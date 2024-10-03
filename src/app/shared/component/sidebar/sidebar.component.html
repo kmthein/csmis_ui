@@ -1,9 +1,43 @@
 <div class="">
-    <div class="my-4 w-full">
-        <a routerLink="/">
-            <img src="assets/logo.png" class="w-[100px] mx-auto" />
-        </a>
+  <div class="w-full">
+    <div class="my-4">
+      <a routerLink="/">
+        <img src="assets/logo.png" class="w-[100px] mx-auto" />
+      </a>
     </div>
-    <div>
+    <div class="ml-8 text-[#707070]">
+      <div>
+        <a
+          class="px-4 py-4 pl-[35%] w-full rounded-tl-xl rounded-bl-xl inline-block transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Dashboard</a
+        >
+      </div>
+      <div>
+        <a
+          class="px-4 py-4 pl-[35%] w-full rounded-tl-xl rounded-bl-xl inline-block transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/lunch"
+          routerLinkActive="active"
+          >Lunch Plan</a
+        >
+      </div>
+      <div>
+        <a
+          class="px-4 py-4 pl-[35%] w-full rounded-tl-xl rounded-bl-xl inline-block transition-colors duration-300 hover:bg-blue-50"
+          routerLinkActive="active"
+          >Report</a
+        >
+      </div>
+      <div>
+        <a
+          class="px-4 py-4 pl-[35%] w-full rounded-tl-xl rounded-bl-xl inline-block transition-colors duration-300 hover:bg-blue-50"
+          routerLinkActive="active"
+          >Profile</a
+        >
+      </div>
     </div>
+  </div>
+  <div></div>
 </div>
