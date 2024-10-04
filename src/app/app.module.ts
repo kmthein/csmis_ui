@@ -10,7 +10,13 @@ import { DashboardComponent } from './page/operator/dashboard/dashboard.componen
 import { LoginComponent } from './page/shared/login/login.component';
 import { LunchPlanComponent } from './page/operator/lunch-plan/lunch-plan.component';
 import { NgIconsModule } from '@ng-icons/core';
-import { ionCalendar, ionDocumentTextSharp, ionHome, ionNotifications, ionPerson } from '@ng-icons/ionicons';
+import {
+  ionCalendar,
+  ionDocumentTextSharp,
+  ionHome,
+  ionNotifications,
+  ionPerson,
+} from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
@@ -28,18 +34,22 @@ import { TableComponent } from './shared/component/table/table.component';
     LunchPlanComponent,
     ProfileComponent,
     HolidayComponent,
-    AdminLayoutComponent
-    TableComponent
+    AdminLayoutComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DataTablesModule,
     NgIconsModule.withIcons({
-      ionHome, ionCalendar, ionPerson, ionDocumentTextSharp, ionNotifications
-    })
+      ionHome,
+      ionCalendar,
+      ionPerson,
+      ionDocumentTextSharp,
+      ionNotifications,
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
