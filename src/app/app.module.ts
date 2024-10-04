@@ -9,6 +9,9 @@ import { NavbarComponent } from './shared/component/navbar/navbar.component';
 import { DashboardComponent } from './page/operator/dashboard/dashboard.component';
 import { LoginComponent } from './page/shared/login/login.component';
 import { LunchPlanComponent } from './page/operator/lunch-plan/lunch-plan.component';
+import { NgIconsModule } from '@ng-icons/core';
+import { ionCalendar, ionDocumentTextSharp, ionHome, ionNotifications, ionPerson } from '@ng-icons/ionicons';
+import { ProfileComponent } from './page/shared/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,15 @@ import { LunchPlanComponent } from './page/operator/lunch-plan/lunch-plan.compon
     NavbarComponent,
     DashboardComponent,
     LoginComponent,
-    LunchPlanComponent
+    LunchPlanComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgIconsModule.withIcons({
+      ionHome, ionCalendar, ionPerson, ionDocumentTextSharp, ionNotifications
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
