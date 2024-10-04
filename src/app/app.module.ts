@@ -14,6 +14,8 @@ import { ionCalendar, ionDocumentTextSharp, ionHome, ionNotifications, ionPerson
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { DataTablesModule } from 'angular-datatables';
+import { TableComponent } from './shared/component/table/table.component';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,12 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
     ProfileComponent,
     HolidayComponent,
     AdminLayoutComponent
+    TableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DataTablesModule,
     NgIconsModule.withIcons({
       ionHome, ionCalendar, ionPerson, ionDocumentTextSharp, ionNotifications
     })

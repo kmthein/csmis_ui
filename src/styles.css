@@ -23,3 +23,7 @@
   font-weight: 600; /* font-semibold */
   color: #336699; /* text-[#336699] */
 }
+select.dt-input {
+  padding-right: 20px!important;
+  padding-left: 10px!important;
+}
