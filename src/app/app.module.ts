@@ -12,6 +12,8 @@ import { LunchPlanComponent } from './page/operator/lunch-plan/lunch-plan.compon
 import { NgIconsModule } from '@ng-icons/core';
 import { ionCalendar, ionDocumentTextSharp, ionHome, ionNotifications, ionPerson } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
+import { HolidayComponent } from './page/admin/holiday/holiday.component';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { DataTablesModule } from 'angular-datatables';
 import { TableComponent } from './shared/component/table/table.component';
 
@@ -25,6 +27,8 @@ import { TableComponent } from './shared/component/table/table.component';
     LoginComponent,
     LunchPlanComponent,
     ProfileComponent,
+    HolidayComponent,
+    AdminLayoutComponent
     TableComponent
   ],
   imports: [
