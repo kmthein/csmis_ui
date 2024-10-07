@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './lunch-plan.component.css'
 })
 export class LunchPlanComponent {
+  isModalOpen = false;
 
+  toggleModal() {
+    this.isModalOpen = !this.isModalOpen;
+  }
 }

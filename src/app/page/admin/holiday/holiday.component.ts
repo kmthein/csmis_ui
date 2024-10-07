@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-holiday',
@@ -10,6 +11,7 @@ export class HolidayComponent {
 
   toggleModal() {
     this.isModalOpen = !this.isModalOpen;
+    initFlowbite();
   }
 
 }

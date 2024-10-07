@@ -6,6 +6,7 @@ import { LunchPlanComponent } from './page/operator/lunch-plan/lunch-plan.compon
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
+import { LoginComponent } from './page/shared/login/login.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       { path: 'holiday', component: HolidayComponent },
       
     ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

@@ -14,6 +14,7 @@ import {
   ionCalendar,
   ionDocumentTextSharp,
   ionHome,
+  ionLockClosed,
   ionNotifications,
   ionPerson,
 } from '@ng-icons/ionicons';
@@ -22,6 +23,10 @@ import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { DataTablesModule } from 'angular-datatables';
 import { TableComponent } from './shared/component/table/table.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -41,13 +46,18 @@ import { TableComponent } from './shared/component/table/table.component';
     BrowserModule,
     AppRoutingModule,
     DataTablesModule,
+    FormsModule,
+    HttpClientModule,
     NgIconsModule.withIcons({
       ionHome,
       ionCalendar,
       ionPerson,
       ionDocumentTextSharp,
       ionNotifications,
+      ionLockClosed
     }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
