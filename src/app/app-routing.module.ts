@@ -7,6 +7,7 @@ import { ProfileComponent } from './page/shared/profile/profile.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { LoginComponent } from './page/shared/login/login.component';
+import { StaffComponent } from './page/admin/staff/staff.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'holiday', component: HolidayComponent },
-      
+      { path: 'staff', component: StaffComponent }
     ]
   },
   {

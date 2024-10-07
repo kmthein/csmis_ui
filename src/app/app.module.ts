@@ -14,6 +14,7 @@ import {
   ionCalendar,
   ionDocumentTextSharp,
   ionHome,
+  ionIdCard,
   ionLockClosed,
   ionNotifications,
   ionPerson,
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { StaffComponent } from './page/admin/staff/staff.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ToastrModule } from 'ngx-toastr';
     HolidayComponent,
     AdminLayoutComponent,
     TableComponent,
+    StaffComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { ToastrModule } from 'ngx-toastr';
       ionPerson,
       ionDocumentTextSharp,
       ionNotifications,
-      ionLockClosed
+      ionLockClosed,
+      ionIdCard
     }),
     BrowserAnimationsModule,
     ToastrModule.forRoot()
