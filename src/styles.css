@@ -24,12 +24,20 @@
   color: #336699; /* text-[#336699] */
 }
 select.dt-input {
-  padding-right: 20px!important;
-  padding-left: 10px!important;
+  padding-right: 20px !important;
+  padding-left: 10px !important;
+}
+.dt-search label {
+  font-size: 15px !important;
 }
 .login {
   position: relative;
-  background-color: rgba(0, 0, 0, 0.5); /* Optional: Adds a semi-transparent background */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Optional: Adds a semi-transparent background */
 }
 .login input {
   border-width: 0 0 1px 0;
