@@ -30,9 +30,17 @@ export class StaffComponent {
     console.log(this.selectedFile);
     const user = JSON.parse(localStorage.getItem('user')!);
     const adminId = user?.id;
+
     this.userService.importFromExcel(this.selectedFile!, adminId).subscribe({
-      next: response => {
-      }
+      next: (response) => {
+        if (response.message) {
+          this.toggleModal();
+          this.getAllStaffs();
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
   }
 
@@ -53,17 +61,27 @@ export class StaffComponent {
     this.getAllStaffs();
     this.dtoptions = {
       pagingType: 'full_numbers',
-      pageLength: 5,
+      pageLength: 10,
       processing: true,
-      paging: false,
+      paging: true,
     };
   }
 
+  ngOnDestroy(): void {
+    // Unsubscribe the DataTable trigger when component is destroyed
+    this.dttrigger.unsubscribe();
+  }
+
   getAllStaffs(): void {
+    if ($.fn.DataTable.isDataTable('#data-table')) {
+      $('#data-table').DataTable().destroy();
+    }
     this.userService.getAllStaffs().subscribe((data) => {
       console.log(data);
       this.staffs = data;
-      this.dttrigger.next(null); // Trigger DataTables to render
+      setTimeout(() => {
+        this.dttrigger.next(null); // Trigger DataTables to render
+      }, 100); // Ensure this runs after DOM update
     });
   }
 }

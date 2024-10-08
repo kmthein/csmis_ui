@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
@@ -8,23 +9,26 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 export class UserService {
   private url = 'http://localhost:8080/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toast: ToastrService) {}
 
   importFromExcel(data: File, adminId: number) {
     const formData = new FormData();
-    formData.append("file", data);  
-    formData.append("adminId", adminId.toString());  
-    return this.http
-      .post<any>(`${this.url}/users`, formData)
-      .pipe(
-        tap((response) => {
-          console.log(response);
-        }),
-        catchError((err) => {
-          const { error } = err;
-          return throwError(error);
-        })
-      );
+    formData.append('file', data);
+    formData.append('adminId', adminId.toString());
+    return this.http.post<any>(`${this.url}/users`, formData).pipe(
+      tap((response) => {
+        console.log(response);
+        if (response.message) {
+          this.toast.success(response.message);
+        } else if (response.error) {
+          this.toast.error(response.error);
+        }
+      }),
+      catchError((err) => {
+        const { error } = err;
+        return throwError(error);
+      })
+    );
   }
 
   getAllStaffs(): Observable<any> {
