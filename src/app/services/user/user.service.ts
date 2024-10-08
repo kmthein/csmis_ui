@@ -11,17 +11,17 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   importFromExcel(data: File, adminId: number) {
-    console.log(data);
+    const formData = new FormData();
+    formData.append("file", data);  
+    formData.append("adminId", adminId.toString());  
     return this.http
-      .post<any>(`${this.url}/users`, { file: data, adminId })
+      .post<any>(`${this.url}/users`, formData)
       .pipe(
         tap((response) => {
           console.log(response);
-          // this.toastService.setMessage(response.message, 'toast-success');
         }),
         catchError((err) => {
           const { error } = err;
-          // this.toastService.setMessage(error.message, 'toast-danger');
           return throwError(error);
         })
       );

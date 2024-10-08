@@ -14,12 +14,11 @@ export class StaffComponent {
   columns: any = [
     { key: 'staffId', label: 'Staff ID' },
     { key: 'name', label: 'Name' },
-    { key: 'doorlogNo', label: 'Door Log No' },
+    { key: 'doorLogNo', label: 'Door Log No' },
     { key: 'division', label: 'Division' },
-    { key: 'dept', label: 'Department' },
+    { key: 'department', label: 'Department' },
     { key: 'team', label: 'Team' },
     { key: 'status', label: 'Status' },
-    { key: 'action', label: 'Action' },
   ];
   staffs: any = [];
   isModalOpen: boolean = false;
@@ -31,7 +30,10 @@ export class StaffComponent {
     console.log(this.selectedFile);
     const user = JSON.parse(localStorage.getItem('user')!);
     const adminId = user?.id;
-    this.userService.importFromExcel(this.selectedFile!, adminId);
+    this.userService.importFromExcel(this.selectedFile!, adminId).subscribe({
+      next: response => {
+      }
+    });
   }
 
   onFileSelected(event: any): void {
