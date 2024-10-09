@@ -8,6 +8,7 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { LoginComponent } from './page/shared/login/login.component';
 import { StaffComponent } from './page/admin/staff/staff.component';
+import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'holiday', component: HolidayComponent },
-      { path: 'staff', component: StaffComponent }
+      { path: 'staff', component: StaffComponent },
+      { path: 'staff/edit/:id', component: EditStaffComponent }
     ]
   },
   {

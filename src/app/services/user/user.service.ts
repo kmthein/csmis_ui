@@ -34,4 +34,8 @@ export class UserService {
   getAllStaffs(): Observable<any> {
     return this.http.get<any>(`${this.url}/users`);
   }
+
+  getStaffById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.url}/users/${id}`);
+  }
 }

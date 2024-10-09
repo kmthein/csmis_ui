@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { initFlowbite } from 'flowbite';
-import { Subject } from 'rxjs';
+import { filter, Subject } from 'rxjs';
 import { Config } from 'datatables.net';
 import { NgForm } from '@angular/forms';
+import { ActionButtonRendererComponent } from '../../../shared/component/action-button-renderer/action-button-renderer.component';
 
 @Component({
   selector: 'app-staff',
@@ -11,31 +12,52 @@ import { NgForm } from '@angular/forms';
   styleUrl: './staff.component.css',
 })
 export class StaffComponent {
-  columns: any = [
-    { key: 'staffId', label: 'Staff ID' },
-    { key: 'name', label: 'Name' },
-    { key: 'doorLogNo', label: 'Door Log No' },
-    { key: 'division', label: 'Division' },
-    { key: 'department', label: 'Department' },
-    { key: 'team', label: 'Team' },
-    { key: 'status', label: 'Status' },
+  pagination = true;
+  paginationPageSize = 10;
+  paginationPageSizeSelector = [10, 20, 30];
+
+  colDefs: any = [
+    {
+      valueGetter: (params: any) => params.node.rowIndex + 1,
+      flex: 0.5
+    },
+    { field: 'staffId', headerName: 'Staff ID', flex: 1, filter: true },
+    { field: 'name', headerName: 'Name', flex: 1.5, filter: true },
+    { field: 'doorLogNo', headerName: 'Door Log No', flex: 1, filter: true },
+    { field: 'division', headerName: 'Division', flex: 1, filter: true },
+    { field: 'department', headerName: 'Department', flex: 1, filter: true },
+    { field: 'team', headerName: 'Team', flex: 1, filter: true },
+    { field: 'status', headerName: 'Status', flex: 1, filter: true },
+    {
+      headerName: 'Actions',
+      cellRenderer: ActionButtonRendererComponent,
+      flex: 0.8
+    }
   ];
   staffs: any = [];
   isModalOpen: boolean = false;
   selectedFile: File | null = null;
+  selectedStaff: any = {}; 
+  isLoading: boolean = false;
 
   constructor(private userService: UserService) {}
 
+  onEdit(staff: any) {
+    this.selectedStaff = staff;  // Store the selected staff's data
+    this.toggleModal();          // Open the modal
+  }
+  
   importExcel() {
-    console.log(this.selectedFile);
+    this.isLoading = true;
     const user = JSON.parse(localStorage.getItem('user')!);
     const adminId = user?.id;
 
     this.userService.importFromExcel(this.selectedFile!, adminId).subscribe({
       next: (response) => {
         if (response.message) {
-          this.toggleModal();
           this.getAllStaffs();
+          this.isLoading = false;
+          this.toggleModal();
         }
       },
       error: (error) => {
@@ -53,35 +75,19 @@ export class StaffComponent {
     initFlowbite();
   }
 
-  // DataTables settings
-  dtoptions: Config = {};
-  dttrigger: Subject<any> = new Subject<any>();
-
   ngOnInit(): void {
     this.getAllStaffs();
-    this.dtoptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      processing: true,
-      paging: true,
-    };
+    console.log(this.isLoading);
+    
   }
 
   ngOnDestroy(): void {
-    // Unsubscribe the DataTable trigger when component is destroyed
-    this.dttrigger.unsubscribe();
   }
 
   getAllStaffs(): void {
-    if ($.fn.DataTable.isDataTable('#data-table')) {
-      $('#data-table').DataTable().destroy();
-    }
     this.userService.getAllStaffs().subscribe((data) => {
       console.log(data);
       this.staffs = data;
-      setTimeout(() => {
-        this.dttrigger.next(null); // Trigger DataTables to render
-      }, 100); // Ensure this runs after DOM update
     });
   }
 }

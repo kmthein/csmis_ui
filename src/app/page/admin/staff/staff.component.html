@@ -1,13 +1,13 @@
-<div class="mt-1">
+<div class="">
   <div class="flex justify-between items-center">
     <h3 class="text-lg font-medium">Staff List</h3>
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button
         type="button"
+        (click)="toggleModal()"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         <button
-          (click)="toggleModal()"
           class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none"
         >
           Import from excel
@@ -16,12 +16,16 @@
     </div>
   </div>
   <div class="my-4">
-    <app-table
-      [dtoptions]="dtoptions"
-      [dttrigger]="dttrigger"
-      [columns]="columns"
-      [list]="staffs"
-    ></app-table>
+    <ag-grid-angular
+      style="width: 100%; height: 500px;"
+      class="ag-theme-alpine"
+      [rowData]="staffs"
+      [columnDefs]="colDefs"
+      [pagination]="pagination"
+      [paginationPageSize]="paginationPageSize"
+      [paginationPageSizeSelector]="paginationPageSizeSelector"
+    >
+    </ag-grid-angular>
   </div>
 </div>
 
@@ -58,7 +62,7 @@
         </svg>
       </button>
     </div>
-    <form (click)="importExcel()" class="p-4">
+    <form (ngSubmit)="importExcel()" class="p-4">
       <label
         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         for="file_input"
@@ -75,7 +79,8 @@
       <div class="flex justify-end">
         <button
           type="submit"
-          class="bg-blue-700 text-white px-4 py-2 rounded-md text-sm"
+          [disabled]="isLoading" 
+          class="bg-blue-700 text-white px-4 py-2 rounded-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-[#1e1552]"
         >
           Upload
         </button>
@@ -83,3 +88,5 @@
     </form>
   </div>
 </div>
+
+9]
