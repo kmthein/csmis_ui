@@ -13,13 +13,13 @@ import { ActionButtonRendererComponent } from '../../../shared/component/action-
 })
 export class StaffComponent {
   pagination = true;
-  paginationPageSize = 10;
+  paginationPageSize = 20;
   paginationPageSizeSelector = [10, 20, 30];
 
   colDefs: any = [
     {
       valueGetter: (params: any) => params.node.rowIndex + 1,
-      flex: 0.5
+      flex: 0.5,
     },
     { field: 'staffId', headerName: 'Staff ID', flex: 1, filter: true },
     { field: 'name', headerName: 'Name', flex: 1.5, filter: true },
@@ -31,22 +31,22 @@ export class StaffComponent {
     {
       headerName: 'Actions',
       cellRenderer: ActionButtonRendererComponent,
-      flex: 0.8
-    }
+      flex: 0.8,
+    },
   ];
   staffs: any = [];
   isModalOpen: boolean = false;
   selectedFile: File | null = null;
-  selectedStaff: any = {}; 
+  selectedStaff: any = {};
   isLoading: boolean = false;
 
   constructor(private userService: UserService) {}
 
   onEdit(staff: any) {
-    this.selectedStaff = staff;  // Store the selected staff's data
-    this.toggleModal();          // Open the modal
+    this.selectedStaff = staff; // Store the selected staff's data
+    this.toggleModal(); // Open the modal
   }
-  
+
   importExcel() {
     this.isLoading = true;
     const user = JSON.parse(localStorage.getItem('user')!);
@@ -77,12 +77,9 @@ export class StaffComponent {
 
   ngOnInit(): void {
     this.getAllStaffs();
-    console.log(this.isLoading);
-    
   }
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
 
   getAllStaffs(): void {
     this.userService.getAllStaffs().subscribe((data) => {

@@ -31,6 +31,22 @@ export class UserService {
     );
   }
 
+  updateStaff(data: any, id: number) {
+    return this.http.put<any>(`${this.url}/users/${id}`, data).pipe(
+      tap((response) => {
+        if (response.status == '200') {
+          this.toast.success(response.message);
+        } else {
+          this.toast.error(response.message);
+        }
+      }),
+      catchError((err) => {
+        const { error } = err;
+        return throwError(error);
+      })
+    );
+  }
+
   getAllStaffs(): Observable<any> {
     return this.http.get<any>(`${this.url}/users`);
   }
