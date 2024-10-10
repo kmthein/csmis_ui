@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { UserService } from '../../../services/user/user.service';
 import { initFlowbite } from 'flowbite';
 import { filter, Subject } from 'rxjs';
-import { Config } from 'datatables.net';
 import { NgForm } from '@angular/forms';
 import { ActionButtonRendererComponent } from '../../../shared/component/action-button-renderer/action-button-renderer.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-staff',
@@ -40,7 +40,11 @@ export class StaffComponent {
   selectedStaff: any = {};
   isLoading: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
+
+  addNewStaff() {
+    this.router.navigate(['/admin/staff/new']);
+  }
 
   onEdit(staff: any) {
     this.selectedStaff = staff; // Store the selected staff's data

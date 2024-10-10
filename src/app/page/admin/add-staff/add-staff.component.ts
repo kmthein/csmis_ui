@@ -1,26 +1,31 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../../services/user/user.service';
 import { NgForm } from '@angular/forms';
+import { UserService } from '../../../services/user/user.service';
+import { Router } from '@angular/router';
 import { StaffDataService } from '../../../services/staff-data/staff-data.service';
 
 @Component({
-  selector: 'app-edit-staff',
-  templateUrl: './edit-staff.component.html',
-  styleUrl: './edit-staff.component.css',
+  selector: 'app-add-staff',
+  templateUrl: './add-staff.component.html',
+  styleUrl: './add-staff.component.css'
 })
-export class EditStaffComponent {
-  id!: number;
-  staff: any;
-  viewMode: boolean = true;
+export class AddStaffComponent {
   statusList = ['Active', 'InActive'];
-  roleList = ['OPERATOR', 'ADMIN'];
   divisions: any = [];
   departments: any = [];
   teams: any = [];
   addNewDivision: boolean = false;
   addNewDepart: boolean = false;
   addNewTeam: boolean = false;
+  roleList = ['OPERATOR', 'ADMIN'];
+
+  staff: any = {
+    staffId: "",
+    name: "",
+    doorLogNo: "",
+    email: "",
+    isVegan: false
+  };
 
   onChangeDivision(event: any) {
     const selectedValue = event.target.value;
@@ -41,37 +46,27 @@ export class EditStaffComponent {
     }
   }
 
-  toggleView(bool: boolean) {
-    this.viewMode = bool;
-  }
-
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private router: Router,
-    private dataService: StaffDataService
-  ) {}
-
   backToStaffList() {
     this.router.navigate(['/admin/staff']);
   }
 
-  ngOnInit(): void {
-    this.id = Number(this.route.snapshot.paramMap.get('id')!);
+  constructor(private userService: UserService, private router: Router, private dataService: StaffDataService) {}
 
-    this.userService.getStaffById(this.id).subscribe((data) => {
-      console.log(data);
-      this.staff = data;
-    });
+  ngOnInit(): void {
     this.dataService.getAllDivision().subscribe((data) => {
       this.divisions = data;
+      this.staff.division = data[0].name;
     });
     this.dataService.getAllDepartment().subscribe((data) => {
       this.departments = data;
+      this.staff.department = data[0].name;
     });
     this.dataService.getAllTeam().subscribe((data) => {
       this.teams = data;
+      this.staff.team = data[0].name;
     });
+    this.staff.status = "Active";
+    this.staff.role = "OPERATOR";
   }
 
   onSubmit(form: NgForm) {
@@ -84,15 +79,14 @@ export class EditStaffComponent {
         }
       }
     }
-    formData.append('role', this.staff?.role.toUpperCase());
-    formData.append('isVegan', this.staff?.isVegan);
-    this.userService.updateStaff(formData, this.id).subscribe({
+    formData.append('role', "OPERATOR");
+    this.userService.addStaff(formData).subscribe({
       next: (response) => {
         this.router.navigate(['/admin/staff']);
       },
       error: (error) => {
         console.error(error);
       },
-    });
+    });;    
   }
 }

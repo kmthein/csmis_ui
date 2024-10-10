@@ -9,6 +9,7 @@ import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { LoginComponent } from './page/shared/login/login.component';
 import { StaffComponent } from './page/admin/staff/staff.component';
 import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component';
+import { AddStaffComponent } from './page/admin/add-staff/add-staff.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'holiday', component: HolidayComponent },
       { path: 'staff', component: StaffComponent },
+      { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent }
     ]
   },

@@ -22,7 +22,6 @@ import {
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { DataTablesModule } from 'angular-datatables';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +30,7 @@ import { StaffComponent } from './page/admin/staff/staff.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ActionButtonRendererComponent } from './shared/component/action-button-renderer/action-button-renderer.component';
 import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component';
+import { AddStaffComponent } from './page/admin/add-staff/add-staff.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component
     AdminLayoutComponent,
     StaffComponent,
     ActionButtonRendererComponent,
-    EditStaffComponent
+    EditStaffComponent,
+    AddStaffComponent
   ],
   imports: [
     BrowserModule,

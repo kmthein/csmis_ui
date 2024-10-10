@@ -177,9 +177,48 @@
         </select>
       </div>
     </div>
+    <div class="flex gap-6 mb-8">
+      <div class="w-[48%]">
+        <label class="text-[#696969] mb-1 block text-sm">Role</label>
+        <input
+          type="text"
+          name="role"
+          required
+          *ngIf="viewMode"
+          [readOnly]="viewMode"
+          [(ngModel)]="staff.role"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <select
+          id="role"
+          name="role"
+          [(ngModel)]="staff.role"
+          *ngIf="!viewMode"
+          (change)="onChangeTeam($event)"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option
+            [selected]="staff.role === role"
+            *ngFor="let role of roleList"
+            [value]="role"
+          >
+            {{ role }}
+          </option>
+        </select>
+      </div>
+      
+    </div>
     <div class="flex justify-end gap-4 my-10">
       <button
-        (click)="viewMode ? backToStaffList() : toggleView(true)"
+        *ngIf="viewMode"
+        (click)="backToStaffList()"
+        class="w-[25%] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] py-[10px]"
+      >
+        Back
+      </button>
+      <button
+        *ngIf="!viewMode"
+        (click)="toggleView(true)"
         class="w-[25%] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] py-[10px]"
       >
         Cancel

@@ -15,13 +15,29 @@ export class UserService {
     const formData = new FormData();
     formData.append('file', data);
     formData.append('adminId', adminId.toString());
-    return this.http.post<any>(`${this.url}/users`, formData).pipe(
+    return this.http.post<any>(`${this.url}/users/excel`, formData).pipe(
       tap((response) => {
         console.log(response);
         if (response.message) {
           this.toast.success(response.message);
         } else if (response.error) {
           this.toast.error(response.error);
+        }
+      }),
+      catchError((err) => {
+        const { error } = err;
+        return throwError(error);
+      })
+    );
+  }
+
+  addStaff(data: any) {
+    return this.http.post<any>(`${this.url}/users`, data).pipe(
+      tap((response) => {
+        if (response.status == '200') {
+          this.toast.success(response.message);
+        } else {
+          this.toast.error(response.message);
         }
       }),
       catchError((err) => {
