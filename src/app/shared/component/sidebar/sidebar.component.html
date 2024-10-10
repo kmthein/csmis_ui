@@ -1,6 +1,6 @@
 <div class="flex flex-col h-screen">
   <div class="w-full">
-    <div class="my-4">
+    <div class="my-5">
       <a routerLink="/">
         <img src="assets/logo.png" class="w-[100px] mx-auto" />
       </a>
@@ -25,6 +25,16 @@
         >
           <ng-icon name="ionCalendar"></ng-icon>
           <span>Lunch</span>
+        </a>
+      </div>
+      <div>
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/admin/staff"
+          routerLinkActive="active"
+        >
+          <ng-icon name="ionIdCard"></ng-icon>
+          <span>Staff</span>
         </a>
       </div>
       <div>
@@ -59,7 +69,6 @@
         </a>
       </div>
     </div>
-    
   </div>
   <div></div>
 </div>
