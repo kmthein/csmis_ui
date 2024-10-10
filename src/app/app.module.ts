@@ -27,6 +27,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { LunchRegistrationComponent } from './lunch/lunch-registration/lunch-registration.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -41,8 +43,10 @@ import { ToastrModule } from 'ngx-toastr';
     HolidayComponent,
     AdminLayoutComponent,
     TableComponent,
+    LunchRegistrationComponent,
   ],
   imports: [
+    MatSnackBarModule,
     BrowserModule,
     AppRoutingModule,
     DataTablesModule,

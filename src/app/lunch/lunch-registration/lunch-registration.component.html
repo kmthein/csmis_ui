@@ -1,0 +1,42 @@
+<div class="calendar-container" id="calendar">
+    <div class="calendar-header">
+        <div class="prev-button" (click)="goToPreviousMonth()" [ngClass]="{'disabled': isFirstMonth()}">&lt;</div>
+        <h1 class="calendar-title">{{ currentMonth | date: 'MMMM yyyy' }}</h1>
+        <div class="next-button" (click)="goToNextMonth()" [ngClass]="{'disabled': !isLastWeekOfMonth()}">&gt;</div>
+    </div>
+    <div class="calendar-body">
+        <div class="day-names">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div class="calendar-grid">
+            <div class="day" *ngFor="let empty of getEmptyDaysBefore(currentMonth)">
+                <div class="empty-day"></div>
+            </div>
+            <div class="day" *ngFor="let date of currentMonthDates"
+                 [ngClass]="{
+                   'selected': isDateSelected(date), 
+                   'weekend': isWeekend(date), 
+                   'today': isBeforeOrToday(date)
+                 }"
+                 (click)="toggleDate(date)">
+                <span>{{ date.getDate() }}</span>
+                <input 
+                    type="checkbox" 
+                    [checked]="isDateSelected(date)" 
+                    (change)="toggleDate(date)" 
+                    [disabled]="isWeekend(date) || isBeforeOrToday(date)" 
+                    style="display: none;">
+            </div>
+        </div>
+    </div>
+
+    <div class="register-box">
+        <button class="register-button" (click)="submitRegistration()">Register for Lunch</button>
+    </div>
+</div>
