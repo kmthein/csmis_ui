@@ -49,7 +49,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     StaffComponent,
     ActionButtonRendererComponent,
     EditStaffComponent,
-    AddStaffComponent
+    AddStaffComponent,
     LunchRegistrationComponent,
   ],
   imports: [
@@ -66,7 +66,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       ionDocumentTextSharp,
       ionNotifications,
       ionLockClosed,
-      ionIdCard
+      ionIdCard,
     }),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
