@@ -1,101 +1,101 @@
 .calendar-container {
-    max-width: 350px; /* Adjust the width of the calendar */
-    margin: auto; /* Center the calendar */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden; /* To round corners */
+  max-width: 350px; /* Adjust the width of the calendar */
+  margin: auto; /* Center the calendar */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden; /* To round corners */
 }
 
 .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f0f0f0; /* Header background */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0; /* Header background */
 }
 
 .calendar-title {
-    margin: 0;
+  margin: 0;
 }
 
-.prev-button, .next-button {
-    cursor: pointer;
+.prev-button,
+.next-button {
+  cursor: pointer;
 }
 
 .calendar-body {
-    padding: 10px;
+  padding: 10px;
 }
 
 .day-names {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    margin-bottom: 5px;
-    text-align: center;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px; /* Space between day boxes */
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px; /* Space between day boxes */
 }
 
 .day {
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px; /* Adjust height for small boxes */
-    width: 40px;  /* Adjust width for small boxes */
-    border: 1px solid #ccc; /* Optional border */
-    border-radius: 4px; /* Optional rounded corners */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    transition: background-color 0.3s; /* Smooth background transition */
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px; /* Adjust height for small boxes */
+  width: 40px; /* Adjust width for small boxes */
+  border: 1px solid #ccc; /* Optional border */
+  border-radius: 4px; /* Optional rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s; /* Smooth background transition */
 }
 
 .day:hover {
-    background-color: #f0f0f0; /* Optional hover effect */
+  background-color: #f0f0f0; /* Optional hover effect */
 }
 
 .weekend {
-    background-color: #f0f0f0; /* Background for weekend days */
-    color: #999; /* Optional color for weekend text */
+  background-color: #f0f0f0; /* Background for weekend days */
+  color: #999; /* Optional color for weekend text */
 }
 
 .selected {
-    background-color: blue; /* Fill the entire box with blue when selected */
-    color: white; /* Change text color to white */
+  background-color: blue; /* Fill the entire box with blue when selected */
+  color: white; /* Change text color to white */
 }
 
 .register-box {
-    justify-content: center;
-    align-items: center;
-    padding: 7px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    
+  justify-content: center;
+  align-items: center;
+  padding: 7px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .register-button {
-    margin-left: 55%;
-    background-color: blue; /* Green background */
-    color: white; /* White text */
-    padding: 8px 15px; /* Padding for button */
-    font-size: 13px; /* Button font size */
-    border: none; /* Remove border */
-    border-radius: 8px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-left: 55%;
+  background-color: blue; /* Green background */
+  color: white; /* White text */
+  padding: 8px 15px; /* Padding for button */
+  font-size: 13px; /* Button font size */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .register-button:hover {
-    background-color: #72b6ee; /* Darker green on hover */
-    transform: translateY(-3px); /* Slight lift on hover */
+  background-color: #72b6ee; /* Darker green on hover */
+  transform: translateY(-3px); /* Slight lift on hover */
 }
 
 .register-button:active {
-    background-color: #72b6ee; /* Even darker green on click */
-    transform: translateY(2px); /* Pressed down effect */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+  background-color: #72b6ee; /* Even darker green on click */
+  transform: translateY(2px); /* Pressed down effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
 }

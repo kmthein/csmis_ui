@@ -5,6 +5,7 @@ import { filter, Subject } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { ActionButtonRendererComponent } from '../../../shared/component/action-button-renderer/action-button-renderer.component';
 import { Router } from '@angular/router';
+import { ExcelService } from '../../../services/admin/excel.service';
 
 @Component({
   selector: 'app-staff',
@@ -40,7 +41,11 @@ export class StaffComponent {
   selectedStaff: any = {};
   isLoading: boolean = false;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private excelService: ExcelService,
+    private router: Router
+  ) {}
 
   addNewStaff() {
     this.router.navigate(['/admin/staff/new']);
@@ -56,18 +61,20 @@ export class StaffComponent {
     const user = JSON.parse(localStorage.getItem('user')!);
     const adminId = user?.id;
 
-    this.userService.importFromExcel(this.selectedFile!, adminId).subscribe({
-      next: (response) => {
-        if (response.message) {
-          this.getAllStaffs();
-          this.isLoading = false;
-          this.toggleModal();
-        }
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
+    this.excelService
+      .importFromExcel(this.selectedFile!, adminId, 'users')
+      .subscribe({
+        next: (response) => {
+          if (response.message) {
+            this.getAllStaffs();
+            this.isLoading = false;
+            this.toggleModal();
+          }
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
   }
 
   onFileSelected(event: any): void {

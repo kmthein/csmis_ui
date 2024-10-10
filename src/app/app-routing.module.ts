@@ -11,11 +11,15 @@ import { StaffComponent } from './page/admin/staff/staff.component';
 import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component';
 import { AddStaffComponent } from './page/admin/add-staff/add-staff.component';
 import { LunchRegistrationComponent } from './lunch/lunch-registration/lunch-registration.component';
+import { AuthGuard } from './core/guard/auth.guard';
+import { AdminGuard } from './core/guard/admin.guard';
+import { LoginGuard } from './core/guard/login.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardComponent },
       { path: 'lunch', component: LunchRegistrationComponent },
@@ -25,6 +29,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
+    canActivate: [AdminGuard],
     children: [
       { path: '', component: DashboardComponent },
       { path: 'holiday', component: HolidayComponent },
@@ -36,6 +41,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [LoginGuard],
   },
 ];
 
