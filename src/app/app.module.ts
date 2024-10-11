@@ -33,6 +33,8 @@ import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component
 import { AddStaffComponent } from './page/admin/add-staff/add-staff.component';
 import { LunchRegistrationComponent } from './lunch/lunch-registration/lunch-registration.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucement-list.component';
+import { AnnoucementCardComponent } from './shared/component/annoucement-card/annoucement-card.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     EditStaffComponent,
     AddStaffComponent,
     LunchRegistrationComponent,
+    AnnoucementListComponent,
+    AnnoucementCardComponent,
   ],
   imports: [
     MatSnackBarModule,

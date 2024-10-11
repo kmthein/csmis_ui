@@ -14,6 +14,7 @@ import { LunchRegistrationComponent } from './lunch/lunch-registration/lunch-reg
 import { AuthGuard } from './core/guard/auth.guard';
 import { AdminGuard } from './core/guard/admin.guard';
 import { LoginGuard } from './core/guard/login.guard';
+import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucement-list.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: 'staff', component: StaffComponent },
       { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent },
+      { path: 'annoucement', component: AnnoucementListComponent }
     ],
   },
   {
