@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 
@@ -13,9 +13,21 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   isModalOpen: boolean = false;
   selectedFile: File | null = null;
 
+  title: string = '';
+  editorContent: string = '';
+
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
   }
+
+  // form: FormGroup;
+
+  // constructor(private fb: FormBuilder) {
+  //   this.form = this.fb.group({
+  //     title: ['', Validators.required],
+  //     editorContent: new FormControl('', Validators.required()),
+  //   });
+  // }
 
   toggleModal() {
     this.isModalOpen = !this.isModalOpen;
@@ -43,21 +55,17 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
-  form = new FormGroup({
-    editorContent: new FormControl('', Validators.required()),
-  });
-
-  getEditorContent() {
-    const content = this.form.get('editorContent')?.value;
-    console.log('Current Editor Content:', content);
-    return content;
-  }
+  // getEditorContent() {
+  //   const content = this.form.get('editorContent')?.value;
+  //   console.log('Current Editor Content:', content);
+  //   return content;
+  // }
 
   // Example method for form submission
   onSubmit() {
-    const content = this.getEditorContent();
-    console.log(content);
-
+    console.log(this.title);
+    console.log(this.editorContent);
+    console.log(this.selectedFile);
     // handle the content, e.g., send to a server
   }
 }

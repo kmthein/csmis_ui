@@ -59,7 +59,25 @@
         </svg>
       </button>
     </div>
-    <form class="p-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="p-4" #form="ngForm" (ngSubmit)="onSubmit()">
+      <div class="mb-5">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          for="title"
+          >Title</label
+        >
+        <input
+          class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          id="title"
+          [(ngModel)]="title"
+          name="title"
+          type="text"
+          #titleInput="ngModel"
+        />
+        <small *ngIf="!title && (titleInput?.touched || titleInput?.dirty)">
+          Title is required.
+        </small>
+      </div>
       <div class="my-5">
         <label
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -68,8 +86,20 @@
         <div class="border rounded-md">
           <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
           </ngx-editor-menu>
-          <ngx-editor [editor]="editor" formControlName="editorContent">
+          <ngx-editor
+            [editor]="editor"
+            [(ngModel)]="editorContent"
+            name="editorContent"
+            #contentInput="ngModel"
+          >
           </ngx-editor>
+          <small
+            *ngIf="
+              !editorContent && (contentInput?.touched || contentInput?.dirty)
+            "
+          >
+            Content is required.
+          </small>
         </div>
       </div>
       <div class="my-5">

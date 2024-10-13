@@ -73,12 +73,14 @@ export class AuthService {
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const currentTime = Math.floor(Date.now() / 1000);
-      if (payload.exp < currentTime) {
-        this.clearToken();
+
+      if (payload.exp > currentTime) {
+        return true;
+      } else {
+        return false;
       }
-      return payload.exp > currentTime;
+    } else {
+      return false;
     }
-    this.clearToken();
-    return false;
   }
 }
