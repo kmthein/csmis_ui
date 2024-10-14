@@ -61,3 +61,6 @@ select.dt-input {
 small {
   color: #ff4444;
 }
+.NgxEditor__Content {
+  height: 100px;
+}

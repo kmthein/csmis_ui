@@ -36,6 +36,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucement-list.component';
 import { AnnoucementCardComponent } from './shared/component/annoucement-card/annoucement-card.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { WeeklyMenuComponent } from './shared/component/weekly-menu/weekly-menu.component';
+import { DashboardMenuCardComponent } from './shared/component/dashboard-menu-card/dashboard-menu-card.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { NgxEditorModule } from 'ngx-editor';
     LunchRegistrationComponent,
     AnnoucementListComponent,
     AnnoucementCardComponent,
+    WeeklyMenuComponent,
+    DashboardMenuCardComponent,
   ],
   imports: [
     MatSnackBarModule,
