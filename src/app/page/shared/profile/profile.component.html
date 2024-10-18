@@ -9,7 +9,7 @@
         Staff Information
       </h6>
       <div class="flex items-center gap-8 mb-8">
-        <label class="text-[#696969] text-sm w-[30%]">Staff ID</label>
+        <label class="text-[#696969] text-sm w-[50%]">Staff ID</label>
         <input
           type="text"
           name="staffId"
@@ -19,7 +19,7 @@
         />
       </div>
       <div class="flex items-center gap-8 mb-8">
-        <label class="text-[#696969] text-sm w-[30%]">Name</label>
+        <label class="text-[#696969] text-sm w-[50%]">Name</label>
         <input
           type="text"
           name="staffId"
@@ -29,7 +29,7 @@
         />
       </div>
       <div class="flex items-center gap-8 mb-8">
-        <label class="text-[#696969] text-sm w-[30%]">Door Log No</label>
+        <label class="text-[#696969] text-sm w-[50%]">Door Log No</label>
         <input
           type="text"
           name="staffId"
@@ -39,7 +39,7 @@
         />
       </div>
       <div class="flex items-center gap-8 mb-8">
-        <label class="text-[#696969] text-sm w-[30%]">Email</label>
+        <label class="text-[#696969] text-sm w-[50%]">Email</label>
         <input
           type="text"
           name="staffId"
@@ -49,7 +49,7 @@
         />
       </div>
       <div class="flex items-center gap-8 mb-8">
-        <label class="text-[#696969] text-sm w-[30%]">Division</label>
+        <label class="text-[#696969] text-sm w-[50%]">Division</label>
         <input
           type="text"
           name="staffId"
@@ -59,7 +59,7 @@
         />
       </div>
       <div class="flex items-center gap-8 mb-8">
-        <label class="text-[#696969] text-sm w-[30%]">Department</label>
+        <label class="text-[#696969] text-sm w-[50%]">Department</label>
         <input
           type="text"
           name="staffId"
@@ -69,7 +69,7 @@
         />
       </div>
       <div class="flex items-center gap-8">
-        <label class="text-[#696969] text-sm w-[30%]">Team</label>
+        <label class="text-[#696969] text-sm w-[50%]">Team</label>
         <input
           type="text"
           name="staffId"
@@ -84,7 +84,7 @@
         User Preference
       </h6>
       <div class="flex items-center gap-8 mb-8">
-        <label class="text-[#696969] text-sm w-[30%]">Avoid Meat</label>
+        <label class="text-[#696969] text-sm w-[50%]">Avoid Meat</label>
         <input
           type="text"
           name="staffId"
@@ -93,16 +93,71 @@
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
       </div>
-      <div class="flex items-center gap-8 mb-8">
-        <span class="text-[#696969] text-sm dark:text-gray-300"
-          >Received Mail</span
+      <div class="flex gap-[25%]">
+        <div class="">
+          <span class="text-[#696969] text-sm dark:text-gray-300 mb-2 block"
+            >Received Mail</span
+          >
+          <div>
+            <label class="inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                value=""
+                class="sr-only peer"
+                disabled="viewMode"
+              />
+              <div
+                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+                [ngStyle]="{
+                  '.pbackground-color':
+                    viewMode ? 'peerbg-blue-600' : 'bg-blue-900'
+                }"
+              ></div>
+            </label>
+          </div>
+        </div>
+        <div class="">
+          <span class="text-[#696969] text-sm dark:text-gray-300 mb-2 block"
+            >Vegetarian</span
+          >
+          <div>
+            <label class="inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                value=""
+                class="sr-only peer"
+                checked
+                disabled="viewMode"
+              />
+              <div
+                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+              ></div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-4 mt-8 mb-4">
+        <button
+          class="w-[25%] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] text-sm py-[8px]"
+          *ngIf="!viewMode"
+          (click)="toggleMode(true)"
         >
-        <label class="inline-flex items-center cursor-pointer">
-          <input type="checkbox" value="" class="sr-only peer" />
-          <div
-            class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
-          ></div>
-        </label>
+          Cancel
+        </button>
+        <button
+          *ngIf="viewMode"
+          class="w-[25%] bg-[#336699] hover:bg-[#2c5a88] rounded-full text-white text-sm py-[8px]"
+          (click)="toggleMode(false)"
+        >
+          Edit
+        </button>
+        <button
+          *ngIf="!viewMode"
+          class="w-[25%] bg-[#336699] hover:bg-[#2c5a88] rounded-full text-white text-sm py-[8px]"
+          (click)="toggleMode(false)"
+        >
+          Update
+        </button>
       </div>
     </div>
   </form>

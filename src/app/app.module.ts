@@ -23,7 +23,7 @@ import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { StaffComponent } from './page/admin/staff/staff.component';
@@ -38,6 +38,7 @@ import { AnnoucementCardComponent } from './shared/component/annoucement-card/an
 import { NgxEditorModule } from 'ngx-editor';
 import { WeeklyMenuComponent } from './shared/component/weekly-menu/weekly-menu.component';
 import { DashboardMenuCardComponent } from './shared/component/dashboard-menu-card/dashboard-menu-card.component';
+import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,7 @@ import { DashboardMenuCardComponent } from './shared/component/dashboard-menu-ca
       },
     }),
   ],
-  providers: [],
+  providers: [provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

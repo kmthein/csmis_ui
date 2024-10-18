@@ -7,7 +7,7 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  private url = 'http://localhost:8080/api';
+  private url = 'http://localhost:8080/admin/api';
 
   constructor(private http: HttpClient, private toast: ToastrService) {}
 
