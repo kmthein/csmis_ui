@@ -2,6 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
+import { User } from '../../../models/user';
+import { AuthService } from '../../../services/auth.service';
+import { AnnoucementService } from '../../../services/annoucement/annoucement.service';
 
 @Component({
   selector: 'app-annoucement-list',
@@ -12,22 +15,19 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   isModalOpen: boolean = false;
   selectedFile: File | null = null;
+  user: User | undefined | null;
 
   title: string = '';
   editorContent: string = '';
 
+  constructor(
+    private authService: AuthService,
+    private announceService: AnnoucementService
+  ) {}
+
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
   }
-
-  // form: FormGroup;
-
-  // constructor(private fb: FormBuilder) {
-  //   this.form = this.fb.group({
-  //     title: ['', Validators.required],
-  //     editorContent: new FormControl('', Validators.required()),
-  //   });
-  // }
 
   toggleModal() {
     this.isModalOpen = !this.isModalOpen;
@@ -38,6 +38,9 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   editor: Editor = new Editor();
   ngOnInit(): void {
     this.editor = new Editor();
+    this.authService.currentUser$.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ngOnDestroy(): void {
@@ -55,17 +58,23 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
-  // getEditorContent() {
-  //   const content = this.form.get('editorContent')?.value;
-  //   console.log('Current Editor Content:', content);
-  //   return content;
-  // }
-
-  // Example method for form submission
   onSubmit() {
     console.log(this.title);
     console.log(this.editorContent);
     console.log(this.selectedFile);
-    // handle the content, e.g., send to a server
+    console.log(this.user?.id);
+    const id = this.user?.id;
+    this.announceService
+      .addNewAnnouncement(
+        this.title,
+        this.editorContent,
+        this.selectedFile!,
+        id!
+      )
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+      });
   }
 }
