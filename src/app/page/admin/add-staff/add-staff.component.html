@@ -1,0 +1,206 @@
+<div>
+  <h3 class="text-lg font-medium mb-5">Add Staff Information</h3>
+  <form
+    #staffForm="ngForm"
+    (ngSubmit)="onSubmit(staffForm)"
+    novalidate
+    class="staff-form md:w-[50%]"
+  >
+    <div class="flex gap-6 mb-8">
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Staff ID</label>
+        <input
+          type="text"
+          name="staffId"
+          [(ngModel)]="staff.staffId"
+          required
+          #staffIdInput="ngModel"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
+          <small *ngIf="staffIdInput.errors?.['required']"
+            >Staff ID is required</small
+          >
+        </div>
+      </div>
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Name</label>
+        <input
+          type="text"
+          name="name"
+          #nameInput="ngModel"
+          required
+          [(ngModel)]="staff.name"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <div *ngIf="nameInput.invalid && nameInput.touched">
+          <small *ngIf="nameInput.errors?.['required']">Name is required</small>
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-6 mb-8">
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Door Log No</label>
+        <input
+          type="text"
+          name="doorLogNo"
+          required
+          #doorLogNoInput="ngModel"
+          [(ngModel)]="staff.doorLogNo"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <div *ngIf="doorLogNoInput.invalid && doorLogNoInput.touched">
+          <small *ngIf="doorLogNoInput.errors?.['required']"
+            >Door Log No is required</small
+          >
+        </div>
+      </div>
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Email</label>
+        <input
+          type="email"
+          name="email"
+          required
+          #emailInput="ngModel"
+          [(ngModel)]="staff.email"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <div *ngIf="emailInput.invalid && emailInput.touched">
+          <small *ngIf="emailInput.errors?.['required']"
+            >Email is required</small
+          >
+        </div>
+      </div>
+    </div>
+    <div class="flex gap-6 mb-8">
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Division</label>
+        <input
+          type="text"
+          name="division"
+          required
+          [(ngModel)]="staff.division"
+          *ngIf="addNewDivision"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <select
+          id="division"
+          name="division"
+          [(ngModel)]="staff.division"
+          (change)="onChangeDivision($event)"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option disabled>Please select division</option>
+          <option *ngFor="let division of divisions" [value]="division.name">
+            {{ division.name }}
+          </option>
+          <option value="" class="font-bold">Add new division</option>
+        </select>
+      </div>
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Department</label>
+        <input
+          type="text"
+          name="department"
+          required
+          [(ngModel)]="staff.department"
+          *ngIf="addNewDepart"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <select
+          id="department"
+          name="department"
+          [(ngModel)]="staff.department"
+          *ngIf="!addNewDepart"
+          (change)="onChangeDepartment($event)"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option disabled>Please select department</option>
+          <option
+            *ngFor="let department of departments"
+            [value]="department.name"
+          >
+            {{ department.name }}
+          </option>
+          <option value="" class="font-bold">Add new department</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex gap-6 mb-8">
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Team</label>
+        <input
+          type="text"
+          name="team"
+          required
+          *ngIf="addNewTeam"
+          [(ngModel)]="staff.team"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <select
+          id="team"
+          name="team"
+          [(ngModel)]="staff.team"
+          *ngIf="!addNewTeam"
+          (change)="onChangeTeam($event)"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option disabled>Please select team</option>
+          <option *ngFor="let team of teams" [value]="team.name">
+            {{ team.name }}
+          </option>
+          <option value="" class="font-bold">Add new team</option>
+        </select>
+      </div>
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Status</label>
+        <select
+          id="status"
+          name="status"
+          [(ngModel)]="staff.status"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option disabled>Please select status</option>
+          <option *ngFor="let status of statusList" [value]="status">
+            {{ status }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <!-- <div class="flex gap-6 mb-8">
+        <div class="w-[48%]">
+          <label class="text-[#696969] mb-1 block text-sm">Role</label>
+          <select
+            id="role"
+            name="role"
+            [(ngModel)]="staff.role"
+            (change)="onChangeTeam($event)"
+            class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            <option
+              [selected]="staff.role === role"
+              *ngFor="let role of roleList"
+              [value]="role"
+            >
+              {{ role }}
+            </option>
+          </select>
+        </div>
+      </div> -->
+    <div class="flex justify-end gap-4 my-10">
+      <button
+        (click)="backToStaffList()"
+        class="w-[25%] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] py-[10px]"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        [disabled]="staffForm.invalid"
+        class="w-[25%] bg-[#336699] hover:bg-[#2c5a88] disabled:bg-slate-400 rounded-full text-white py-[10px]"
+      >
+        Register
+      </button>
+    </div>
+  </form>
+</div>

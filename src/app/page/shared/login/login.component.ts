@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  staffId: string = "";
-  password: string = "";
+  staffId: string = '';
+  password: string = '';
   @Output() userLogged = new EventEmitter<User>();
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -21,11 +21,15 @@ export class LoginComponent {
     this.authService.login(staffId, password).subscribe({
       next: (response) => {
         console.log(response);
-        if(response.token) {
+        if (response.token) {
           this.userLogged.emit(response.userDetails);
-          this.router.navigate(['/admin']);
+          if (this.authService.isAdmin()) {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/']);
+          }
         }
-      }
-    })
+      },
+    });
   }
 }

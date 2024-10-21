@@ -5,7 +5,7 @@ import { User } from '../models/user';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private url = 'http://localhost:8080/api';
@@ -14,8 +14,8 @@ export class AuthService {
   currentUser$ = this.userSource.asObservable();
 
   constructor(private http: HttpClient, private toast: ToastrService) {
-    const storedUser = localStorage.getItem("user");
-    if(storedUser) {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
       this.userSource.next(JSON.parse(storedUser));
     }
   }
@@ -26,7 +26,7 @@ export class AuthService {
       tap((response) => {
         console.log(response);
         const { token, userDetails } = response;
-        if(token) {
+        if (token) {
           localStorage.setItem('token', token);
           localStorage.setItem('user', JSON.stringify(userDetails));
           this.userSource.next(userDetails);
@@ -35,7 +35,7 @@ export class AuthService {
           this.toast.error(response?.message || 'Login failed');
         }
       })
-    )
+    );
   }
 
   logout(): void {
@@ -46,5 +46,39 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  getUser() {
+    return this.userSource.value;
+  }
+
+  isAdmin() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      if (payload.role == 'ADMIN') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  clearToken() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const currentTime = Math.floor(Date.now() / 1000);
+      if (payload.exp < currentTime) {
+        this.clearToken();
+      }
+      return payload.exp > currentTime;
+    }
+    this.clearToken();
+    return false;
   }
 }

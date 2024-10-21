@@ -8,35 +8,47 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { LoginComponent } from './page/shared/login/login.component';
 import { AdminLunchComponent } from './page/admin/admin-lunch/admin-lunch.component';
+import { StaffComponent } from './page/admin/staff/staff.component';
+import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component';
+import { AddStaffComponent } from './page/admin/add-staff/add-staff.component';
+import { LunchRegistrationComponent } from './lunch/lunch-registration/lunch-registration.component';
+import { AuthGuard } from './core/guard/auth.guard';
+import { AdminGuard } from './core/guard/admin.guard';
+import { LoginGuard } from './core/guard/login.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'lunch', component: LunchPlanComponent },
       { path: 'admin-lunch', component: AdminLunchComponent },
+      { path: 'lunch', component: LunchRegistrationComponent },
       { path: 'profile', component: ProfileComponent },
-    ]
+    ],
   },
   {
     path: 'admin',
     component: AdminLayoutComponent,
+    canActivate: [AdminGuard],
     children: [
       { path: '', component: DashboardComponent },
       { path: 'holiday', component: HolidayComponent },
-      
-    ]
+      { path: 'staff', component: StaffComponent },
+      { path: 'staff/new', component: AddStaffComponent },
+      { path: 'staff/edit/:id', component: EditStaffComponent },
+    ],
   },
   {
     path: 'login',
-    component: LoginComponent
-  }
+    component: LoginComponent,
+    canActivate: [LoginGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

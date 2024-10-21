@@ -1,0 +1,242 @@
+<div>
+  <h3 class="text-lg font-medium mb-5">
+    {{ viewMode ? "View " : "Edit " }} Staff Details
+  </h3>
+  <form
+    #staffForm="ngForm"
+    (ngSubmit)="onSubmit(staffForm)"
+    class="staff-form w-[50%]"
+  >
+    <div class="flex gap-6 mb-8">
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Staff ID</label>
+        <input
+          type="text"
+          name="staffId"
+          [(ngModel)]="staff.staffId"
+          [readOnly]="viewMode"
+          required
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+      </div>
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Name</label>
+        <input
+          type="text"
+          name="name"
+          required
+          [readOnly]="viewMode"
+          [(ngModel)]="staff.name"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+      </div>
+    </div>
+    <div class="flex gap-6 mb-8">
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Door Log No</label>
+        <input
+          type="text"
+          name="doorLogNo"
+          required
+          [readOnly]="viewMode"
+          [(ngModel)]="staff.doorLogNo"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+      </div>
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Email</label>
+        <input
+          type="email"
+          name="email"
+          required
+          [readOnly]="viewMode"
+          [(ngModel)]="staff.email"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+      </div>
+    </div>
+    <div class="flex gap-6 mb-8">
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Division</label>
+        <input
+          type="text"
+          name="division"
+          required
+          [readOnly]="viewMode"
+          [(ngModel)]="staff.division"
+          *ngIf="viewMode || addNewDivision"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <select
+          id="division"
+          name="division"
+          [(ngModel)]="staff.division"
+          *ngIf="!viewMode && !addNewDivision"
+          (change)="onChangeDivision($event)"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option disabled>Please select division</option>
+          <option
+            [selected]="staff.division === division.name"
+            *ngFor="let division of divisions"
+            [value]="division.name"
+          >
+            {{ division.name }}
+          </option>
+          <option value="" class="font-bold">Add new division</option>
+        </select>
+      </div>
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Department</label>
+        <input
+          type="text"
+          name="department"
+          required
+          [readOnly]="viewMode"
+          [(ngModel)]="staff.department"
+          *ngIf="viewMode || addNewDepart"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <select
+          id="department"
+          name="department"
+          [(ngModel)]="staff.department"
+          *ngIf="!viewMode && !addNewDepart"
+          (change)="onChangeDepartment($event)"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option disabled>Please select department</option>
+          <option
+            [selected]="staff.department === department.name"
+            *ngFor="let department of departments"
+            [value]="department.name"
+          >
+            {{ department.name }}
+          </option>
+          <option value="" class="font-bold">Add new department</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex gap-6 mb-8">
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Team</label>
+        <input
+          type="text"
+          name="team"
+          required
+          *ngIf="viewMode || addNewTeam"
+          [readOnly]="viewMode"
+          [(ngModel)]="staff.team"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <select
+          id="team"
+          name="team"
+          [(ngModel)]="staff.team"
+          *ngIf="!viewMode && !addNewTeam"
+          (change)="onChangeTeam($event)"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option disabled>Please select team</option>
+          <option
+            [selected]="staff.team === team.name"
+            *ngFor="let team of teams"
+            [value]="team.name"
+          >
+            {{ team.name }}
+          </option>
+          <option value="" class="font-bold">Add new team</option>
+        </select>
+      </div>
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Status</label>
+        <input
+          type="text"
+          name="status"
+          required
+          [readOnly]="viewMode"
+          *ngIf="viewMode"
+          [(ngModel)]="staff.status"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <select
+          id="status"
+          name="status"
+          [(ngModel)]="staff.status"
+          *ngIf="!viewMode"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option disabled>Please select status</option>
+          <option
+            [selected]="staff.status === status"
+            *ngFor="let status of statusList"
+            [value]="status"
+          >
+            {{ status }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="flex gap-6 mb-8">
+      <div class="w-[48%]">
+        <label class="text-[#696969] mb-1 block text-sm">Role</label>
+        <input
+          type="text"
+          name="role"
+          required
+          *ngIf="viewMode"
+          [readOnly]="viewMode"
+          [(ngModel)]="staff.role"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <select
+          id="role"
+          name="role"
+          [(ngModel)]="staff.role"
+          *ngIf="!viewMode"
+          (change)="onChangeTeam($event)"
+          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option
+            [selected]="staff.role === role"
+            *ngFor="let role of roleList"
+            [value]="role"
+          >
+            {{ role }}
+          </option>
+        </select>
+      </div>
+      
+    </div>
+    <div class="flex justify-end gap-4 my-10">
+      <button
+        *ngIf="viewMode"
+        (click)="backToStaffList()"
+        class="w-[25%] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] py-[10px]"
+      >
+        Back
+      </button>
+      <button
+        *ngIf="!viewMode"
+        (click)="toggleView(true)"
+        class="w-[25%] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] py-[10px]"
+      >
+        Cancel
+      </button>
+      <button
+        *ngIf="viewMode"
+        (click)="toggleView(false)"
+        class="w-[25%] bg-[#336699] hover:bg-[#2c5a88] rounded-full text-white py-[10px]"
+      >
+        Edit
+      </button>
+      <button
+        *ngIf="!viewMode"
+        type="submit"
+        class="w-[25%] bg-[#336699] hover:bg-[#2c5a88] rounded-full text-white py-[10px]"
+      >
+        Update
+      </button>
+    </div>
+  </form>
+</div>
