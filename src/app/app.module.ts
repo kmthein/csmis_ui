@@ -47,7 +47,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ProfileComponent,
     HolidayComponent,
     AdminLayoutComponent,
-    TableComponent,
     AdminLunchComponent,
     StaffComponent,
     ActionButtonRendererComponent,
