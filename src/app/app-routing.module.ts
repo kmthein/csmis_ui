@@ -7,6 +7,7 @@ import { ProfileComponent } from './page/shared/profile/profile.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { LoginComponent } from './page/shared/login/login.component';
+import { AdminLunchComponent } from './page/admin/admin-lunch/admin-lunch.component';
 import { StaffComponent } from './page/admin/staff/staff.component';
 import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component';
 import { AddStaffComponent } from './page/admin/add-staff/add-staff.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardComponent },
+      { path: 'admin-lunch', component: AdminLunchComponent },
       { path: 'lunch', component: LunchRegistrationComponent },
       { path: 'profile', component: ProfileComponent },
     ],

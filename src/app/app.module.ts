@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AdminLunchComponent } from './page/admin/admin-lunch/admin-lunch.component';
 import { StaffComponent } from './page/admin/staff/staff.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ActionButtonRendererComponent } from './shared/component/action-button-renderer/action-button-renderer.component';
@@ -46,6 +47,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ProfileComponent,
     HolidayComponent,
     AdminLayoutComponent,
+    TableComponent,
+    AdminLunchComponent,
     StaffComponent,
     ActionButtonRendererComponent,
     EditStaffComponent,
