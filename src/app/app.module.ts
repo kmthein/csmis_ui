@@ -27,6 +27,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AdminLunchComponent } from './page/admin/admin-lunch/admin-lunch.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
     HolidayComponent,
     AdminLayoutComponent,
     TableComponent,
+    AdminLunchComponent,
   ],
   imports: [
     BrowserModule,

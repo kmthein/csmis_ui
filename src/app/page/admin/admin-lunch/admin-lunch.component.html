@@ -1,0 +1,60 @@
+
+  <div class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-end mx-auto p-4">
+        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <button (click)="toggleModal()" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Add New
+            </button>
+        </div>
+    </div>
+</div>
+<div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white rounded-lg p-6 flex flex-col">
+      <h2 class="text-lg font-bold mb-4">Fill the Lunch Form for This Week</h2>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="space-y-4 flex-grow">
+    <div id="date-range-picker" class="flex items-center mb-4">
+        <div class="relative flex-1">
+            <input id="datepicker-range-start" name="start" type="date" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                (change)="onStartDateChange($event)">
+        </div>
+        <span class="mx-4 text-gray-500">to</span>
+        <div class="relative flex-1">
+            <input id="datepicker-range-end" name="end" type="date" 
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                [(ngModel)]="endDate" (change)="onEndDateChange($event)">
+        </div>
+    </div>
+
+    <div *ngFor="let menuItem of lunch.menu; let i = index" class="mb-4 flex items-center">
+        <label for="menu{{i}}" class="block text-sm font-medium w-1/3">Menu Item {{i + 1}}</label>
+        <input id="menu{{i}}" name="menu{{i}}" type="text" [(ngModel)]="lunch.menu[i]" 
+            class="mt-1 block w-2/3 border-gray-300 rounded-md shadow-sm 
+            focus:ring focus:ring-blue-300" required />
+    </div>
+
+    <div class="mb-4 flex items-center">
+        <label for="price" class="block text-sm font-medium w-1/3">Price</label>
+        <input id="price" name="price" type="text" [(ngModel)]="lunch.price" 
+            class="mt-1 block w-2/3 border-gray-300 rounded-md shadow-sm 
+            focus:ring focus:ring-blue-300" required />
+    </div>
+
+    <div class="mb-4 flex items-center">
+        <label for="companyRate" class="block text-sm font-medium w-1/3">Company Rate</label>
+        <input id="companyRate" name="companyRate" type="text" [(ngModel)]="lunch.companyRate" 
+            class="mt-1 block w-2/3 border-gray-300 rounded-md shadow-sm 
+            focus:ring focus:ring-blue-300" required />
+    </div>
+
+    <div class="flex justify-end mt-4">
+        <button type="button" class="mr-2 text-gray-500 hover:text-gray-700">Cancel</button>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 rounded-lg px-4 py-2">Submit</button>
+    </div>
+</form>
+
+  </div>
+</div>
+

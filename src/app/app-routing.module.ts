@@ -7,6 +7,7 @@ import { ProfileComponent } from './page/shared/profile/profile.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { LoginComponent } from './page/shared/login/login.component';
+import { AdminLunchComponent } from './page/admin/admin-lunch/admin-lunch.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'lunch', component: LunchPlanComponent },
+      { path: 'admin-lunch', component: AdminLunchComponent },
       { path: 'profile', component: ProfileComponent },
     ]
   },
