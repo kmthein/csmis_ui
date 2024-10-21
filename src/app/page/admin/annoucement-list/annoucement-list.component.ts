@@ -12,6 +12,7 @@ import { AnnoucementService } from '../../../services/annoucement/annoucement.se
   styleUrl: './annoucement-list.component.css',
 })
 export class AnnoucementListComponent implements OnInit, OnDestroy {
+  announcements: any = [];
   isLoading: boolean = false;
   isModalOpen: boolean = false;
   selectedFile: File | null = null;
@@ -36,7 +37,16 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
 
   html = 'Hello world!';
   editor: Editor = new Editor();
+
+  getAllAnnouncement() {
+    this.announceService.getAllAnnouncements().subscribe((data) => {
+      console.log(data);
+      this.announcements = data;
+    })
+  }
+
   ngOnInit(): void {
+    this.getAllAnnouncement();
     this.editor = new Editor();
     this.authService.currentUser$.subscribe((user) => {
       this.user = user;
@@ -48,8 +58,7 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   }
 
   toolbar: Toolbar = [
-    ['bold', 'italic'],
-    ['underline', 'strike'],
+    ['bold', 'italic', 'underline', 'strike'],
     ['code', 'blockquote'],
     ['ordered_list', 'bullet_list'],
     [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
@@ -69,7 +78,14 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (response) => {
-          console.log(response);
+          if (response.message) {
+            this.getAllAnnouncement();
+            this.isLoading = false;
+            this.toggleModal();
+          }
+        },
+        error: (error) => {
+          console.error(error);
         },
       });
   }

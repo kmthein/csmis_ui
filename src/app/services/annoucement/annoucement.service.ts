@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,10 @@ export class AnnoucementService {
   private url = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient, private toast: ToastrService) {}
+
+  getAllAnnouncements(): Observable<any> {
+    return this.http.get<any>(`${this.url}/announcements`);
+  }
 
   addNewAnnouncement(
     title: string,

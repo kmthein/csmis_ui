@@ -13,17 +13,8 @@
       </button>
     </div>
   </div>
-  <div class="pb-6">
-    <app-annoucement-card></app-annoucement-card>
-  </div>
-  <div class="pb-6">
-    <app-annoucement-card></app-annoucement-card>
-  </div>
-  <div class="pb-6">
-    <app-annoucement-card></app-annoucement-card>
-  </div>
-  <div class="pb-6">
-    <app-annoucement-card></app-annoucement-card>
+  <div class="pb-6" *ngFor="let announcement of announcements">
+    <app-annoucement-card [announcement]="announcement"></app-annoucement-card>
   </div>
 </div>
 

@@ -5,13 +5,18 @@
       src="assets/logo.png"
       alt="Medium avatar"
     />
-    <div>
+    <div class="w-full">
       <div class="mb-3">
-        <h3 class="font-semibold">Announcement: Special Lunch on Friday</h3>
-      <span class="text-sm text-[#797979]">30 minutes ago</span>
+        <h4>{{ announcement.title }}</h4>
+      <span class="text-sm text-[#797979]">{{ announcement.date | dfnsFormat: 'EEE LLLL d yyyy' }}</span>
       </div>
-      <div class="mb-3">
-        <p class="leading-relaxed">Dear All Staff, We are pleased to inform you that this Friday, there will be a Special Lunch organized for all employees, courtesy of DIR ACE Technology Company. We want to take this opportunity to show our appreciation for your hard work and dedication.</p>
+      <div class="mb-3 w-full">
+        <div class="leading-relaxed" [innerHTML]="announcement.content | safeHtml"></div>
+      </div>
+      <div class="mb-3" *ngIf="announcement.files.length > 0">
+        <div *ngFor="let file of announcement.files">
+          <img *ngIf="file.type == 'image/jpeg'" src='http://localhost:8080/{{file.filePath}}' />
+        </div>
       </div>
     </div>
   </div>

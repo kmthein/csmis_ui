@@ -39,6 +39,9 @@ import { NgxEditorModule } from 'ngx-editor';
 import { WeeklyMenuComponent } from './shared/component/weekly-menu/weekly-menu.component';
 import { DashboardMenuCardComponent } from './shared/component/dashboard-menu-card/dashboard-menu-card.component';
 import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
+import { SafeHtmlPipe } from './core/pipe/safe-html.pipe';
+import { DateFnsModule } from 'ngx-date-fns';
+import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
 
 @NgModule({
   declarations: [
@@ -61,6 +64,8 @@ import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
     AnnoucementCardComponent,
     WeeklyMenuComponent,
     DashboardMenuCardComponent,
+    SafeHtmlPipe,
+    DfnsFormatPipe
   ],
   imports: [
     MatSnackBarModule,
@@ -70,6 +75,7 @@ import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
     ReactiveFormsModule,
     AgGridModule,
     HttpClientModule,
+    DateFnsModule,
     NgIconsModule.withIcons({
       ionHome,
       ionCalendar,
