@@ -8,6 +8,8 @@ import { Editor, Toolbar } from 'ngx-editor';
 })
 export class AnnoucementCardComponent {
   @Input() announcement : any;
+  file = "https://morth.nic.in/sites/default/files/dd12-13_0.pdf";
+
   editor: Editor = new Editor();
 
   ngOnInit() {

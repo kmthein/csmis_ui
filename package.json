@@ -29,6 +29,7 @@
     "flowbite": "^2.5.2",
     "jquery": "^3.7.1",
     "jwt-decode": "^4.0.0",
+    "ng2-pdf-viewer": "^10.3.3",
     "ngx-date-fns": "^11.0.0",
     "ngx-editor": "^17.5.4",
     "ngx-toastr": "^19.0.0",

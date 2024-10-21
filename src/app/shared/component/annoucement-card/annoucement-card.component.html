@@ -8,14 +8,32 @@
     <div class="w-full">
       <div class="mb-3">
         <h4>{{ announcement.title }}</h4>
-      <span class="text-sm text-[#797979]">{{ announcement.date | dfnsFormat: 'EEE LLLL d yyyy' }}</span>
+        <span class="text-sm text-[#797979]">{{
+          announcement.date | dfnsFormat : "EEE LLLL d yyyy"
+        }}</span>
       </div>
       <div class="mb-3 w-full">
-        <div class="leading-relaxed" [innerHTML]="announcement.content | safeHtml"></div>
+        <div
+          class="leading-relaxed"
+          [innerHTML]="announcement.content | safeHtml"
+        ></div>
       </div>
       <div class="mb-3" *ngIf="announcement.files.length > 0">
         <div *ngFor="let file of announcement.files">
-          <img *ngIf="file.type == 'image/jpeg'" src='http://localhost:8080/{{file.filePath}}' />
+          <img
+            *ngIf="file.type == 'image/jpeg'"
+            src="http://localhost:8080/{{ file.filePath }}"
+          />
+          <iframe
+          *ngIf="file.type == 'application/pdf'"
+          src="https://docs.google.com/gview?url=http%3A%2F%2Fstatic.googleusercontent.com%2Fmedia%2Fresearch.google.com%2Fen%2F%2Fpubs%2Farchive%2F43934.pdf&embedded=true" width="500" height="700"></iframe>
+          <!-- <pdf-viewer
+          *ngIf="file.type == 'application/pdf'" 
+          src="https://docs.google.com/gview?url=http%3A%2F%2Fstatic.googleusercontent.com%2Fmedia%2Fresearch.google.com%2Fen%2F%2Fpubs%2Farchive%2F43934.pdf&embedded=true" [original-size]="false" style="height: 500px; width: 400px;"></pdf-viewer> -->
+          <video width="auto" height="240" controls *ngIf="file.type == 'video/mp4'">
+            <source src="http://localhost:8080/{{ file.filePath }}" type="{{file.file_type}}" >
+          Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </div>

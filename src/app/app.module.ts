@@ -42,6 +42,8 @@ import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
 import { SafeHtmlPipe } from './core/pipe/safe-html.pipe';
 import { DateFnsModule } from 'ngx-date-fns';
 import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
+import { SafeUrlPipe } from './core/pipe/safe-url.pipe';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
     WeeklyMenuComponent,
     DashboardMenuCardComponent,
     SafeHtmlPipe,
-    DfnsFormatPipe
+    DfnsFormatPipe,
+    SafeUrlPipe
   ],
   imports: [
     MatSnackBarModule,
@@ -76,6 +79,7 @@ import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
     AgGridModule,
     HttpClientModule,
     DateFnsModule,
+    PdfViewerModule,
     NgIconsModule.withIcons({
       ionHome,
       ionCalendar,
