@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { tap } from 'rxjs';
 export class AnnoucementService {
   private url = 'http://localhost:8080/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toast: ToastrService) {}
 
   addNewAnnouncement(
     title: string,
@@ -27,6 +28,11 @@ export class AnnoucementService {
     return this.http.post<any>(`${this.url}/announcements`, formData).pipe(
       tap((response) => {
         console.log(response);
+        if(response.message) {
+          this.toast.success(response.message);
+        } else if (response.error) {
+          this.toast.error(response.error);
+        }
       })
     );
   }

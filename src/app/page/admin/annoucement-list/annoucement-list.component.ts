@@ -59,10 +59,6 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   ];
 
   onSubmit() {
-    console.log(this.title);
-    console.log(this.editorContent);
-    console.log(this.selectedFile);
-    console.log(this.user?.id);
     const id = this.user?.id;
     this.announceService
       .addNewAnnouncement(
