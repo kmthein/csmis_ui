@@ -11,6 +11,37 @@
   font-optical-sizing: auto;
   font-style: normal;
 }
+/* Custom font sizes and weights for h1 to h6 */
+h1 {
+  font-size: 2em;    /* 32px if the base font size is 16px */
+  font-weight: 700;  /* Bold */
+}
+
+h2 {
+  font-size: 1.5em;  /* 24px */
+  font-weight: 700;  /* Bold */
+}
+
+h3 {
+  font-size: 1.17em; /* 18.72px */
+  font-weight: 700;  /* Bold */
+}
+
+h4 {
+  font-size: 1em;    /* 16px */
+  font-weight: 700;  /* Bold */
+}
+
+h5 {
+  font-size: 0.83em; /* 13.28px */
+  font-weight: 700;  /* Bold */
+}
+
+h6 {
+  font-size: 0.67em; /* 10.72px */
+  font-weight: 700;  /* Bold */
+}
+
 .active {
   background-color: #e0f0ff; /* bg-[#E0F0FF] */
   padding-top: 1rem; /* py-4 (16px) */
@@ -60,4 +91,10 @@ select.dt-input {
 }
 small {
   color: #ff4444;
+}
+em {
+  font-style: italic;
+}
+.NgxEditor {
+  min-height: 100px;
 }

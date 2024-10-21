@@ -22,8 +22,8 @@ import {
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminLunchComponent } from './page/admin/admin-lunch/admin-lunch.component';
@@ -34,6 +34,15 @@ import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component
 import { AddStaffComponent } from './page/admin/add-staff/add-staff.component';
 import { LunchRegistrationComponent } from './lunch/lunch-registration/lunch-registration.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucement-list.component';
+import { AnnoucementCardComponent } from './shared/component/annoucement-card/annoucement-card.component';
+import { NgxEditorModule } from 'ngx-editor';
+import { WeeklyMenuComponent } from './shared/component/weekly-menu/weekly-menu.component';
+import { DashboardMenuCardComponent } from './shared/component/dashboard-menu-card/dashboard-menu-card.component';
+import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
+import { SafeHtmlPipe } from './core/pipe/safe-html.pipe';
+import { DateFnsModule } from 'ngx-date-fns';
+import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
 
 @NgModule({
   declarations: [
@@ -53,14 +62,22 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     EditStaffComponent,
     AddStaffComponent,
     LunchRegistrationComponent,
+    AnnoucementListComponent,
+    AnnoucementCardComponent,
+    WeeklyMenuComponent,
+    DashboardMenuCardComponent,
+    SafeHtmlPipe,
+    DfnsFormatPipe
   ],
   imports: [
     MatSnackBarModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     AgGridModule,
     HttpClientModule,
+    DateFnsModule,
     NgIconsModule.withIcons({
       ionHome,
       ionCalendar,
@@ -72,8 +89,44 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     }),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    NgxEditorModule.forRoot({
+      locals: {
+        // menu
+        bold: 'Bold',
+        italic: 'Italic',
+        code: 'Code',
+        blockquote: 'Blockquote',
+        underline: 'Underline',
+        strike: 'Strike',
+        bullet_list: 'Bullet List',
+        ordered_list: 'Ordered List',
+        heading: 'Heading',
+        h1: 'Header 1',
+        h2: 'Header 2',
+        h3: 'Header 3',
+        h4: 'Header 4',
+        h5: 'Header 5',
+        h6: 'Header 6',
+        align_left: 'Left Align',
+        align_center: 'Center Align',
+        align_right: 'Right Align',
+        align_justify: 'Justify',
+        text_color: 'Text Color',
+        background_color: 'Background Color',
+
+        // popups, forms, others...
+        url: 'URL',
+        text: 'Text',
+        openInNewTab: 'Open in new tab',
+        insert: 'Insert',
+        altText: 'Alt Text',
+        title: 'Title',
+        remove: 'Remove',
+        enterValidUrl: 'Please enter a valid URL',
+      },
+    }),
   ],
-  providers: [],
+  providers: [provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

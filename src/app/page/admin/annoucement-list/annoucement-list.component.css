@@ -1,0 +1,11 @@
+@import "ckeditor5/ckeditor5.css";
+.ck-editor__editable_inline {
+  min-height: 300px; /* Set a minimum height */
+  width: 100%; /* Make the editor take up full width */
+  box-sizing: border-box; /* Ensure padding is included in width/height */
+}
+.full-width-editor {
+  width: 100vw; /* Full viewport width */
+  padding: 20px; /* Optional padding */
+  box-sizing: border-box;
+}
