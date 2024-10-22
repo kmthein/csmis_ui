@@ -15,6 +15,7 @@ import { AuthGuard } from './core/guard/auth.guard';
 import { AdminGuard } from './core/guard/admin.guard';
 import { LoginGuard } from './core/guard/login.guard';
 import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
+import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucement-list.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'lunch', component: LunchRegistrationComponent },
       { path: 'profile', component: ProfileComponent },
+      {
+        path: 'lunch-menu',
+        component: LunchComponent,
+      },
     ],
   },
   {
@@ -37,10 +42,7 @@ const routes: Routes = [
       { path: 'staff', component: StaffComponent },
       { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent },
-      {
-        path: 'lunch/lunch',
-        component: LunchComponent,
-      },
+      { path: 'annoucement', component: AnnoucementListComponent }
     ],
   },
   {

@@ -15,6 +15,7 @@ export class ExcelService {
     const formData = new FormData();
     formData.append('file', data);
     formData.append('adminId', adminId.toString());
+    console.log(adminId);
     return this.http.post<any>(`${this.url}/${endpoint}/excel`, formData).pipe(
       tap((response) => {
         console.log(response);

@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+  viewMode: boolean = true;
 
+  toggleMode(bool: boolean) {
+    this.viewMode = bool;
+  }
 }

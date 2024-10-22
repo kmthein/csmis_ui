@@ -1,0 +1,23 @@
+<div class="bg-white p-4 rounded-md">
+  <div class="flex gap-4">
+    <img
+      class="w-12 h-12 rounded object-contain border"
+      src="assets/logo.png"
+      alt="Medium avatar"
+    />
+    <div class="w-full">
+      <div class="mb-3">
+        <h4>{{ announcement?.title }}</h4>
+      <span class="text-sm text-[#797979]">{{ announcement?.date | dfnsFormat: 'EEE LLLL d yyyy' }}</span>
+      </div>
+      <div class="mb-3 w-full">
+        <div class="leading-relaxed" [innerHTML]="announcement?.content | safeHtml"></div>
+      </div>
+      <div class="mb-3" *ngIf="announcement?.files.length > 0">
+        <div *ngFor="let file of announcement?.files">
+          <img *ngIf="file?.type == 'image/jpeg'" src='http://localhost:8080/{{file?.filePath}}' />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
