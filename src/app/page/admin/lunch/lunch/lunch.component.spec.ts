@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminLunchComponent } from './admin-lunch.component';
+import { LunchComponent } from './lunch.component';
 
-describe('AdminLunchComponent', () => {
-  let component: AdminLunchComponent;
-  let fixture: ComponentFixture<AdminLunchComponent>;
+describe('LunchComponent', () => {
+  let component: LunchComponent;
+  let fixture: ComponentFixture<LunchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AdminLunchComponent]
+      declarations: [LunchComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AdminLunchComponent);
+    fixture = TestBed.createComponent(LunchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

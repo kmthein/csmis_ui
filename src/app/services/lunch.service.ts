@@ -1,18 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
-import { Observable } from 'rxjs'; // Import Observablenecessary
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Lunch } from '../models/lunch';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LunchService {
+  private apiUrl = '/api/lunches'; // Adjust the API endpoint as needed
 
-  private apiUrl = 'http://localhost:8080/api/lunches'; // Ensure the API URL points to the correct endpoint
+constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+getAllLunches(): Observable<Lunch[]> {
+  return this.http.get<Lunch[]>(this.apiUrl);
+}
 
-  register(lunch: Lunch): Observable<any> {
-    return this.http.post<any>(this.apiUrl, lunch); // Ensure proper endpoint is called
-  }
+createLunch(lunch: Lunch): Observable<Lunch> {
+  return this.http.post<Lunch>(this.apiUrl, lunch);
+}
+
+updateLunch(id: number, lunch: Lunch): Observable<Lunch> {
+  return this.http.put<Lunch>(`${this.apiUrl}/${id}`, lunch);
+}
+
+deleteLunch(id: number): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/${id}`);
+}
 }

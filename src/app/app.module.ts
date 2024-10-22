@@ -22,11 +22,10 @@ import {
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { AdminLunchComponent } from './page/admin/admin-lunch/admin-lunch.component';
 import { StaffComponent } from './page/admin/staff/staff.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ActionButtonRendererComponent } from './shared/component/action-button-renderer/action-button-renderer.component';
@@ -34,6 +33,9 @@ import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component
 import { AddStaffComponent } from './page/admin/add-staff/add-staff.component';
 import { LunchRegistrationComponent } from './lunch/lunch-registration/lunch-registration.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
+
+
 
 @NgModule({
   declarations: [
@@ -47,15 +49,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ProfileComponent,
     HolidayComponent,
     AdminLayoutComponent,
-    TableComponent,
-    AdminLunchComponent,
     StaffComponent,
     ActionButtonRendererComponent,
     EditStaffComponent,
     AddStaffComponent,
     LunchRegistrationComponent,
+    LunchComponent,
   ],
   imports: [
+    BrowserModule,
+    FormsModule, 
+    HttpClientModule,
     MatSnackBarModule,
     BrowserModule,
     AppRoutingModule,

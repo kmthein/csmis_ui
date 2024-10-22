@@ -7,7 +7,6 @@ import { ProfileComponent } from './page/shared/profile/profile.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { LoginComponent } from './page/shared/login/login.component';
-import { AdminLunchComponent } from './page/admin/admin-lunch/admin-lunch.component';
 import { StaffComponent } from './page/admin/staff/staff.component';
 import { EditStaffComponent } from './page/admin/edit-staff/edit-staff.component';
 import { AddStaffComponent } from './page/admin/add-staff/add-staff.component';
@@ -15,6 +14,7 @@ import { LunchRegistrationComponent } from './lunch/lunch-registration/lunch-reg
 import { AuthGuard } from './core/guard/auth.guard';
 import { AdminGuard } from './core/guard/admin.guard';
 import { LoginGuard } from './core/guard/login.guard';
+import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
 
 const routes: Routes = [
   {
@@ -23,7 +23,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'admin-lunch', component: AdminLunchComponent },
       { path: 'lunch', component: LunchRegistrationComponent },
       { path: 'profile', component: ProfileComponent },
     ],
@@ -38,6 +37,10 @@ const routes: Routes = [
       { path: 'staff', component: StaffComponent },
       { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent },
+      {
+        path: 'lunch/lunch',
+        component: LunchComponent,
+      },
     ],
   },
   {
