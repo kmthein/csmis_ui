@@ -26,10 +26,6 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'lunch', component: LunchRegistrationComponent },
       { path: 'profile', component: ProfileComponent },
-      {
-        path: 'lunch-menu',
-        component: LunchComponent,
-      },
     ],
   },
   {
@@ -42,7 +38,11 @@ const routes: Routes = [
       { path: 'staff', component: StaffComponent },
       { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent },
-      { path: 'annoucement', component: AnnoucementListComponent }
+      { path: 'annoucement', component: AnnoucementListComponent },
+      {
+        path: 'menu',
+        component: LunchComponent,
+      },
     ],
   },
   {
