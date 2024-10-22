@@ -4,11 +4,11 @@ import { Editor, Toolbar } from 'ngx-editor';
 @Component({
   selector: 'app-annoucement-card',
   templateUrl: './annoucement-card.component.html',
-  styleUrl: './annoucement-card.component.css'
+  styleUrl: './annoucement-card.component.css',
 })
 export class AnnoucementCardComponent {
-  @Input() announcement : any;
-  file = "https://morth.nic.in/sites/default/files/dd12-13_0.pdf";
+  @Input() announcement: any;
+  file = 'https://morth.nic.in/sites/default/files/dd12-13_0.pdf';
 
   editor: Editor = new Editor();
 

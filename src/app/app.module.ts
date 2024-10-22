@@ -23,7 +23,11 @@ import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { StaffComponent } from './page/admin/staff/staff.component';
@@ -68,7 +72,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     DashboardMenuCardComponent,
     SafeHtmlPipe,
     DfnsFormatPipe,
-    SafeUrlPipe
+    SafeUrlPipe,
   ],
   imports: [
     MatSnackBarModule,

@@ -14,7 +14,10 @@
     </div>
   </div>
   <div class="pb-6" *ngFor="let announcement of announcements">
-    <app-annoucement-card [announcement]="announcement"></app-annoucement-card>
+    <app-annoucement-card
+      *ngIf="announcements.length > 0"
+      [announcement]="announcement"
+    ></app-annoucement-card>
   </div>
 </div>
 

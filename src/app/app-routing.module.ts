@@ -32,12 +32,11 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate: [AdminGuard],
     children: [
-      { path: '', component: DashboardComponent },
       { path: 'holiday', component: HolidayComponent },
       { path: 'staff', component: StaffComponent },
       { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent },
-      { path: 'annoucement', component: AnnoucementListComponent }
+      { path: 'annoucement', component: AnnoucementListComponent },
     ],
   },
   {
