@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
@@ -8,7 +9,22 @@ import { Editor, Toolbar } from 'ngx-editor';
 })
 export class AnnoucementCardComponent {
   @Input() announcement: any;
-  file = 'https://morth.nic.in/sites/default/files/dd12-13_0.pdf';
+  @Output() selectAnnouncement = new EventEmitter<any>();  
+
+  onCardClick() {
+    this.selectAnnouncement.emit(this.announcement);  
+    this.selectedDropdown = null;
+  }
+
+  selectedDropdown: number | null = null; 
+
+  toggleDropdown(announcementId: number): void {
+    if (this.selectedDropdown === announcementId) {
+      this.selectedDropdown = null;
+    } else {
+      this.selectedDropdown = announcementId;
+    }
+  }
 
   editor: Editor = new Editor();
 

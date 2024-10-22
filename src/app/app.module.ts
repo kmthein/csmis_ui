@@ -47,7 +47,12 @@ import { SafeHtmlPipe } from './core/pipe/safe-html.pipe';
 import { DateFnsModule } from 'ngx-date-fns';
 import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
 import { SafeUrlPipe } from './core/pipe/safe-url.pipe';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat'; // Import AngularFireModule
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { PdfUploaderComponent } from './page/shared/pdf-uploader/pdf-uploader.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +78,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     SafeHtmlPipe,
     DfnsFormatPipe,
     SafeUrlPipe,
+    PdfUploaderComponent,
   ],
   imports: [
     MatSnackBarModule,
@@ -83,7 +89,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     AgGridModule,
     HttpClientModule,
     DateFnsModule,
-    PdfViewerModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig), // Initialize Firebase
+    AngularFireStorageModule,
+    NgxDocViewerModule,
     NgIconsModule.withIcons({
       ionHome,
       ionCalendar,
@@ -94,6 +102,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
       ionIdCard,
     }),
     BrowserAnimationsModule,
+    NgxDocViewerModule,
     ToastrModule.forRoot(),
     NgxEditorModule.forRoot({
       locals: {

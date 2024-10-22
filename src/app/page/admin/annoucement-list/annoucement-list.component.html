@@ -7,16 +7,20 @@
       <button
         type="button"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        (click)="toggleModal()"
+        (click)="toggleModal(false)"
       >
         Create New
       </button>
     </div>
   </div>
+  <div class="pb-6" *ngIf="announcements.length == 0">
+    <p class="text-center">No announcement found yet.</p>
+  </div>
   <div class="pb-6" *ngFor="let announcement of announcements">
     <app-annoucement-card
       *ngIf="announcements.length > 0"
       [announcement]="announcement"
+      (selectAnnouncement)="onSelectAnnouncement($event)"
     ></app-annoucement-card>
   </div>
 </div>
@@ -31,10 +35,10 @@
     <!-- Modal content -->
     <div class="flex justify-between p-4 border-b dark:border-gray-600">
       <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-        Create New Announcement
+        {{!editMode ? "Create New Announcement" : "Edit Announcement" }} 
       </h3>
       <button
-        (click)="toggleModal()"
+        (click)="toggleModal(false)"
         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
       >
         <svg

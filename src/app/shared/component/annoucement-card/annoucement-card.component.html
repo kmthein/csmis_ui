@@ -1,4 +1,4 @@
-<div class="bg-white p-4 rounded-md">
+<div class="bg-white p-4 rounded-md relative">
   <div class="flex gap-4">
     <img
       class="w-12 h-12 rounded object-contain border"
@@ -7,9 +7,60 @@
     />
     <div class="w-full">
       <div class="mb-3">
-        <h4>{{ announcement?.title }}</h4>
+        <div class="flex justify-between">
+          <h4>{{ announcement?.title }}</h4>
+          <div
+            id="dropdownDefaultButton2"
+            (click)="toggleDropdown(announcement?.id)"
+            class="focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center flex items-center cursor-pointer"
+            type="button"
+          >
+            <svg
+              class="w-2.5 h-2.5 ms-3 text-gray-500"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </div> 
+          <!-- Dropdown menu -->
+          <div
+            *ngIf="selectedDropdown === announcement?.id"
+            id="dd"
+            class="z-10 absolute right-4 top-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownDefaultButton2"
+            >
+              <li class="cursor-pointer">
+                <a
+                  (click)="onCardClick()"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Edit</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Settings</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <span class="text-sm text-[#797979]">{{
-          announcement?.date | dfnsFormat : "EEE LLLL d yyyy"
+          announcement?.date | dfnsFormat : 'EEE LLLL d yyyy'
         }}</span>
       </div>
       <div class="mb-3 w-full">
@@ -26,27 +77,21 @@
               file?.type == 'image/png' ||
               file?.type == 'image/jpg'
             "
-            src="http://localhost:8080/{{ file?.filePath }}"
+            src="{{ file?.filePath }}"
           />
-          <iframe
-            *ngIf="file?.type == 'application/pdf'"
-            src="https://docs.google.com/gview?url=http%3A%2F%2Fstatic.googleusercontent.com%2Fmedia%2Fresearch.google.com%2Fen%2F%2Fpubs%2Farchive%2F43934.pdf&embedded=true"
-            width="500"
-            height="700"
-          ></iframe>
-          <!-- <pdf-viewer
-          *ngIf="file.type == 'application/pdf'" 
-          src="https://docs.google.com/gview?url=http%3A%2F%2Fstatic.googleusercontent.com%2Fmedia%2Fresearch.google.com%2Fen%2F%2Fpubs%2Farchive%2F43934.pdf&embedded=true" [original-size]="false" style="height: 500px; width: 400px;"></pdf-viewer> -->
+          <ngx-doc-viewer
+            *ngIf="file.type == 'application/pdf'"
+            [url]="file?.filePath"
+            viewer="pdf"
+            style="width: 100%; height: 700px"
+          ></ngx-doc-viewer>
           <video
             width="auto"
             height="240"
             controls
             *ngIf="file?.type == 'video/mp4'"
           >
-            <source
-              src="http://localhost:8080/{{ file?.filePath }}"
-              type="{{ file?.file_type }}"
-            />
+            <source src="{{ file?.filePath }}" type="{{ file?.file_type }}" />
             Your browser does not support the video tag.
           </video>
         </div>
