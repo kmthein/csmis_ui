@@ -18,7 +18,7 @@ export class AnnoucementService {
   addNewAnnouncement(
     title: string,
     content: string,
-    file: File,
+    files: any,
     admin: number
   ) {
     const localDate = new Date();
@@ -26,7 +26,9 @@ export class AnnoucementService {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('files', file);
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
     formData.append('user', `${admin}`);
     formData.append('date', formattedDate);
     return this.http.post<any>(`${this.url}/announcements`, formData).pipe(

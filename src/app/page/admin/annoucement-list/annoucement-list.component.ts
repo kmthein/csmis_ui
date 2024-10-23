@@ -27,6 +27,7 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   selectedAnnouncement: any;  
   editMode: boolean = false;
   hoveredIndex: any = null;
+  deleteFileIds: any = [];
 
   constructor(
     private authService: AuthService,
@@ -35,21 +36,19 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
     private renderer: Renderer2
   ) {}
 
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-  }
-
   onSelectAnnouncement(announcement: any) {
     this.selectedAnnouncement = announcement;
     this.title = announcement.title;
     this.editorContent = announcement.content;
     console.log(this.selectedAnnouncement);
     this.editMode = true;
+    this.deleteFileIds = [];
     this.toggleModal(true);
   }
 
   deleteFile(id: number) {
-    console.log(id);
+    this.deleteFileIds.push(id);
+    console.log(this.deleteFileIds);
   }
 
   toggleModal(editMode: boolean) {
@@ -99,64 +98,80 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
-  uploadFile(input: any) {
-    const file = input;
-    const filePath = `${file.name}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
+selectedFiles: File[] = []; 
+renamedFiles: File[] = [];  
 
-    // Monitor upload progress
-    task.percentageChanges().subscribe(progress => {
+onFileSelected(event: any): void {
+  this.selectedFiles = Array.from(event.target.files); 
+}
+
+uploadFiles() {
+  const uploadPromises = this.selectedFiles.map((file) => this.uploadFile(file)); 
+  Promise.all(uploadPromises)
+    .then((renamedFiles) => {
+      const id = this.user?.id;
+      this.announceService
+        .addNewAnnouncement(
+          this.title,
+          this.editorContent,
+          renamedFiles,  
+          id!
+        )
+        .subscribe({
+          next: (response) => {
+            if (response.message) {
+              this.getAllAnnouncement();
+              this.isLoading = false;
+              this.toggleModal(false);
+              this.title = '';
+              this.editorContent = '';
+            }
+          },
+          error: (error) => {
+            console.error(error);
+          },
+        });
+    })
+    .catch((error) => {
+      console.error('Error uploading files:', error);
+    });
+}
+
+uploadFile(file: File): Promise<File> {
+  const filePath = `${file.name}`;
+  const fileRef = this.storage.ref(filePath);
+  const task = this.storage.upload(filePath, file);
+
+  return new Promise((resolve, reject) => {
+    task.percentageChanges().subscribe((progress) => {
       this.uploadProgress = progress;
     });
 
-    const id = this.user?.id;
-
-    // Get download URL after successful upload
     task.snapshotChanges().pipe(
       finalize(() => {
-        fileRef.getDownloadURL().subscribe(url => {
-          this.downloadURL = url;  // This is the viewable URL
-          this.selectedFile = this.renameFile(this.selectedFile!, this.downloadURL!);
-          console.log('File available at:', this.downloadURL);
-          console.log(this.selectedFile);
-          this.announceService
-      .addNewAnnouncement(
-        this.title,
-        this.editorContent,
-        this.selectedFile!,
-        id!
-      )
-      .subscribe({
-        next: (response) => {
-          if (response.message) {
-            this.getAllAnnouncement();
-            this.isLoading = false;
-            this.toggleModal(false);
-            this.title = '';
-            this.editorContent = '';
-          }
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
-        });
+        fileRef.getDownloadURL().subscribe(
+          (url) => {
+            console.log(url);
+            const renamedFile = this.renameFile(file, url);
+            this.renamedFiles.push(renamedFile);
+            resolve(renamedFile); 
+          },
+          (error) => reject(error)  
+        );
       })
     ).subscribe();
-  }
+  });
+}
 
-  renameFile(originalFile: File, newFileName: string): File {
-    // Create a new file with the same content, type, and modified name
-    const renamedFile = new File([originalFile], newFileName, {
-      type: originalFile.type,
-      lastModified: originalFile.lastModified,
-    });
-    
-    return renamedFile;
-  }
+renameFile(originalFile: File, newFileName: string): File {
+  const renamedFile = new File([originalFile], newFileName, {
+    type: originalFile.type,
+    lastModified: originalFile.lastModified,
+  });
+  return renamedFile;
+}
 
-  onSubmit() {
-    this.uploadFile(this.selectedFile);
-  }
+onSubmit() {
+    this.uploadFiles();
+}
 }

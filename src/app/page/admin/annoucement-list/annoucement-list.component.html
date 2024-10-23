@@ -108,7 +108,8 @@
           for="file_input"
           >Previous files</label
         >
-        <div
+        <div class="flex">
+          <div
           *ngFor="let file of selectedAnnouncement?.files; let i = index"
           class="w-40 h-[8rem] relative"
           (mouseenter)="hoveredIndex = i"
@@ -127,7 +128,7 @@
               file?.filetype == 'image/jpg'
             "
             src="{{ file?.filePath }}"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-contain"
           />
           <ngx-doc-viewer
             *ngIf="file.filetype == 'application/pdf'"
@@ -146,6 +147,7 @@
             />
             Your browser does not support the video tag.
           </video>
+        </div>
         </div>
       </div>
       <div class="my-5">
