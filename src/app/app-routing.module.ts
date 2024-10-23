@@ -16,6 +16,9 @@ import { AdminGuard } from './core/guard/admin.guard';
 import { LoginGuard } from './core/guard/login.guard';
 import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
 import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucement-list.component';
+import { ForgotPasswordComponent } from './password/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './password/reset-password/reset-password.component';
+import { OtpVerificationComponent } from './password/otp-verification/otp-verification.component';
 
 const routes: Routes = [
   {
@@ -46,9 +49,11 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
-    canActivate: [LoginGuard],
+    component: LoginComponent
   },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
+      { path: 'otp-verification', component: OtpVerificationComponent },
 ];
 
 @NgModule({

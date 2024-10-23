@@ -44,7 +44,6 @@ import { AnnoucementCardComponent } from './shared/component/annoucement-card/an
 import { NgxEditorModule } from 'ngx-editor';
 import { WeeklyMenuComponent } from './shared/component/weekly-menu/weekly-menu.component';
 import { DashboardMenuCardComponent } from './shared/component/dashboard-menu-card/dashboard-menu-card.component';
-import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
 import { SafeHtmlPipe } from './core/pipe/safe-html.pipe';
 import { DateFnsModule } from 'ngx-date-fns';
 import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
@@ -56,6 +55,12 @@ import { AngularFireModule } from '@angular/fire/compat'; // Import AngularFireM
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { PdfUploaderComponent } from './page/shared/pdf-uploader/pdf-uploader.component';
 import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
+import { ForgotPasswordComponent } from './password/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './password/reset-password/reset-password.component';
+import { OtpVerificationComponent } from './password/otp-verification/otp-verification.component';
+import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
+import { AvoidMeatComponent } from './meal/avoid-meat/avoid-meat.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +88,11 @@ import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
     SafeUrlPipe,
     PdfUploaderComponent,
     LunchComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    OtpVerificationComponent,
+    AvoidMeatComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
