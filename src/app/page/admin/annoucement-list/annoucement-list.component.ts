@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
@@ -26,11 +26,13 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   downloadURL: string | undefined;
   selectedAnnouncement: any;  
   editMode: boolean = false;
+  hoveredIndex: any = null;
 
   constructor(
     private authService: AuthService,
     private announceService: AnnoucementService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private renderer: Renderer2
   ) {}
 
   onFileSelected(event: any): void {
@@ -46,12 +48,21 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
     this.toggleModal(true);
   }
 
+  deleteFile(id: number) {
+    console.log(id);
+  }
+
   toggleModal(editMode: boolean) {
     this.isModalOpen = !this.isModalOpen;
     if(!editMode) {
       this.title = '';
       this.editorContent = '';
       this.editMode = false;
+    }
+    if(this.isModalOpen) {
+      this.renderer.addClass(document.body, 'overflow-hidden');
+    } else {
+      this.renderer.removeClass(document.body, 'overflow-hidden');
     }
     initFlowbite();
   }

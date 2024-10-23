@@ -16,8 +16,10 @@ import {
   ionHome,
   ionIdCard,
   ionLockClosed,
+  ionMegaphone,
   ionNotifications,
   ionPerson,
+  ionTrashBin,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -105,6 +107,8 @@ import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
       ionNotifications,
       ionLockClosed,
       ionIdCard,
+      ionTrashBin,
+      ionMegaphone
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

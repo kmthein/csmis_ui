@@ -80,7 +80,7 @@
             src="{{ file?.filePath }}"
           />
           <ngx-doc-viewer
-            *ngIf="file.type == 'application/pdf'"
+            *ngIf="file.filetype == 'application/pdf'"
             [url]="file?.filePath"
             viewer="pdf"
             style="width: 100%; height: 700px"
