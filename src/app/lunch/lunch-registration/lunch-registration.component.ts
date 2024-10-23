@@ -34,7 +34,7 @@ export class LunchRegistrationComponent implements OnInit {
     if (this.userId) {
       this.lunchRegistrationService.getSelectedDates(this.userId).subscribe(
         (registeredDates: Date[]) => {
-          // Map the received date strings to Date objects
+          // Map the received date strings to Date objects 
           this.selectedDates = registeredDates.map(dateStr => new Date(dateStr));
           this.generateCalendarDates(this.currentMonth); // Generate calendar after loading dates
           

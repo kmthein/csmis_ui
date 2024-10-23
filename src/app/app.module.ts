@@ -24,11 +24,17 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
 import { DataTablesModule } from 'angular-datatables';
 import { TableComponent } from './shared/component/table/table.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LunchRegistrationComponent } from './lunch/lunch-registration/lunch-registration.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ForgotPasswordComponent } from './password/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './password/reset-password/reset-password.component';
+import { OtpVerificationComponent } from './password/otp-verification/otp-verification.component';
+import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
+import { AvoidMeatComponent } from './meal/avoid-meat/avoid-meat.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +50,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AdminLayoutComponent,
     TableComponent,
     LunchRegistrationComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    OtpVerificationComponent,
+    AvoidMeatComponent,
+    ModalComponent,
   ],
   imports: [
     MatSnackBarModule,
@@ -63,7 +74,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [provideHttpClient(withInterceptors([authInterceptor]))],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
