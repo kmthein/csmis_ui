@@ -30,7 +30,7 @@
                 d="m1 1 4 4 4-4"
               />
             </svg>
-          </div> 
+          </div>
           <!-- Dropdown menu -->
           <div
             *ngIf="selectedDropdown === announcement?.id"
@@ -60,7 +60,7 @@
         </div>
 
         <span class="text-sm text-[#797979]">{{
-          announcement?.date | dfnsFormat : 'EEE LLLL d yyyy'
+          announcement?.date | dfnsFormat : "EEE LLLL d yyyy"
         }}</span>
       </div>
       <div class="mb-3 w-full">
@@ -73,9 +73,9 @@
         <div *ngFor="let file of announcement?.files">
           <img
             *ngIf="
-              file?.type == 'image/jpeg' ||
-              file?.type == 'image/png' ||
-              file?.type == 'image/jpg'
+              file?.filetype == 'image/jpeg' ||
+              file?.filetype == 'image/png' ||
+              file?.filetype == 'image/jpg'
             "
             src="{{ file?.filePath }}"
           />
@@ -89,9 +89,9 @@
             width="auto"
             height="240"
             controls
-            *ngIf="file?.type == 'video/mp4'"
+            *ngIf="file?.filetype == 'video/mp4'"
           >
-            <source src="{{ file?.filePath }}" type="{{ file?.file_type }}" />
+            <source src="{{ file?.filePath }}" type="{{ file?.filetype }}" />
             Your browser does not support the video tag.
           </video>
         </div>

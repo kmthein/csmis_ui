@@ -53,6 +53,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat'; // Import AngularFireModule
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { PdfUploaderComponent } from './page/shared/pdf-uploader/pdf-uploader.component';
+import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
 
 @NgModule({
   declarations: [
@@ -79,8 +80,12 @@ import { PdfUploaderComponent } from './page/shared/pdf-uploader/pdf-uploader.co
     DfnsFormatPipe,
     SafeUrlPipe,
     PdfUploaderComponent,
+    LunchComponent,
   ],
   imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
     MatSnackBarModule,
     BrowserModule,
     AppRoutingModule,

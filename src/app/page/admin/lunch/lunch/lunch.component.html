@@ -1,0 +1,62 @@
+<div class="lunch-container">
+  <h2>{{ isEditing ? 'Edit Lunch' : 'Add Lunch' }}</h2>
+  <form (ngSubmit)="saveLunch()">
+    <div>
+      <label>Menu:</label>
+      <input type="text" [(ngModel)]="selectedLunch.menu" name="menu" required />
+    </div>
+    <div>
+      <label>Price:</label>
+      <input type="number" [(ngModel)]="selectedLunch.price" name="price" required />
+    </div>
+    <div>
+      <label>Company Rating:</label>
+      <input type="number" [(ngModel)]="selectedLunch.companyRate" name="companyRate" required />
+    </div>
+    <div>
+      <label>Date:</label>
+      <input type="date" [(ngModel)]="selectedLunch.date" name="date" required />
+    </div>
+    <div>
+      <label>Admin ID:</label>
+      <input type="number" [(ngModel)]="selectedLunch.adminId" name="adminId" />
+    </div>
+    <div>
+      <label>Restaurant ID:</label>
+      <input type="number" [(ngModel)]="selectedLunch.restaurantId" name="restaurantId" />
+    </div>
+    <button type="submit">{{ isEditing ? 'Update' : 'Create' }}</button>
+    <button type="button" (click)="clearSelection()">Cancel</button>
+  </form>
+
+  <h2>Lunch List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Menu</th>
+        <th>Price</th>
+        <th>Company Rating</th>
+        <th>Date</th>
+        <th>Admin ID</th>
+        <th>Restaurant ID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lunch of lunches">
+        <td>{{ lunch.id }}</td>
+        <td>{{ lunch.menu.join(', ') }}</td>
+        <td>{{ lunch.price }}</td>
+        <td>{{ lunch.companyRate }}</td>
+        <td>{{ lunch.date | date }}</td>
+        <td>{{ lunch.adminId }}</td>
+        <td>{{ lunch.restaurantId }}</td>
+        <td>
+          <button (click)="selectLunch(lunch)">Edit</button>
+          <button (click)="deleteLunch(lunch.id!)">Delete</button> <!-- Ensure id is defined -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
