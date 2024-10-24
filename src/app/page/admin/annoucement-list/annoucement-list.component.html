@@ -60,7 +60,7 @@
     </div>
     <form
       class="p-4"
-      #form="ngForm"
+      #announceForm="ngForm"
       (ngSubmit)="onSubmit()"
       enctype="multipart/form-data"
     >
@@ -76,6 +76,7 @@
           [(ngModel)]="title"
           name="title"
           type="text"
+          required
           #titleInput="ngModel"
         />
         <small *ngIf="!title && (titleInput?.touched || titleInput?.dirty)">
@@ -95,6 +96,7 @@
             [(ngModel)]="editorContent"
             name="editorContent"
             #contentInput="ngModel"
+            required
             class="w-80"
           >
           </ngx-editor>
@@ -174,7 +176,7 @@
       <div class="flex justify-end">
         <button
           type="submit"
-          [disabled]="isLoading"
+          [disabled]="isLoading || announceForm.invalid"
           class="bg-blue-700 text-white px-4 py-2 rounded-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-[#1e1552]"
         >
           {{ editMode ? "Update" : "Upload" }}

@@ -213,6 +213,7 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.uploadFiles();
   }
 }

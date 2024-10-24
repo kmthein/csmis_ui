@@ -41,19 +41,18 @@
               class="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownDefaultButton2"
             >
-              <li class="cursor-pointer">
+              <li (click)="onCardClick()" class="cursor-pointer flex justify-between items-center px-4 py-2 gap-2 hover:bg-gray-100">
                 <a
-                  (click)="onCardClick()"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >Edit</a
                 >
+                <ng-icon name="ionCreateOutline" class="mb-1 text-[#3a23a0]"></ng-icon>
               </li>
-              <li>
+              <li class="cursor-pointer flex items-center justify-between px-4 py-2 gap-2 hover:bg-gray-100">
                 <a
                   href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >Settings</a
+                  >Delete</a
                 >
+                <ng-icon name="ionTrash" class="mb-1 text-[#f74141]"></ng-icon>
               </li>
             </ul>
           </div>
