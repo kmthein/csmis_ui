@@ -10,6 +10,12 @@ import { Editor, Toolbar } from 'ngx-editor';
 export class AnnoucementCardComponent {
   @Input() announcement: any;
   @Output() selectAnnouncement = new EventEmitter<any>();  
+  @Output() confirmDelete = new EventEmitter<number>();
+
+  onDelete() {
+    this.confirmDelete.emit(this.announcement.id);
+    this.selectedDropdown = null;
+  }
 
   onCardClick() {
     this.selectAnnouncement.emit(this.announcement);  

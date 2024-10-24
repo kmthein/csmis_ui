@@ -1,0 +1,39 @@
+<h3 class="text-md font-semibold mb-4">Add Next Week Menu</h3>
+<form
+  #weeklyForm="ngForm"
+  (ngSubmit)="onSubmit(weeklyForm)"
+  novalidate
+  class="weekly-form md:w-[50%]"
+>
+  <div class="flex gap-6 mb-4" *ngFor="let day of validDays">
+    <div class="w-full">
+      <label class="text-[#696969] mb-1 block text-sm">{{ day.toDateString() }}</label>
+      <textarea
+        type="text"
+        name="staffId"
+        required
+        class="block w-full bg-[#FCFCFC] border-0 rounded-sm read-only:bg-[#fcfcfc88]"
+      ></textarea>
+      <!-- <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
+        <small *ngIf="staffIdInput.errors?.['required']"
+          >Staff ID is required</small
+        >
+      </div> -->
+    </div>
+  </div>
+  <div class="flex justify-end gap-4 my-10">
+    <button
+      (click)="backToMenuList()"
+      class="w-[25%] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] py-[10px]"
+    >
+      Cancel
+    </button>
+    <button
+      type="submit"
+      [disabled]="weeklyForm.invalid"
+      class="w-[25%] bg-[#336699] hover:bg-[#2c5a88] disabled:bg-slate-400 rounded-full text-white py-[10px]"
+    >
+      Add
+    </button>
+  </div>
+</form>

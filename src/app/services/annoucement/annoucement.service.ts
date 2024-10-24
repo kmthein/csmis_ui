@@ -70,7 +70,6 @@ export class AnnoucementService {
     }
     return this.http.put<any>(`${this.url}/announcements/${id}`, formData).pipe(
       tap((response) => {
-        console.log(response);
         if (response.message) {
           this.toast.success(response.message);
         } else if (response.error) {
@@ -78,5 +77,17 @@ export class AnnoucementService {
         }
       })
     );
+  }
+
+  deleteAnnouncement(id: number) {
+    return this.http.delete<any>(`${this.url}/announcements/${id}`).pipe(
+      tap((response) => {
+        if (response.message) {
+          this.toast.success(response.message);
+        } else if (response.error) {
+          this.toast.error(response.error);
+        }
+      })
+    )
   }
 }

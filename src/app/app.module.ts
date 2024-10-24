@@ -64,6 +64,7 @@ import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
 import { AvoidMeatComponent } from './meal/avoid-meat/avoid-meat.component';
 import { ModalComponent } from './modal/modal.component';
 import { ConfirmationModalComponent } from './shared/component/confirmation-modal/confirmation-modal.component';
+import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-weekly-menu.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { ConfirmationModalComponent } from './shared/component/confirmation-moda
     AvoidMeatComponent,
     ModalComponent,
     ConfirmationModalComponent,
+    AddWeeklyMenuComponent,
   ],
   imports: [
     BrowserModule,

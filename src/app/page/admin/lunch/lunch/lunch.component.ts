@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Lunch } from '../../../../models/lunch';
 import { LunchService } from '../../../../services/lunch.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,8 +13,10 @@ export class LunchComponent implements OnInit {
   lunches: Lunch[] = [];
   selectedLunch: Lunch; // Ensure this is always defined
   isEditing: boolean = false;
+  isModalOpen: boolean = false;
+  isLoading: boolean = false;
 
-  constructor(private lunchService: LunchService) {
+  constructor(private lunchService: LunchService, private router: Router) {
     this.selectedLunch = {
       menu: [],
       price: 0,
@@ -22,6 +25,15 @@ export class LunchComponent implements OnInit {
       adminId: undefined,
       restaurantId: undefined
     };
+  }
+
+  navigateAddWeeklyMenu() {
+    this.router.navigate(['/admin/menu/add-weekly'])
+  }
+
+
+  toggleModal() {
+    this.isModalOpen = !this.isModalOpen;
   }
 
   ngOnInit() {

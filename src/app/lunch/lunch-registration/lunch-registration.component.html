@@ -21,7 +21,7 @@
             <div class="day" *ngFor="let date of currentMonthDates"
                  [ngClass]="{
                    'selected': isDateSelected(date), 
-                   'weekend': isWeekend(date), 
+                   'weekend': isWeekend(date) || isPublicHoliday(date), 
                    'today': isBeforeOrToday(date)
                  }"
                  (click)="toggleDate(date)">
@@ -30,7 +30,7 @@
                     type="checkbox" 
                     [checked]="isDateSelected(date)" 
                     (change)="toggleDate(date)" 
-                    [disabled]="isWeekend(date) || isBeforeOrToday(date)" 
+                    [disabled]="isWeekend(date) || isBeforeOrToday(date) || isPublicHoliday(date)" 
                     style="display: none;">
             </div>
         </div>

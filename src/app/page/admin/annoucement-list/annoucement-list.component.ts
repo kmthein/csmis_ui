@@ -29,6 +29,8 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   hoveredIndex: any = null;
   deleteFileIds: any = [];
   previewFiles: any = [];
+  isConfirmOpen: boolean = false;
+  selectedAnnouncementId: number | null = null;
 
   constructor(
     private authService: AuthService,
@@ -36,6 +38,28 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
     private storage: AngularFireStorage,
     private renderer: Renderer2
   ) {}
+
+  toggleConfirmModal(show: boolean, id: number | null = null) {
+    this.isConfirmOpen = show;
+    this.selectedAnnouncementId = id;
+  }
+
+  confirmDelete() {
+    if (this.selectedAnnouncementId) {
+      console.log('Delete announcement with ID:', this.selectedAnnouncementId);
+      this.announceService.deleteAnnouncement(this.selectedAnnouncementId).subscribe({
+        next: (response) => {
+          if(response.message) {
+            this.getAllAnnouncement();
+          }
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+    }
+    this.toggleConfirmModal(false);
+  }
 
   onSelectAnnouncement(announcement: any) {
     this.selectedAnnouncement = announcement;

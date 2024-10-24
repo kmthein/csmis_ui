@@ -19,6 +19,7 @@ import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucem
 import { ForgotPasswordComponent } from './password/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './password/reset-password/reset-password.component';
 import { OtpVerificationComponent } from './password/otp-verification/otp-verification.component';
+import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-weekly-menu.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
         path: 'menu',
         component: LunchComponent,
       },
+      {
+        path: 'menu/add-weekly',
+        component: AddWeeklyMenuComponent,
+      }
     ],
   },
   {

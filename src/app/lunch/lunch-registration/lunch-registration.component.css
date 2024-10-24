@@ -54,12 +54,17 @@
 }
 
 .day:hover {
-  background-color: #f0f0f0; /* Optional hover effect */
+  background-color: #515dff; /* Optional hover effect */
 }
+
 
 .weekend {
   background-color: #f0f0f0; /* Background for weekend days */
   color: #999; /* Optional color for weekend text */
+  cursor: no-drop;
+}
+.weekend:hover {
+  background: transparent;
 }
 
 .selected {
