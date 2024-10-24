@@ -58,7 +58,12 @@
         </svg>
       </button>
     </div>
-    <form class="p-4" #form="ngForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <form
+      class="p-4"
+      #form="ngForm"
+      (ngSubmit)="onSubmit()"
+      enctype="multipart/form-data"
+    >
       <div class="mb-5">
         <label
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -110,44 +115,45 @@
         >
         <div class="flex">
           <div
-          *ngFor="let file of selectedAnnouncement?.files; let i = index"
-          class="w-40 h-[8rem] relative"
-          (mouseenter)="hoveredIndex = i"
-          (mouseleave)="hoveredIndex = null"
-        >
-          <div
-            class="bg-[#0000005b] w-full h-full absolute flex justify-center items-center"
-            [ngClass]="{ hidden: hoveredIndex !== i }"
+            *ngFor="let file of previewFiles; let i = index"
+            class="w-40 h-[8rem] relative"
+            (mouseenter)="hoveredIndex = i"
+            (mouseleave)="hoveredIndex = null"
           >
-            <ng-icon (click)="deleteFile(file.id)" name="ionTrashBin" class="text-red-600 text-2xl cursor-pointer z-50"></ng-icon>
-          </div>
-          <img
-            *ngIf="
-              file?.filetype == 'image/jpeg' ||
-              file?.filetype == 'image/png' ||
-              file?.filetype == 'image/jpg'
-            "
-            src="{{ file?.filePath }}"
-            class="w-full h-full object-contain"
-          />
-          <ngx-doc-viewer
-            *ngIf="file.filetype == 'application/pdf'"
-            [url]="file?.filePath"
-            viewer="pdf"
-            class="w-full h-full"
-          ></ngx-doc-viewer>
-          <video
-            controls
-            *ngIf="file?.filetype == 'video/mp4'"
-            class="w-full h-full object-cover"
-          >
-            <source
+            <div
+              class="bg-[#0000005b] w-full h-full absolute flex justify-center items-center cursor-pointer"
+              [ngClass]="{ hidden: hoveredIndex !== i }"
+            >
+              <ng-icon
+                (click)="deleteFile(file.id)"
+                name="ionTrashBin"
+                class="text-red-600 text-2xl cursor-pointer z-50"
+              ></ng-icon>
+            </div>
+            <img
+              *ngIf="
+                file?.filetype == 'image/jpeg' ||
+                file?.filetype == 'image/png' ||
+                file?.filetype == 'image/jpg'
+              "
               src="{{ file?.filePath }}"
-              type="{{ file?.filetype }}"
+              class="w-full h-full object-contain"
             />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+            <ngx-doc-viewer
+              *ngIf="file.filetype == 'application/pdf'"
+              [url]="file?.filePath"
+              viewer="pdf"
+              class="w-full h-full"
+            ></ngx-doc-viewer>
+            <video
+              controls
+              *ngIf="file?.filetype == 'video/mp4'"
+              class="w-full h-full object-cover"
+            >
+              <source src="{{ file?.filePath }}" type="{{ file?.filetype }}" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </div>
       <div class="my-5">

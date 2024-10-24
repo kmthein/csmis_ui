@@ -48,7 +48,7 @@
     "@types/jasmine": "~5.1.0",
     "@types/jquery": "^3.5.31",
     "autoprefixer": "^10.4.20",
-    "firebase-tools": "^12.9.1",
+    "firebase-tools": "^13.23.0",
     "fuzzy": "^0.1.3",
     "inquirer": "^6.2.2",
     "inquirer-autocomplete-prompt": "^1.0.1",
