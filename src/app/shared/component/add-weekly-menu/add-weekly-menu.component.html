@@ -3,35 +3,114 @@
   #weeklyForm="ngForm"
   (ngSubmit)="onSubmit(weeklyForm)"
   novalidate
-  class="weekly-form md:w-[50%]"
+  class="weekly-form"
 >
-  <div class="flex gap-6 mb-4" *ngFor="let day of validDays">
-    <div class="w-full">
-      <label class="text-[#696969] mb-1 block text-sm">{{ day.toDateString() }}</label>
-      <textarea
-        type="text"
-        name="staffId"
-        required
-        class="block w-full bg-[#FCFCFC] border-0 rounded-sm read-only:bg-[#fcfcfc88]"
-      ></textarea>
-      <!-- <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
+  <div class="flex justify-between mr-9">
+    <div class="w-[50%]">
+      <div
+        class="flex gap-6 mb-4"
+        *ngFor="let day of weeklyMenu; let i = index"
+      >
+        <div class="w-full">
+          <label class="text-[#696969] mb-1 block text-sm">{{
+            day?.date.toDateString()
+          }}</label>
+          <textarea
+            type="text"
+            name="day-{{ i }}"
+            [(ngModel)]="day.menu"
+            required
+            class="block w-full bg-[#FCFCFC] border-0 rounded-sm read-only:bg-[#fcfcfc88]"
+          ></textarea>
+          <!-- <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
         <small *ngIf="staffIdInput.errors?.['required']"
           >Staff ID is required</small
         >
       </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="w-[45%]">
+      <div class="flex gap-4 mb-8">
+        <div class="w-[50%]">
+          <label class="text-[#696969] mb-1 block text-sm"
+            >Price (Per Lunch)</label
+          >
+          <input
+            type="number"
+            name="price"
+            [(ngModel)]="price"
+            required
+            class="block w-full bg-[#FCFCFC] border-0 rounded-sm read-only:bg-[#fcfcfc88]"
+          />
+          <!-- <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
+        <small *ngIf="staffIdInput.errors?.['required']"
+          >Staff ID is required</small
+        >
+      </div> -->
+        </div>
+        <div class="w-[50%]">
+          <label class="text-[#696969] mb-1 block text-sm">Restaurant</label>
+          <input
+            type="text"
+            name="restaurant"
+            [(ngModel)]="restaurant"
+            required
+            class="block w-full bg-[#FCFCFC] border-0 rounded-sm read-only:bg-[#fcfcfc88]"
+          />
+          <!-- <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
+        <small *ngIf="staffIdInput.errors?.['required']"
+          >Staff ID is required</small
+        >
+      </div> -->
+        </div>
+      </div>
+      <div class="w-full mb-6">
+        <label class="text-[#696969] mb-1 block text-sm">Company rate</label>
+        <div class="relative mb-6">
+          <label for="labels-range-input" class="sr-only">Company rate</label>
+          <input
+            id="labels-range-input"
+            type="range"
+            name="rate"
+            [(ngModel)]="rate"
+            value="50"
+            min="0"
+            max="100"
+            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+          />
+          <span
+            class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6"
+            >Min (0%)</span
+          >
+          <span
+            class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6"
+            >50%</span
+          >
+          <span
+            class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6"
+            >Max (100%)</span
+          >
+        </div>
+        <!-- <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
+      <small *ngIf="staffIdInput.errors?.['required']"
+        >Staff ID is required</small
+      >
+    </div> -->
+      </div>
     </div>
   </div>
-  <div class="flex justify-end gap-4 my-10">
+  <div class="flex justify-center gap-6 my-20">
     <button
       (click)="backToMenuList()"
-      class="w-[25%] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] py-[10px]"
+      class="w-[150px] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] py-[10px]"
     >
       Cancel
     </button>
     <button
       type="submit"
       [disabled]="weeklyForm.invalid"
-      class="w-[25%] bg-[#336699] hover:bg-[#2c5a88] disabled:bg-slate-400 rounded-full text-white py-[10px]"
+      class="w-[150px] bg-[#336699] hover:bg-[#2c5a88] disabled:bg-slate-400 rounded-full text-white py-[10px]"
     >
       Add
     </button>
