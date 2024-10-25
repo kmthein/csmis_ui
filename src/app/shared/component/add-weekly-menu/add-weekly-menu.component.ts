@@ -14,7 +14,7 @@ export class AddWeeklyMenuComponent {
   currentMonthDates: Date[] = [];
   publicHolidays: Date[] = [];
   validDays: Date[] = [];
-  price: number | null = null;
+  price: number | null = 3000;
   rate: number | null = 50;
   restaurant: string = '';
   weeklyMenu: any = [];

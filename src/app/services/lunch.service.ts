@@ -15,6 +15,10 @@ export class LunchService {
     return this.http.post<any>(`${this.apiUrl}/weekly`, formData);
   }
 
+  getWeeklyLunch() {
+    return this.http.get<any>(`${this.apiUrl}/weekly`);
+  }
+
   // Get all lunches
   getAllLunches(): Observable<Lunch[]> {
     return this.http.get<Lunch[]>(this.apiUrl);
@@ -31,7 +35,7 @@ export class LunchService {
   }
 
   // Update an existing lunch
-  updateLunch(id: number, lunch: Lunch): Observable<Lunch> {
+  updateLunch(id: number, lunch: any): Observable<Lunch> {
     return this.http.put<Lunch>(`${this.apiUrl}/${id}`, lunch);
   }
 

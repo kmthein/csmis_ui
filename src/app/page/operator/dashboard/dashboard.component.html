@@ -1,7 +1,10 @@
-<div>
-    <app-weekly-menu></app-weekly-menu>
+<div class="">
+   <div class="mb-4">
+        <h3 class="text-md font-semibold mb-5">This Week Lunch Menu <span class="font-normal text-[18px] text-[#444444]">({{restaurantName}} Restaurant)</span></h3>
+   </div> 
+    <app-weekly-menu (restaurant)="onRestaurantChange($event)"></app-weekly-menu>
     <div class="my-6">
         <h3 class="text-md font-semibold mb-4">Latest Annoucement</h3>
-        <app-annoucement-card></app-annoucement-card>
+        <app-annoucement-card [announcement]="announcement"></app-annoucement-card>
     </div>
 </div>

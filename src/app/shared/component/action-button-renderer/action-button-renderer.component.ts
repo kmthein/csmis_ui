@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-action-button-renderer',
@@ -16,11 +15,13 @@ export class ActionButtonRendererComponent {
     this.params = params;
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  }
 
   onEdit() {
-    const staff = this.params.data;
-    this.router.navigate([`admin/staff/edit/`, staff.id]);
+    const paramsData = this.params.data;
+    const type = this.params.type;
+    this.router.navigate([`admin/${type}/edit/`, paramsData.id]);
   }
 
   onDelete() {

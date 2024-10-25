@@ -14,6 +14,7 @@ import {
   ionCalendar,
   ionCreateOutline,
   ionDocumentTextSharp,
+  ionFastFood,
   ionHome,
   ionIdCard,
   ionLockClosed,
@@ -65,6 +66,7 @@ import { AvoidMeatComponent } from './meal/avoid-meat/avoid-meat.component';
 import { ModalComponent } from './modal/modal.component';
 import { ConfirmationModalComponent } from './shared/component/confirmation-modal/confirmation-modal.component';
 import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-weekly-menu.component';
+import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +101,7 @@ import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-w
     ModalComponent,
     ConfirmationModalComponent,
     AddWeeklyMenuComponent,
+    EditLunchComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,7 +129,8 @@ import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-w
       ionTrashBin,
       ionMegaphone,
       ionCreateOutline,
-      ionTrash
+      ionTrash,
+      ionFastFood
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

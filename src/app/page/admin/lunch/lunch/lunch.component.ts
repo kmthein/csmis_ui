@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Lunch } from '../../../../models/lunch';
 import { LunchService } from '../../../../services/lunch.service';
 import { Router } from '@angular/router';
+import { ActionButtonRendererComponent } from '../../../../shared/component/action-button-renderer/action-button-renderer.component';
 
 
 @Component({
@@ -11,20 +12,40 @@ import { Router } from '@angular/router';
 })
 export class LunchComponent implements OnInit {
   lunches: Lunch[] = [];
-  selectedLunch: Lunch; // Ensure this is always defined
   isEditing: boolean = false;
   isModalOpen: boolean = false;
   isLoading: boolean = false;
+  restaurantName: string = "";
+
+  // Function to handle the emitted restaurant name
+  onRestaurantChange(name: string) {
+    this.restaurantName = name;
+  }
+
+  pagination = true;
+  paginationPageSize = 20;
+  paginationPageSizeSelector = [10, 20, 30];
+  colDefs: any = [
+    {
+      valueGetter: (params: any) => params.node.rowIndex + 1,
+      flex: 0.5,
+    },
+    { field: 'menu', headerName: 'Menu', flex: 1.5, filter: true },
+    { field: 'date', headerName: 'Date', flex: 1, filter: true },
+    { field: 'price', headerName: 'Price', flex: 0.8, filter: true },
+    { field: 'companyRate', headerName: 'Rate', flex: 0.8, filter: true },
+    { field: 'restaurantName', headerName: 'Restaurant', flex: 1, filter: true },
+    {
+      headerName: 'Actions',
+      cellRenderer: ActionButtonRendererComponent,
+      flex: 0.8,
+      cellRendererParams: {
+        type: "menu"
+      },
+    },
+  ];
 
   constructor(private lunchService: LunchService, private router: Router) {
-    this.selectedLunch = {
-      menu: [],
-      price: 0,
-      companyRate: 0,
-      date: new Date(),
-      adminId: undefined,
-      restaurantId: undefined
-    };
   }
 
   navigateAddWeeklyMenu() {
@@ -45,50 +66,6 @@ export class LunchComponent implements OnInit {
       this.lunches = data;
     });
   }
-
-  selectLunch(lunch: Lunch) {
-    this.selectedLunch = { ...lunch }; // Create a copy for editing
-    this.isEditing = true;
-  }
-
-  clearSelection() {
-    this.selectedLunch = {
-      menu: [],
-      price: 0,
-      companyRate: 0,
-      date: new Date(),
-      adminId: undefined,
-      restaurantId: undefined
-    };
-    this.isEditing = false;
-  }
-
-  saveLunch() {
-    if (this.selectedLunch) {
-      if (this.isEditing) {
-        if (this.selectedLunch.id != null) {
-          this.lunchService.updateLunch(this.selectedLunch.id, this.selectedLunch).subscribe(() => {
-            this.loadLunches();
-            this.clearSelection();
-          });
-        } else {
-          console.error('Selected lunch ID is undefined.');
-        }
-      } else {
-        // Creating a new lunch
-        this.lunchService.createLunch(this.selectedLunch).subscribe(
-          () => {
-            this.loadLunches();
-            this.clearSelection();
-          },
-          error => {
-            console.error('Error creating lunch:', error); // Log any errors
-          }
-        );
-      }
-    }
-  }
-  
 
   deleteLunch(id: number) {
     this.lunchService.deleteLunch(id).subscribe(() => {

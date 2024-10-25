@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Editor, Toolbar } from 'ngx-editor';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-annoucement-card',
@@ -11,6 +12,13 @@ export class AnnoucementCardComponent {
   @Input() announcement: any;
   @Output() selectAnnouncement = new EventEmitter<any>();  
   @Output() confirmDelete = new EventEmitter<number>();
+  isAdmin: boolean = false;
+
+  constructor(private authService: AuthService) {
+    if (authService.isAdmin()) {
+      this.isAdmin = true;
+    }
+  }
 
   onDelete() {
     this.confirmDelete.emit(this.announcement.id);

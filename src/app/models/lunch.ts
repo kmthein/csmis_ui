@@ -1,6 +1,6 @@
 export interface Lunch {
     id?: number;             // Optional for new lunches
-    menu: string[];         // Array of menu items
+    menu: string;         // Array of menu items
     price: number;          // Price of the lunch
     companyRate: number;    // Company rating
     date: Date;           // Date in YYYY-MM-DD format

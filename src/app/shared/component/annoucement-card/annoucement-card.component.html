@@ -10,6 +10,7 @@
         <div class="flex justify-between">
           <h4>{{ announcement?.title }}</h4>
           <div
+            *ngIf="isAdmin"
             id="dropdownDefaultButton2"
             (click)="toggleDropdown(announcement?.id)"
             class="focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-2.5 py-2.5 text-center flex items-center cursor-pointer"

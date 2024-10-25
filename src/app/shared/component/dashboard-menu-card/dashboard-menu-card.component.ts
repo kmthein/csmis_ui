@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-menu-card',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard-menu-card.component.css'
 })
 export class DashboardMenuCardComponent {
+  @Input() menu: any = [];
 
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
 }
