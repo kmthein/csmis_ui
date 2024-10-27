@@ -11,6 +11,9 @@ import { LoginComponent } from './page/shared/login/login.component';
 import { LunchPlanComponent } from './page/operator/lunch-plan/lunch-plan.component';
 import { NgIconsModule } from '@ng-icons/core';
 import {
+  ionAdd,
+  ionAddCircleSharp,
+  ionAddOutline,
   ionCalendar,
   ionDocumentTextSharp,
   ionHome,
@@ -18,6 +21,7 @@ import {
   ionLockClosed,
   ionNotifications,
   ionPerson,
+  ionRestaurant,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -43,6 +47,9 @@ import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
 import { SafeHtmlPipe } from './core/pipe/safe-html.pipe';
 import { DateFnsModule } from 'ngx-date-fns';
 import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
+import { AddRestaurantComponent } from './page/admin/restaurant/add-restaurant/add-restaurant.component';
+import { EditRestaurantComponent } from './page/admin/restaurant/edit-restaurant/edit-restaurant.component';
+import { RestaurantListComponent } from './page/admin/restaurant/restaurant-list/restaurant-list.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +74,10 @@ import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
     WeeklyMenuComponent,
     DashboardMenuCardComponent,
     SafeHtmlPipe,
-    DfnsFormatPipe
+    DfnsFormatPipe,
+    AddRestaurantComponent,
+    EditRestaurantComponent,
+    RestaurantListComponent
   ],
   imports: [
     MatSnackBarModule,
@@ -86,6 +96,8 @@ import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
       ionNotifications,
       ionLockClosed,
       ionIdCard,
+      ionRestaurant,
+      ionAddOutline
     }),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

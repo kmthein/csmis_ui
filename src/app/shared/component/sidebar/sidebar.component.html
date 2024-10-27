@@ -95,6 +95,16 @@
       <div *ngIf="isAdmin">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/admin/restaurant"
+          routerLinkActive="active"
+        >
+          <ng-icon name="ionRestaurant"></ng-icon>
+          <span>Restaurant</span>
+        </a>
+      </div>
+      <div *ngIf="isAdmin">
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/admin/staff"
           routerLinkActive="active"
         >

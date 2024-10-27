@@ -33,6 +33,9 @@ export class StaffComponent {
       headerName: 'Actions',
       cellRenderer: ActionButtonRendererComponent,
       flex: 0.8,
+      cellRendererParams: {
+        type: "staff"
+      },
     },
   ];
   staffs: any = [];

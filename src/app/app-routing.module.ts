@@ -16,6 +16,9 @@ import { AuthGuard } from './core/guard/auth.guard';
 import { AdminGuard } from './core/guard/admin.guard';
 import { LoginGuard } from './core/guard/login.guard';
 import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucement-list.component';
+import { RestaurantListComponent } from './page/admin/restaurant/restaurant-list/restaurant-list.component';
+import { AddRestaurantComponent } from './page/admin/restaurant/add-restaurant/add-restaurant.component';
+import { EditRestaurantComponent } from './page/admin/restaurant/edit-restaurant/edit-restaurant.component';
 
 const routes: Routes = [
   {
@@ -39,7 +42,10 @@ const routes: Routes = [
       { path: 'staff', component: StaffComponent },
       { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent },
-      { path: 'annoucement', component: AnnoucementListComponent }
+      { path: 'annoucement', component: AnnoucementListComponent },
+      { path: 'restaurant', component: RestaurantListComponent },
+      { path: 'restaurant/new', component: AddRestaurantComponent },
+      { path: 'restaurant/edit/:id', component: EditRestaurantComponent}
     ],
   },
   {
