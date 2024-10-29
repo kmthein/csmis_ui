@@ -19,9 +19,11 @@ export class ActionButtonRendererComponent {
   constructor(private router: Router) {}
 
   onEdit() {
-    const staff = this.params.data;
-    this.router.navigate([`admin/staff/edit/`, staff.id]);
+    const paramsData = this.params.data;
+    const type = this.params.type;
+    this.router.navigate([`admin/${type}/edit/`, paramsData.id]);
   }
+
 
   onDelete() {
     alert('Delete action for ' + this.params.data.name);

@@ -11,6 +11,9 @@ import { LoginComponent } from './page/shared/login/login.component';
 import { LunchPlanComponent } from './page/operator/lunch-plan/lunch-plan.component';
 import { NgIconsModule } from '@ng-icons/core';
 import {
+  ionAdd,
+  ionAddCircleSharp,
+  ionAddOutline,
   ionCalendar,
   ionCreateOutline,
   ionDocumentTextSharp,
@@ -22,6 +25,7 @@ import {
   ionPerson,
   ionTrash,
   ionTrashBin,
+  ionRestaurant,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -64,6 +68,9 @@ import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
 import { AvoidMeatComponent } from './meal/avoid-meat/avoid-meat.component';
 import { ModalComponent } from './modal/modal.component';
 import { ConfirmationModalComponent } from './shared/component/confirmation-modal/confirmation-modal.component';
+import { AddRestaurantComponent } from './page/admin/restaurant/add-restaurant/add-restaurant.component';
+import { EditRestaurantComponent } from './page/admin/restaurant/edit-restaurant/edit-restaurant.component';
+import { RestaurantListComponent } from './page/admin/restaurant/restaurant-list/restaurant-list.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +104,9 @@ import { ConfirmationModalComponent } from './shared/component/confirmation-moda
     AvoidMeatComponent,
     ModalComponent,
     ConfirmationModalComponent,
+    AddRestaurantComponent,
+    EditRestaurantComponent,
+    RestaurantListComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +134,9 @@ import { ConfirmationModalComponent } from './shared/component/confirmation-moda
       ionTrashBin,
       ionMegaphone,
       ionCreateOutline,
-      ionTrash
+      ionTrash,
+      ionRestaurant,
+      ionAddOutline
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

@@ -19,6 +19,9 @@ import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucem
 import { ForgotPasswordComponent } from './password/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './password/reset-password/reset-password.component';
 import { OtpVerificationComponent } from './password/otp-verification/otp-verification.component';
+import { RestaurantListComponent } from './page/admin/restaurant/restaurant-list/restaurant-list.component';
+import { AddRestaurantComponent } from './page/admin/restaurant/add-restaurant/add-restaurant.component';
+import { EditRestaurantComponent } from './page/admin/restaurant/edit-restaurant/edit-restaurant.component';
 
 const routes: Routes = [
   {
@@ -45,6 +48,9 @@ const routes: Routes = [
         path: 'menu',
         component: LunchComponent,
       },
+      { path: 'restaurant', component: RestaurantListComponent },
+      { path: 'restaurant/new', component: AddRestaurantComponent },
+      { path: 'restaurant/edit/:id', component: EditRestaurantComponent}
     ],
   },
   {
