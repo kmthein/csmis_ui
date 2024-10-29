@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { HolidayService } from '../../../services/admin/holiday.service';
 import { Router } from '@angular/router';
 import { LunchService } from '../../../services/lunch.service';
+import { RestaurantService } from '../../../services/admin/restaurant.service';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-add-weekly-menu',
@@ -16,19 +18,34 @@ export class AddWeeklyMenuComponent {
   validDays: Date[] = [];
   price: number | null = 3000;
   rate: number | null = 50;
-  restaurant: string = '';
+  restaurant: string | null = null;
   weeklyMenu: any = [];
+  restaurants: any = [];
 
   constructor(
     private holidayService: HolidayService,
     private router: Router,
-    private lunchService: LunchService
+    private lunchService: LunchService,
+    private restaurantService: RestaurantService
   ) {
     this.today = new Date();
   }
 
   ngOnInit() {
     this.loadPublicHolidays();
+    this.getAllRestaurants();
+  }
+
+  getAllRestaurants() {
+    this.restaurantService.getAllRestaurants().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.restaurants = res;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
   }
 
   generateNextWeekNonHolidayDates(today: Date): Date[] {

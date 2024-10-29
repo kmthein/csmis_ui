@@ -5,6 +5,7 @@ import { error } from 'jquery';
 import { NgForm } from '@angular/forms';
 import { User } from '../../../models/user';
 import { AuthService } from '../../../services/auth.service';
+import { RestaurantService } from '../../../services/admin/restaurant.service';
 
 @Component({
   selector: 'app-edit-lunch',
@@ -15,7 +16,9 @@ export class EditLunchComponent {
   user: User | undefined | null;
   id: number | null = null;
   lunch: any = null;
-  constructor(private route: ActivatedRoute, private lunchService: LunchService, private router: Router, private authService: AuthService) {
+  restaurants: any = [];
+
+  constructor(private route: ActivatedRoute, private lunchService: LunchService, private router: Router, private authService: AuthService, private restaurantService: RestaurantService) {
   }
 
   ngOnInit(): void {
@@ -24,6 +27,19 @@ export class EditLunchComponent {
     });
     this.id = Number(this.route.snapshot.paramMap.get('id')!);
     this.getLunchById();
+    this.getAllRestaurants();
+  }
+
+  getAllRestaurants() {
+    this.restaurantService.getAllRestaurants().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.restaurants = res;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
   }
 
   backToMenuList() {
@@ -35,8 +51,7 @@ export class EditLunchComponent {
     const body = {
       price: form.value.price,
       companyRate: form.value.companyRate,
-      restaurantName: form.value.restaurantName,
-      restaurantId: form.value.restaurantId,
+      restaurantId: form.value.restaurant,
       date: form.value.date,
       menu: form.value.menu,
       adminId: this.user?.id

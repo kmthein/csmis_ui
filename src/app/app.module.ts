@@ -27,6 +27,8 @@ import {
   ionTrash,
   ionTrashBin,
   ionRestaurant,
+  ionEnterOutline,
+  ionAddSharp,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -142,7 +144,9 @@ import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component
       ionTrash,
       ionRestaurant,
       ionAddOutline,
-      ionFastFood
+      ionAddSharp,
+      ionFastFood,
+      ionEnterOutline
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

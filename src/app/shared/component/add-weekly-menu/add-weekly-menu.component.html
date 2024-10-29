@@ -51,18 +51,34 @@
         </div>
         <div class="w-[50%]">
           <label class="text-[#696969] mb-1 block text-sm">Restaurant</label>
-          <input
+          <!-- <input
             type="text"
             name="restaurant"
             [(ngModel)]="restaurant"
             required
             class="block w-full bg-[#FCFCFC] border-0 rounded-sm read-only:bg-[#fcfcfc88]"
-          />
-          <!-- <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
-        <small *ngIf="staffIdInput.errors?.['required']"
-          >Staff ID is required</small
-        >
-      </div> -->
+          /> -->
+          <select
+            id="restaurant"
+            name="restaurant"
+            class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            [(ngModel)]="restaurant"
+            required
+            #restaurantSelect="ngModel"
+          >
+            <option [ngValue]="null" disabled>Please select restaurant</option>
+            <option
+              *ngFor="let restaurant of restaurants"
+              [value]="restaurant.name"
+            >
+              {{ restaurant.name }}
+            </option>
+          </select>
+          <div *ngIf="restaurantSelect.invalid && restaurantSelect.touched">
+            <small *ngIf="restaurantSelect.errors?.['required']"
+              >Please select a restaurant.</small
+            >
+          </div>
         </div>
       </div>
       <div class="w-full mb-6">
