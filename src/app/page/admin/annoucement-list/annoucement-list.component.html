@@ -21,6 +21,7 @@
       *ngIf="announcements.length > 0"
       [announcement]="announcement"
       (selectAnnouncement)="onSelectAnnouncement($event)"
+      (confirmDelete)="toggleConfirmModal(true, announcement.id)"
     ></app-annoucement-card>
   </div>
 </div>
@@ -30,7 +31,7 @@
   class="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-gray-500 bg-opacity-50"
 >
   <div
-    class="relative p-4 w-full overflow-y-auto bg-white rounded-lg shadow dark:bg-gray-700"
+    class=" img_scroll relative p-4 w-full overflow-y-auto bg-white shadow dark:bg-gray-700"
     [ngClass]="editMode ? 'max-w-2xl max-h-[80%] ' : 'max-w-lg'"
   >
     <!-- Modal content -->
@@ -185,3 +186,8 @@
     </form>
   </div>
 </div>
+
+<app-confirmation-modal *ngIf="isConfirmOpen"
+[content]="'announcement'"
+(confirm)="confirmDelete()"
+(cancel)="toggleConfirmModal(false)"></app-confirmation-modal>  

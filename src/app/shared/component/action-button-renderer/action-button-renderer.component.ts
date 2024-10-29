@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-action-button-renderer',
@@ -16,7 +15,8 @@ export class ActionButtonRendererComponent {
     this.params = params;
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  }
 
   onEdit() {
     const paramsData = this.params.data;

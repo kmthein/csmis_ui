@@ -1,10 +1,3 @@
-<div>
-    <h3 class="text-md font-semibold mb-4">This Week Lunch Menu</h3>
-    <div class="flex gap-4">
-        <app-dashboard-menu-card class="w-[20%]"></app-dashboard-menu-card>
-        <app-dashboard-menu-card class="w-[20%]"></app-dashboard-menu-card>
-        <app-dashboard-menu-card class="w-[20%]"></app-dashboard-menu-card>
-        <app-dashboard-menu-card class="w-[20%]"></app-dashboard-menu-card>
-        <app-dashboard-menu-card class="w-[20%]"></app-dashboard-menu-card>
-    </div>
+<div class="flex gap-4">
+  <app-dashboard-menu-card *ngFor="let menu of weeklyMenu" [menu]="menu" class="w-[20%]"></app-dashboard-menu-card>
 </div>

@@ -1,14 +1,11 @@
 <div class="bg-white rounded-md text-center">
     <div class="flex justify-center border-b-2 mx-4 py-4 mb-3">
-        <h5 class="uppercase">Monday</h5>
+        <h5 class="uppercase">{{ menu?.date?.toLocaleDateString('en-US', { weekday: 'short' }) }}</h5>
     </div>
     <div class="pb-3">
-        <p class="font-semibold mb-4">Oct 14, 2024</p>
+        <p class="font-medium mb-5">{{ menu?.date | date: 'MMM d, y' }}</p>
         <div>
-            <span class="block mb-3">Tom Yum Soup</span>
-            <span class="block mb-3">Stir-fried vegetables</span>
-            <span class="block mb-3">Tofu Salad</span>
-            <span class="block mb-3">Prawn Curry</span>
+            <span *ngFor="let item of menu.menu" class="block mb-3">{{ item }}</span>
         </div>
     </div>
 </div>

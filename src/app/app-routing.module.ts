@@ -22,6 +22,8 @@ import { OtpVerificationComponent } from './password/otp-verification/otp-verifi
 import { RestaurantListComponent } from './page/admin/restaurant/restaurant-list/restaurant-list.component';
 import { AddRestaurantComponent } from './page/admin/restaurant/add-restaurant/add-restaurant.component';
 import { EditRestaurantComponent } from './page/admin/restaurant/edit-restaurant/edit-restaurant.component';
+import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-weekly-menu.component';
+import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,8 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'lunch', component: LunchRegistrationComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'announcement', component: AnnoucementListComponent },
+      { path: 'announcement/:id', component: AnnoucementListComponent },
     ],
   },
   {
@@ -43,14 +47,22 @@ const routes: Routes = [
       { path: 'staff', component: StaffComponent },
       { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent },
-      { path: 'annoucement', component: AnnoucementListComponent },
+      { path: 'announcement', component: AnnoucementListComponent },
       {
         path: 'menu',
         component: LunchComponent,
       },
       { path: 'restaurant', component: RestaurantListComponent },
       { path: 'restaurant/new', component: AddRestaurantComponent },
-      { path: 'restaurant/edit/:id', component: EditRestaurantComponent}
+      { path: 'restaurant/edit/:id', component: EditRestaurantComponent},
+      {
+        path: 'menu/edit/:id',
+        component: EditLunchComponent,
+      },
+      {
+        path: 'menu/add-weekly',
+        component: AddWeeklyMenuComponent,
+      }
     ],
   },
   {
@@ -58,8 +70,8 @@ const routes: Routes = [
     component: LoginComponent
   },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-      { path: 'reset-password', component: ResetPasswordComponent },
-      { path: 'otp-verification', component: OtpVerificationComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'otp-verification', component: OtpVerificationComponent },
 ];
 
 @NgModule({

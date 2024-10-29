@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LunchRegistrationService } from '../../services/lunch-registration.service';
 import { LunchRegistrationDTO } from '../../DTO/LunchRegistrationDTO';
+import { HolidayService } from '../../services/admin/holiday.service';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-lunch-registration',
@@ -11,15 +13,17 @@ export class LunchRegistrationComponent implements OnInit {
   currentMonth: Date = new Date();
   selectedDates: Date[] = [];
   currentMonthDates: Date[] = [];
+  publicHolidays: Date[] = [];
   today: Date;
   userId: number | null = null;
   isFirstRegistration: boolean = true; // Flag to check if it's the first registration
 
-  constructor(private lunchRegistrationService: LunchRegistrationService) {
+  constructor(private lunchRegistrationService: LunchRegistrationService, private holidayService: HolidayService) {
     this.today = new Date();
   }
 
   ngOnInit(): void {
+    this.loadPublicHolidays();
     const user = JSON.parse(localStorage.getItem('user')!);
     if (user && user.id) {
       this.userId = user.id;
@@ -29,11 +33,24 @@ export class LunchRegistrationComponent implements OnInit {
     }
   }
 
+  loadPublicHolidays() {
+    this.holidayService.getAllHolidays().subscribe({
+      next: (data) => {
+        this.publicHolidays = data.map((holiday: any) => new Date(holiday.date)); 
+        console.log(this.publicHolidays);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
+  }
+
   // Load user selected dates from the backend
   loadUserSelectedDates(): void {
     if (this.userId) {
       this.lunchRegistrationService.getSelectedDates(this.userId).subscribe(
         (registeredDates: Date[]) => {
+          console.log(registeredDates);
           // Map the received date strings to Date objects 
           this.selectedDates = registeredDates.map(dateStr => new Date(dateStr));
           this.generateCalendarDates(this.currentMonth); // Generate calendar after loading dates
@@ -112,6 +129,18 @@ export class LunchRegistrationComponent implements OnInit {
         this.selectedDates.splice(index, 1); // Unselect the date
       }
     }
+  }
+
+  isPublicHoliday(date: Date): boolean {
+    return this.publicHolidays.some(holiday => this.isSameDay(date, holiday));
+  }
+
+  private isSameDay(date1: Date, date2: Date): boolean {
+    return (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    );
   }
 
   // Check if a date is selected

@@ -4,12 +4,20 @@ import { Observable } from 'rxjs';
 import { Lunch } from '../models/lunch';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LunchService {
   private apiUrl = 'http://localhost:8080/api/lunches'; // Adjust this to your API endpoint
 
   constructor(private http: HttpClient) {}
+
+  addWeeklyLunch(formData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/weekly`, formData);
+  }
+
+  getWeeklyLunch() {
+    return this.http.get<any>(`${this.apiUrl}/weekly`);
+  }
 
   // Get all lunches
   getAllLunches(): Observable<Lunch[]> {
@@ -27,7 +35,7 @@ export class LunchService {
   }
 
   // Update an existing lunch
-  updateLunch(id: number, lunch: Lunch): Observable<Lunch> {
+  updateLunch(id: number, lunch: any): Observable<Lunch> {
     return this.http.put<Lunch>(`${this.apiUrl}/${id}`, lunch);
   }
 
