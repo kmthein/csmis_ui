@@ -43,6 +43,8 @@ import { SafeHtmlPipe } from './core/pipe/safe-html.pipe';
 import { DateFnsModule } from 'ngx-date-fns';
 import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
 import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
+import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
+import { SafeUrlPipe } from './safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
     DashboardMenuCardComponent,
     SafeHtmlPipe,
     DfnsFormatPipe,
-    LunchComponent
+    LunchComponent,
+    ReportViewerComponent,
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,

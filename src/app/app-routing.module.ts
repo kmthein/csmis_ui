@@ -16,6 +16,7 @@ import { AdminGuard } from './core/guard/admin.guard';
 import { LoginGuard } from './core/guard/login.guard';
 import { LunchComponent } from './page/admin/lunch/lunch/lunch.component';
 import { AnnoucementListComponent } from './page/admin/annoucement-list/annoucement-list.component';
+import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
         path: 'lunch-menu',
         component: LunchComponent,
       },
+      { path: 'reportViewer', component: ReportViewerComponent }
     ],
   },
   {
