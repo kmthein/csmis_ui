@@ -24,6 +24,7 @@ import { AddRestaurantComponent } from './page/admin/restaurant/add-restaurant/a
 import { EditRestaurantComponent } from './page/admin/restaurant/edit-restaurant/edit-restaurant.component';
 import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-weekly-menu.component';
 import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component';
+import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,11 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'announcement', component: AnnoucementListComponent },
       { path: 'announcement/:id', component: AnnoucementListComponent },
+      {
+        path: 'lunch-menu',
+        component: LunchComponent,
+      },
+      { path: 'reportViewer', component: ReportViewerComponent }
     ],
   },
   {
