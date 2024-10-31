@@ -93,65 +93,15 @@
           <span>Lunch</span>
         </a>
       </div>
-      <div *ngIf="isAdmin">
+
+      <div *ngIf="!isAdmin">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
-          routerLink="/admin/restaurant"
-          routerLinkActive="active"
-        >
-          <ng-icon name="ionRestaurant"></ng-icon>
-          <span>Restaurant</span>
-        </a>
-      </div>
-      <div *ngIf="isAdmin">
-        <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
-          routerLink="/admin/staff"
-          routerLinkActive="active"
-        >
-          <ng-icon name="ionIdCard"></ng-icon>
-          <span>Staff</span>
-        </a>
-      </div>
-      <div>
-        <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
-          [routerLink]="isAdmin ? '/admin/announcement' : '/announcement'"
+          routerLink="/announcement"
           routerLinkActive="active"
         >
           <ng-icon name="ionMegaphone"></ng-icon>
           <span>Announcement</span>
-        </a>
-      </div>
-      <div *ngIf="isAdmin">
-        <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
-          routerLink="/admin/menu"
-          routerLinkActive="active"
-        >
-          <ng-icon name="ionFastFood"></ng-icon>
-          <span>Menu</span>
-        </a>
-      </div>
-
-      <div>
-        <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
-          routerLink="/report"
-          routerLinkActive="active"
-        >
-          <ng-icon name="ionDocumentTextSharp"></ng-icon>
-          <span>Report</span>
-        </a>
-      </div>
-      <div *ngIf="isAdmin">
-        <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
-          routerLink="/admin/holiday"
-          routerLinkActive="active"
-        >
-          <ng-icon name="ionCalendar"></ng-icon>
-          <span>Holiday</span>
         </a>
       </div>
 
@@ -165,8 +115,142 @@
           <span>Profile</span>
         </a>
       </div>
-     
-     
+
+      <div>
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/reportViewer"
+          routerLinkActive="active"
+        >
+          <ng-icon name="ionCalendar"></ng-icon>
+          <span>Lunch-Report</span>
+        </a>
+      </div>
+
+      <div *ngIf="isAdmin">
+        <!-- Management Main Item -->
+        <button
+          type="button"
+          class="px-4 py-4 pl-[20%] w-full rounded-tl-xl rounded-bl-xl inline-flex items-center gap-2 transition-colors duration-300 hover:bg-blue-50"
+          (click)="toggleManagementSubMenu()"
+        >
+          <div class="flex justify-between w-full items-center">
+            <div class="flex items-center gap-2">
+              <ng-icon name="ionSettings"></ng-icon>
+              <span>Management</span>
+            </div>
+            <svg
+              [ngClass]="{ 'rotate-180': isManagementSubMenuOpen }"
+              class="w-3 h-3 transition-transform"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1l4 4 4-4"
+              />
+            </svg>
+          </div>
+        </button>
+
+        <!-- Submenu for Management -->
+        <ul *ngIf="isManagementSubMenuOpen && isAdmin">
+          <li>
+            <a
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              routerLink="/admin/restaurant"
+              routerLinkActive="active"
+            >
+              <ng-icon name="ionRestaurant"></ng-icon>
+              <span>Restaurant</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              routerLink="/admin/menu"
+              routerLinkActive="active"
+            >
+              <ng-icon name="ionFastFood"></ng-icon>
+              <span>Menu</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              routerLink="/admin/announcement"
+              routerLinkActive="active"
+            >
+              <ng-icon name="ionMegaphone"></ng-icon>
+              <span>Announcement</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              routerLink="/admin/staff"
+              routerLinkActive="active"
+            >
+              <ng-icon name="ionIdCard"></ng-icon>
+              <span>Staff</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              routerLink="/admin/holiday"
+              routerLinkActive="active"
+            >
+              <ng-icon name="ionCalendar"></ng-icon>
+              <span>Holiday</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          (click)="toggleReportSubMenu()"
+        >
+          <div class="flex justify-between w-full">
+            <div class="flex items-center gap-2">
+              <ng-icon name="ionDocumentTextSharp"></ng-icon>
+              <span>Report</span>
+            </div>
+          </div>
+          <svg
+            [ngClass]="{ 'rotate-180': isReportSubMenuOpen }"
+            class="w-3 h-3 transition-transform"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 1l4 4 4-4"
+            />
+          </svg>
+        </button>
+        <ul *ngIf="isReportSubMenuOpen">
+          <li>
+            <a
+            routerLink="/admin/report/mail-on"
+            routerLinkActive="active"
+            class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              >Mail Noti-on</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
   <div></div>

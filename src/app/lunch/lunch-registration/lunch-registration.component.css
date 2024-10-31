@@ -104,3 +104,9 @@
   transform: translateY(2px); /* Pressed down effect */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
 }
+.past-day {
+  opacity: 0.6;               /* Reduce opacity to indicate past days */
+  pointer-events: none;       /* Disable clicks on past days if needed */
+  background-color: #f0f0f0;  /* Light gray background for past days */
+  color: #aaa;                /* Dimmed text color */
+}

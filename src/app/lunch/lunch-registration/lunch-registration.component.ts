@@ -118,9 +118,7 @@ export class LunchRegistrationComponent implements OnInit {
   // Toggle the selection of a date
   toggleDate(date: Date): void {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Set today's time to midnight for comparison
-
-    // Check if the date is before or today, a weekend, or within the current week
+    today.setHours(0, 0, 0, 0); // Set today's time to midnight for comparison// Check if the date is before or today, a weekend, or within the current week
     if (!this.isBeforeOrToday(date) && !this.isWeekend(date) && !this.isCurrentWeek(date)) {
       const index = this.selectedDates.findIndex(selectedDate => selectedDate.getTime() === date.getTime());
       if (index === -1) {

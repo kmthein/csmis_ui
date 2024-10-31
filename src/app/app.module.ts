@@ -29,6 +29,9 @@ import {
   ionRestaurant,
   ionEnterOutline,
   ionAddSharp,
+  ionCalendarNumberOutline,
+  ionTodayOutline,
+  ionSettings,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -56,7 +59,6 @@ import { DashboardMenuCardComponent } from './shared/component/dashboard-menu-ca
 import { SafeHtmlPipe } from './core/pipe/safe-html.pipe';
 import { DateFnsModule } from 'ngx-date-fns';
 import { DfnsFormatPipe } from './core/pipe/dfns-format.pipe';
-import { SafeUrlPipe } from './core/pipe/safe-url.pipe';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -76,6 +78,9 @@ import { EditRestaurantComponent } from './page/admin/restaurant/edit-restaurant
 import { RestaurantListComponent } from './page/admin/restaurant/restaurant-list/restaurant-list.component';
 import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-weekly-menu.component';
 import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component';
+import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
+import { SafeUrlPipe } from './safe-url.pipe';
+import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +105,6 @@ import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component
     DashboardMenuCardComponent,
     SafeHtmlPipe,
     DfnsFormatPipe,
-    SafeUrlPipe,
     PdfUploaderComponent,
     LunchComponent,
     ForgotPasswordComponent,
@@ -114,6 +118,10 @@ import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component
     RestaurantListComponent,
     AddWeeklyMenuComponent,
     EditLunchComponent,
+    LunchComponent,
+    ReportViewerComponent,
+    SafeUrlPipe,
+    MailOnUserComponent
   ],
   imports: [
     BrowserModule,
@@ -146,7 +154,10 @@ import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component
       ionAddOutline,
       ionAddSharp,
       ionFastFood,
-      ionEnterOutline
+      ionEnterOutline,
+      ionCalendarNumberOutline,
+      ionTodayOutline,
+      ionSettings
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

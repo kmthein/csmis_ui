@@ -1,10 +1,83 @@
 <div class="">
-   <div class="mb-4">
-        <h3 class="text-md font-semibold mb-5">This Week Lunch Menu <span class="font-normal text-[18px] text-[#444444]">({{restaurantName}} Restaurant)</span></h3>
-   </div> 
-    <app-weekly-menu (restaurant)="onRestaurantChange($event)"></app-weekly-menu>
-    <div class="my-6" *ngIf="announcement">
-        <h3 class="text-md font-semibold mb-4">Latest Annoucement</h3>
-        <app-annoucement-card [announcement]="announcement"></app-annoucement-card>
+  <div class="mb-4">
+    <h3 class="text-md font-semibold mb-5">
+      This Week Lunch Menu
+      <span class="font-normal text-[18px] text-[#444444]"
+        >({{ restaurantName }} Restaurant)</span
+      >
+    </h3>
+  </div>
+  <app-weekly-menu (restaurant)="onRestaurantChange($event)"></app-weekly-menu>
+  <div class="my-6" *ngIf="announcement">
+    <h3 class="text-md font-semibold mb-4">Latest Annoucement</h3>
+    <app-annoucement-card [announcement]="announcement"></app-annoucement-card>
+  </div>
+  <div class="my-6">
+    <div class="flex gap-4">
+      <div
+        class="bg-white flex w-[25%] justify-between px-5 py-12 items-center rounded-lg"
+      >
+        <div>
+          <p class="text-[#5B5B5B] mb-[16px]">Total Cost(Monthly)</p>
+          <p class="font-bold">70000</p>
+        </div>
+        <div
+          class="bg-[#91BAE3] inline-flex items-center justify-center h-10 w-10 rounded-xl"
+        >
+          <ng-icon
+            name="ionCalendarNumberOutline"
+            class="text-xl text-[#1c4166]"
+          ></ng-icon>
+        </div>
+      </div>
+      <div
+        class="bg-white flex w-[25%] justify-between px-5 py-12 items-center rounded-lg"
+      >
+        <div>
+          <p class="text-[#5B5B5B] mb-[16px]">Total Cost(Weekly)</p>
+          <p class="font-bold">4500</p>
+        </div>
+        <div
+          class="bg-[#FFCC33] inline-flex items-center justify-center h-10 w-10 rounded-xl"
+        >
+          <ng-icon
+            name="ionTodayOutline"
+            class="text-xl text-[#5f4c13]"
+          ></ng-icon>
+        </div>
+      </div>
+      <div
+        class="bg-white flex w-[25%] justify-between px-5 py-12 items-center rounded-lg"
+      >
+        <div>
+          <p class="text-[#5B5B5B] mb-[16px]">Lunch Price</p>
+          <p class="font-bold">3000</p>
+        </div>
+        <div
+          class="bg-[#E5E4FF] inline-flex items-center justify-center h-10 w-10 rounded-xl"
+        >
+          <ng-icon
+            name="ionRestaurant"
+            class="text-xl text-[#4c4a8a]"
+          ></ng-icon>
+        </div>
+      </div>
+      <div
+        class="bg-white flex w-[25%] justify-between px-5 py-12 items-center rounded-lg"
+      >
+        <div>
+          <p class="text-[#5B5B5B] mb-[16px]">Mail Notification</p>
+          <p class="font-bold">ON</p>
+        </div>
+        <div>
+          <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" />
+            <div
+              class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+            ></div>
+          </label>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

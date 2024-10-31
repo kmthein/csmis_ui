@@ -1,0 +1,20 @@
+.report-viewer {
+    position: relative;
+    margin: 20px 0;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .controls {
+    margin-top: 10px;
+    text-align: right;
+  }
+  
+  .btn {
+    margin-left: 10px;
+  }
+  

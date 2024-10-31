@@ -10,6 +10,17 @@ import { NavigationEnd, Router } from '@angular/router';
 export class SidebarComponent {
   isAdmin: boolean = false;
 
+  isManagementSubMenuOpen = false;
+  isReportSubMenuOpen = false;
+
+  toggleManagementSubMenu(): void {
+    this.isManagementSubMenuOpen = !this.isManagementSubMenuOpen;
+  }
+
+  toggleReportSubMenu(): void {
+    this.isReportSubMenuOpen = !this.isReportSubMenuOpen;
+  }
+
   constructor(private authService: AuthService, private router: Router) {
     if (authService.isAdmin()) {
       this.isAdmin = true;
