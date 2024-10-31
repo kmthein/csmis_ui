@@ -83,7 +83,7 @@
           <span>Dashboard</span>
         </a>
       </div>
-      <div>
+      <div *ngIf="!isAdmin">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/lunch"
@@ -155,7 +155,7 @@
         </a>
       </div>
 
-      <div>
+      <div *ngIf="!isAdmin">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/profile"

@@ -52,13 +52,23 @@ export class AuthService {
     return this.userSource.value;
   }
 
-  isAdmin() {
+  isPermanentOperator() {
     const token = localStorage.getItem('token');
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      if (payload.role == 'ADMIN') {
+      if (payload.role == 'OPERATOR') {
         return true;
       }
+    }
+    return false;
+  }
+
+  isAdmin() {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    if(user?.role == 'ADMIN') {
+      return true;
+    } else if(user?.role == 'OPERATOR') {
+      return false;
     }
     return false;
   }
