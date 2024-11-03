@@ -32,6 +32,7 @@ import {
   ionCalendarNumberOutline,
   ionTodayOutline,
   ionSettings,
+  ionArrowDownRightBoxOutline,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -121,7 +122,7 @@ import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.componen
     LunchComponent,
     ReportViewerComponent,
     SafeUrlPipe,
-    MailOnUserComponent
+    MailOnUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -157,7 +158,8 @@ import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.componen
       ionEnterOutline,
       ionCalendarNumberOutline,
       ionTodayOutline,
-      ionSettings
+      ionSettings,
+      ionArrowDownRightBoxOutline,
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,
