@@ -33,6 +33,8 @@ import {
   ionTodayOutline,
   ionSettings,
   ionArrowDownRightBoxOutline,
+  ionCreate,
+  ionCreateSharp,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -82,6 +84,7 @@ import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component
 import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
 import { SafeUrlPipe } from './safe-url.pipe';
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
+import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +126,7 @@ import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.componen
     ReportViewerComponent,
     SafeUrlPipe,
     MailOnUserComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -160,6 +164,8 @@ import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.componen
       ionTodayOutline,
       ionSettings,
       ionArrowDownRightBoxOutline,
+      ionCreate,
+      ionCreateSharp
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

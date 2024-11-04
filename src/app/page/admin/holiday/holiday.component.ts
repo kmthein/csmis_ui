@@ -73,7 +73,6 @@ export class HolidayComponent {
 
   getAllHolidays() {
     this.holidayService.getAllHolidays().subscribe((data) => {
-      console.log(data);
       this.holidays = data;
     });
   }

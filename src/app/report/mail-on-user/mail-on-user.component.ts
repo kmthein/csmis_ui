@@ -56,12 +56,12 @@ export class MailOnUserComponent {
           a.download = `${fileName}.${fileType}`;
           a.click();
           window.URL.revokeObjectURL(url);
-          this.toggleDropdown();
         },
         error: (err) => {
           console.error('Report download failed', err);
         },
       });
+      this.toggleDropdown();
   }
 
   ngOnInit() {

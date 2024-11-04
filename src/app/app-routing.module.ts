@@ -26,6 +26,7 @@ import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-w
 import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component';
 import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
+import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,7 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate: [AdminGuard],
     children: [
+      { path: '', component: AdminDashboardComponent },
       { path: 'holiday', component: HolidayComponent },
       { path: 'staff', component: StaffComponent },
       { path: 'staff/new', component: AddStaffComponent },
