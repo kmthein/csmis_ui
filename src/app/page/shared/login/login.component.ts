@@ -24,7 +24,7 @@ export class LoginComponent {
         if (response.token) {
           this.userLogged.emit(response.userDetails);
           if (this.authService.isAdmin()) {
-            this.router.navigate(['/admin/announcement']);
+            this.router.navigate(['/admin']);
           } else {
             this.router.navigate(['/']);
           }

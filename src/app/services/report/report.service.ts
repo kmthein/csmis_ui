@@ -8,9 +8,13 @@ import { Observable } from 'rxjs';
 export class ReportService {
   private apiUrl = 'http://localhost:8080/api/reports';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  generateReport(templatePath: any, fileType: any, fileName: any): Observable<Blob> {
+  generateReport(
+    templatePath: any,
+    fileType: any,
+    fileName: any
+  ): Observable<Blob> {
     const params = new HttpParams()
       .set('templatePath', templatePath)
       .set('fileType', fileType)
@@ -18,7 +22,11 @@ export class ReportService {
 
     return this.http.get(`${this.apiUrl}/generate`, {
       params: params,
-      responseType: 'blob' // Expecting a binary file (PDF or Excel)
+      responseType: 'blob', // Expecting a binary file (PDF or Excel)
     });
+  }
+
+  getMailOnUsers() {
+    return this.http.get(`${this.apiUrl}/mail-on`);
   }
 }

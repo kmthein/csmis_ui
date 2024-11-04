@@ -128,6 +128,9 @@ export class AddWeeklyMenuComponent {
     this.lunchService.addWeeklyLunch(body).subscribe({
       next: (response) => {
         console.log(response);
+        if(response.status == "201") {
+          this.router.navigate(['/admin/menu']);
+        }
       },
     });
   }

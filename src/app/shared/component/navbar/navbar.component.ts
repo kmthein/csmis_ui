@@ -59,7 +59,7 @@ export class NavbarComponent {
     this.permanentOperator = false;
 
     // Navigate and ensure Angular detects changes after navigation
-    this.router.navigate([isAdmin ? '/' : '/admin/announcement']).then(() => {
+    this.router.navigate([isAdmin ? '/' : '/admin']).then(() => {
         this.ngZone.run(() => {
             this.dropdownOpen = false;
             this.cdRef.detectChanges(); // Trigger change detection after navigation in NgZone

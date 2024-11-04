@@ -11,7 +11,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const token = authService.getToken();
 
   const checkTokenExpiration = (token: string): boolean => {
-    if(!token) {
+    if (!token) {
       return true;
     }
 
@@ -19,12 +19,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     const currentTime = Math.floor(Date.now() / 1000);
 
     return decodedToken.exp < currentTime;
-  }
+  };
 
-  if(token) {
-    if(checkTokenExpiration(token)) {
+  if (token) {
+    if (checkTokenExpiration(token)) {
       authService.logout();
-      toastService.info('Your session has expired. Please log in again.');
     } else {
       // Token is valid, clone the request and add the Authorization header
       const clonedRequest = req.clone({
