@@ -78,22 +78,18 @@
         />
       </div>
       <div
-        id="dropdownDefaultButton"
-        data-dropdown-toggle="dropdown"
+        (click)="toggleDropdown()"
         class="focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center flex items-center cursor-pointer"
         type="button"
       >
-        <div>
+        <div *ngIf="isAdmin">
           <p class="mb-1 text-left">{{ user?.name || "User 404" }}</p>
-          <p class="text-left text-gray-500 font-light">
-            {{
-              user?.role == "OPERATOR"
-                ? "Operator"
-                : user?.role == "ADMIN"
-                ? "Admin"
-                : "Role 404"
-            }}
-          </p>
+          <p class="text-left text-gray-500 font-light">Admin</p>
+        </div>
+
+        <div *ngIf="!isAdmin">
+          <p class="mb-1 text-left">{{ user?.name || "User 404" }}</p>
+          <p class="text-left text-gray-500 font-light">Operator</p>
         </div>
 
         <svg
@@ -115,18 +111,25 @@
 
       <!-- Dropdown menu -->
       <div
-        id="dropdown"
-        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+        *ngIf="dropdownOpen"
+        class="z-10 absolute top-[6rem] bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
       >
         <ul
           class="py-2 text-sm text-gray-700 dark:text-gray-200"
           aria-labelledby="dropdownDefaultButton"
         >
-          <li>
+          <li *ngIf="isAdmin" class="cursor-pointer">
             <a
-              href="#"
+              (click)="switchUserPanel(true)"
               class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >Dashboard</a
+              >Switch as Operator</a
+            >
+          </li>
+          <li *ngIf="!isAdmin && !permanentOperator" class="cursor-pointer">
+            <a
+              (click)="switchUserPanel(false)"
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >Switch as Admin</a
             >
           </li>
           <li (click)="logout()" class="cursor-pointer">

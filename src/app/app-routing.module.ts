@@ -24,6 +24,9 @@ import { AddRestaurantComponent } from './page/admin/restaurant/add-restaurant/a
 import { EditRestaurantComponent } from './page/admin/restaurant/edit-restaurant/edit-restaurant.component';
 import { AddWeeklyMenuComponent } from './shared/component/add-weekly-menu/add-weekly-menu.component';
 import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component';
+import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
+import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
+import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
 
 const routes: Routes = [
   {
@@ -36,6 +39,11 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'announcement', component: AnnoucementListComponent },
       { path: 'announcement/:id', component: AnnoucementListComponent },
+      {
+        path: 'lunch-menu',
+        component: LunchComponent,
+      },
+      { path: 'reportViewer', component: ReportViewerComponent }
     ],
   },
   {
@@ -55,6 +63,7 @@ const routes: Routes = [
       { path: 'restaurant', component: RestaurantListComponent },
       { path: 'restaurant/new', component: AddRestaurantComponent },
       { path: 'restaurant/edit/:id', component: EditRestaurantComponent},
+      { path: 'doorlogs', component: DoorAccessRecordComponent },
       {
         path: 'menu/edit/:id',
         component: EditLunchComponent,
@@ -62,7 +71,8 @@ const routes: Routes = [
       {
         path: 'menu/add-weekly',
         component: AddWeeklyMenuComponent,
-      }
+      },
+      { path: 'report/mail-on', component: MailOnUserComponent },
     ],
   },
   {
