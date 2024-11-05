@@ -1,66 +1,85 @@
 <div>
   <h3 class="text-md font-semibold mb-4">Lunch Registration</h3>
-  <div class="calendar-container" id="calendar">
-    <div class="calendar-header">
-      <div
-        class="prev-button"
-        (click)="goToPreviousMonth()"
-        [ngClass]="{ disabled: isFirstMonth() }"
-      >
-        &lt;
+  <div class="flex mt-8 justify-center">
+    <div class="bg-[#174572] w-[350px] rounded-tl-[8px] rounded-bl-[8px] relative">
+      <div class="absolute left-1/2 transform -translate-x-1/2 top-4">
+        <!-- <img src="assets/logo.png" class="w-14" /> -->
       </div>
-      <h1 class="calendar-title">{{ currentMonth | date : "MMMM yyyy" }}</h1>
-      <div
-        class="next-button"
-        (click)="goToNextMonth()"
-        [ngClass]="{ disabled: !isLastWeekOfMonth() }"
-      >
-        &gt;
+      <div class="inline-flex justify-center items-center w-full h-full">
+        <div>
+          <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex"><span class="min-w-[135px]">Price Per Lunch </span><span class="w-[30px]"> - </span>  <span> MMK 3000</span></h4>
+          <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex"><span class="min-w-[135px]">Registered Lunch </span><span class="w-[30px]"> - </span>  <span> 24 days</span></h4>
+          <h4 class="text-[#E2F1FF] font-medium text-[15px] flex"><span class="min-w-[135px]">Est.Cost Monthly</span><span class="w-[30px]"> - </span><span> MMK 25000</span></h4>
+        </div>
       </div>
     </div>
-    <div class="calendar-body">
-      <div class="day-names">
-        <div>Sun</div>
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
-        <div>Fri</div>
-        <div>Sat</div>
-      </div>
-      <div class="calendar-grid">
-        <div class="day" *ngFor="let empty of getEmptyDaysBefore(currentMonth)">
-          <div class="empty-day"></div>
-        </div>
+    <div class="calendar-container bg-[#ffffffd2]" id="calendar">
+      <div class="calendar-header bg-[#ffffffd2] border-b mx-3 mb-3">
         <div
-          class="day"
-          *ngFor="let date of currentMonthDates"
-          [ngClass]="{
-            selected: isDateSelected(date),
-            weekend: isWeekend(date) || isPublicHoliday(date),
-            today: isBeforeOrToday(date),
-            'past-day': isBeforeOrToday(date) || isCurrentWeek(date)
-          }"
-          (click)="toggleDate(date)"
+          class="prev-button"
+          (click)="goToPreviousMonth()"
+          [ngClass]="{ disabled: isFirstMonth() }"
         >
-          <span>{{ date.getDate() }}</span>
-          <input
-            type="checkbox"
-            [checked]="isDateSelected(date)"
-            (change)="toggleDate(date)"
-            [disabled]="
-              isWeekend(date) || isBeforeOrToday(date) || isPublicHoliday(date)
-            "
-            style="display: none"
-          />
+          &lt;
+        </div>
+        <h1 class="calendar-title">{{ currentMonth | date : "MMMM yyyy" }}</h1>
+        <div
+          class="next-button"
+          (click)="goToNextMonth()"
+          [ngClass]="{ disabled: !isLastWeekOfMonth() }"
+        >
+          &gt;
         </div>
       </div>
-    </div>
+      <div class="calendar-body">
+        <div class="day-names">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
+        <div class="calendar-grid">
+          <div
+            class="day"
+            *ngFor="let empty of getEmptyDaysBefore(currentMonth)"
+          >
+            <div class="empty-day"></div>
+          </div>
+          <div
+            class="day"
+            *ngFor="let date of currentMonthDates"
+            [ngClass]="{
+              selected: isDateSelected(date) && !isPublicHoliday(date),
+              weekend: isWeekend(date) || isPublicHoliday(date),
+              today: isBeforeOrToday(date),
+              'past-day': isBeforeOrToday(date) || isCurrentWeek(date)
+            }"
+            (click)="toggleDate(date)"
+          >
+            <span>{{ date.getDate() }}</span>
+            <input
+              type="checkbox"
+              [checked]="isDateSelected(date)"
+              (change)="toggleDate(date)"
+              [disabled]="
+                isWeekend(date) ||
+                isBeforeOrToday(date) ||
+                isPublicHoliday(date)
+              "
+              style="display: none"
+            />
+          </div>
+        </div>
+      </div>
 
-    <div class="register-box">
-      <button class="register-button" (click)="submitRegistration()">
-        Register for Lunch
-      </button>
+      <div class="register-box flex justify-end mx-[30px]">
+        <button class="register-button" (click)="submitRegistration()">
+          Register
+        </button>
+      </div>
     </div>
   </div>
 </div>
