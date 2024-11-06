@@ -35,6 +35,9 @@ import {
   ionArrowDownRightBoxOutline,
   ionCreate,
   ionCreateSharp,
+  ionArrowBack,
+  ionReturnDownBackSharp,
+  ionReturnUpBackOutline,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -165,7 +168,9 @@ import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dash
       ionSettings,
       ionArrowDownRightBoxOutline,
       ionCreate,
-      ionCreateSharp
+      ionCreateSharp,
+      ionArrowBack,
+      ionReturnUpBackOutline
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,
