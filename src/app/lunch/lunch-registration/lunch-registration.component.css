@@ -1,8 +1,8 @@
 .calendar-container {
-  max-width: 350px; /* Adjust the width of the calendar */
-  margin: auto; /* Center the calendar */
+  max-width: 400px; /* Adjust the width of the calendar */
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
   overflow: hidden; /* To round corners */
 }
 
@@ -10,12 +10,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background-color: #f0f0f0; /* Header background */
+  padding: 20px;
 }
 
 .calendar-title {
   margin: 0;
+  color: #082f57;
+  font-size: 20px;
 }
 
 .prev-button,
@@ -23,8 +24,13 @@
   cursor: pointer;
 }
 
+.disabled {
+  color: #e0e0e0;
+  cursor: not-allowed;
+}
+
 .calendar-body {
-  padding: 10px;
+  padding: 10px 30px;
 }
 
 .day-names {
@@ -68,22 +74,22 @@
 }
 
 .selected {
-  background-color: blue; /* Fill the entire box with blue when selected */
+  background-color: #174572; /* Fill the entire box with blue when selected */
   color: white; /* Change text color to white */
+}
+.selected:hover {
+  background-color: #3a6fa3;
 }
 
 .register-box {
-  justify-content: center;
   align-items: center;
-  padding: 7px;
-  background-color: #f9f9f9;
+  padding: 6px 0;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .register-button {
-    margin-left: 55%;
-    background-color: blue; 
+    margin: 10px 0;
+    background-color: #174572; 
     color: white; 
     padding: 8px 15px; 
     font-size: 13px; 
@@ -95,7 +101,7 @@
 }
 
 .register-button:hover {
-  background-color: #72b6ee; /* Darker green on hover */
+  background-color: #3a6fa3; /* Darker green on hover */
   transform: translateY(-3px); /* Slight lift on hover */
 }
 

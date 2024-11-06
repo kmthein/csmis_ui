@@ -56,6 +56,8 @@ export class AdminDashboardComponent {
   onSubmit(form: NgForm) {
     console.log(form.value);
     const formData = new FormData();
+    const user = JSON.parse(localStorage.getItem("user")!);
+    formData.append('adminId', user?.id);
     formData.append('lastRegisterDay', form.value.lastRegisterDay);
     formData.append('lastRegisterTime', form.value.lastRegisterTime);
     this.settingService.updateLastRegister(formData).subscribe({
@@ -63,8 +65,8 @@ export class AdminDashboardComponent {
         console.log(response);
         if (response.status == '200') {
           this.getSetting();
-          this.closeModal();
         }
+        this.closeModal();
       },
     });
   }
