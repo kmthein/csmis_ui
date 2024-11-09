@@ -31,9 +31,10 @@
   *ngIf="isModalOpen"
   class="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-gray-500 bg-opacity-50"
 >
-  <div
-    class=" img_scroll relative p-4 w-full overflow-y-auto bg-white shadow dark:bg-gray-700"
-    [ngClass]="editMode ? 'max-w-2xl max-h-[80%] ' : 'max-w-lg'"
+   <div
+    class="relative p-4 w-full max-w-2xl bg-white shadow dark:bg-gray-700"
+    [ngClass]="editMode ? 'max-h-[80%]' : 'max-h-[70%]'"
+    style="overflow-y: auto;"  
   >
     <!-- Modal content -->
     <div class="flex justify-between p-4 border-b dark:border-gray-600">

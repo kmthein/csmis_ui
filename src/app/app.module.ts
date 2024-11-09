@@ -88,6 +88,7 @@ import { ReportViewerComponent } from './report/report-viewer/report-viewer.comp
 import { SafeUrlPipe } from './safe-url.pipe';
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
+import { ForcePasswordChangeComponent } from './password/force-password-change/force-password-change.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dash
     SafeUrlPipe,
     MailOnUserComponent,
     AdminDashboardComponent,
+    ForcePasswordChangeComponent,
   ],
   imports: [
     BrowserModule,

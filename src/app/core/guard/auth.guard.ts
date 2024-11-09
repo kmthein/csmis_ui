@@ -10,6 +10,12 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
+      const user = this.authService.getUser();
+      const hasDefaultPassword = user?.hasDefaultPassword;
+      if(hasDefaultPassword) {
+        this.router.navigate(['/force-password/change']);
+        return false;
+      }
       return true;
     }
 

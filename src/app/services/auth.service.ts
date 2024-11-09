@@ -24,7 +24,6 @@ export class AuthService {
     const body = { staffId, password };
     return this.http.post<any>(`${this.url}/login`, body).pipe(
       tap((response) => {
-        console.log(response);
         const { token, userDetails } = response;
         if (token) {
           localStorage.setItem('token', token);
@@ -42,6 +41,18 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.userSource.next(null);
+  }
+
+  forcePasswordChange(form: FormData) {
+    return this.http.put<any>(`${this.url}/password-change`, form).pipe(
+      tap((response) => {
+        if(response.status == "200") {
+          this.toast.success(response.message);
+        } else {
+          this.toast.info(response.message);
+        }
+      })
+    );
   }
 
   getToken(): string | null {

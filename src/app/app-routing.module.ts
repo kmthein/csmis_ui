@@ -27,6 +27,7 @@ import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component
 import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
+import { ForcePasswordChangeComponent } from './password/force-password-change/force-password-change.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'otp-verification', component: OtpVerificationComponent },
+  { path: 'force-password/change', component: ForcePasswordChangeComponent },
 ];
 
 @NgModule({
