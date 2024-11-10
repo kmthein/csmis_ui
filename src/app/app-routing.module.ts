@@ -28,6 +28,7 @@ import { ReportViewerComponent } from './report/report-viewer/report-viewer.comp
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
 import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
+import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
         component: LunchComponent,
       },
       { path: 'reportViewer', component: ReportViewerComponent },
+      {path: 'suggest', component:SuggestionCreateComponent}
     ],
   },
   {
