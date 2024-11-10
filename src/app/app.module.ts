@@ -88,6 +88,8 @@ import { SafeUrlPipe } from './safe-url.pipe';
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
+import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
+import { NotiComponent } from './noti/noti.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +133,8 @@ import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dash
     MailOnUserComponent,
     DoorAccessRecordComponent,
     AdminDashboardComponent,
+    SuggestionCreateComponent,
+    NotiComponent,
   ],
   imports: [
     BrowserModule,

@@ -44,6 +44,11 @@ export class AuthService {
     this.userSource.next(null);
   }
 
+  getUserId(): number | null {
+    const user = this.userSource.getValue();
+    return user ? user.id : null; // Adjust based on your User model
+  }
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }
