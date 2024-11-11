@@ -83,3 +83,27 @@
     </div>
   </div>
 </div>
+<!-- Vegan Modal -->
+<div *ngIf="showVeganModal" class="modal">
+  <div class="modal-content">
+    <p>Are you a vegan?</p>
+    <div class="vegan-buttons">
+      <button (click)="setVegan(true)">Yes</button>
+      <button (click)="setVegan(false)">No</button>
+    </div>
+  </div>
+</div>
+
+<!-- Meat Selection Modal -->
+<div *ngIf="showMeatModal" class="modal">
+  <div class="modal-content">
+    <p>Select the meats you avoid:</p>
+    <div *ngFor="let meat of meats">
+      <input type="checkbox" [value]="meat.id" (change)="toggleMeatSelection(meat)"> {{ meat.name }}
+    </div>
+    <div class="meat-buttons">
+      <button (click)="submitAvoidedMeats()">Save</button>
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>

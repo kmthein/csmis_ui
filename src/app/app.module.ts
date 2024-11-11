@@ -75,7 +75,6 @@ import { ForgotPasswordComponent } from './password/forgot-password/forgot-passw
 import { ResetPasswordComponent } from './password/reset-password/reset-password.component';
 import { OtpVerificationComponent } from './password/otp-verification/otp-verification.component';
 import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
-import { AvoidMeatComponent } from './meal/avoid-meat/avoid-meat.component';
 import { ModalComponent } from './modal/modal.component';
 import { ConfirmationModalComponent } from './shared/component/confirmation-modal/confirmation-modal.component';
 import { AddRestaurantComponent } from './page/admin/restaurant/add-restaurant/add-restaurant.component';
@@ -90,6 +89,9 @@ import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
 import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
 import { NotiComponent } from './noti/noti.component';
+import { MeatListComponent } from './meat/meat-list/meat-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +121,6 @@ import { NotiComponent } from './noti/noti.component';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     OtpVerificationComponent,
-    AvoidMeatComponent,
     ModalComponent,
     ConfirmationModalComponent,
     AddRestaurantComponent,
@@ -135,8 +136,12 @@ import { NotiComponent } from './noti/noti.component';
     AdminDashboardComponent,
     SuggestionCreateComponent,
     NotiComponent,
+    ModalComponent,
+    MeatListComponent,
+    AvoidMealComponent,
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
