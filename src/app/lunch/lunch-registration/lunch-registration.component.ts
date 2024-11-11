@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LunchRegistrationService } from '../../services/lunch-registration.service';
 import { LunchRegistrationDTO } from '../../DTO/LunchRegistrationDTO';
+import { Meat } from '../../models/meat';
+import { MeatService } from '../../services/meat.service';
+import { DietaryPreference } from '../../models/DietaryPreference';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-lunch-registration',
@@ -13,9 +17,15 @@ export class LunchRegistrationComponent implements OnInit {
   currentMonthDates: Date[] = [];
   today: Date;
   userId: number | null = null;
-  isFirstRegistration: boolean = true; // Flag to check if it's the first registration
+  isFirstRegistration: boolean = true; 
+  meats: Meat[] = [];
+  showVeganModal = false;
+  showMeatModal = false;
+  selectedMeats: number[] = [];
 
-  constructor(private lunchRegistrationService: LunchRegistrationService) {
+
+
+  constructor(private lunchRegistrationService: LunchRegistrationService,private meatService: MeatService,private userService: UserService) {
     this.today = new Date();
   }
 
@@ -26,10 +36,17 @@ export class LunchRegistrationComponent implements OnInit {
       this.loadUserSelectedDates();
     } else {
       console.error('User not found in local storage!');
-    }
+    };    this.loadMeats();
+
+
   }
 
-  // Load user selected dates from the backend
+  loadMeats() {
+    this.meatService.getAllMeats().subscribe({
+      next: (meats) => (this.meats = meats),
+      error: (err) => console.error('Error loading meats:', err)
+    });
+  }
   loadUserSelectedDates(): void {
     if (this.userId) {
       this.lunchRegistrationService.getSelectedDates(this.userId).subscribe(
@@ -54,42 +71,37 @@ export class LunchRegistrationComponent implements OnInit {
     }
   }
 
-  // Populate all weekdays of the current month, excluding the current week
   populateAllWeekdaysExcludingCurrentWeek(month: Date): void {
     const year = month.getFullYear();
     const monthIndex = month.getMonth();
     const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
     
-    // Clear the selectedDates array before populating
+
     this.selectedDates = [];
   
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Reset the time to midnight for comparison
+    today.setHours(0, 0, 0, 0); 
 
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, monthIndex, day);
       
-      // Skip if the date is a weekday within the current week
       if (!this.isCurrentWeek(date) && date.getDay() !== 0 && date.getDay() !== 6 && date > today) {
         this.selectedDates.push(date);
       }
     }
   }
 
-  // Check if a date is before or today
   isBeforeOrToday(date: Date): boolean {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return date.getTime() <= today.getTime();
   }
 
-  // Check if a date is a weekend
   isWeekend(date: Date): boolean {
     const day = date.getDay();
-    return day === 0 || day === 6; // Sunday (0) and Saturday (6)
+    return day === 0 || day === 6; 
   }
 
-  // Check if a date is within the current week
   isCurrentWeek(date: Date): boolean {
     const today = new Date();
     const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 1)); // Monday of the current week
@@ -98,28 +110,24 @@ export class LunchRegistrationComponent implements OnInit {
     return date >= startOfWeek && date <= endOfWeek;
   }
 
-  // Toggle the selection of a date
   toggleDate(date: Date): void {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Set today's time to midnight for comparison
+    today.setHours(0, 0, 0, 0); 
 
-    // Check if the date is before or today, a weekend, or within the current week
     if (!this.isBeforeOrToday(date) && !this.isWeekend(date) && !this.isCurrentWeek(date)) {
       const index = this.selectedDates.findIndex(selectedDate => selectedDate.getTime() === date.getTime());
       if (index === -1) {
-        this.selectedDates.push(date); // Select the date
+        this.selectedDates.push(date); 
       } else {
-        this.selectedDates.splice(index, 1); // Unselect the date
+        this.selectedDates.splice(index, 1); 
       }
     }
   }
 
-  // Check if a date is selected
   isDateSelected(date: Date): boolean {
     return this.selectedDates.some(selectedDate => selectedDate.getTime() === date.getTime());
   }
 
-  // Generate the dates for the current month calendar
   generateCalendarDates(month: Date): void {
     const year = month.getFullYear();
     const monthIndex = month.getMonth();
@@ -132,81 +140,181 @@ export class LunchRegistrationComponent implements OnInit {
     }
   }
 
-  // Get empty days before the first day of the current month
   getEmptyDaysBefore(month: Date): Date[] {
     const firstDay = new Date(month.getFullYear(), month.getMonth(), 1);
     const emptyDays = [];
     const dayOfWeek = firstDay.getDay();
 
-    // Calculate the number of empty days to display at the start of the calendar
     for (let i = 0; i < dayOfWeek; i++) {
-      // Push empty Date objects to the array
       emptyDays.push(new Date(firstDay.getFullYear(), firstDay.getMonth(), i - dayOfWeek + 1));
     }
     return emptyDays;
   }
 
-  // Navigate to the previous month
   goToPreviousMonth(): void {
     if (!this.isFirstMonth()) {
       const prevMonth = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() - 1, 1);
       this.currentMonth = prevMonth;
       this.generateCalendarDates(this.currentMonth);
+      this.loadUserSelectedDates();
     }
   }
 
-  // Navigate to the next month
   goToNextMonth(): void {
-    if (this.isLastWeekOfMonth()) {
+    if (this.isLastWeekOfMonth() && this.isCurrentMonth()) {
       const nextMonth = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() + 1, 1);
       this.currentMonth = nextMonth;
       this.generateCalendarDates(this.currentMonth);
+  
+      this.autoSelectAllWeekdays(nextMonth);
+      this.loadUserSelectedDates();
+    }
+  }
+  
+  autoSelectAllWeekdays(month: Date): void {
+    const year = month.getFullYear();
+    const monthIndex = month.getMonth();
+    const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+    
+    this.selectedDates = [];
+  
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(year, monthIndex, day);
+      
+      if (date.getDay() !== 0 && date.getDay() !== 6) {
+        this.selectedDates.push(date);
+      }
     }
   }
 
-  // Check if the current date is in the last week of the month
+isCurrentMonth(): boolean {
+  const today = new Date();
+  return (
+    today.getFullYear() === this.currentMonth.getFullYear() &&
+    today.getMonth() === this.currentMonth.getMonth()
+  );
+}
   isLastWeekOfMonth(): boolean {
     const today = new Date();
     const lastDay = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth() + 1, 0).getDate();
     return today.getDate() >= lastDay - 6; 
   }
 
-  // Check if the current month is the first month of the year
   isFirstMonth(): boolean {
     return this.currentMonth.getFullYear() === this.today.getFullYear() &&
            this.currentMonth.getMonth() === this.today.getMonth();
   }
 
-  // Submit registration for lunch
   submitRegistration(): void {
     if (this.userId) {
       const registrationDto: LunchRegistrationDTO = {
         userId: this.userId,
-        selectedDates: this.selectedDates.map(date => date.toISOString()) // Format dates as ISO strings
+        selectedDates: this.selectedDates.map((date) => date.toISOString()), // Format dates as ISO strings
       };
 
-      if (this.isFirstRegistration) {
-        this.lunchRegistrationService.registerUserForLunch(registrationDto).subscribe(
-          response => {
-            console.log('Registration successful:', response);
-            this.isFirstRegistration = false; 
-          },
-          error => {
-            console.error('Error registering for lunch:', error);
-          }
-        );
+      if (this.isCurrentMonth()) {
+        if (this.isFirstRegistration) {
+          this.lunchRegistrationService.registerUserForLunch(registrationDto).subscribe(
+            (response) => {
+              console.log('Registration successful for current month:', response);
+              this.isFirstRegistration = false;
+              this.openVeganModal();
+            },
+            (error) => {
+              console.error('Error registering for current month:', error);
+              alert('Error registering for current month!');
+            }
+          );
+        } else {
+          this.lunchRegistrationService.updateLunchRegistration(this.userId, registrationDto).subscribe(
+            (response) => {
+              console.log('Registration updated successfully for current month:', response);
+              alert('Registration updated successfully for current month!');
+            },
+            (error) => {
+              console.error('Error updating registration for current month:', error);
+              alert('Error updating registration for current month!');
+            }
+          );
+        }
       } else {
-        this.lunchRegistrationService.updateLunchRegistration(this.userId, registrationDto).subscribe(
-          response => {
-            console.log('Registration updated successfully:', response);
-          },
-          error => {
-            console.error('Error updating registration:', error);
-          }
-        );
+        // Handle next month registration
+        if (this.isFirstRegistration) {
+          this.lunchRegistrationService.registerUserForLunch(registrationDto).subscribe(
+            (response) => {
+              console.log('Registration successful for next month:', response);
+              alert('Registration successful for next month!');
+              this.isFirstRegistration = false;
+              this.openVeganModal();
+            },
+            (error) => {
+              console.error('Error registering for next month:', error);
+              alert('Error registering for next month!');
+            }
+          );
+        } else {
+          this.lunchRegistrationService.updateLunchRegistrationForNextMonth(this.userId, registrationDto).subscribe(
+            (response) => {
+              console.log('Registration updated successfully for next month:', response);
+              alert('Registration updated successfully for next month!');
+            },
+            (error) => {
+              console.error('Error updating registration for next month:', error);
+              alert('Error updating registration for next month!');
+            }
+          );
+        }
       }
     } else {
       console.error('User ID is not set!');
+      alert('User ID is not set!');
     }
   }
+  openVeganModal() {
+    this.showVeganModal = true;
+  }
+  setVegan(isVegan: boolean) {
+    this.showVeganModal = false;
+    if (isVegan) {
+      this.saveDietaryPreference(true, []);
+    } else {
+      this.showMeatModal = true;
+    }
+  }
+
+  toggleMeatSelection(meat: Meat) {
+    const index = this.selectedMeats.indexOf(meat.id);
+    if (index > -1) {
+      this.selectedMeats.splice(index, 1);
+    } else {
+      this.selectedMeats.push(meat.id);
+    }
+  }
+
+  submitAvoidedMeats() {
+    this.saveDietaryPreference(false, this.selectedMeats);
+    this.closeModal();
+  }
+
+  closeModal() {
+    this.showVeganModal = false;
+    this.showMeatModal = false;
+  }
+
+  saveDietaryPreference(isVegan: boolean, meatIds: number[]) {
+    const preference: DietaryPreference = {
+      userId: this.userId,
+      isVegan,
+      meatIds
+    };
+    this.userService.saveDietaryPreference(preference).subscribe({
+      next: (response) => {
+          console.log('Dietary preference saved successfully:', response);
+      },
+      error: (err) => {
+          console.error('Error saving dietary preference:', err);
+      }
+  });
+  
+}
 }

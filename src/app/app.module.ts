@@ -59,8 +59,10 @@ import { ForgotPasswordComponent } from './password/forgot-password/forgot-passw
 import { ResetPasswordComponent } from './password/reset-password/reset-password.component';
 import { OtpVerificationComponent } from './password/otp-verification/otp-verification.component';
 import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
-import { AvoidMeatComponent } from './meal/avoid-meat/avoid-meat.component';
 import { ModalComponent } from './modal/modal.component';
+import { MeatListComponent } from './meat/meat-list/meat-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component';
 
 @NgModule({
   declarations: [
@@ -91,10 +93,12 @@ import { ModalComponent } from './modal/modal.component';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     OtpVerificationComponent,
-    AvoidMeatComponent,
-    ModalComponent,
+      ModalComponent,
+      MeatListComponent,
+      AvoidMealComponent,
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,

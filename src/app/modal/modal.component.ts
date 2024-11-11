@@ -8,12 +8,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class ModalComponent {
   @Input() message: string = ''; 
   @Input() isVisible: boolean = false; 
-  @Output() okClick = new EventEmitter<void>(); // Event for OK button click
+  @Output() okClick = new EventEmitter<void>(); 
 
   onOkClick() {
-    this.okClick.emit(); // Emit event when OK is clicked
+    this.okClick.emit(); 
   }
   onCloseClick() {
-    this.isVisible = false; // Hide the modal
+    this.isVisible = false; 
   }
 }
