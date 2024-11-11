@@ -28,6 +28,9 @@ import { ReportViewerComponent } from './report/report-viewer/report-viewer.comp
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
 import { ForcePasswordChangeComponent } from './password/force-password-change/force-password-change.component';
+import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
+import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
+import { SettingComponent } from './page/admin/setting/setting.component';
 
 const routes: Routes = [
   {
@@ -44,7 +47,8 @@ const routes: Routes = [
         path: 'lunch-menu',
         component: LunchComponent,
       },
-      { path: 'reportViewer', component: ReportViewerComponent }
+      { path: 'reportViewer', component: ReportViewerComponent },
+      {path: 'suggest', component:SuggestionCreateComponent}
     ],
   },
   {
@@ -64,7 +68,8 @@ const routes: Routes = [
       },
       { path: 'restaurant', component: RestaurantListComponent },
       { path: 'restaurant/new', component: AddRestaurantComponent },
-      { path: 'restaurant/edit/:id', component: EditRestaurantComponent},
+      { path: 'restaurant/edit/:id', component: EditRestaurantComponent },
+      { path: 'doorlogs', component: DoorAccessRecordComponent },
       {
         path: 'menu/edit/:id',
         component: EditLunchComponent,
@@ -74,11 +79,12 @@ const routes: Routes = [
         component: AddWeeklyMenuComponent,
       },
       { path: 'report/mail-on', component: MailOnUserComponent },
+      { path: 'settings', component: SettingComponent },
     ],
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },

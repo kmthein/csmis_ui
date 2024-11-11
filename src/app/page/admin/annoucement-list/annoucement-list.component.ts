@@ -31,6 +31,7 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   previewFiles: any = [];
   isConfirmOpen: boolean = false;
   selectedAnnouncementId: number | null = null;
+  isAdmin: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -102,6 +103,7 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
     this.editor = new Editor();
     this.authService.currentUser$.subscribe((user) => {
       this.user = user;
+      this.isAdmin = user?.role == "ADMIN" ? true : false;
     });
   }
 

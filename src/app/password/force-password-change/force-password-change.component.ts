@@ -35,16 +35,17 @@ export class ForcePasswordChangeComponent {
     formData.append("newPassword", this.newPassword);
     this.authService.forcePasswordChange(formData).subscribe({
       next: response => {
-        if(response.status == "200") {
+        console.log(response);
           const newUser = {...user, hasDefaultPassword: false};
           localStorage.setItem("user", JSON.stringify(newUser));
-          if(user?.role == "ADMIN") {
-            this.router.navigate([`/admin`])
+          console.log(newUser);
+          
+          if(newUser.role == "OPERATOR") {
+            this.router.navigate([`/`]);
           } else {
-            this.router.navigate([`/`])
+            this.router.navigate([`/admin`]);
           }
         }
-      }
     });
   }
 }

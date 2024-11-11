@@ -1,0 +1,123 @@
+<div>
+  <h3 class="text-lg font-medium mb-5">Add Staff Information</h3>
+  <form
+    #settingsForm="ngForm"
+    (ngSubmit)="onSubmit(settingsForm)"
+    novalidate
+    class="staff-form md:w-[50%]"
+  >
+    <div class="flex gap-6 mb-4">
+      <div class="w-[50%]">
+        <label class="text-[#696969] mb-1 block text-sm">Current Lunch Price</label>
+        <input
+          type="text"
+          name="price"
+          [(ngModel)]="price"
+          required
+          [disabled]="viewMode"
+          #priceInput="ngModel"
+          class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
+        />
+        <div *ngIf="priceInput.invalid && priceInput.touched">
+          <small *ngIf="priceInput.errors?.['required']"
+            >Price is required</small
+          >
+        </div>
+      </div>
+      <div class="w-[50%] mb-6">
+        <label class="text-[#696969] mb-1 block text-sm">Company rate</label>
+        <div class="relative mb-6">
+          <label for="labels-range-input" class="sr-only">Company rate</label>
+          <input
+            id="labels-range-input"
+            type="range"
+            name="rate"
+            [(ngModel)]="rate"
+            value="50"
+            min="0"
+            max="100"
+            [disabled]="viewMode"
+            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+          />
+          <span
+            class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6"
+            >Min (0%)</span
+          >
+          <span
+            class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/4 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6"
+            >50%</span
+          >
+          <span
+            class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6"
+            >Max (100%)</span
+          >
+        </div>
+        <!-- <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
+          <small *ngIf="staffIdInput.errors?.['required']"
+            >Staff ID is required</small
+          >
+        </div> -->
+      </div>
+    </div>
+    <div class="flex gap-6 mb-8">
+      <div class="w-[48%]">
+        <label class="text-[#696969] mb-1 block text-sm">Lunch Reminder Time</label>
+        <div class="relative">
+            <div
+              class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none"
+            >
+              <svg
+                class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+
+            <input
+              type="time"
+              id="time"
+              class="bg-gray-50 border leading-none read-only:bg-[#fcfcfc88] read-only:border-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              min="09:00"
+              max="18:00"
+              [(ngModel)]="lunchReminder"
+              name="lunchReminder"
+              required
+              [disabled]="viewMode"
+            />
+          </div>
+      </div>
+    </div>
+    <div class="flex justify-end gap-4 my-10">
+      <button
+        *ngIf="!viewMode"
+        (click)="toggleViewMode(true)"
+        class="w-[25%] bg-transparent hover:bg-[#adadad1e] rounded-full text-[#888888] border-2 border-[#CDCDCD] py-[10px]"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        *ngIf="!viewMode"
+        [disabled]="settingsForm.invalid"
+        class="w-[25%] bg-[#336699] hover:bg-[#2c5a88] disabled:bg-slate-400 rounded-full text-white py-[10px]"
+      >
+        Update
+      </button>
+      <button
+        *ngIf="viewMode"
+        (click)="toggleViewMode(false)"
+        class="w-[25%] bg-[#336699] hover:bg-[#2c5a88] disabled:bg-slate-400 rounded-full text-white py-[10px]"
+      >
+        Edit
+      </button>
+    </div>
+  </form>
+</div>

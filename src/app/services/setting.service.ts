@@ -13,6 +13,10 @@ export class SettingService {
     return this.http.get(`${this.apiUrl}`);
   }
 
+  updateSettings(form: FormData) {
+    return this.http.put<any>(`${this.apiUrl}`, form);
+  }
+
   updateLastRegister(form: FormData) {
     return this.http.put(`${this.apiUrl}/last-register`, form);
   }

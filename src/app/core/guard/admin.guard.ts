@@ -10,7 +10,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
-      const user = this.authService.getUser();
+      const user = JSON.parse(localStorage.getItem("user")!);
       const hasDefaultPassword = user?.hasDefaultPassword;
       if(hasDefaultPassword) {
         this.router.navigate(['/force-password/change']);

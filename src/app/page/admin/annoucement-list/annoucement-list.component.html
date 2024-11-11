@@ -2,6 +2,7 @@
   <div class="flex justify-between items-center mb-3">
     <h3 class="text-md font-semibold mb-4">All Announcements</h3>
     <div
+      *ngIf="isAdmin"
       class="flex md:order-2 gap-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
     >
       <button

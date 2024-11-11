@@ -104,17 +104,6 @@
           <span>Announcement</span>
         </a>
       </div>
-
-      <div *ngIf="!isAdmin">
-        <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
-          routerLink="/profile"
-          routerLinkActive="active"
-        >
-          <ng-icon name="ionPerson"></ng-icon>
-          <span>Profile</span>
-        </a>
-      </div>
       
       <div *ngIf="isAdmin">
         <!-- Management Main Item -->
@@ -125,7 +114,7 @@
         >
           <div class="flex justify-between w-full items-center">
             <div class="flex items-center gap-2">
-              <ng-icon name="ionSettings"></ng-icon>
+              <ng-icon name="ionBuild"></ng-icon>
               <span>Management</span>
             </div>
             <svg
@@ -198,6 +187,16 @@
               <span>Holiday</span>
             </a>
           </li>
+          <li>
+            <a
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              routerLink="/admin/doorlogs"
+              routerLinkActive="active"
+            >
+              <ng-icon name="ionCard"></ng-icon>
+              <span>DoorLogs</span>
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -240,6 +239,29 @@
           </li>
         </ul>
       </div>
+
+      <div *ngIf="!isAdmin">
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/profile"
+          routerLinkActive="active"
+        >
+          <ng-icon name="ionPerson"></ng-icon>
+          <span>Profile</span>
+        </a>
+      </div>
+      
+      <div *ngIf="isAdmin">
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/admin/settings"
+          routerLinkActive="active"
+        >
+          <ng-icon name="ionSettings"></ng-icon>
+          <span>Settings</span>
+        </a>
+      </div>
+      
     </div>
   </div>
   <div></div>

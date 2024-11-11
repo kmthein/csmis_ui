@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class AuthService {
   private userSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.userSource.asObservable();
 
-  constructor(private http: HttpClient, private toast: ToastrService) {
+  constructor(private http: HttpClient, private toast: ToastrService, private router: Router) {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.userSource.next(JSON.parse(storedUser));
@@ -53,6 +54,10 @@ export class AuthService {
         }
       })
     );
+  }
+  getUserId(): number | null {
+    const user = this.userSource.getValue();
+    return user ? user.id : null; // Adjust based on your User model
   }
 
   getToken(): string | null {
