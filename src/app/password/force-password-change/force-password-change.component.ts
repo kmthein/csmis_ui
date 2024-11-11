@@ -29,15 +29,12 @@ export class ForcePasswordChangeComponent {
   }
 
   onSubmit() {
-    console.log(this.newPassword);
     const user = this.authService.getUser();
-    console.log(user);
     const formData = new FormData();
     formData.append("id", String(user?.id));
     formData.append("newPassword", this.newPassword);
     this.authService.forcePasswordChange(formData).subscribe({
       next: response => {
-        console.log(response);
         if(response.status == "200") {
           const newUser = {...user, hasDefaultPassword: false};
           localStorage.setItem("user", JSON.stringify(newUser));
