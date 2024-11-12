@@ -26,6 +26,16 @@ export class ReportService {
     });
   }
 
+  getLunchSummaryPie() {
+    const formData = new FormData();
+    formData.append("date", "2024-11-12");
+    return this.http.put(`${this.apiUrl}/lunch-summary`, formData);
+  }
+
+  getMonthlySummaryPie() {
+    return this.http.get(`${this.apiUrl}/monthly-summary`);
+  }
+
   getMailOnUsers() {
     return this.http.get(`${this.apiUrl}/mail-on`);
   }

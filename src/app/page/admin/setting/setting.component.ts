@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SettingService } from '../../../services/setting.service';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-setting',
@@ -11,6 +12,7 @@ import { DatePipe } from '@angular/common';
 export class SettingComponent {
   price: number = 0;
   rate: number = 50;
+  initialRate: number = 0;
   lunchReminder: string = "10:00";
   dueDate: any = 'Monday';
   dueTime: any;
@@ -19,7 +21,7 @@ export class SettingComponent {
   isModalOpen: boolean = false;
   viewMode: boolean = true;
 
-  constructor(private settingService: SettingService, private datePipe: DatePipe) {}
+  constructor(private settingService: SettingService, private datePipe: DatePipe, private toast: ToastrService) {}
 
   ngOnInit() {
     this.getSetting();
@@ -31,6 +33,7 @@ export class SettingComponent {
         console.log(response);
         this.price = response?.currentLunchPrice;
         this.rate = response?.companyRate;
+        this.initialRate = response?.companyRate;
         this.lunchReminder = response?.lunchReminderTime;
       },
       error: (error) => {
@@ -45,6 +48,7 @@ export class SettingComponent {
   }
 
   onSubmit(form: NgForm) {
+    this.initialRate = form.value.rate;
     console.log(form.value);
     this.viewMode = true;
     const formData = new FormData();
@@ -56,11 +60,20 @@ export class SettingComponent {
     this.settingService.updateSettings(formData).subscribe({
       next: response => {
         console.log(response);
+        if(response.status == "200") {
+          this.toast.success(response.message);
+        } else {
+          this.toast.error(response.message);
+        }
+        this.viewMode = true;
       }
     });
   }
 
   toggleViewMode(bool: boolean) {
     this.viewMode = bool;
+    if(bool) {
+      this.rate = this.initialRate;
+    }
   }
 }

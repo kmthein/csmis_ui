@@ -65,7 +65,7 @@
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/"
-          routerLinkActive="active"
+          routerLinkActive="nav-active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
           <ng-icon name="ionHome"></ng-icon>
@@ -87,7 +87,7 @@
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/lunch"
-          routerLinkActive="active"
+          routerLinkActive="nav-active"
         >
           <ng-icon name="ionCalendar"></ng-icon>
           <span>Lunch</span>
@@ -98,7 +98,7 @@
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/announcement"
-          routerLinkActive="active"
+          routerLinkActive="nav-active"
         >
           <ng-icon name="ionMegaphone"></ng-icon>
           <span>Announcement</span>
@@ -141,7 +141,7 @@
             <a
               class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
               routerLink="/admin/restaurant"
-              routerLinkActive="active"
+              routerLinkActive="nav-active"
             >
               <ng-icon name="ionRestaurant"></ng-icon>
               <span>Restaurant</span>
@@ -151,7 +151,7 @@
             <a
               class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
               routerLink="/admin/menu"
-              routerLinkActive="active"
+              routerLinkActive="nav-active"
             >
               <ng-icon name="ionFastFood"></ng-icon>
               <span>Menu</span>
@@ -161,7 +161,7 @@
             <a
               class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
               routerLink="/admin/announcement"
-              routerLinkActive="active"
+              routerLinkActive="nav-active"
             >
               <ng-icon name="ionMegaphone"></ng-icon>
               <span>Announcement</span>
@@ -171,7 +171,7 @@
             <a
               class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
               routerLink="/admin/staff"
-              routerLinkActive="active"
+              routerLinkActive="nav-active"
             >
               <ng-icon name="ionIdCard"></ng-icon>
               <span>Staff</span>
@@ -181,7 +181,7 @@
             <a
               class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
               routerLink="/admin/holiday"
-              routerLinkActive="active"
+              routerLinkActive="nav-active"
             >
               <ng-icon name="ionCalendar"></ng-icon>
               <span>Holiday</span>
@@ -191,7 +191,7 @@
             <a
               class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
               routerLink="/admin/doorlogs"
-              routerLinkActive="active"
+              routerLinkActive="nav-active"
             >
               <ng-icon name="ionCard"></ng-icon>
               <span>DoorLogs</span>
@@ -232,9 +232,17 @@
           <li>
             <a
               routerLink="/admin/report/mail-on"
+              routerLinkActive="nav-active"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              >Mail received users</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/admin/report/lunch-summary"
               routerLinkActive="active"
               class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
-              >Mail Received Users</a
+              >Lunch summary</a
             >
           </li>
         </ul>
@@ -244,7 +252,7 @@
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/profile"
-          routerLinkActive="active"
+          routerLinkActive="nav-active"
         >
           <ng-icon name="ionPerson"></ng-icon>
           <span>Profile</span>
@@ -255,7 +263,7 @@
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/admin/settings"
-          routerLinkActive="active"
+          routerLinkActive="nav-active"
         >
           <ng-icon name="ionSettings"></ng-icon>
           <span>Settings</span>

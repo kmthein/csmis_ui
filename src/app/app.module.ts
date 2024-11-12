@@ -97,6 +97,9 @@ import { SuggestionCreateComponent } from './components/suggestion/suggestion-cr
 import { NotiComponent } from './noti/noti.component';
 import { SettingComponent } from './page/admin/setting/setting.component';
 import { DatePipe } from '@angular/common';
+import { LunchSummaryPieComponent } from './components/chart/lunch-summary-pie/lunch-summary-pie.component';
+import { AgChartsModule } from 'ag-charts-angular';
+import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +147,8 @@ import { DatePipe } from '@angular/common';
     SuggestionCreateComponent,
     NotiComponent,
     SettingComponent,
+    LunchSummaryPieComponent,
+    LunchSummaryComponent,
   ],
   imports: [
     BrowserModule,
@@ -155,6 +160,7 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     AgGridModule,
+    AgChartsModule,
     HttpClientModule,
     DateFnsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Initialize Firebase

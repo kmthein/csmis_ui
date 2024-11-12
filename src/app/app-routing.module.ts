@@ -31,6 +31,7 @@ import { ForcePasswordChangeComponent } from './password/force-password-change/f
 import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
 import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
 import { SettingComponent } from './page/admin/setting/setting.component';
+import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,7 @@ const routes: Routes = [
         component: AddWeeklyMenuComponent,
       },
       { path: 'report/mail-on', component: MailOnUserComponent },
+      { path: 'report/lunch-summary', component: LunchSummaryComponent },
       { path: 'settings', component: SettingComponent },
     ],
   },
