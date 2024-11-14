@@ -24,7 +24,10 @@ export class LunchSummaryPieComponent {
   }
 
   getMonthlyLunchPie() {
-    this.reportService.getMonthlySummaryPie().subscribe({
+    const formData = new FormData();
+    formData.append('month', (new Date().getMonth() + 1).toString());
+    formData.append('year', new Date().getFullYear().toString());
+    this.reportService.getMonthlySummaryPie(formData).subscribe({
       next: (response) => {
         this.chartOptions = {
           data: this.transformData(response),
@@ -40,7 +43,6 @@ export class LunchSummaryPieComponent {
                 fontSize: 14,
               },
             },
-            
           ],
           title: {
             text: 'Monthly Lunch Summary',
@@ -50,8 +52,8 @@ export class LunchSummaryPieComponent {
             item: {
               label: {
                 fontSize: 14, // Adjust font size for legend items
-              }
-            }
+              },
+            },
           },
         };
       },
@@ -63,10 +65,10 @@ export class LunchSummaryPieComponent {
       registerAndEat: 'Register and eat',
       registerNotEat: 'Register, not eat',
       unregisterButEat: 'Unregister but eat',
-  };
+    };
 
     return Object.keys(response).map((key) => ({
-      label: keyMappings[key] || key, 
+      label: keyMappings[key] || key,
       value: response[key],
     }));
   }

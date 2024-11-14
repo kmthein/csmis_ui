@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { ReportService } from '../../services/report/report.service';
 import { error } from 'jquery';
 import { ActionButtonRendererComponent } from '../../shared/component/action-button-renderer/action-button-renderer.component';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-mail-on-user',
@@ -37,8 +38,12 @@ export class MailOnUserComponent {
     const fileName = `mail_on_report_${new Date().getTime()}`;
     const templatePath = 'mail-user';
     let fileType: any = type;
+    const params = new HttpParams()
+    .set('templatePath', templatePath)
+    .set('fileType', fileType)
+    .set('fileName', fileName);
     this.reportService
-      .generateReport(templatePath, fileType, fileName)
+      .generateReport(params)
       .subscribe({
         next: (response) => {
           const blob = new Blob([response], {

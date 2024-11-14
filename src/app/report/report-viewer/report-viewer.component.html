@@ -1,5 +1,4 @@
 <div class="report-viewer">
-  <button (click)="viewReport()" class="btn btn-primary">View Report</button>
   <button (click)="downloadPdf()" class="btn btn-secondary">Download PDF</button>
 
   <div *ngIf="!loading && pdfUrl; else loadingTemplate">

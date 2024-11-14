@@ -41,6 +41,7 @@ import {
   ionReturnDownBackSharp,
   ionReturnUpBackOutline,
   ionBuild,
+  ionSearch,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -192,7 +193,8 @@ import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.comp
       ionCreateSharp,
       ionArrowBack,
       ionReturnUpBackOutline,
-      ionBuild
+      ionBuild,
+      ionSearch
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,
