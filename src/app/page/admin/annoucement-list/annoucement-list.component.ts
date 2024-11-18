@@ -4,7 +4,7 @@ import { initFlowbite } from 'flowbite';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { User } from '../../../models/user';
 import { AuthService } from '../../../services/auth.service';
-import { AnnoucementService } from '../../../services/annoucement/annoucement.service';
+import { AnnouncementService } from '../../../services/announcement/announcement.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 
@@ -34,7 +34,7 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private announceService: AnnoucementService,
+    private announceService: AnnouncementService,
     private storage: AngularFireStorage,
     private renderer: Renderer2
   ) {}

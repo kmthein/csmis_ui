@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/user';
 import { initFlowbite } from 'flowbite';
-import { AnnoucementService } from '../../../services/annoucement/annoucement.service';
+import { AnnouncementService } from '../../../services/announcement/announcement.service';
 import { UserService } from '../../../services/user/user.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class DashboardComponent {
     this.restaurantName = name;
   }
 
-  constructor(private router: Router, private authService: AuthService, private announceService: AnnoucementService, private userService: UserService) {}
+  constructor(private router: Router, private authService: AuthService, private announceService: AnnouncementService, private userService: UserService) {}
 
   ngOnInit() {
     this.authService.currentUser$.subscribe((user) => {

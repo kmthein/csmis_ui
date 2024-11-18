@@ -90,6 +90,7 @@ import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
 import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
 import { NotiComponent } from './noti/noti.component';
+import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { NotiComponent } from './noti/noti.component';
     AdminDashboardComponent,
     SuggestionCreateComponent,
     NotiComponent,
+    FeedbackFormComponent
   ],
   imports: [
     BrowserModule,

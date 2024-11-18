@@ -15,6 +15,7 @@ export class AdminGuard implements CanActivate {
         return true;
       }
     }
+    
     const user = this.authService.getUser();
     console.log(user);
 
