@@ -11,19 +11,26 @@ export class ReportService {
   constructor(private http: HttpClient) {}
 
   generateReport(
-    templatePath: any,
-    fileType: any,
-    fileName: any
+    params: HttpParams
   ): Observable<Blob> {
-    const params = new HttpParams()
-      .set('templatePath', templatePath)
-      .set('fileType', fileType)
-      .set('fileName', fileName);
-
     return this.http.get(`${this.apiUrl}/generate`, {
       params: params,
       responseType: 'blob', // Expecting a binary file (PDF or Excel)
     });
+  }
+
+  getLunchSummaryPie(date: string) {
+    const formData = new FormData();
+    formData.append("date", date);
+    return this.http.put(`${this.apiUrl}/lunch-summary`, formData);
+  }
+  
+  getLunchSummaryBetween(form: FormData) {
+    return this.http.put(`${this.apiUrl}/summary-between`, form);
+  }
+
+  getMonthlySummaryPie(form: FormData) {
+    return this.http.put(`${this.apiUrl}/monthly-summary`, form);
   }
 
   getMailOnUsers() {

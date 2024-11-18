@@ -1,31 +1,35 @@
-<div class="container" style="margin-top:10%">
-  <h2>OTP Verification</h2>
-  <p>Enter the OTP sent to your email: <strong>{{ email }}</strong></p>
-
-  <div class="otp-inputs">
-    <input type="text" maxlength="1" id="otp1" [(ngModel)]="otpDigits[0]" class="otp-input"
-      (input)="onInputChange($event, 0)" (keyup)="moveFocus($event, 'otp2')" />
-    <input type="text" maxlength="1" id="otp2" [(ngModel)]="otpDigits[1]" class="otp-input"
-      (input)="onInputChange($event, 1)" (keyup)="moveFocus($event, 'otp3')" />
-    <input type="text" maxlength="1" id="otp3" [(ngModel)]="otpDigits[2]" class="otp-input"
-      (input)="onInputChange($event, 2)" (keyup)="moveFocus($event, 'otp4')" />
-    <input type="text" maxlength="1" id="otp4" [(ngModel)]="otpDigits[3]" class="otp-input"
-      (input)="onInputChange($event, 3)" (keyup)="moveFocus($event, 'otp5')" />
-    <input type="text" maxlength="1" id="otp5" [(ngModel)]="otpDigits[4]" class="otp-input"
-      (input)="onInputChange($event, 4)" (keyup)="moveFocus($event, 'otp6')" />
-    <input type="text" maxlength="1" id="otp6" [(ngModel)]="otpDigits[5]" class="otp-input"
-      (input)="onInputChange($event, 5)" />
+<div class="flex justify-center items-center h-screen login">
+    <div class="container px-8 py-10" style="margin-top:10%">
+      <h3 class="text-center mb-3 text-[#444444]">OTP Verification</h3>
+      <p class="text-[#696969] text-sm text-center mb-6 leading-[1.6rem]">Enter the OTP sent to your email: <strong>{{ email }}</strong></p>
+    
+      <div class="otp-inputs">
+        <input type="text" maxlength="1" id="otp1" [(ngModel)]="otpDigits[0]" class="otp-input"
+          (input)="onInputChange($event, 0)" (keyup)="moveFocus($event, 'otp2')" />
+        <input type="text" maxlength="1" id="otp2" [(ngModel)]="otpDigits[1]" class="otp-input"
+          (input)="onInputChange($event, 1)" (keyup)="moveFocus($event, 'otp3')" />
+        <input type="text" maxlength="1" id="otp3" [(ngModel)]="otpDigits[2]" class="otp-input"
+          (input)="onInputChange($event, 2)" (keyup)="moveFocus($event, 'otp4')" />
+        <input type="text" maxlength="1" id="otp4" [(ngModel)]="otpDigits[3]" class="otp-input"
+          (input)="onInputChange($event, 3)" (keyup)="moveFocus($event, 'otp5')" />
+        <input type="text" maxlength="1" id="otp5" [(ngModel)]="otpDigits[4]" class="otp-input"
+          (input)="onInputChange($event, 4)" (keyup)="moveFocus($event, 'otp6')" />
+        <input type="text" maxlength="1" id="otp6" [(ngModel)]="otpDigits[5]" class="otp-input"
+          (input)="onInputChange($event, 5)" />
+      </div>
+    
+      <p *ngIf="timeLeft > 0" class="text-[#444444] text-sm text-center mb-6 leading-[1.6rem]">Time left: {{ timeLeft }} seconds</p>
+      <p *ngIf="timeLeft === 0" class="text-[#dd4d4d] text-sm text-center mb-6 leading-[1.6rem]">OTP expired. Please request a new one.</p>
+    
+      <button (click)="validateOTP()" class="btn btn-primary" [disabled]="timeLeft === 0">Verify OTP</button>
+    
+      <div *ngIf="successMessage" class="alert alert-success mt-3" role="alert">
+          {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+          {{ errorMessage }}
+      </div>
+    </div>
   </div>
 
-  <p *ngIf="timeLeft > 0">Time left: {{ timeLeft }} seconds</p>
-  <p *ngIf="timeLeft === 0" class="text-danger">OTP expired. Please request a new one.</p>
 
-  <button (click)="validateOTP()" class="btn btn-primary" [disabled]="timeLeft === 0">Verify OTP</button>
-
-  <div *ngIf="successMessage" class="alert alert-success mt-3" role="alert">
-      {{ successMessage }}
-  </div>
-  <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
-      {{ errorMessage }}
-  </div>
-</div>

@@ -27,6 +27,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@ng-icons/core": "^28.1.0",
     "@ng-icons/ionicons": "^29.5.1",
+    "ag-charts-angular": "^10.3.1",
+    "ag-charts-community": "^10.3.1",
     "ag-grid-angular": "^32.2.2",
     "ag-grid-community": "^32.2.2",
     "bootstrap": "^5.3.3",

@@ -27,9 +27,12 @@ import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component
 import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
+import { ForcePasswordChangeComponent } from './password/force-password-change/force-password-change.component';
 import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
 import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
 import { MeatListComponent } from './meat/meat-list/meat-list.component';
+import { SettingComponent } from './page/admin/setting/setting.component';
+import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 
 const routes: Routes = [
   {
@@ -79,6 +82,8 @@ const routes: Routes = [
       },
       { path: 'report/mail-on', component: MailOnUserComponent },
       { path: 'meats', component: MeatListComponent },
+      { path: 'report/lunch-summary', component: LunchSummaryComponent },
+      { path: 'settings', component: SettingComponent },
     ],
   },
   {
@@ -88,6 +93,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'otp-verification', component: OtpVerificationComponent },
+  { path: 'force-password/change', component: ForcePasswordChangeComponent },
 ];
 
 @NgModule({

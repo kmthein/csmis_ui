@@ -37,6 +37,11 @@ import {
   ionArrowDownRightBoxOutline,
   ionCreate,
   ionCreateSharp,
+  ionArrowBack,
+  ionReturnDownBackSharp,
+  ionReturnUpBackOutline,
+  ionBuild,
+  ionSearch,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -87,11 +92,17 @@ import { SafeUrlPipe } from './safe-url.pipe';
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
+import { ForcePasswordChangeComponent } from './password/force-password-change/force-password-change.component';
 import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
 import { NotiComponent } from './noti/noti.component';
 import { MeatListComponent } from './meat/meat-list/meat-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component';
+import { SettingComponent } from './page/admin/setting/setting.component';
+import { DatePipe } from '@angular/common';
+import { LunchSummaryPieComponent } from './components/chart/lunch-summary-pie/lunch-summary-pie.component';
+import { AgChartsModule } from 'ag-charts-angular';
+import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 
 @NgModule({
   declarations: [
@@ -134,11 +145,15 @@ import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component
     MailOnUserComponent,
     DoorAccessRecordComponent,
     AdminDashboardComponent,
+    ForcePasswordChangeComponent,
     SuggestionCreateComponent,
     NotiComponent,
     ModalComponent,
     MeatListComponent,
     AvoidMealComponent,
+    SettingComponent,
+    LunchSummaryPieComponent,
+    LunchSummaryComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -151,6 +166,7 @@ import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component
     FormsModule,
     ReactiveFormsModule,
     AgGridModule,
+    AgChartsModule,
     HttpClientModule,
     DateFnsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Initialize Firebase
@@ -180,6 +196,10 @@ import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component
       ionArrowDownRightBoxOutline,
       ionCreate,
       ionCreateSharp,
+      ionArrowBack,
+      ionReturnUpBackOutline,
+      ionBuild,
+      ionSearch
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,
@@ -221,7 +241,7 @@ import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component
       },
     }),
   ],
-  providers: [provideHttpClient(withInterceptors([authInterceptor]))],
+  providers: [provideHttpClient(withInterceptors([authInterceptor])), DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -10,6 +10,12 @@ export class LoginGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
+      const user = this.authService.getUser();
+      const hasDefaultPassword = user?.hasDefaultPassword;
+      if(hasDefaultPassword) {
+        this.router.navigate(['/force-password/change']);
+        return false;
+      }
       const isAdmin = this.authService.isAdmin();
       if (isAdmin) {
         this.router.navigate(['/admin']);

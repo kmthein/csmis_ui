@@ -12,11 +12,13 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   staffId: string = '';
   password: string = '';
+  isLoading: boolean = false;
   @Output() userLogged = new EventEmitter<User>();
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(form: NgForm) {
+    this.isLoading = true;
     const { staffId, password } = form.value;
     this.authService.login(staffId, password).subscribe({
       next: (response) => {
@@ -29,6 +31,7 @@ export class LoginComponent {
             this.router.navigate(['/']);
           }
         }
+        this.isLoading = false;
       },
     });
   }
