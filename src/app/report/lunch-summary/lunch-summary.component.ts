@@ -17,6 +17,8 @@ export class LunchSummaryComponent {
   currentSelect: any;
   month: string = "";
   year: string = "";
+  dataNotFound: boolean = false;
+  monthIndex: number = 0;
 
   constructor(private reportService: ReportService) {
     this.chartOptions = {
@@ -25,18 +27,28 @@ export class LunchSummaryComponent {
     };
   }
 
-  ngOnInit() {
+  dateSelect() {
     const date = new Date();
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
     const day = String(date.getDate() - 1).padStart(2, '0');
-
+    this.monthIndex = +month;
+    this.year = year.toString();
+    this.month = month.toString();
     const formattedDate = `${year}-${month}-${day}`;
     this.end = formattedDate;
+  }
+
+  ngOnInit() {
     this.currentSelect = 'daily';
-    this.reportService.getLunchSummaryPie(formattedDate).subscribe({
-      next: (response) => {
+    this.dateSelect();
+    this.reportService.getLunchSummaryPie(this.end).subscribe({
+      next: (response: any) => {
         console.log(response);
+        const { registerAndEat, registerNotEat, unregisterButEat } = response;
+        if(registerAndEat == 0 && registerNotEat == 0 && unregisterButEat == 0) {
+          this.dataNotFound = true;
+        }
         this.chartOptions = {
           data: this.transformData(response),
           series: [
@@ -82,7 +94,9 @@ export class LunchSummaryComponent {
   }
 
   selectOption(value: string) {
+    this.dateSelect();
     this.currentSelect = value;
+    this.getSummaryBetween();
   }
 
   months: string[] = [
@@ -144,6 +158,9 @@ export class LunchSummaryComponent {
         .set('fileName', fileName)
         .set('startDate', this.start)
         .set('endDate', this.end);
+    } else if (this.currentSelect == 'yearly') {
+      console.log("yearly");
+      
     }
     this.reportService.generateReport(params).subscribe({
       next: (response) => {
@@ -181,14 +198,19 @@ export class LunchSummaryComponent {
   }
 
   getSummaryBetween() {
+    this.dataNotFound = false;
     const formData = this.createFormData();
     const reportObservable = this.currentSelect === 'daily'
       ? this.reportService.getLunchSummaryPie(this.end)
-      : this.currentSelect == 'monthly' ? this.reportService.getMonthlySummaryPie(formData) : this.reportService.getLunchSummaryBetween(formData);
+      : this.currentSelect == 'monthly' ? this.reportService.getMonthlySummaryPie(formData) : this.currentSelect == 'yearly' ? this.reportService.getYearlySummaryPie(formData) : this.reportService.getLunchSummaryBetween(formData);
 
     reportObservable.subscribe({
-      next: (response) => {
+      next: (response: any) => {
         console.log(response);
+        const { registerAndEat, registerNotEat, unregisterButEat } = response;
+        if(registerAndEat == 0 && registerNotEat == 0 && unregisterButEat == 0) {
+          this.dataNotFound = true;
+        }
         this.chartOptions = this.createChartOptions(response, this.currentSelect === 'daily' ? 'Daily Lunch Summary' : 'Lunch Summary');
       },
     });
@@ -203,6 +225,8 @@ export class LunchSummaryComponent {
       formData.append('endDate', this.end);
     } else if (this.currentSelect === 'monthly') {
       formData.append('month', this.month);
+      formData.append('year', this.year);
+    } else if (this.currentSelect == 'yearly') {
       formData.append('year', this.year);
     }
     return formData;
