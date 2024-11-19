@@ -6,10 +6,14 @@ import { Observable, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AnnoucementService {
+export class AnnouncementService {
   private url = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient, private toast: ToastrService) {}
+
+  getUnseenAnnouncementsByUserId(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.url}/announcements/unseen/${userId}`);
+  }
 
   getAllAnnouncements(): Observable<any> {
     return this.http.get<any>(`${this.url}/announcements`);

@@ -103,6 +103,7 @@ import { DatePipe } from '@angular/common';
 import { LunchSummaryPieComponent } from './components/chart/lunch-summary-pie/lunch-summary-pie.component';
 import { AgChartsModule } from 'ag-charts-angular';
 import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
+import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
 
 @NgModule({
   declarations: [
@@ -154,6 +155,7 @@ import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.comp
     SettingComponent,
     LunchSummaryPieComponent,
     LunchSummaryComponent,
+    FeedbackFormComponent
   ],
   imports: [
     FontAwesomeModule,

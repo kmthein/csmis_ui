@@ -34,6 +34,7 @@ import { MeatListComponent } from './meat/meat-list/meat-list.component';
 import { SettingComponent } from './page/admin/setting/setting.component';
 import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 
+import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
 const routes: Routes = [
   {
     path: '',
@@ -50,7 +51,8 @@ const routes: Routes = [
         component: LunchComponent,
       },
       { path: 'reportViewer', component: ReportViewerComponent },
-      {path: 'suggest', component:SuggestionCreateComponent}
+      { path: 'suggest', component:SuggestionCreateComponent },
+      { path: 'feedback', component:FeedbackFormComponent}
     ],
   },
   {
@@ -64,6 +66,7 @@ const routes: Routes = [
       { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent },
       { path: 'announcement', component: AnnoucementListComponent },
+      { path: 'announcement/:id', component: AnnoucementListComponent },
       {
         path: 'menu',
         component: LunchComponent,

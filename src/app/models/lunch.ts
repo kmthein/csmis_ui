@@ -6,4 +6,5 @@ export interface Lunch {
     date: Date;           // Date in YYYY-MM-DD format
     adminId?: number;       // ID of the admin/user managing the lunch
     restaurantId?: number;  // ID of the associated restaurant
+    meats?: string[];  
   }

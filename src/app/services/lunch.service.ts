@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Lunch } from '../models/lunch';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +11,7 @@ export class LunchService {
   private apiUrl = 'http://localhost:8080/api/lunches'; // Adjust this to your API endpoint
 
   constructor(private http: HttpClient, private toast: ToastrService) {}
+
 
   addWeeklyLunch(formData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/weekly`, formData);
@@ -61,4 +62,23 @@ export class LunchService {
   deleteLunch(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getLunchByDate(date: string): Observable<Lunch> {
+    const params = new HttpParams().set('date', date);
+    return this.http.get<Lunch>(`${this.apiUrl}/date`, { params }).pipe(
+      tap({
+        next: (response) => {
+          // Log the backend response to the console
+          console.log('Lunch data:', response);
+        },
+        error: () => {
+          // Log the error to the console if the request fails
+          console.error(`Failed to load lunch for ${date}`);
+        },
+      })
+    );
+  }
+
+
+  
 }
