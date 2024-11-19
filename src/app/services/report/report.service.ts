@@ -32,6 +32,10 @@ export class ReportService {
   getMonthlySummaryPie(form: FormData) {
     return this.http.put(`${this.apiUrl}/monthly-summary`, form);
   }
+  
+  getYearlySummaryPie(form: FormData) {
+    return this.http.put(`${this.apiUrl}/yearly-summary`, form);
+  }
 
   getMailOnUsers() {
     return this.http.get(`${this.apiUrl}/mail-on`);

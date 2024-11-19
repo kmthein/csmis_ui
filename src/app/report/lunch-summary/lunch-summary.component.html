@@ -110,7 +110,7 @@
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[9px] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             (change)="onChangeMonth($event)"
           >
-            <option *ngFor="let month of months; let i = index;" [value]="i + 1">{{ month }}</option>
+            <option *ngFor="let month of months; let i = index;" [selected]="monthIndex == i + 1" [value]="i + 1">{{ month }}</option>
           </select>
         </div>
         <div
@@ -152,9 +152,9 @@
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-tl-lg rounded-bl-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             (change)="onChangeYear($event)"
           >
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
             <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
           </select>
         </div>
         <div
@@ -179,10 +179,12 @@
       </button>
     </form>
   </div>
-  <div class="my-8 h-[350px] flex justify-center">
+  <div class="my-8 h-[350px] flex justify-center items-center">
     <ag-charts
+      *ngIf="!dataNotFound"
       class="h-full w-full rounded-md"
       [options]="chartOptions"
     ></ag-charts>
+    <span *ngIf="dataNotFound">Data not found</span>
   </div>
 </div>
