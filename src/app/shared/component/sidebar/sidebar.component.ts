@@ -35,6 +35,19 @@ export class SidebarComponent {
     });
   }
 
+  closeAllSubmenu() {
+    this.isManagementSubMenuOpen = false;
+    this.isReportSubMenuOpen = false;
+  }
+
+  closeOtherSubmenu(type: string) {
+    if(type == "management") {
+      this.isReportSubMenuOpen = false;
+    } else if(type == "report") {
+      this.isManagementSubMenuOpen = false;
+    }
+  }
+
   openDrawer() {
     const drawer = document.getElementById('drawer-navigation');
     const backdrop = document.getElementById('drawer-backdrop');

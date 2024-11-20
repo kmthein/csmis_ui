@@ -148,7 +148,8 @@ export class LunchSummaryComponent {
         .set('templatePath', templatePath)
         .set('fileType', fileType)
         .set('fileName', fileName)
-        .set('reportDate', this.end);
+        .set('month', this.month)
+        .set('year', this.year);
     } else if (this.currentSelect == 'custom') {
       fileName = `lunch_summary_between_${new Date().getTime()}`;
       templatePath = 'lunch-summary-between';

@@ -61,7 +61,7 @@
       </a>
     </div>
     <div class="ml-8 text-[#707070]">
-      <div *ngIf="!isAdmin">
+      <div *ngIf="!isAdmin" (click)="closeAllSubmenu()">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/"
@@ -72,11 +72,11 @@
           <span>Dashboard</span>
         </a>
       </div>
-      <div *ngIf="isAdmin">
+      <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/admin"
-          routerLinkActive="active"
+          routerLinkActive="nav-active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
           <ng-icon name="ionHome"></ng-icon>
@@ -104,8 +104,8 @@
           <span>Announcement</span>
         </a>
       </div>
-      
-      <div *ngIf="isAdmin">
+
+      <div *ngIf="isAdmin" (click)="closeOtherSubmenu('management')">
         <!-- Management Main Item -->
         <button
           type="button"
@@ -194,13 +194,13 @@
               routerLinkActive="nav-active"
             >
               <ng-icon name="ionCard"></ng-icon>
-              <span>DoorLogs</span>
+              <span>Doorlog</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <div *ngIf="isAdmin">
+      <div *ngIf="isAdmin" (click)="closeOtherSubmenu('report')">
         <button
           type="button"
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
@@ -246,12 +246,13 @@
             >
           </li>
         </ul>
-     
-      <div>
+      </div>
+
+      <div *ngIf="isAdmin">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/admin/meats"
-          routerLinkActive="active"
+          routerLinkActive="nav-active"
         >
           <ng-icon name="ionPerson"></ng-icon>
           <span>Meats</span>
@@ -268,8 +269,8 @@
           <span>Profile</span>
         </a>
       </div>
-      
-      <div *ngIf="isAdmin">
+
+      <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/admin/settings"
@@ -279,8 +280,7 @@
           <span>Settings</span>
         </a>
       </div>
-      
     </div>
+    <div></div>
   </div>
-  <div></div>
 </div>
