@@ -35,6 +35,7 @@ import { SettingComponent } from './page/admin/setting/setting.component';
 import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 
 import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
+import { CreateVoucherComponent } from './components/payment-voucher/create-voucher/create-voucher.component';
 const routes: Routes = [
   {
     path: '',
@@ -86,6 +87,8 @@ const routes: Routes = [
       { path: 'report/mail-on', component: MailOnUserComponent },
       { path: 'meats', component: MeatListComponent },
       { path: 'report/lunch-summary', component: LunchSummaryComponent },
+
+      { path: 'create-voucher', component: CreateVoucherComponent },
       { path: 'settings', component: SettingComponent },
     ],
   },

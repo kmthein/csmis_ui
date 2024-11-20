@@ -42,6 +42,7 @@ import {
   ionReturnUpBackOutline,
   ionBuild,
   ionSearch,
+  ionCash,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -104,6 +105,7 @@ import { LunchSummaryPieComponent } from './components/chart/lunch-summary-pie/l
 import { AgChartsModule } from 'ag-charts-angular';
 import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
+import { CreateVoucherComponent } from './components/payment-voucher/create-voucher/create-voucher.component';
 
 @NgModule({
   declarations: [
@@ -155,7 +157,8 @@ import { FeedbackFormComponent } from './components/feedback/feedback-form/feedb
     SettingComponent,
     LunchSummaryPieComponent,
     LunchSummaryComponent,
-    FeedbackFormComponent
+    FeedbackFormComponent,
+    CreateVoucherComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -201,7 +204,8 @@ import { FeedbackFormComponent } from './components/feedback/feedback-form/feedb
       ionArrowBack,
       ionReturnUpBackOutline,
       ionBuild,
-      ionSearch
+      ionSearch,
+      ionCash
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

@@ -273,6 +273,17 @@
       <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/admin/create-voucher"
+          routerLinkActive="nav-active"
+        >
+          <ng-icon name="ionCash"></ng-icon>
+          <span>Payment</span>
+        </a>
+      </div>
+
+      <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/admin/settings"
           routerLinkActive="nav-active"
         >
