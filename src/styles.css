@@ -1,3 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+/* Custom font sizes and weights for h1 to h6 */
+h1 {
+  font-size: 2em;    /* 32px if the base font size is 16px */
+  font-weight: 700;  /* Bold */
+}
+
+h2 {
+  font-size: 1.5em;  /* 24px */
+  font-weight: 700;  /* Bold */
+}
+
+h3 {
+  font-size: 1.17em; /* 18.72px */
+  font-weight: 700;  /* Bold */
+}
+
+h4 {
+  font-size: 1em;    /* 16px */
+  font-weight: 700;  /* Bold */
+}
+
+h5 {
+  font-size: 0.83em; /* 13.28px */
+  font-weight: 700;  /* Bold */
+}
+
+h6 {
+  font-size: 0.67em; /* 10.72px */
+  font-weight: 700;  /* Bold */
+}
+
+.nav-active {
+  background-color: #e0f0ff; /* bg-[#E0F0FF] */
+  padding-top: 1rem; /* py-4 (16px) */
+  padding-bottom: 1rem; /* py-4 (16px) */
+  padding-right: 1rem; /* px-4 (16px) */
+  display: inline-flex; /* inline-flex */
+  width: 100%; /* w-full */
+  border-right-width: 4px; /* border-r-4 */
+  border-right-color: #336699; /* border-[#336699] */
+  font-weight: 600; /* font-semibold */
+  color: #336699; /* text-[#336699] */
+}
+select.dt-input {
+  padding-right: 20px !important;
+  padding-left: 10px !important;
+}
+.dt-search label {
+  font-size: 15px !important;
+}
+.login {
+  position: relative;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Optional: Adds a semi-transparent background */
+}
+.login input {
+  border-width: 0 0 1px 0;
+}
+.login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(../src/assets/Office.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5; /* Adjust the opacity value as needed */
+  z-index: -1; /* Ensure the background stays behind content */
+}
+.login-container {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+small {
+  color: #ff4444;
+}
+em {
+  font-style: italic;
+}
+.NgxEditor {
+  min-height: 100px;
+}
+.weekly-form input, textarea, select {
+  font-size: 14px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}

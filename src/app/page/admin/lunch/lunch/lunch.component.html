@@ -1,0 +1,31 @@
+<div>
+  <div class="flex justify-between items-center mb-3">
+    <h3 class="text-md font-semibold">Lunches List</h3>
+    <div
+      *ngIf="!menuAlreadyHave"
+      class="flex md:order-2 gap-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+    >
+      <button
+        type="button"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-1"
+        (click)="navigateAddWeeklyMenu()"
+      >
+        <ng-icon name="ionAddSharp" class="text-lg"></ng-icon>
+        Add Next Week
+      </button>
+    </div>
+  </div>
+  <div class="my-4">
+    <ag-grid-angular
+      style="width: 100%; height: 100vh"
+      class="ag-theme-alpine"
+      [rowData]="lunches"
+      [columnDefs]="colDefs"
+      [pagination]="pagination"
+      [paginationPageSize]="paginationPageSize"
+      [paginationPageSizeSelector]="paginationPageSizeSelector"
+    >
+    </ag-grid-angular>
+  </div>
+</div>
+<!-- <app-weekly-menu (restaurant)="onRestaurantChange($event)"></app-weekly-menu> -->

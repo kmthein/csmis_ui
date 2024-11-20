@@ -1,0 +1,30 @@
+@import "ckeditor5/ckeditor5.css";
+.ck-editor__editable_inline {
+  min-height: 300px; /* Set a minimum height */
+  width: 100%; /* Make the editor take up full width */
+  box-sizing: border-box; /* Ensure padding is included in width/height */
+}
+.full-width-editor {
+  width: 100vw; /* Full viewport width */
+  padding: 20px; /* Optional padding */
+  box-sizing: border-box;
+}
+.img_scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+/* Track */
+.img_scroll::-webkit-scrollbar-track {
+  background: #f7f7f7;
+}
+
+/* Handle */
+.img_scroll::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.img_scroll::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

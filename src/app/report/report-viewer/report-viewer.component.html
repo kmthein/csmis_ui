@@ -1,0 +1,13 @@
+<div class="report-viewer">
+  <button (click)="downloadPdf()" class="btn btn-secondary">Download PDF</button>
+
+  <div *ngIf="!loading && pdfUrl; else loadingTemplate">
+    <iframe [src]="pdfUrl | safeUrl" width="100%" height="600px"></iframe>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading">
+      <p>Loading report...</p>
+    </div>
+  </ng-template>
+</div>

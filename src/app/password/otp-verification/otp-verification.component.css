@@ -1,0 +1,57 @@
+.container {
+    max-width: 450px; /* Set a max width for the container */
+    margin: 50px auto; /* Center the container */
+    border: 2px solid rgb(105, 105, 104); /* Golden border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #ffffffe3; /* Light blue background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+
+h2 {
+    color: #333; /* Dark gray color for the heading */
+    text-align: center; /* Center the heading */
+}
+
+.otp-inputs {
+    display: flex; /* Use flexbox for OTP inputs */
+    justify-content: space-between; /* Space out the inputs */
+    margin: 20px 0; /* Add vertical margin */
+}
+
+.otp-input {
+    width: 50px; /* Set a fixed width for each input */
+    height: 50px; /* Set a fixed height for each input */
+    text-align: center; /* Center the text inside inputs */
+    font-size: 20px; /* Increase font size */
+    border: 2px solid rgb(156, 156, 156); /* Golden border for inputs */
+    border-radius: 5px; /* Rounded corners */
+    background-color: white; /* White background for inputs */
+    transition: border-color 0.3s; /* Smooth border color transition */
+}
+
+.otp-input:focus {
+    outline: none; /* Remove default outline */
+    border-color: dodgerblue; /* Change border color on focus */
+    box-shadow: 0 0 5px dodgerblue; /* Add shadow on focus */
+}
+
+.btn {
+    width: 100%; /* Full width for the button */
+    background-color: dodgerblue; /* Button background color */
+    color: white; /* White text for the button */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners for the button */
+    padding: 10px; /* Padding for the button */
+    font-size: 16px; /* Increase font size */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.alert {
+    margin-top: 15px; /* Space above alert boxes */
+}
