@@ -1,11 +1,12 @@
 <div
   class="relative cursor-pointer"
+  (click)="toggleDropdown()"
   id="dropdownNotificationButton"
-  data-dropdown-toggle="dropdownNotification"
 >
   <ng-icon name="ionNotifications" class="text-2xl"></ng-icon>
   <span
     class="bg-red-500 text-white rounded-full w-4 h-4 inline-flex justify-center items-center text-sm absolute bottom-5 left-4"
+    *ngIf="unreadCount > 0"
   >
     {{ unreadCount }}
   </span>
@@ -14,8 +15,8 @@
 <!-- Dropdown menu -->
 <div
   id="dropdownNotification"
-  class="z-20 hidden w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700"
-  aria-labelledby="dropdownNotificationButton"
+  [ngClass]="{ hidden: !isDropdownVisible }"
+  class="absolute z-20 top-[7rem] right-[7rem] w-[24rem] bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-800 dark:divide-gray-700"
 >
   <div
     class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white"
@@ -24,24 +25,30 @@
   </div>
 
   <div class="divide-y divide-gray-100 dark:divide-gray-700">
-    <ng-container *ngIf="unreadSuggestions.length > 0 || unreadAnnouncements.length > 0">
+    <ng-container *ngIf="suggestions.length > 0 || announcements.length > 0">
       <!-- Suggestions -->
-      <ng-container *ngIf="unreadSuggestions.length > 0">
-        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+      <ng-container *ngIf="suggestions.length > 0">
+        <!-- <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
           <strong>New Suggestions:</strong>
-        </div>
-        <div *ngFor="let suggestion of unreadSuggestions">
+        </div> -->
+        <div
+          [ngClass]="!suggestion.seen ? 'bg-[#E9EFF2]' : ''"
+          *ngFor="let suggestion of suggestions.slice(0, 7)"
+        >
           <a
-            (click)="navigateToSuggestionList()"
-            class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+            (click)="navigateToSuggestDetails(suggestion.id, suggestion.seen)"
+            class="flex px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <div class="w-full">
-              <div class="text-gray-900 font-semibold dark:text-white">
-               
+              <div class="text-gray-900 text-sm dark:text-gray-400 mb-2">
+                <span class="font-medium text-black">{{
+                  suggestion.username
+                }}</span>
+                has sent a suggestion.
               </div>
-              <div class="text-gray-500 text-sm dark:text-gray-400">
-                {{ suggestion.userName }} has sent a suggestion
-              </div>
+              <p class="text-gray-400 text-sm font-light">
+                {{ suggestion.createdAt | relativeTime }}
+              </p>
             </div>
           </a>
         </div>
@@ -68,7 +75,7 @@
     </ng-container>
 
     <a
-      routerLink=""
+      (click)="navigateToSuggestionList()"
       class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
     >
       <div class="inline-flex items-center">

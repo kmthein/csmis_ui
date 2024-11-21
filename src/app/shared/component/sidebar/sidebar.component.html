@@ -109,7 +109,7 @@
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/profile"
-          routerLinkActive="active"
+          routerLinkActive="nav-active"
         >
           <ng-icon name="ionPerson"></ng-icon>
           <span>Profile</span>
@@ -118,14 +118,14 @@
       <div *ngIf="!isAdmin">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
-          routerLink="/avoid" 
+          routerLink="/avoid"
           routerLinkActive="active"
         >
           <ng-icon name="ionPerson"></ng-icon>
           <span>avoid</span>
         </a>
       </div>
-      
+
       <div *ngIf="isAdmin">
         <!-- Management Main Item -->
         <button
@@ -218,7 +218,6 @@
               <span>Doorlog</span>
             </a>
           </li>
-
         </ul>
       </div>
 
@@ -300,6 +299,17 @@
         </a>
       </div>
 
+      <div *ngIf="!isAdmin">
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/suggest"
+          routerLinkActive="nav-active"
+        >
+          <ng-icon name="ionPerson"></ng-icon>
+          <span>Suggestion</span>
+        </a>
+      </div>
+
       <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
@@ -372,16 +382,15 @@
       <ng-icon name="ionPerson"></ng-icon>
       <span>Company_yearly</span>
     </a> -->
-    <a
-      class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
-      routerLink="/admin/payment"
-      routerLinkActive="active"
-    >
-      <ng-icon name="ionPerson"></ng-icon>
-      <span>payment</span>
-    </a>
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/admin/payment"
+          routerLinkActive="active"
+        >
+          <ng-icon name="ionPerson"></ng-icon>
+          <span>payment</span>
+        </a>
       </div>
-      
     </div>
     <div></div>
   </div>

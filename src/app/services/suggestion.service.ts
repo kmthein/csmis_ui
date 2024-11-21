@@ -4,16 +4,19 @@ import { Observable } from 'rxjs';
 import { Suggestion } from '../models/suggestion';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SuggestionService {
-
   private baseUrl = 'http://localhost:8080/api/suggestions';
-  
+
   constructor(private http: HttpClient) {}
 
   getUnseenSuggestionsByUserId(userId: number): Observable<Suggestion[]> {
     return this.http.get<Suggestion[]>(`${this.baseUrl}/unseen/${userId}`);
+  }
+
+  getSuggestionAndMakeSeen(id: number, form: FormData) {
+    return this.http.put(`${this.baseUrl}/${id}/seen`, form);
   }
 
   // Get all suggestions (Admin only)
