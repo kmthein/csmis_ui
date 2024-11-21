@@ -42,6 +42,7 @@ import {
   ionReturnUpBackOutline,
   ionBuild,
   ionSearch,
+  ionCash,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -97,14 +98,25 @@ import { SuggestionCreateComponent } from './components/suggestion/suggestion-cr
 import { NotiComponent } from './noti/noti.component';
 import { MeatListComponent } from './meat/meat-list/meat-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component';
 import { SettingComponent } from './page/admin/setting/setting.component';
 import { DatePipe } from '@angular/common';
 import { LunchSummaryPieComponent } from './components/chart/lunch-summary-pie/lunch-summary-pie.component';
 import { AgChartsModule } from 'ag-charts-angular';
 import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
+import { CreateVoucherComponent } from './components/payment-voucher/create-voucher/create-voucher.component';
 import { DepartmentCostComponent } from './report/department-cost/department-cost.component';
+import { DietaryPreferenceComponent } from './avoid-meal/dietary-preference/dietary-preference.component';
+import { WeeklyPaymentComponent } from './payments/weekly-payment/weekly-payment.component';
+import { MonthlyPaymentComponent } from './payments/monthly-payment/monthly-payment.component';
+import { YearlyPaymentComponent } from './payments/yearly-payment/yearly-payment.component';
+import { CompanyweeklyPaymentComponent } from './payments/companyweekly-payment/companyweekly-payment.component';
+import { CompanyMonthlyPaymentComponent } from './payments/company-monthly-payment/company-monthly-payment.component';
+import { CompanyYearlyPaymentComponent } from './payments/company-yearly-payment/company-yearly-payment.component';
+import { ViewPaymentComponent } from './payments/view-payment/view-payment.component';
+import { TotalWeeklyPaymentComponent } from './payments/total-weekly-payment/total-weekly-payment.component';
+import { TotalMonthlyPaymentComponent } from './payments/total-monthly-payment/total-monthly-payment.component';
+import { TotalYearlyPaymentComponent } from './payments/total-yearly-payment/total-yearly-payment.component';
 
 @NgModule({
   declarations: [
@@ -152,12 +164,23 @@ import { DepartmentCostComponent } from './report/department-cost/department-cos
     NotiComponent,
     ModalComponent,
     MeatListComponent,
-    AvoidMealComponent,
     SettingComponent,
     LunchSummaryPieComponent,
     LunchSummaryComponent,
     FeedbackFormComponent,
-    DepartmentCostComponent
+    CreateVoucherComponent,
+    DepartmentCostComponent,
+    DietaryPreferenceComponent,
+    WeeklyPaymentComponent,
+    MonthlyPaymentComponent,
+    YearlyPaymentComponent,
+    CompanyweeklyPaymentComponent,
+    CompanyMonthlyPaymentComponent,
+    CompanyYearlyPaymentComponent,
+    ViewPaymentComponent,
+    TotalWeeklyPaymentComponent,
+    TotalMonthlyPaymentComponent,
+    TotalYearlyPaymentComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -203,7 +226,8 @@ import { DepartmentCostComponent } from './report/department-cost/department-cos
       ionArrowBack,
       ionReturnUpBackOutline,
       ionBuild,
-      ionSearch
+      ionSearch,
+      ionCash,
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,
