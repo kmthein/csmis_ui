@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SettingService } from '../../../services/setting.service';
 import { DatePipe } from '@angular/common';
+import { AgChartOptions } from 'ag-charts-community';
+import { ReportService } from '../../../services/report/report.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,15 +17,146 @@ export class AdminDashboardComponent {
   lastRegisterDay: any;
   lastRegisterTime: any;
   isModalOpen: boolean = false;
+  month: string = "";
+  year: string = "";
+  dataNotFound: boolean = false;
+  monthIndex: number = 0;
+
+  public chartOptions: AgChartOptions;
 
   constructor(
     private settingService: SettingService,
-    private datePipe: DatePipe
-  ) {}
+    private datePipe: DatePipe,
+    private reportService: ReportService
+  ) {
+
+      this.chartOptions = {
+        title: {
+          text: `Monthly Cost Report`,
+        },
+        subtitle: {
+          text: "Cost Report By Department",
+        },
+        data: [
+          {
+            month: "February",
+            sales: 140,
+            hr: 85,
+            marketing: 95,
+            it: 115,
+            operations: 160,
+          },
+        ],
+        series: [
+          {
+            type: "bar",
+            xKey: "month",
+            yKey: "sales",
+            yName: "Sales",
+          },
+          {
+            type: "bar",
+            xKey: "month",
+            yKey: "hr",
+            yName: "HR",
+          },
+          {
+            type: "bar",
+            xKey: "month",
+            yKey: "marketing",
+            yName: "Marketing",
+          },
+          {
+            type: "bar",
+            xKey: "month",
+            yKey: "it",
+            yName: "IT",
+          },
+          {
+            type: "bar",
+            xKey: "month",
+            yKey: "operations",
+            yName: "Operations",
+          },
+        ],
+      };
+  }
+
+  dateSelect() {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const day = String(date.getDate() - 1).padStart(2, '0');
+    this.monthIndex = +month;
+    this.year = year.toString();
+    this.month = month.toString();
+    const formattedDate = `${year}-${month}-${day}`;
+  }
 
   ngOnInit() {
     this.getSetting();
+    this.dateSelect();
+    this.getCurrentMonthCostByDepartment();
   }
+
+  getCurrentMonthCostByDepartment() {
+    const form = new FormData();
+    form.append("month", this.month);
+    this.reportService.getLunchCostBarChart(form).subscribe((res: any) => {
+      console.log(res);
+
+      const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+    
+      res.forEach((row: any) => {
+        const monthNumber = parseInt(row.month, 10);
+        row.month = monthNames[monthNumber - 1];
+      });
+      
+      // Restructure data by month
+      const groupedData: { [key: string]: any } = {};
+      res.forEach((row: any) => {
+        const month = row.month;
+        const department = row.departmentName;
+        const cost = row.totalCost;
+    
+        if (!groupedData[month]) {
+          groupedData[month] = { month };
+        }
+        groupedData[month][department] = cost;
+      });
+    
+      // Convert grouped data to array format for the chart
+      const chartData = Object.values(groupedData);
+    
+      // Extract unique department names
+      const departments = Array.from(
+        new Set(res.map((row: any) => row.departmentName))
+      );
+    
+      // Create dynamic series
+      const series: any = departments.map((department) => ({
+        type: "bar",
+        xKey: "month",
+        yKey: department,
+        yName: department,
+      }));
+    
+      // Set the chart options
+      this.chartOptions = {
+        title: {
+          text: `Monthly Cost Report`,
+        },
+        subtitle: {
+          text: "Cost Report By Department",
+        },
+        data: chartData,
+        series: series,
+      };
+    });
+  } 
 
   openModal() {
     this.isModalOpen = true;

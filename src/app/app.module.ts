@@ -104,6 +104,7 @@ import { LunchSummaryPieComponent } from './components/chart/lunch-summary-pie/l
 import { AgChartsModule } from 'ag-charts-angular';
 import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
+import { DepartmentCostComponent } from './report/department-cost/department-cost.component';
 
 @NgModule({
   declarations: [
@@ -155,7 +156,8 @@ import { FeedbackFormComponent } from './components/feedback/feedback-form/feedb
     SettingComponent,
     LunchSummaryPieComponent,
     LunchSummaryComponent,
-    FeedbackFormComponent
+    FeedbackFormComponent,
+    DepartmentCostComponent
   ],
   imports: [
     FontAwesomeModule,

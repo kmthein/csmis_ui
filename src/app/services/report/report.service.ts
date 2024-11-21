@@ -19,6 +19,10 @@ export class ReportService {
     });
   }
 
+  getLunchCostBarChart(formData: FormData) {
+    return this.http.put(`${this.apiUrl}/lunch-cost`, formData);
+  }
+
   getLunchSummaryPie(date: string) {
     const formData = new FormData();
     formData.append("date", date);
