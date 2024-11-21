@@ -106,6 +106,7 @@ import { AgChartsModule } from 'ag-charts-angular';
 import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
 import { CreateVoucherComponent } from './components/payment-voucher/create-voucher/create-voucher.component';
+import { DepartmentCostComponent } from './report/department-cost/department-cost.component';
 
 @NgModule({
   declarations: [
@@ -158,7 +159,8 @@ import { CreateVoucherComponent } from './components/payment-voucher/create-vouc
     LunchSummaryPieComponent,
     LunchSummaryComponent,
     FeedbackFormComponent,
-    CreateVoucherComponent
+    CreateVoucherComponent,
+    DepartmentCostComponent
   ],
   imports: [
     FontAwesomeModule,
