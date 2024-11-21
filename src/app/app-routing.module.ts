@@ -27,8 +27,15 @@ import { EditLunchComponent } from './page/admin/edit-lunch/edit-lunch.component
 import { ReportViewerComponent } from './report/report-viewer/report-viewer.component';
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
+import { ForcePasswordChangeComponent } from './password/force-password-change/force-password-change.component';
 import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
+import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
+import { MeatListComponent } from './meat/meat-list/meat-list.component';
+import { SettingComponent } from './page/admin/setting/setting.component';
+import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 
+import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
+import { DepartmentCostComponent } from './report/department-cost/department-cost.component';
 const routes: Routes = [
   {
     path: '',
@@ -45,6 +52,8 @@ const routes: Routes = [
         component: LunchComponent,
       },
       { path: 'reportViewer', component: ReportViewerComponent },
+      { path: 'suggest', component:SuggestionCreateComponent },
+      { path: 'feedback', component:FeedbackFormComponent}
     ],
   },
   {
@@ -58,6 +67,7 @@ const routes: Routes = [
       { path: 'staff/new', component: AddStaffComponent },
       { path: 'staff/edit/:id', component: EditStaffComponent },
       { path: 'announcement', component: AnnoucementListComponent },
+      { path: 'announcement/:id', component: AnnoucementListComponent },
       {
         path: 'menu',
         component: LunchComponent,
@@ -74,7 +84,11 @@ const routes: Routes = [
         path: 'menu/add-weekly',
         component: AddWeeklyMenuComponent,
       },
+      { path: 'meats', component: MeatListComponent },
+      { path: 'settings', component: SettingComponent },
       { path: 'report/mail-on', component: MailOnUserComponent },
+      { path: 'report/lunch-summary', component: LunchSummaryComponent },
+      { path: 'report/department-cost', component: DepartmentCostComponent },
     ],
   },
   {
@@ -84,6 +98,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'otp-verification', component: OtpVerificationComponent },
+  { path: 'force-password/change', component: ForcePasswordChangeComponent },
 ];
 
 @NgModule({

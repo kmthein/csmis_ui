@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LunchService } from '../../../services/lunch.service';
 import { RestaurantService } from '../../../services/admin/restaurant.service';
 import { error } from 'jquery';
+import { SettingService } from '../../../services/setting.service';
 
 @Component({
   selector: 'app-add-weekly-menu',
@@ -26,7 +27,8 @@ export class AddWeeklyMenuComponent {
     private holidayService: HolidayService,
     private router: Router,
     private lunchService: LunchService,
-    private restaurantService: RestaurantService
+    private restaurantService: RestaurantService,
+    private settingService: SettingService
   ) {
     this.today = new Date();
   }
@@ -34,12 +36,12 @@ export class AddWeeklyMenuComponent {
   ngOnInit() {
     this.loadPublicHolidays();
     this.getAllRestaurants();
+    this.getSettings();
   }
 
   getAllRestaurants() {
     this.restaurantService.getAllRestaurants().subscribe({
       next: (res) => {
-        console.log(res);
         this.restaurants = res;
       },
       error: (error) => {
@@ -70,6 +72,14 @@ export class AddWeeklyMenuComponent {
     }
 
     return nextWeekDates;
+  }
+
+  getSettings() {
+    this.settingService.getSettings().subscribe((data: any) => {
+      console.log(data);
+      this.rate = data?.companyRate;
+      this.price = data?.currentLunchPrice;
+    })
   }
 
   isPublicHoliday(date: Date): boolean {

@@ -21,6 +21,8 @@ export class WeeklyMenuComponent {
   getCurrentWeekMenu() {
     this.lunchService.getWeeklyLunch().subscribe({
       next: (response) => {
+        console.log(response);
+        
         this.restaurant.emit(response[response.length - 1].restaurantName);
         this.weeklyMenu = response.map((data: any) => {
           return {

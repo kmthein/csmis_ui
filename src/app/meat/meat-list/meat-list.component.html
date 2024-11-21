@@ -1,0 +1,67 @@
+<div class="container">
+  <div><h2>Meat List</h2>
+    <button class="btn btn-success mb-3" (click)="onCreateMeat()">
+      <fa-icon [icon]="faPlus"></fa-icon> Create Meat
+    </button>
+  </div>
+
+  
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <table class="table table-striped" *ngIf="meats.length > 0">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let meat of meats; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ meat.name }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="onEditMeat(meat)">
+            <fa-icon [icon]="faEdit"></fa-icon> Edit
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="onDeleteMeat(meat.id)">
+            <fa-icon [icon]="faTrash"></fa-icon> Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No Meats Found Message -->
+  <div *ngIf="meats.length === 0 && !errorMessage" class="alert alert-info">
+    No meats found.
+  </div>
+
+  <!-- Edit Meat Modal -->
+  <div class="modal fade" id="editMeatModal" tabindex="-1" aria-labelledby="editMeatModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editMeatModalLabel">{{ isEditMode ? 'Edit Meat' : 'Create Meat' }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="meatName" class="form-label">Meat Name</label>
+              <input type="text" class="form-control" id="meatName" [(ngModel)]="selectedMeat.name" name="meatName" required>
+            </div>
+          </form>
+          <p *ngIf="successMessage" class="text-success">{{ successMessage }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="saveMeat()">{{ isEditMode ? 'Save changes' : 'Create Meat' }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

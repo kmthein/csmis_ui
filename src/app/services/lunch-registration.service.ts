@@ -29,6 +29,8 @@ deleteUserSelectedDate(userId: number, date: Date): Observable<any> {
 updateLunchRegistration(userId: number, registrationDto: LunchRegistrationDTO): Observable<any> {
   return this.http.put(`${this.apiUrl}/${userId}`, registrationDto);
 }
-  
+updateLunchRegistrationForNextMonth(userId: number, registrationDto: LunchRegistrationDTO): Observable<any> {
+  return this.http.put<any>(`${this.apiUrl}/api/lunch/update-next-month/${userId}`, registrationDto);
+}
   
 }

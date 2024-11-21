@@ -15,6 +15,10 @@ export class ForgotPasswordComponent {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  navgiateBack() {
+    this.router.navigate([`/login`])
+  }
+
   onSubmit() {
     const apiUrl = 'http://localhost:8080/api/forgot-password';
     this.isLoading = true;

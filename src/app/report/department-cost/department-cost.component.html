@@ -1,0 +1,191 @@
+<div class="flex justify-between items-center mb-3">
+    <h3 class="text-md font-semibold">Total Cost Report By Department</h3>
+    <div
+      class="flex md:order-2 gap-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative"
+    >
+      <button
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-2"
+        (click)="toggleDropdown()"
+      >
+        <ng-icon name="ionArrowDownRightBoxOutline" class="text-lg"></ng-icon>
+        Export
+      </button>
+      <!-- Dropdown menu -->
+      <div
+        *ngIf="dropdownOpen"
+        class="z-10 absolute top-[3rem] right-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+      >
+        <ul
+          class="py-2 text-sm text-gray-700 dark:text-gray-200"
+          aria-labelledby="dropdownDefaultButton"
+        >
+          <li (click)="exportReport('pdf')" class="cursor-pointer">
+            <a
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >Export as PDF</a
+            >
+          </li>
+          <li (click)="exportReport('excel')" class="cursor-pointer">
+            <a
+              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >Export as excel</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="p-6 bg-white rounded-lg shadow-md">
+    <div class="flex justify-between items-center mb-4">
+      <div class="flex gap-7">
+        <span
+          class="h-8 px-1 cursor-pointer hover:text-[#7e7e7e]"
+          [ngClass]="
+            currentSelect == 'daily'
+              ? 'font-semibold border-b-[3px] border-[#336699]'
+              : 'text-gray-400'
+          "
+          (click)="selectOption('daily')"
+          >Daily</span
+        >
+        <span
+          class="h-8 cursor-pointer hover:text-[#7e7e7e]"
+          [ngClass]="
+            currentSelect == 'monthly'
+              ? 'font-semibold border-b-[3px] border-[#336699]'
+              : 'text-gray-400'
+          "
+          (click)="selectOption('monthly')"
+          >Monthly</span
+        >
+        <span
+          class="h-8 cursor-pointer hover:text-[#7e7e7e]"
+          [ngClass]="
+            currentSelect == 'yearly'
+              ? 'font-semibold border-b-[3px] border-[#336699]'
+              : 'text-gray-400'
+          "
+          (click)="selectOption('yearly')"
+          >Yearly</span
+        >
+        <span
+          class="h-8 cursor-pointer hover:text-[#7e7e7e]"
+          [ngClass]="
+            currentSelect == 'custom'
+              ? 'font-semibold border-b-[3px] border-[#336699]'
+              : 'text-gray-400'
+          "
+          (click)="selectOption('custom')"
+          >Custom</span
+        >
+      </div>
+      <form
+        (ngSubmit)="getSummaryBetween()"
+        #dateForm="ngForm"
+        class="flex items-center"
+      >
+        <div id="date-range-picker" class="flex items-center">
+          <span
+            *ngIf="currentSelect == 'daily'"
+            class="mx-2 text-gray-500 text-sm"
+            >Select day:</span
+          >
+          <span
+            *ngIf="currentSelect == 'custom'"
+            class="mx-2 text-gray-500 text-sm"
+            >Select from:</span
+          >
+          <span
+            *ngIf="currentSelect == 'yearly'"
+            class="mx-2 text-gray-500 text-sm"
+            >Select year:</span
+          >
+          <span
+            *ngIf="currentSelect == 'monthly'"
+            class="mx-2 text-gray-500 text-sm"
+            >Select month:</span
+          >
+          <div class="relative" *ngIf="currentSelect == 'monthly'">
+            <select
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[9px] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              (change)="onChangeMonth($event)"
+            >
+              <option *ngFor="let month of months; let i = index;" [selected]="monthIndex == i + 1" [value]="i + 1">{{ month }}</option>
+            </select>
+          </div>
+          <div
+            *ngIf="
+              currentSelect != 'daily' &&
+              currentSelect != 'yearly' &&
+              currentSelect != 'monthly'
+            "
+            class="relative"
+          >
+            <input
+              id="datepicker-range-start"
+              name="start"
+              [(ngModel)]="start"
+              type="date"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Select date start"
+            />
+          </div>
+          <span
+            *ngIf="
+              currentSelect != 'daily' &&
+              currentSelect != 'yearly' &&
+              currentSelect != 'monthly'
+            "
+            class="mx-2 text-gray-500 text-sm"
+            >to</span
+          >
+          <span
+            *ngIf="currentSelect == 'monthly'"
+            class="mx-2 text-gray-500 text-sm"
+            >Select year:</span
+          >
+          <div
+            class="relative"
+            *ngIf="currentSelect == 'yearly' || currentSelect == 'monthly'"
+          >
+            <select
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-tl-lg rounded-bl-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              (change)="onChangeYear($event)"
+            >
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+            </select>
+          </div>
+          <div
+            class="relative"
+            *ngIf="currentSelect != 'yearly' && currentSelect != 'monthly'"
+          >
+            <input
+              id="datepicker-range-end"
+              name="end"
+              [(ngModel)]="end"
+              type="date"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-tl-lg rounded-bl-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Select date end"
+            />
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="px-4 bg-[#336699] text-white rounded-tr-lg rounded-br-lg hover:bg-[#28537e] inline-flex items-center py-2.5"
+        >
+          <ng-icon name="ionSearch" class="text-white text-lg"></ng-icon>
+        </button>
+      </form>
+    </div>
+    <div class="my-8 h-[350px] flex justify-center items-center">
+      <ag-charts
+        *ngIf="!dataNotFound"
+        class="h-full w-full rounded-md"
+        [options]="chartOptions"
+      ></ag-charts>
+      <span *ngIf="dataNotFound">Data not found</span>
+    </div>
+  </div>
+  

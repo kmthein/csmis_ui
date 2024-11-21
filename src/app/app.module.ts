@@ -37,6 +37,11 @@ import {
   ionArrowDownRightBoxOutline,
   ionCreate,
   ionCreateSharp,
+  ionArrowBack,
+  ionReturnDownBackSharp,
+  ionReturnUpBackOutline,
+  ionBuild,
+  ionSearch,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -75,7 +80,6 @@ import { ForgotPasswordComponent } from './password/forgot-password/forgot-passw
 import { ResetPasswordComponent } from './password/reset-password/reset-password.component';
 import { OtpVerificationComponent } from './password/otp-verification/otp-verification.component';
 import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
-import { AvoidMeatComponent } from './meal/avoid-meat/avoid-meat.component';
 import { ModalComponent } from './modal/modal.component';
 import { ConfirmationModalComponent } from './shared/component/confirmation-modal/confirmation-modal.component';
 import { AddRestaurantComponent } from './page/admin/restaurant/add-restaurant/add-restaurant.component';
@@ -88,6 +92,19 @@ import { SafeUrlPipe } from './safe-url.pipe';
 import { MailOnUserComponent } from './report/mail-on-user/mail-on-user.component';
 import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
 import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dashboard.component';
+import { ForcePasswordChangeComponent } from './password/force-password-change/force-password-change.component';
+import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
+import { NotiComponent } from './noti/noti.component';
+import { MeatListComponent } from './meat/meat-list/meat-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component';
+import { SettingComponent } from './page/admin/setting/setting.component';
+import { DatePipe } from '@angular/common';
+import { LunchSummaryPieComponent } from './components/chart/lunch-summary-pie/lunch-summary-pie.component';
+import { AgChartsModule } from 'ag-charts-angular';
+import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
+import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
+import { DepartmentCostComponent } from './report/department-cost/department-cost.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +134,6 @@ import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dash
     ForgotPasswordComponent,
     ResetPasswordComponent,
     OtpVerificationComponent,
-    AvoidMeatComponent,
     ModalComponent,
     ConfirmationModalComponent,
     AddRestaurantComponent,
@@ -131,8 +147,20 @@ import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dash
     MailOnUserComponent,
     DoorAccessRecordComponent,
     AdminDashboardComponent,
+    ForcePasswordChangeComponent,
+    SuggestionCreateComponent,
+    NotiComponent,
+    ModalComponent,
+    MeatListComponent,
+    AvoidMealComponent,
+    SettingComponent,
+    LunchSummaryPieComponent,
+    LunchSummaryComponent,
+    FeedbackFormComponent,
+    DepartmentCostComponent
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
@@ -142,6 +170,7 @@ import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dash
     FormsModule,
     ReactiveFormsModule,
     AgGridModule,
+    AgChartsModule,
     HttpClientModule,
     DateFnsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Initialize Firebase
@@ -171,6 +200,10 @@ import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dash
       ionArrowDownRightBoxOutline,
       ionCreate,
       ionCreateSharp,
+      ionArrowBack,
+      ionReturnUpBackOutline,
+      ionBuild,
+      ionSearch
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,
@@ -212,7 +245,7 @@ import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dash
       },
     }),
   ],
-  providers: [provideHttpClient(withInterceptors([authInterceptor]))],
+  providers: [provideHttpClient(withInterceptors([authInterceptor])), DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

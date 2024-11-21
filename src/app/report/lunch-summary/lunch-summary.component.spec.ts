@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AvoidMeatComponent } from './avoid-meat.component';
+import { LunchSummaryComponent } from './lunch-summary.component';
 
-describe('AvoidMeatComponent', () => {
-  let component: AvoidMeatComponent;
-  let fixture: ComponentFixture<AvoidMeatComponent>;
+describe('LunchSummaryComponent', () => {
+  let component: LunchSummaryComponent;
+  let fixture: ComponentFixture<LunchSummaryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AvoidMeatComponent]
+      declarations: [LunchSummaryComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AvoidMeatComponent);
+    fixture = TestBed.createComponent(LunchSummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -41,6 +41,7 @@
             name="price"
             [(ngModel)]="price"
             required
+            disabled="true"
             class="block w-full bg-[#FCFCFC] border-0 rounded-sm read-only:bg-[#fcfcfc88]"
           />
           <!-- <div *ngIf="staffIdInput.invalid && staffIdInput.touched">
@@ -82,7 +83,7 @@
         </div>
       </div>
       <div class="w-full mb-6">
-        <label class="text-[#696969] mb-1 block text-sm">Company rate</label>
+        <label class="text-[#696969] mb-1 block text-sm">Company rate - {{ rate }}%</label>
         <div class="relative mb-6">
           <label for="labels-range-input" class="sr-only">Company rate</label>
           <input
@@ -93,6 +94,7 @@
             value="50"
             min="0"
             max="100"
+            disabled="true"
             class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
           />
           <span

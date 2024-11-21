@@ -16,6 +16,7 @@ export class LunchComponent implements OnInit {
   isModalOpen: boolean = false;
   isLoading: boolean = false;
   restaurantName: string = "";
+  menuAlreadyHave: boolean = false;
 
   // Function to handle the emitted restaurant name
   onRestaurantChange(name: string) {
@@ -61,11 +62,45 @@ export class LunchComponent implements OnInit {
     this.loadLunches();
   }
 
-  loadLunches() {
-    this.lunchService.getAllLunches().subscribe(data => {
-      this.lunches = data;
-    });
+  getDaysFromNextWeek(): Date[] {
+    const now = new Date();
+    const daysOfNextWeek: Date[] = [];
+    
+    // Calculate the upcoming week's dates (Monday to Friday only)
+    const daysToNextMonday = (8 - now.getDay()) % 7 || 7; // Next Monday
+    for (let i = 0; i < 7; i++) {
+      const day = new Date(now);
+      day.setDate(now.getDate() + daysToNextMonday + i);
+  
+      // Only include weekdays (Monday = 1, Friday = 5)
+      const dayOfWeek = day.getDay(); // 0 = Sunday, 6 = Saturday
+      if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+        daysOfNextWeek.push(day);
+      }
+    }
+    return daysOfNextWeek;
   }
+
+loadLunches() {
+  this.lunchService.getAllLunches().subscribe(data => {
+    this.lunches = data;
+
+    // Get all days of next week
+    const nextWeekDates = this.getDaysFromNextWeek();
+
+    const datesToAdd = nextWeekDates.filter(nextWeekDate => {
+      const isExisting = this.lunches.some((lunch: any) => {
+        // Assuming lunch.date is in "YYYY-MM-DD" format
+        if (new Date(lunch.date).toDateString() === nextWeekDate.toDateString()) {
+          this.menuAlreadyHave = true; 
+          return true; 
+        }
+        return false; 
+      });
+      return !isExisting; 
+    });
+  });
+}
 
   deleteLunch(id: number) {
     this.lunchService.deleteLunch(id).subscribe(() => {

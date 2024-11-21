@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class AuthService {
   private userSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.userSource.asObservable();
 
-  constructor(private http: HttpClient, private toast: ToastrService) {
+  constructor(private http: HttpClient, private toast: ToastrService, private router: Router) {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.userSource.next(JSON.parse(storedUser));
@@ -24,7 +25,6 @@ export class AuthService {
     const body = { staffId, password };
     return this.http.post<any>(`${this.url}/login`, body).pipe(
       tap((response) => {
-        console.log(response);
         const { token, userDetails } = response;
         if (token) {
           localStorage.setItem('token', token);
@@ -42,6 +42,22 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.userSource.next(null);
+  }
+
+  forcePasswordChange(form: FormData) {
+    return this.http.put<any>(`${this.url}/password-change`, form).pipe(
+      tap((response) => {
+        if(response.status == "200") {
+          this.toast.success(response.message);
+        } else {
+          this.toast.info(response.message);
+        }
+      })
+    );
+  }
+  getUserId(): number | null {
+    const user = this.userSource.getValue();
+    return user ? user.id : null; // Adjust based on your User model
   }
 
   getToken(): string | null {
