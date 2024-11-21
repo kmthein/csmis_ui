@@ -1,0 +1,21 @@
+<div>
+    <label for="department">Select Department:</label>
+    <select id="department" (change)="onDepartmentChange($event)">
+      <option [value]="null">All Departments</option>
+      <option *ngFor="let department of departments" [value]="department.id">
+        {{ department.name }}
+      </option>
+    </select>
+  
+  
+
+    <label for="year">Year:</label>
+    <input type="number" id="year" [(ngModel)]="selectedYear" (change)="onYearChange()" min="2000">
+  
+  
+  
+    <h3>Company Cost Report for {{ selectedYear }}</h3>
+    <p>Total Company Cost: {{ totalCompanyCost | currency }}</p>
+    <p>Registered Date Count: {{ registeredDateCount }}</p>
+  </div>
+  

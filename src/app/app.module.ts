@@ -43,6 +43,7 @@ import {
   ionBuild,
   ionSearch,
   ionCash,
+  ionCash,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';

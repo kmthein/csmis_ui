@@ -1,0 +1,210 @@
+<div class="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-md rounded-md">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Create Payment Voucher</h2>
+
+  <form [formGroup]="voucherForm" (ngSubmit)="onSubmit()">
+    <!-- General Fields -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label for="voucherNo" class="block text-sm font-medium text-gray-700 mb-2">
+          Voucher No
+        </label>
+        <input
+          id="voucherNo"
+          type="text"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          formControlName="voucherNo"
+          placeholder="Enter voucher number"
+        />
+      </div>
+
+      <div>
+        <label for="restaurantName" class="block text-sm font-medium text-gray-700 mb-2">
+          Restaurant Name
+        </label>
+        <input
+          id="restaurantName"
+          type="text"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          formControlName="restaurantName"
+          placeholder="Enter restaurant name"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label for="paymentDate" class="block text-sm font-medium text-gray-700 mb-2">
+          Payment Date
+        </label>
+        <input
+          id="paymentDate"
+          type="date"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          formControlName="paymentDate"
+        />
+      </div>
+
+      <div>
+        <label for="invoiceFor" class="block text-sm font-medium text-gray-700 mb-2">
+          Invoice For
+        </label>
+        <input
+          id="invoiceFor"
+          type="text"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          formControlName="invoiceFor"
+          placeholder="Enter invoice details"
+        />
+      </div>
+    </div>
+
+    <!-- Dynamic Table -->
+    <div class="overflow-x-auto mb-4">
+      <table class="w-full table-auto border-collapse border border-gray-300 text-sm text-left text-gray-700 shadow-md">
+        <thead class="bg-gray-100 text-gray-600">
+          <tr>
+            <th class="border border-gray-300 px-4 py-2">#</th>
+            <th class="border border-gray-300 px-4 py-2">Lunch Date</th>
+            <th class="border border-gray-300 px-4 py-2">Pax</th>
+            <th class="border border-gray-300 px-4 py-2">Price</th>
+            <th class="border border-gray-300 px-4 py-2">Amount</th>
+            <th class="border border-gray-300 px-4 py-2">Remarks</th>
+            <th class="border border-gray-300 px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="rows">
+          <tr
+            *ngFor="let row of rows.controls; let i = index"
+            [formGroupName]="i"
+            class="hover:bg-gray-50"
+          >
+            <td class="border border-gray-300 px-4 py-2 text-center">{{ i + 1 }}</td>
+
+            <!-- Lunch Date -->
+            <td class="border border-gray-300 px-4 py-2">
+              <input
+                type="date"
+                class="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                formControlName="lunchDate"
+              />
+            </td>
+
+            <!-- Pax -->
+            <td class="border border-gray-300 px-4 py-2">
+              <input
+                type="number"
+                class="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                formControlName="pax"
+                (input)="calculateAmount(i)"
+              />
+            </td>
+
+            <!-- Price -->
+            <td class="border border-gray-300 px-4 py-2">
+              <input
+                type="number"
+                class="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                formControlName="price"
+                (input)="calculateAmount(i)"
+              />
+            </td>
+
+            <!-- Amount -->
+            <td class="border border-gray-300 px-4 py-2">
+              <input
+                type="number"
+                class="w-full px-3 py-1 bg-gray-100 border border-gray-300 rounded-md focus:outline-none"
+                formControlName="amount"
+                readonly
+              />
+            </td>
+
+            <!-- Remark -->
+            <td class="border border-gray-300 px-4 py-2">
+              <input
+                type="text"
+                class="w-full px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                formControlName="remark"
+                placeholder="Remarks"
+              />
+            </td>
+
+            <!-- Actions -->
+            <td class="border border-gray-300 px-4 py-2 text-center">
+              <button
+                type="button"
+                class="text-red-600 hover:text-red-800"
+                (click)="removeRow(i)"
+              >
+                Remove
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Add Row Button -->
+    <div class="flex justify-between items-center mb-6">
+      <button
+        type="button"
+        class="bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50"
+        (click)="addRow()"
+      >
+        Add Row
+      </button>
+    </div>
+
+    <!-- Additional Fields -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div>
+        <label for="cashier" class="block text-sm font-medium text-gray-700 mb-2">
+          Cashier
+        </label>
+        <input
+          id="cashier"
+          type="text"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          formControlName="cashier"
+          placeholder="Enter cashier name"
+        />
+      </div>
+
+      <div>
+        <label for="receivedBy" class="block text-sm font-medium text-gray-700 mb-2">
+          Received By
+        </label>
+        <input
+          id="receivedBy"
+          type="text"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          formControlName="receivedBy"
+          placeholder="Enter recipient name"
+        />
+      </div>
+
+      <div>
+        <label for="approvedBy" class="block text-sm font-medium text-gray-700 mb-2">
+          Approved By
+        </label>
+        <input
+          id="approvedBy"
+          type="text"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          formControlName="approvedBy"
+          placeholder="Enter approver name"
+        />
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+      <button
+        type="submit"
+        class="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 focus:ring-2 focus:ring-green-400 focus:ring-opacity-50"
+      >
+        Create Voucher
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,16 +1,17 @@
 .calendar-container {
-  max-width: 400px; /* Adjust the width of the calendar */
+  width: 60%; /* Increased width for a wider calendar */
+  max-width: 1000px; /* Set a max-width to control its size on larger screens */
+  margin: 0 auto; /* Center the calendar on the page */
   border: 1px solid #ccc;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   overflow: hidden; /* To round corners */
 }
-
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 60px;
 }
 
 .calendar-title {
@@ -51,8 +52,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px; /* Adjust height for small boxes */
-  width: 40px; /* Adjust width for small boxes */
+  height: 70px; /* Adjust height for small boxes */
+  width: 70px; /* Adjust width for small boxes */
   border: 1px solid #ccc; /* Optional border */
   border-radius: 4px; /* Optional rounded corners */
   cursor: pointer; /* Change cursor to pointer on hover */
@@ -75,11 +76,17 @@
 
 .selected {
   background-color: #174572; /* Fill the entire box with blue when selected */
-  color: white; /* Change text color to white */
+  color: rgb(0, 0, 0); /* Change text color to white */
 }
 .selected:hover {
   background-color: #3a6fa3;
 }
+.day.past-weekend {
+  background-color: #FF6347; /* Red for past weekends */
+  color: #FFF;
+  pointer-events: none;
+}
+
 
 .register-box {
   align-items: center;
@@ -116,8 +123,70 @@
   background-color: #f0f0f0;  /* Light gray background for past days */
   color: #aaa;                /* Dimmed text color */
 }
-/* Modal Background */
-.modal {
+.day.selected {
+  background-color: #174572;
+  color: #000000;
+}
+.date-container {
+  display: flex;
+  flex-direction: column; /* Stack date and text vertically */
+  align-items: center;    /* Center-align content */
+}
+
+.date {
+  font-size: 1.2em;       /* Adjust font size as needed */
+}
+
+.registered-text {
+  font-size: 0.5em;            /* Smaller font for the badge */
+  color: white;                /* White text */
+  background-color: #6fe775;   /* Button-like blue background */
+  padding: 2px 6px;            /* Padding for button shape */
+  border-radius: 4px;          /* Rounded corners */
+  margin-top: 4px;             /* Space above the registered text */
+  display: inline-block;       /* Display as inline-block */
+  /* font-weight: bold;      Space between date and text */
+}
+.holiday-text {
+  font-size: 0.5em;            /* Smaller font for the badge */
+  color: white;                /* White text */
+  background-color: #6fe775;   /* Button-like blue background */
+  padding: 2px 6px;            /* Padding for button shape */
+  border-radius: 4px;          /* Rounded corners */
+  margin-top: 4px;             /* Space above the registered text */
+  display: inline-block;
+}
+
+/* .registered-text {
+  display: block;
+  font-size: 0.5em;
+  color: green; /* Customize the color as desired */
+  /* margin-top: 5px; */
+/* } */ 
+.day.weekend {
+  background-color: #ff593b7c; /* Red for weekends */
+  color: #000000;
+}
+
+.day.today {
+  border: 2px solid #358d02; /* Golden border for today */
+}
+
+.day.past-day {
+  background-color: #dad8d04b; /* Golden color */
+  color: #333;
+  pointer-events: none; /* Disable past days */
+}
+.day.public-holiday {
+  background-color: #Ffd700; /* Grey color for holidays */
+  color: #000000;
+  pointer-events: none;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}.modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,7 +235,6 @@
   background-color: #0056b3;
 }
 
-/* Meat Selection Buttons */
 .modal-content .meat-buttons {
   display: flex;
   justify-content: space-between;

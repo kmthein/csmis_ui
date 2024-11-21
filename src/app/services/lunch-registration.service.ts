@@ -32,5 +32,10 @@ updateLunchRegistration(userId: number, registrationDto: LunchRegistrationDTO): 
 updateLunchRegistrationForNextMonth(userId: number, registrationDto: LunchRegistrationDTO): Observable<any> {
   return this.http.put<any>(`${this.apiUrl}/api/lunch/update-next-month/${userId}`, registrationDto);
 }
-  
+getLunchDetails(userId: number): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/get-lunch-details/${userId}`);
+}
+saveUserCost(userHasLunch: any): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/saveUserCosts`, userHasLunch);
+}
 }

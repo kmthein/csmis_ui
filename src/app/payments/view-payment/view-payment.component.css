@@ -1,0 +1,101 @@
+nav {
+    background-color: #74726ea6; /* Light golden color */
+    color: white;
+    padding: 0.8rem 1.5rem; /* Slightly increased padding for better spacing */
+    border-radius: 6px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 900px; /* Adjusted for a larger but controlled width */
+    margin: 0 auto; /* Center the navbar */
+  }
+  
+  nav .flex {
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px; /* Adjusted gap between items */
+  }
+  
+  /* Buttons */
+  button {
+    background-color: #3a89f7; /* Light blue color */
+    color: white;
+    border: none;
+    padding: 8px 16px; /* More padding for larger buttons */
+    border-radius: 12px; /* Rounded buttons */
+    font-size: 1rem; /* Slightly larger font */
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 2px 5px rgba(0, 123, 255, 0.4); /* Subtle shadow */
+  }
+  
+  button:hover {
+    transform: translateY(-2px); /* Slight lift */
+    background-color: #7ab8f5; /* Darker light blue on hover */
+  }
+  
+  /* Dropdown container */
+  .relative {
+    position: relative;
+  }
+  
+  .relative ul {
+    display: none; /* Hidden by default */
+    background-color: white;
+    border: 1px solid #e2e8f0; /* Light gray border */
+    border-radius: 6px; /* Slightly rounded */
+    list-style-type: none;
+    margin: 0;
+    padding: 4px 0; /* Compact padding */
+    position: absolute;
+    z-index: 1000;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    width: 200px; /* Adjusted dropdown width */
+    left: 0;
+  }
+  
+  .relative:hover ul,
+  .relative:focus-within ul {
+    display: block; /* Show dropdown on hover or focus */
+  }
+  
+  /* Dropdown items */
+  .relative ul li {
+    padding: 8px 12px; /* Larger padding for dropdown items */
+    cursor: pointer;
+    font-size: 1rem; /* Adjust font size */
+    color: #333; /* Darker text color for readability */
+    font-weight: 500;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  
+  .relative ul li:hover {
+    background-color: #3a89f7; /* Light blue on hover */
+    color: white;
+  }
+  
+  /* Main container box */
+  .bg-white {
+    background: #f8fafc; /* Off-white for subtle contrast */
+    padding: 1rem; /* Standard padding */
+    border-radius: 8px; /* Slightly rounded */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 800px; /* Controlled width */
+    margin: 20px auto; /* Centered box with margin */
+  }
+  
+  h2 {
+    color: #1e293b; /* Dark navy */
+    font-size: 1.25rem; /* Slightly larger heading */
+    margin-bottom: 1rem; /* Adjusted spacing */
+    text-align: center;
+  }
+  
+  /* Additional spacing */
+  .mt-4 {
+    margin-top: 1.5rem; /* Adjusted spacing */
+  }
+  
+  .rounded-lg {
+    border-radius: 8px;
+  }
+  

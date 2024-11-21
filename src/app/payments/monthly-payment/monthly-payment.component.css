@@ -1,0 +1,99 @@
+/* General body styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container styling */
+div {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 2px solid #007bff; /* Blue border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #007bff; /* Blue heading */
+  margin-bottom: 1rem;
+}
+
+/* Label styling */
+label {
+  display: block;
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Select dropdown styling */
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #333;
+  border: 2px solid #007bff; /* Blue border */
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* Focused select dropdown */
+select:focus {
+  border-color: #0056b3; /* Darker blue for focus */
+  background-color: #ffffff;
+  outline: none;
+}
+
+/* Section headers */
+h3 {
+  font-size: 1.4rem;
+  color: #000000;
+  margin-top: 1.5rem;
+}
+
+/* Paragraphs */
+p {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Highlighted values */
+p[ngIf="totalCost"], p[ngIf="totalCostAllDepartments"] {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #28a745; /* Green for total cost */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  div {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  select {
+    font-size: 0.9rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}

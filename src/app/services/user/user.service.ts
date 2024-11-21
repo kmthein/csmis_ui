@@ -71,5 +71,7 @@ export class UserService {
   saveDietaryPreference(preference: DietaryPreference) {
     return this.http.post('http://localhost:8080/admin/api/users/saveDietaryPreference', preference, { responseType: 'text' });
 }
-
+getUserPreferences(userId: number): Observable<DietaryPreference> {
+  return this.http.get<DietaryPreference>(`${this.url}/users/preferences/${userId}`);
+}
 }
