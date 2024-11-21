@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class HolidayService {
-  private url = 'http://localhost:8080/api';
+  private url = 'http://localhost:8080/admin/api';
 
   constructor(private http: HttpClient) {}
 

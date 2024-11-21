@@ -91,7 +91,17 @@ import { SuggestionCreateComponent } from './components/suggestion/suggestion-cr
 import { NotiComponent } from './noti/noti.component';
 import { MeatListComponent } from './meat/meat-list/meat-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component';
+import { DietaryPreferenceComponent } from './avoid-meal/dietary-preference/dietary-preference.component';
+import { WeeklyPaymentComponent } from './payments/weekly-payment/weekly-payment.component';
+import { MonthlyPaymentComponent } from './payments/monthly-payment/monthly-payment.component';
+import { YearlyPaymentComponent } from './payments/yearly-payment/yearly-payment.component';
+import { CompanyweeklyPaymentComponent } from './payments/companyweekly-payment/companyweekly-payment.component';
+import { CompanyMonthlyPaymentComponent } from './payments/company-monthly-payment/company-monthly-payment.component';
+import { CompanyYearlyPaymentComponent } from './payments/company-yearly-payment/company-yearly-payment.component';
+import { ViewPaymentComponent } from './payments/view-payment/view-payment.component';
+import { TotalWeeklyPaymentComponent } from './payments/total-weekly-payment/total-weekly-payment.component';
+import { TotalMonthlyPaymentComponent } from './payments/total-monthly-payment/total-monthly-payment.component';
+import { TotalYearlyPaymentComponent } from './payments/total-yearly-payment/total-yearly-payment.component';
 
 @NgModule({
   declarations: [
@@ -138,7 +148,17 @@ import { AvoidMealComponent } from './avoid-meal/avoid-meal/avoid-meal.component
     NotiComponent,
     ModalComponent,
     MeatListComponent,
-    AvoidMealComponent,
+    DietaryPreferenceComponent,
+    WeeklyPaymentComponent,
+    MonthlyPaymentComponent,
+    YearlyPaymentComponent,
+    CompanyweeklyPaymentComponent,
+    CompanyMonthlyPaymentComponent,
+    CompanyYearlyPaymentComponent,
+    ViewPaymentComponent,
+    TotalWeeklyPaymentComponent,
+    TotalMonthlyPaymentComponent,
+    TotalYearlyPaymentComponent,
   ],
   imports: [
     FontAwesomeModule,

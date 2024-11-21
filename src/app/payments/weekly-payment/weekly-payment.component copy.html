@@ -1,0 +1,15 @@
+<div>
+  <label for="department">Select Department:</label>
+  <select id="department" (change)="onDepartmentChange($event)">
+    <option [value]="null">All Departments</option>
+    <option *ngFor="let department of departments" [value]="department.id">
+      {{ department.name }}
+    </option>
+  </select>
+</div>
+
+<div>
+  <h3>Weekly Payment Report</h3>
+  <p>Total Cost: {{ totalCost | currency }}</p>
+  <p>Registered Date Count: {{ registeredDateCount }}</p>
+</div>

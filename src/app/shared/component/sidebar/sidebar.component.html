@@ -117,6 +117,16 @@
           <span>Profile</span>
         </a>
       </div>
+      <div *ngIf="!isAdmin">
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/avoid" 
+          routerLinkActive="active"
+        >
+          <ng-icon name="ionPerson"></ng-icon>
+          <span>avoid</span>
+        </a>
+      </div>
       
       <div *ngIf="isAdmin">
         <!-- Management Main Item -->
@@ -210,6 +220,7 @@
               <span>DoorLogs</span>
             </a>
           </li>
+
         </ul>
       </div>
 
@@ -262,6 +273,67 @@
           <span>Meats</span>
         </a>
       </div>
+      <div>
+        <!-- <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          routerLink="/admin/weekly"
+          routerLinkActive="active"
+        >
+          <ng-icon name="ionPerson"></ng-icon>
+          <span>Weekly</span>
+        </a>
+        <a
+        class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+        routerLink="/admin/Company_weekly"
+        routerLinkActive="active"
+      >
+        <ng-icon name="ionPerson"></ng-icon>
+        <span>Company_weekly</span>
+      </a>
+        
+        <a
+        class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+        routerLink="/admin/monthly"
+        routerLinkActive="active"
+      >
+        <ng-icon name="ionPerson"></ng-icon>
+        <span>monthly</span>
+      </a>
+      <a
+      class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+      routerLink="/admin/Company_monthly"
+      routerLinkActive="active"
+    >
+      <ng-icon name="ionPerson"></ng-icon>
+      <span>Company_monthly</span>
+    </a>
+      
+      <a
+      class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+      routerLink="/admin/yearly"
+      routerLinkActive="active"
+    >
+      <ng-icon name="ionPerson"></ng-icon>
+      <span>Yearly</span>
+    </a>
+    <a
+      class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+      routerLink="/admin/Company_yearly"
+      routerLinkActive="active"
+    >
+      <ng-icon name="ionPerson"></ng-icon>
+      <span>Company_yearly</span>
+    </a> -->
+    <a
+      class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+      routerLink="/admin/payment"
+      routerLinkActive="active"
+    >
+      <ng-icon name="ionPerson"></ng-icon>
+      <span>payment</span>
+    </a>
+      </div>
+      
     </div>
   </div>
   <div></div>

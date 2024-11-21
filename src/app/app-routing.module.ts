@@ -30,6 +30,17 @@ import { AdminDashboardComponent } from './page/admin/admin-dashboard/admin-dash
 import { DoorAccessRecordComponent } from './page/admin/door-access-record/door-access-record.component';
 import { SuggestionCreateComponent } from './components/suggestion/suggestion-create/suggestion-create.component';
 import { MeatListComponent } from './meat/meat-list/meat-list.component';
+import { DietaryPreferenceComponent } from './avoid-meal/dietary-preference/dietary-preference.component';
+import { WeeklyPaymentComponent } from './payments/weekly-payment/weekly-payment.component';
+import { MonthlyPaymentComponent } from './payments/monthly-payment/monthly-payment.component';
+import { YearlyPaymentComponent } from './payments/yearly-payment/yearly-payment.component';
+import { CompanyweeklyPaymentComponent } from './payments/companyweekly-payment/companyweekly-payment.component';
+import { CompanyMonthlyPaymentComponent } from './payments/company-monthly-payment/company-monthly-payment.component';
+import { CompanyYearlyPaymentComponent } from './payments/company-yearly-payment/company-yearly-payment.component';
+import { ViewPaymentComponent } from './payments/view-payment/view-payment.component';
+import { TotalWeeklyPaymentComponent } from './payments/total-weekly-payment/total-weekly-payment.component';
+import { TotalYearlyPaymentComponent } from './payments/total-yearly-payment/total-yearly-payment.component';
+import { TotalMonthlyPaymentComponent } from './payments/total-monthly-payment/total-monthly-payment.component';
 
 const routes: Routes = [
   {
@@ -42,6 +53,9 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'announcement', component: AnnoucementListComponent },
       { path: 'announcement/:id', component: AnnoucementListComponent },
+      { path: 'avoid', component: DietaryPreferenceComponent },
+
+      
       {
         path: 'lunch-menu',
         component: LunchComponent,
@@ -79,6 +93,22 @@ const routes: Routes = [
       },
       { path: 'report/mail-on', component: MailOnUserComponent },
       { path: 'meats', component: MeatListComponent },
+      { path: 'weekly', component: WeeklyPaymentComponent },
+      
+      { path: 'monthly', component: MonthlyPaymentComponent },
+      { path: 'Company_monthly', component: CompanyMonthlyPaymentComponent },
+      { path: 'Totalmonthly', component: TotalMonthlyPaymentComponent },
+
+      { path: 'yearly', component: YearlyPaymentComponent },
+      { path: 'Company_yearly', component: CompanyYearlyPaymentComponent },
+
+      { path: 'Company_weekly', component:       CompanyweeklyPaymentComponent},
+      
+      { path: 'payment', component:       ViewPaymentComponent},
+      { path: 'TotalWeekly', component:       TotalWeeklyPaymentComponent},
+      { path: 'TotalYearly', component:       TotalYearlyPaymentComponent},
+
+      
     ],
   },
   {

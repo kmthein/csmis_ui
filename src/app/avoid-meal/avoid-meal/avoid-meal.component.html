@@ -1,1 +1,31 @@
-<p>avoid-meal works!</p>
+<div class="flex items-center gap-8 mb-8">
+  <label class="text-[#696969] text-sm w-[50%]">Avoid Meat</label>
+  <div class="toggle-container">
+    <label class="inline-flex items-center cursor-pointer">
+      <input
+        type="checkbox"
+        [(ngModel)]="isVegan"
+        (change)="toggleVegan()"
+        class="sr-only peer"
+      />
+      <div
+        class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:bg-blue-600"
+      ></div>
+    </label>
+  </div>
+</div>
+
+<div class="meat-options">
+  <span class="text-[#696969] text-sm mb-2 block">Select Meats to Avoid:</span>
+  <div *ngFor="let meat of meatOptions" class="flex items-center gap-4">
+    <input
+      type="checkbox"
+      [checked]="avoidMeats.includes(meat.id)"  <!-- Check if meat is in the avoidMeats array -->
+      (change)="updateMeatSelection(meat)"   <!-- Update meat selection -->
+      [disabled]="isVegan"  <!-- Disable the checkboxes if the user is vegan -->
+    />
+    <label>{{ meat.name }}</label>
+  </div>
+</div>
+
+<button (click)="saveDietaryPreferences()" class="save-button">Save Preferences</button>

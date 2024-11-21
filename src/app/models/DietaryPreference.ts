@@ -1,5 +1,5 @@
 export interface DietaryPreference {
-    userId: number | null; // Update the type to allow null
+    userId: number | null; 
     isVegan: boolean;
     meatIds: number[];
   }
