@@ -1,0 +1,153 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+        margin-left: 80%;
+
+  }
+  
+  /* Container for the form */
+  div {
+    max-width: 800px; /* Reduced the max width */
+    /* margin: 2rem auto; */
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Default to column for small screens */
+    /* margin-left: 80px; */
+    border: 2px solid #007bff; /* Blue border */
+
+  }
+  
+  /* Label styling */
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #4a4a4a;
+    font-size: 1rem;
+  }
+  
+  /* Select Dropdown */
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 2px solid #007bff; /* Blue border */
+    border-radius: 6px;
+    background-color: #fafafa;
+    font-size: 0.95rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Focused state for select dropdown */
+  select:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #ffffff;
+  }
+  
+  /* Heading */
+  h3 {
+    font-size: 1.1rem;
+    color: #000000;
+    margin-top: 0;
+  }
+  
+  /* Paragraph styling */
+  p {
+    font-size: 1rem;
+    color: #333;
+    margin: 8px 0;
+  }
+  
+  /* Currency style */
+  p[ngIf="totalCostAllDepartments"],
+  p[ngIf="totalCost"] {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #28a745;
+  }
+  
+  /* Border and Shadows for Card Effect */
+  div > h3, div > p {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  /* Responsive Styling for smaller devices */
+  @media (max-width: 600px) {
+    div {
+      padding: 1.2rem;
+      max-width: 95%;
+    }
+  
+    select {
+      font-size: 0.9rem;
+    }
+  
+    label {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Styling for the form row containing select dropdowns */
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Space between the two select dropdowns */
+  }
+  
+  /* Adjust each select dropdown to be smaller */
+  .select-wrapper {
+    flex: 1; /* Ensures both dropdowns take equal space */
+    min-width: 120px; /* Minimum width for each select */
+  }
+  
+  /* Styling for options inside select */
+  option {
+    padding: 8px;
+    background-color: #fafafa;
+    border-radius: 4px;
+  }
+  
+  option:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  /* Add space between sections */
+  div > div {
+    margin-top: 1.5rem;
+  }
+/* Styling for the container holding the selects */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Space between the two select elements */
+    margin-bottom: 20px; /* Space below the row */
+  }
+  
+  /* Each select wrapper will take equal space */
+  .select-wrapper {
+    flex: 1; /* Ensures both selects take equal space */
+    min-width: 200px; /* Minimum width for each select to look good */
+  }
+  
+  /* Label styling for both select elements */
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #4a4a4a;
+    font-size: 1rem;
+  }
+  
+  /* Styling for the select dropdown */
+  

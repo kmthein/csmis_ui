@@ -1,0 +1,95 @@
+/* General styling for the body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+
+  }
+  
+  /* Container for the entire form */
+  div {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #007bff; /* Blue border */
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  /* Label styling */
+  label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Select and input fields styling */
+  select, input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: #333;
+    border: 1px solid #007bff; /* Blue border */
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  /* Focus effect on select and input fields */
+  select:focus, input[type="number"]:focus {
+    border-color: #0056b3; /* Darker blue */
+    background-color: #ffffff;
+    outline: none;
+  }
+  
+  /* Title for the report */
+  h3 {
+    font-size: 1.5rem;
+    color: #000000;
+    margin-top: 1.5rem;
+  }
+  
+  /* Paragraph styling for report content */
+  p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+  
+  /* Highlight the total cost with bold and green color */
+  p:first-of-type {
+    font-weight: bold;
+    color: #000000; /* Green color for total cost */
+  }
+  
+  /* Highlight the registered date count */
+  p:last-of-type {
+    font-weight: bold;
+    color: #050505; /* Gray color for date count */
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    div {
+      max-width: 95%; /* Adjust width for smaller screens */
+      padding: 1rem;
+    }
+  
+    label, select, input[type="number"], h3, p {
+      font-size: 0.9rem; /* Reduce font size on small screens */
+    }
+  }
+  
+  /* Additional styles for a clean and minimalistic design */
+  h3 {
+    margin-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef; /* Underline for heading */
+  }
+  

@@ -3,13 +3,34 @@
   <div class="flex mt-8 justify-center">
     <div class="bg-[#174572] w-[350px] rounded-tl-[8px] rounded-bl-[8px] relative">
       <div class="absolute left-1/2 transform -translate-x-1/2 top-4">
-        <!-- <img src="assets/logo.png" class="w-14" /> -->
       </div>
       <div class="inline-flex justify-center items-center w-full h-full">
         <div>
-          <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex"><span class="min-w-[135px]">Price Per Lunch </span><span class="w-[30px]"> - </span>  <span> MMK 3000</span></h4>
-          <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex"><span class="min-w-[135px]">Registered Lunch </span><span class="w-[30px]"> - </span>  <span> 24 days</span></h4>
-          <h4 class="text-[#E2F1FF] font-medium text-[15px] flex"><span class="min-w-[135px]">Est.Cost Monthly</span><span class="w-[30px]"> - </span><span> MMK 25000</span></h4>
+          <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
+            <span class="min-w-[135px]">Price Per Lunch</span>
+            <span class="w-[30px]"> - </span>
+            <span> MMK {{ lunchPrice }}</span>
+          </h4>
+          <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
+            <span class="min-w-[135px]">Registered Lunch</span>
+            <span class="w-[30px]"> - </span>
+            <span>{{ registeredDays }} days</span>
+          </h4>
+          <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
+            <span class="min-w-[135px]">Est.Cost Monthly</span>
+            <span class="w-[30px]"> - </span>
+            <span> MMK {{ estMonthlyCost }}</span>
+          </h4>
+          <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
+            <span class="min-w-[135px]">Your Cost</span>
+            <span class="w-[30px]"> - </span>
+            <span> MMK {{ userCost }}</span>
+          </h4>
+          <!-- <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
+            <span class="min-w-[135px]">Company Cost</span>
+            <span class="w-[30px]"> - </span>
+            <span> MMK {{ companyCost }}</span>
+          </h4> -->
         </div>
       </div>
     </div>
@@ -49,29 +70,39 @@
             <div class="empty-day"></div>
           </div>
           <div
-            class="day"
-            *ngFor="let date of currentMonthDates"
-            [ngClass]="{
-              selected: isDateSelected(date) && !isPublicHoliday(date),
-              weekend: isWeekend(date) || isPublicHoliday(date),
-              today: isBeforeOrToday(date),
-              'past-day': isBeforeOrToday(date) || isCurrentWeek(date)
-            }"
-            (click)="toggleDate(date)"
-          >
-            <span>{{ date.getDate() }}</span>
-            <input
-              type="checkbox"
-              [checked]="isDateSelected(date)"
-              (change)="toggleDate(date)"
-              [disabled]="
-                isWeekend(date) ||
-                isBeforeOrToday(date) ||
-                isPublicHoliday(date)
-              "
-              style="display: none"
-            />
-          </div>
+  class="day"
+  *ngFor="let date of currentMonthDates"
+  [ngClass]="{
+    selected: isDateSelected(date) && !isPublicHoliday(date),
+    weekend: isWeekend(date),
+    'past-day': isBeforeOrToday(date),
+    'past-weekend': isWeekend(date) ,
+    today : isToday(date),
+    'public-holiday': isPublicHoliday(date)
+
+  }"
+  (click)="toggleDate(date)"
+>
+<div class="date-container">
+  <span class="date">{{ date.getDate() }}</span>
+  <!-- <span *ngIf="isRegistered(date)" class="registered-text">registered</span> -->
+
+</div>
+
+
+  <input
+    type="checkbox"
+    [checked]="isDateSelected(date)"
+    (change)="toggleDate(date)"
+    [disabled]="
+      isWeekend(date) ||
+      isBeforeOrToday(date) ||
+      isPublicHoliday(date)
+    "
+    style="display: none"
+  />
+</div>
+
         </div>
       </div>
 

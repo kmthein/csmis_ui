@@ -7,6 +7,8 @@ import { Meat } from '../../models/meat';
 import { MeatService } from '../../services/meat.service';
 import { DietaryPreference } from '../../models/DietaryPreference';
 import { UserService } from '../../services/user/user.service';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-lunch-registration',
@@ -14,20 +16,30 @@ import { UserService } from '../../services/user/user.service';
   styleUrls: ['./lunch-registration.component.css']
 })
 export class LunchRegistrationComponent implements OnInit {
+  [x: string]: any;
   currentMonth: Date = new Date();
   selectedDates: Date[] = [];
   currentMonthDates: Date[] = [];
-  publicHolidays: Date[] = [];
   today: Date;
-  userId: number | null = null;
+  userId!: number ;
   isFirstRegistration: boolean = true; 
   meats: Meat[] = [];
   showVeganModal = false;
   showMeatModal = false;
   selectedMeats: number[] = [];
+  lunchPrice: number = 0;
+  companyRate: number = 0;
+  registeredDays: number = 0;
+  userCost: number | undefined;
+  companyCost: number | undefined;
+  estMonthlyCost: number = 0;
+
+  public publicHolidays: { date: Date, name: string }[] = [];
+
 
   constructor(private lunchRegistrationService: LunchRegistrationService,private meatService: MeatService,private userService: UserService, private holidayService: HolidayService) {
     this.today = new Date();
+    
   }
 
   ngOnInit(): void {
@@ -40,22 +52,50 @@ export class LunchRegistrationComponent implements OnInit {
       console.error('User not found in local storage!');
     };    this.loadMeats();
 
+    
+    this.lunchRegistrationService.getLunchDetails(this.userId).subscribe(data => {
+      this.lunchPrice = data.lunchPrice;
+      this.companyRate = data.companyRate;
+      this.registeredDays = data.registeredDays;
 
+      this.calculateCost();
+    });
   }
+  
+  calculateCost(): void {
+    if (this.lunchPrice > 0 && this.companyRate >= 0 && this.registeredDays > 0) {
+      const userSharePercentage = 100 - this.companyRate;
+      const userCostPerDay = (this.lunchPrice * userSharePercentage) / 100;
+      const companyCostPerDay = (this.lunchPrice * this.companyRate) / 100;
+      this.estMonthlyCost = this.lunchPrice * this.registeredDays;
 
+      this.userCost = userCostPerDay * this.registeredDays;
+      this.companyCost = companyCostPerDay * this.registeredDays;
+    }
+  }
   loadPublicHolidays() {
     this.holidayService.getAllHolidays().subscribe({
       next: (data) => {
-        this.publicHolidays = data.map((holiday: any) => new Date(holiday.date)); 
-        console.log(this.publicHolidays);
+        this.publicHolidays = data.map((holiday: any) => ({
+          date: new Date(holiday.date),
+          name: holiday.name // Assuming holiday name is available in the response
+        }));
+        console.log(this.publicHolidays); // Check the structure
       },
       error: (error) => {
         console.error(error);
       }
-    })
+    });
   }
-
-  // Load user selected dates from the backend
+  getHolidayName(date: Date): string | null {
+    const formattedDate = date.toISOString().split('T')[0]; 
+    const holiday = this.publicHolidays.find(holiday => {
+      return holiday.date.toISOString().split('T')[0] === formattedDate; 
+    });
+    return holiday ? holiday.name : null;
+  }
+  
+  
   loadMeats() {
     this.meatService.getAllMeats().subscribe({
       next: (meats) => (this.meats = meats),
@@ -64,29 +104,29 @@ export class LunchRegistrationComponent implements OnInit {
   }
   loadUserSelectedDates(): void {
     if (this.userId) {
-      this.lunchRegistrationService.getSelectedDates(this.userId).subscribe(
-        (registeredDates: Date[]) => {
-          console.log(registeredDates);
-          // Map the received date strings to Date objects 
-          this.selectedDates = registeredDates.map(dateStr => new Date(dateStr));
-          this.generateCalendarDates(this.currentMonth); // Generate calendar after loading dates
-          
-          // Check if user has already registered
-          this.isFirstRegistration = this.selectedDates.length === 0; // Set to false if there are already selected dates
-
-          // Populate weekdays excluding the current week if no dates are selected
-          if (this.selectedDates.length === 0) {
-            this.populateAllWeekdaysExcludingCurrentWeek(this.currentMonth);
-          }
-        },
-        error => {
+      this.lunchRegistrationService.getSelectedDates(this.userId).pipe(
+        catchError(error => {
           console.error('Error loading selected dates:', error);
-          this.populateAllWeekdaysExcludingCurrentWeek(this.currentMonth); // Fallback to populating weekdays excluding current week
-        }
-      );
+          this.populateAllWeekdaysExcludingCurrentWeek(this.currentMonth);
+          return of([]); // Fallback with empty array on error
+        })
+      ).subscribe((registeredDates: Date[]) => {
+        this.selectedDates = registeredDates.map(dateStr => new Date(dateStr));
+        this.generateCalendarDates(this.currentMonth); 
+        this.loadPublicHolidays(); 
+        this.isFirstRegistration = this.selectedDates.length === 0;
+        if (this.isFirstRegistration) this.populateAllWeekdaysExcludingCurrentWeek(this.currentMonth);
+      });
     }
   }
-
+  isToday(date: Date): boolean {
+    const today = new Date();
+    return (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    );
+  }
   populateAllWeekdaysExcludingCurrentWeek(month: Date): void {
     const year = month.getFullYear();
     const monthIndex = month.getMonth();
@@ -106,18 +146,26 @@ export class LunchRegistrationComponent implements OnInit {
       }
     }
   }
-
+  isRegistered(date: Date): boolean {
+    return this.selectedDates.some(
+      (registeredDate) =>
+        registeredDate.getDate() === date.getDate() &&
+        registeredDate.getMonth() === date.getMonth() &&
+        registeredDate.getFullYear() === date.getFullYear()
+    );
+  }
   isBeforeOrToday(date: Date): boolean {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    return date.getTime() <= today.getTime();
+    const isWeekday = date.getDay() !== 0 && date.getDay() !== 6;
+    return isWeekday && date.getTime() <= today.getTime();
   }
+  
 
   isWeekend(date: Date): boolean {
     const day = date.getDay();
-    return day === 0 || day === 6; 
+    return day === 0 || day === 6; // Sunday or Saturday
   }
-
   isCurrentWeek(date: Date): boolean {
     const today = new Date();
     const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 1)); // Monday of the current week
@@ -140,8 +188,9 @@ export class LunchRegistrationComponent implements OnInit {
     }
   }
 
-  isPublicHoliday(date: Date): boolean {
-    return this.publicHolidays.some(holiday => this.isSameDay(date, holiday));
+  isPublicHoliday(date: Date): string | null {
+    const holiday = this.publicHolidays.find(holiday => this.isSameDay(date, holiday.date));
+    return holiday ? holiday.name : null;
   }
 
   private isSameDay(date1: Date, date2: Date): boolean {
@@ -152,7 +201,6 @@ export class LunchRegistrationComponent implements OnInit {
     );
   }
 
-  // Check if a date is selected
   isDateSelected(date: Date): boolean {
     return this.selectedDates.some(selectedDate => selectedDate.getTime() === date.getTime());
   }
@@ -267,7 +315,6 @@ isCurrentMonth(): boolean {
           );
         }
       } else {
-        // Handle next month registration
         if (this.isFirstRegistration) {
           this.lunchRegistrationService.registerUserForLunch(registrationDto).subscribe(
             (response) => {
@@ -290,7 +337,7 @@ isCurrentMonth(): boolean {
             (error) => {
               console.error('Error updating registration for next month:', error);
               alert('Error updating registration for next month!');
-            }
+            }   
           );
         }
       }

@@ -1,0 +1,88 @@
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #007bff; /* Blue border */
+
+  }
+  
+  /* Main container styling */
+  div {
+    max-width: 800px;
+    margin: 1rem auto;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #007bff; /* Blue border */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  /* Label styling */
+  label {
+    display: block;
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Input and select styling */
+  select, input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: #333;
+    border: 1px solid #007bff; /* Blue border */
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s, background-color 0.3s;
+  }
+  
+  /* Focus styling for input/select */
+  select:focus, input[type="number"]:focus {
+    border-color: #0056b3; /* Darker blue on focus */
+    background-color: #ffffff;
+    outline: none;
+  }
+  
+  /* Title and report section */
+  h3 {
+    font-size: 1.3rem;
+    color: #000000;
+    margin-top: 1rem;
+  }
+  
+  p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    line-height: 1.5;
+  }
+  
+  /* Highlight the total cost with bold and green color */
+  p:first-of-type {
+    font-weight: bold;
+    color: #000000; /* Green for total cost */
+  }
+  
+  /* Highlight the registered date count */
+  p:last-of-type {
+    font-weight: bold;
+    color: #000000; /* Gray for date count */
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    div {
+      max-width: 95%; /* Adjust to screen width */
+      padding: 1rem;
+    }
+  
+    label, select, input[type="number"], h3, p {
+      font-size: 0.9rem; /* Adjust font size for smaller screens */
+    }
+  }
+  
