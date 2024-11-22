@@ -17,6 +17,7 @@ export class NotiComponent implements OnInit {
   unreadAnnouncements: any[] = []; // Array to hold announcements
   suggestions: any[] = [];
   announcements: any[] = [];
+  isAdmin: boolean = false;
   private clickListener: () => void;
 
   constructor(
@@ -42,6 +43,7 @@ export class NotiComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
     this.loadUnreadCount();
     this.setupWebSocket();
   }
@@ -86,22 +88,39 @@ export class NotiComponent implements OnInit {
   }
 
   navigateToSuggestDetails(suggestionId: string, isSeen: boolean): void {
-    console.log(isSeen);
     if (isSeen) {
       this.router.navigate([`/admin/suggestions/${suggestionId}`]);
     } else {
       const form = new FormData();
       const user = JSON.parse(localStorage.getItem('user')!);
       form.append('userId', user?.id);
-      this.suggestionService
+      if(this.isAdmin) {
+        this.suggestionService
         .getSuggestionAndMakeSeen(+suggestionId, form)
         .subscribe((res) => {
           this.router.navigate([`/admin/suggestions/${suggestionId}`]);
           this.loadUnreadCount();
         });
+      }
+      
     }
+    this.isDropdownVisible = false;
+  }
 
-    // Close the dropdown
+  navigateToAnnouncementDetails(announceId: string, isSeen: boolean): void {
+    if (isSeen) {
+      this.router.navigate([`/admin/announcements/${announceId}`]);
+    } else {
+      const form = new FormData();
+      const user = JSON.parse(localStorage.getItem('user')!);
+      form.append('userId', user?.id);
+      this.announcementService
+        .getAnnouncementAndMakeSeen(+announceId, form)
+        .subscribe((res) => {
+          this.router.navigate([`/admin/announcements/${announceId}`]);
+          this.loadUnreadCount();
+        });
+    }
     this.isDropdownVisible = false;
   }
 
@@ -115,10 +134,20 @@ export class NotiComponent implements OnInit {
 
   navigateToSuggestionList(): void {
     this.router.navigate(['/admin/suggestions']);
+    this.isDropdownVisible = false;
   }
 
   navigateToAnnouncementList(): void {
     this.router.navigate(['/admin/announcements']);
+  }
+
+  navigateToNotificationList() {
+    if(this.isAdmin) {
+      this.router.navigate(['/admin/notifications/all']);
+    } else {
+      this.router.navigate(['/notifications/all']);
+    }
+    this.isDropdownVisible = false;
   }
 
   private incrementUnreadCount(): void {
@@ -144,7 +173,12 @@ export class NotiComponent implements OnInit {
         this.announcementService
           .getUnseenAnnouncementsByUserId(userId)
           .subscribe((announcements) => {
-            this.unreadCount = announcements.length;
+            console.log(announcements);
+            this.announcements = announcements;
+            const unreadAnnounces = announcements.filter(
+              (data: any) => data.seen == false
+            );
+            this.unreadCount = unreadAnnounces.length;
           });
       }
     } else {

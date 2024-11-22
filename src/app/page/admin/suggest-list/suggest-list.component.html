@@ -3,7 +3,7 @@
       <h3 class="text-md font-semibold mb-4">Suggestion</h3>
       <ng-icon (click)="navgiateBack()" name="ionReturnUpBackOutline" class="text-2xl cursor-pointer text-[#363636] hover:text-[#363636]"></ng-icon>
     </div>
-    <div class="pb-6">
+    <div class="pb-6" *ngFor="let suggestion of suggestions">
         <div class="bg-white p-4 rounded-md relative">
             <div class="flex gap-4">
               <img

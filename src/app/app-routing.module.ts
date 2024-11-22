@@ -48,6 +48,8 @@ import { TotalWeeklyPaymentComponent } from './payments/total-weekly-payment/tot
 import { TotalYearlyPaymentComponent } from './payments/total-yearly-payment/total-yearly-payment.component';
 import { TotalMonthlyPaymentComponent } from './payments/total-monthly-payment/total-monthly-payment.component';
 import { SuggestDetailsComponent } from './page/admin/suggest-details/suggest-details.component';
+import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.component';
+import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
 
 const routes: Routes = [
   {
@@ -60,6 +62,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'announcement', component: AnnoucementListComponent },
       { path: 'announcement/:id', component: AnnoucementListComponent },
+      { path: 'notifications/all', component: AllNotificationsComponent },
       { path: 'avoid', component: DietaryPreferenceComponent },
       {
         path: 'lunch-menu',
@@ -120,6 +123,7 @@ const routes: Routes = [
       { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
       { path: 'TotalYearly', component: TotalYearlyPaymentComponent },
       { path: 'suggestions/:id', component: SuggestDetailsComponent },
+      { path: 'notifications/all', component: SuggestListComponent },
     ],
   },
   {

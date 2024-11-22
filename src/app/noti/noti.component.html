@@ -55,19 +55,25 @@
       </ng-container>
 
       <!-- Announcements -->
-      <ng-container *ngIf="unreadAnnouncements.length > 0">
-        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-          <strong>New Announcements:</strong>
-        </div>
-        <div *ngFor="let announcement of unreadAnnouncements">
+      <ng-container *ngIf="announcements.length > 0">
+        <!-- <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+          <strong>New Suggestions:</strong>
+        </div> -->
+        <div
+          [ngClass]="!announcement.seen ? 'bg-[#E9EFF2]' : ''"
+          *ngFor="let announcement of announcements.slice(0, 7)"
+        >
           <a
-            (click)="navigateToAnnouncementList()"
-            class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+            (click)="navigateToAnnouncementDetails(announcement.id, announcement.seen)"
+            class="flex px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <div class="w-full">
-              <div class="text-gray-900 font-semibold dark:text-white">
-                {{ announcement.content }}
+              <div class="text-gray-900 text-sm dark:text-gray-400 mb-2">
+                New announcement has received
               </div>
+              <p class="text-gray-400 text-sm font-light">
+                {{ announcement.createdAt | relativeTime }}
+              </p>
             </div>
           </a>
         </div>
@@ -75,8 +81,8 @@
     </ng-container>
 
     <a
-      (click)="navigateToSuggestionList()"
-      class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
+      (click)="navigateToNotificationList()"
+      class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white cursor-pointer"
     >
       <div class="inline-flex items-center">
         <svg

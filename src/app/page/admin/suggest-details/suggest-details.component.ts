@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SuggestionService } from '../../../services/suggestion.service';
+import { AuthService } from '../../../services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-suggest-details',
@@ -9,10 +11,18 @@ import { SuggestionService } from '../../../services/suggestion.service';
 })
 export class SuggestDetailsComponent {
   id!: number;
+  suggestion: any;
+
+  navgiateBack() {
+    this.location.back();
+  }
 
   constructor(
     private route: ActivatedRoute,
-    private suggestService: SuggestionService
+    private suggestService: SuggestionService,
+    private authService: AuthService,
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -28,6 +38,7 @@ export class SuggestDetailsComponent {
   getSuggestionAndMakeSeen() {
     this.suggestService.getSuggestionById(this.id).subscribe((res) => {
       console.log(res);
+      this.suggestion = res;
     });
   }
 }

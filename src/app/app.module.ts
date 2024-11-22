@@ -119,6 +119,8 @@ import { TotalMonthlyPaymentComponent } from './payments/total-monthly-payment/t
 import { TotalYearlyPaymentComponent } from './payments/total-yearly-payment/total-yearly-payment.component';
 import { RelativeTimePipe } from './core/pipe/relative-time.pipe';
 import { SuggestDetailsComponent } from './page/admin/suggest-details/suggest-details.component';
+import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.component';
+import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
 
 @NgModule({
   declarations: [
@@ -185,6 +187,8 @@ import { SuggestDetailsComponent } from './page/admin/suggest-details/suggest-de
     TotalYearlyPaymentComponent,
     RelativeTimePipe,
     SuggestDetailsComponent,
+    SuggestListComponent,
+    AllNotificationsComponent,
   ],
   imports: [
     FontAwesomeModule,
