@@ -26,7 +26,7 @@
 
 <div
   id="drawer-navigation"
-  class="fixed top-0 left-0 z-40 h-screen p-4 md:p-0 overflow-y-auto transition-transform -translate-x-full md:translate-x-0 bg-white w-64 md:w-[20%] dark:bg-gray-800 img_scroll"
+  class="fixed top-0 left-0 z-40 h-screen p-4 md:p-0 overflow-y-auto transition-transform -translate-x-full md:translate-x-0 bg-[#13385e] w-64 md:w-[20%] dark:bg-gray-800 img_scroll"
   tabindex="-1"
   aria-labelledby="drawer-navigation-label"
 >
@@ -63,7 +63,7 @@
     <div class="ml-8 text-[#707070]">
       <div *ngIf="!isAdmin" (click)="closeAllSubmenu()">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
           routerLink="/"
           routerLinkActive="nav-active"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -74,7 +74,7 @@
       </div>
       <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
           routerLink="/admin"
           routerLinkActive="nav-active"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -85,7 +85,7 @@
       </div>
       <div *ngIf="!isAdmin">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
           routerLink="/lunch"
           routerLinkActive="nav-active"
         >
@@ -96,7 +96,7 @@
 
       <div *ngIf="!isAdmin">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
           routerLink="/announcement"
           routerLinkActive="nav-active"
         >
@@ -105,7 +105,7 @@
         </a>
       </div>
 
-      <div *ngIf="isAdmin" (click)="closeOtherSubmenu('management')">
+      <!-- <div *ngIf="isAdmin" (click)="closeOtherSubmenu('management')">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
           routerLink="/profile"
@@ -114,7 +114,7 @@
           <ng-icon name="ionPerson"></ng-icon>
           <span>Profile</span>
         </a>
-      </div>
+      </div> -->
       <div *ngIf="!isAdmin">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
@@ -130,13 +130,13 @@
         <!-- Management Main Item -->
         <button
           type="button"
-          class="px-4 py-4 pl-[20%] w-full rounded-tl-xl rounded-bl-xl inline-flex items-center gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 pl-[20%] w-full rounded-tl-xl rounded-bl-xl inline-flex items-center gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
           (click)="toggleManagementSubMenu()"
         >
           <div class="flex justify-between w-full items-center">
             <div class="flex items-center gap-2">
-              <ng-icon name="ionBuild"></ng-icon>
-              <span>Management</span>
+              <ng-icon name="ionBuild" class="text-[#b6b6b6]"></ng-icon>
+              <span class="text-[#b6b6b6]">Management</span>
             </div>
             <svg
               [ngClass]="{ 'rotate-180': isManagementSubMenuOpen }"
@@ -160,7 +160,7 @@
         <ul *ngIf="isManagementSubMenuOpen && isAdmin">
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
               routerLink="/admin/restaurant"
               routerLinkActive="nav-active"
             >
@@ -170,7 +170,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
               routerLink="/admin/menu"
               routerLinkActive="nav-active"
             >
@@ -180,7 +180,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
               routerLink="/admin/announcement"
               routerLinkActive="nav-active"
             >
@@ -190,7 +190,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
               routerLink="/admin/staff"
               routerLinkActive="nav-active"
             >
@@ -200,7 +200,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
               routerLink="/admin/holiday"
               routerLinkActive="nav-active"
             >
@@ -210,7 +210,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
               routerLink="/admin/doorlogs"
               routerLinkActive="nav-active"
             >
@@ -224,13 +224,16 @@
       <div *ngIf="isAdmin" (click)="closeOtherSubmenu('report')">
         <button
           type="button"
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
           (click)="toggleReportSubMenu()"
         >
           <div class="flex justify-between w-full">
             <div class="flex items-center gap-2">
-              <ng-icon name="ionDocumentTextSharp"></ng-icon>
-              <span>Reports</span>
+              <ng-icon
+                name="ionDocumentTextSharp"
+                class="text-[#b6b6b6]"
+              ></ng-icon>
+              <span class="text-[#b6b6b6]">Reports</span>
             </div>
           </div>
           <svg
@@ -254,7 +257,7 @@
             <a
               routerLink="/admin/report/mail-on"
               routerLinkActive="nav-active"
-              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
               >Mail received users</a
             >
           </li>
@@ -262,7 +265,7 @@
             <a
               routerLink="/admin/report/lunch-summary"
               routerLinkActive="nav-active"
-              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
               >Lunch summary</a
             >
           </li>
@@ -270,7 +273,7 @@
             <a
               routerLink="/admin/report/department-cost"
               routerLinkActive="nav-active"
-              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-blue-50"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
               >Cost by department</a
             >
           </li>
