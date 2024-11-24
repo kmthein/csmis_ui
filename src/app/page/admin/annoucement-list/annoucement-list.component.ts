@@ -92,20 +92,19 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
 
   html = 'Hello world!';
   editor: Editor = new Editor();
-  page = 0;
   pageSize = 10;
-  totalElements: any;
-  totalPages: any;
-  p: number = 0;
+  totalElements: any = 0;
+  totalPages: any = 0;
+  p: number = 1;
 
   onPageChange(page: number) {
-    this.page = page;
+    this.p = page;
     this.getAllAnnouncement();
   }
 
   getAllAnnouncement() {
     this.announceService
-      .getAllAnnouncements(this.page, this.pageSize)
+      .getAllAnnouncements(this.p - 1, this.pageSize)
       .subscribe((data) => {
         console.log(data);
         this.announcements = data.content; // 'content' is the list of announcements

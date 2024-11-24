@@ -18,13 +18,7 @@
   <div class="pb-6" *ngIf="announcements.length == 0">
     <p class="text-center">No announcement found yet.</p>
   </div>
-  <div
-    class="pb-6"
-    *ngFor="
-      let announcement of announcements
-        | paginate : { itemsPerPage: 5, currentPage: p }
-    "
-  >
+  <div class="pb-6" *ngFor="let announcement of announcements">
     <app-annoucement-card
       *ngIf="announcements.length > 0"
       [announcement]="announcement"
@@ -32,8 +26,29 @@
       (confirmDelete)="toggleConfirmModal(true, announcement.id)"
     ></app-annoucement-card>
   </div>
-  <div class="mt-4">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <div class="pagination">
+    <button (click)="onPageChange(p - 1)" [disabled]="p === 1" class="btn">
+      Previous
+    </button>
+
+    <span *ngFor="let page of [].constructor(totalPages); let i = index">
+      <button
+        *ngIf="i + 1 <= totalPages"
+        (click)="onPageChange(i + 1)"
+        [class.active]="p === i + 1"
+        class="btn"
+      >
+        {{ i + 1 }}
+      </button>
+    </span>
+
+    <button
+      (click)="onPageChange(p + 1)"
+      [disabled]="p === totalPages"
+      class="btn"
+    >
+      Next
+    </button>
   </div>
 </div>
 
