@@ -132,6 +132,15 @@ export class OrderCreateComponent implements OnInit {
     });
   }
 
+  isValid(service: any): boolean {
+    return service.quantity >= service.initialQuantity;
+  }
+
+  isValidForm(form: any): boolean {
+    // Logic to validate the entire form
+    return this.registerData.every((service: any) => this.isValid(service));
+  }
+
   getNextWeekRegister() {
     this.orderService.getNextWeekRegister().subscribe((res: any) => {
       const holidayDates = this.publicHolidays.map((holiday: any) => holiday); // ISO format
@@ -139,6 +148,13 @@ export class OrderCreateComponent implements OnInit {
       this.registerData = res.filter(
         (data: any) => !holidayDates.includes(data.lunchDate) // Exclude holidays
       );
+
+      this.registerData = this.registerData.map((data: any) => ({
+        ...data,
+        initialQuantity: data.quantity,
+      }));
+
+      console.log(this.registerData);
 
       this.totalAmount = this.registerData.reduce(
         (total: number, data: any) => {
@@ -164,7 +180,7 @@ export class OrderCreateComponent implements OnInit {
       restaurantId: this.restaurantId,
       adminId: user?.id,
       rows: this.registerData,
-      restaurantName: this.restaurantId
+      restaurantName: this.restaurantId,
     };
     // if (this.order.message.trim() === '') {
     //   this.toastr.error('Message is required.', 'Error');

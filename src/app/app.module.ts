@@ -137,6 +137,7 @@ import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-
 import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
 import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
 import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -213,12 +214,13 @@ import { FeedbackListComponent } from './components/feedback/feedback-list/feedb
     OrderCreateComponent,
     VoucherListComponent,
     EditVoucherComponent,
-    FeedbackListComponent
+    FeedbackListComponent,
   ],
   imports: [
     FontAwesomeModule,
     BrowserModule,
     FormsModule,
+    NgxPaginationModule,
     HttpClientModule,
     MatSnackBarModule,
     BrowserModule,

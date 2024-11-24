@@ -4,6 +4,7 @@
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.233) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 h2 {
@@ -22,13 +23,11 @@ button {
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
 }
 
 button:hover {
   background-color: #45a049;
 }
-
 .row {
   display: flex;
   justify-content: space-between; /* Distribute the columns evenly */
@@ -78,4 +77,7 @@ th:last-child {
   border: none;
   border-top: 2px dotted black; /* Dotted line styling */
   margin: 15px 0; /* Add spacing around the line */
+}
+.initial {
+  right: 25px;
 }

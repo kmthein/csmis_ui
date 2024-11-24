@@ -10,7 +10,7 @@
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-1"
         (click)="toggleModal(false)"
       >
-      <ng-icon name="ionAddSharp" class="text-lg"></ng-icon>
+        <ng-icon name="ionAddSharp" class="text-lg"></ng-icon>
         Create New
       </button>
     </div>
@@ -18,7 +18,13 @@
   <div class="pb-6" *ngIf="announcements.length == 0">
     <p class="text-center">No announcement found yet.</p>
   </div>
-  <div class="pb-6" *ngFor="let announcement of announcements">
+  <div
+    class="pb-6"
+    *ngFor="
+      let announcement of announcements
+        | paginate : { itemsPerPage: 5, currentPage: p }
+    "
+  >
     <app-annoucement-card
       *ngIf="announcements.length > 0"
       [announcement]="announcement"
@@ -26,16 +32,19 @@
       (confirmDelete)="toggleConfirmModal(true, announcement.id)"
     ></app-annoucement-card>
   </div>
+  <div class="mt-4">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>
 
 <div
   *ngIf="isModalOpen"
   class="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-gray-500 bg-opacity-50"
 >
-   <div
+  <div
     class="relative p-4 w-full max-w-2xl bg-white shadow dark:bg-gray-700"
     [ngClass]="editMode ? 'max-h-[80%]' : 'max-h-[70%]'"
-    style="overflow-y: auto;"  
+    style="overflow-y: auto"
   >
     <!-- Modal content -->
     <div class="flex justify-between p-4 border-b dark:border-gray-600">
@@ -190,7 +199,9 @@
   </div>
 </div>
 
-<app-confirmation-modal *ngIf="isConfirmOpen"
-[content]="'announcement'"
-(confirm)="confirmDelete()"
-(cancel)="toggleConfirmModal(false)"></app-confirmation-modal>  
+<app-confirmation-modal
+  *ngIf="isConfirmOpen"
+  [content]="'announcement'"
+  (confirm)="confirmDelete()"
+  (cancel)="toggleConfirmModal(false)"
+></app-confirmation-modal>

@@ -1,4 +1,4 @@
-<div class="voucher-container">
+<div class="voucher-container bg-[#FCFCFC]">
   <h2>Create New Order</h2>
 
   <div *ngIf="registerData && !orderAlreadyExist">
@@ -44,16 +44,33 @@
         >
           <td class="py-2 px-4">{{ i + 1 }}</td>
           <td class="py-2 px-4">{{ service.lunchDate }}</td>
-          <td class="py-2 px-2 w-20">
-            <input
-              type="number"
-              name="service.quantity"
-              min="0"
-              [(ngModel)]="service.quantity"
-              (change)="updateTotalAmount()"
-              class="w-full border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-blue-400 text-center"
-            />
+          <td class="py-2 px-2 w-40 relative flex items-center justify-center">
+            <div class="relative flex items-center">
+              <input
+                type="number"
+                [min]="service.initialQuantity"
+                [(ngModel)]="service.quantity"
+                (change)="updateTotalAmount()"
+                [class.border-red-500]="
+                  service.quantity < service.initialQuantity
+                "
+                name="quantity"
+                class="border border-gray-300 bg-transparent rounded-md p-1 pr-6 focus:outline-none focus:ring-2 focus:ring-blue-400 text-center"
+                [style.width]="
+                  service.quantity?.toString().length > 2
+                    ? '100px'
+                    : service.quantity?.toString().length > 1
+                    ? '90px'
+                    : '80px'
+                "
+              />
+              <!-- Overlay the initialQuantity as read-only text -->
+              <span class="absolute text-gray-500 initial">
+                /{{ service.initialQuantity }}
+              </span>
+            </div>
           </td>
+
           <td class="py-2 px-4">{{ service.cost || 0 }}</td>
           <td class="py-2 px-4">{{ service.quantity * service.cost }}</td>
         </tr>

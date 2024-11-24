@@ -48,16 +48,18 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
   confirmDelete() {
     if (this.selectedAnnouncementId) {
       console.log('Delete announcement with ID:', this.selectedAnnouncementId);
-      this.announceService.deleteAnnouncement(this.selectedAnnouncementId).subscribe({
-        next: (response) => {
-          if(response.message) {
-            this.getAllAnnouncement();
-          }
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
+      this.announceService
+        .deleteAnnouncement(this.selectedAnnouncementId)
+        .subscribe({
+          next: (response) => {
+            if (response.message) {
+              this.getAllAnnouncement();
+            }
+          },
+          error: (error) => {
+            console.error(error);
+          },
+        });
     }
     this.toggleConfirmModal(false);
   }
@@ -90,12 +92,26 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
 
   html = 'Hello world!';
   editor: Editor = new Editor();
+  page = 0;
+  pageSize = 10;
+  totalElements: any;
+  totalPages: any;
+  p: number = 0;
+
+  onPageChange(page: number) {
+    this.page = page;
+    this.getAllAnnouncement();
+  }
 
   getAllAnnouncement() {
-    this.announceService.getAllAnnouncements().subscribe((data) => {
-      console.log(data);
-      this.announcements = data;
-    });
+    this.announceService
+      .getAllAnnouncements(this.page, this.pageSize)
+      .subscribe((data) => {
+        console.log(data);
+        this.announcements = data.content; // 'content' is the list of announcements
+        this.totalElements = data.totalElements; // Total number of announcements
+        this.totalPages = data.totalPages; // Total number of pages
+      });
   }
 
   ngOnInit(): void {
@@ -103,7 +119,7 @@ export class AnnoucementListComponent implements OnInit, OnDestroy {
     this.editor = new Editor();
     this.authService.currentUser$.subscribe((user) => {
       this.user = user;
-      this.isAdmin = user?.role == "ADMIN" ? true : false;
+      this.isAdmin = user?.role == 'ADMIN' ? true : false;
     });
   }
 

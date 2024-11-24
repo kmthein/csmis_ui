@@ -22,9 +22,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   weeklyMenu: any[] = [];
   menuAry: string[] = [];
   restaurant: any;
-  
+
   monthlyCost: number = 0; // Variable to store monthly cost
-  weeklyCost: number = 0;  // Variable to store weekly cost
+  weeklyCost: number = 0; // Variable to store weekly cost
 
   constructor(
     private router: Router,
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   // Fetch announcements
   private fetchAnnouncements(): void {
-    this.announceService.getAllAnnouncements().subscribe({
+    this.announceService.getAllAnnouncements(1, 1).subscribe({
       next: (response) => {
         this.announcement = response[0];
       },
@@ -97,7 +97,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   private getCurrentWeekMenu(): void {
     this.lunchService.getWeeklyLunch().subscribe({
       next: (response) => {
-        this.restaurantName = response[response.length - 1]?.restaurantName || '';
+        this.restaurantName =
+          response[response.length - 1]?.restaurantName || '';
         this.weeklyMenu = response.map((data: any) => ({
           ...data,
           menu: data?.menu?.split(','),
@@ -114,7 +115,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   private getNextWeekMenu(): void {
     this.lunchService.getNextWeekLunch().subscribe({
       next: (response) => {
-        this.restaurantName = response[response.length - 1]?.restaurantName || '';
+        this.restaurantName =
+          response[response.length - 1]?.restaurantName || '';
         this.weeklyMenu = response.map((data: any) => ({
           ...data,
           menu: data?.menu?.split(','),
