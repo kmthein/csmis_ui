@@ -121,6 +121,8 @@ import { RelativeTimePipe } from './core/pipe/relative-time.pipe';
 import { SuggestDetailsComponent } from './page/admin/suggest-details/suggest-details.component';
 import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.component';
 import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
+import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
+import { MeatActionRendererComponent } from './components/meat-action-renderer/meat-action-renderer.component';
 
 @NgModule({
   declarations: [
@@ -189,6 +191,8 @@ import { AllNotificationsComponent } from './page/shared/all-notifications/all-n
     SuggestDetailsComponent,
     SuggestListComponent,
     AllNotificationsComponent,
+    AnnouncementDetailsComponent,
+    MeatActionRendererComponent,
   ],
   imports: [
     FontAwesomeModule,

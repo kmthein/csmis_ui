@@ -15,6 +15,10 @@ export class AnnouncementService {
     return this.http.get<any>(`${this.url}/announcements/unseen/${userId}`);
   }
 
+  getAnnouncementById(id: number) {
+    return this.http.get<any>(`${this.url}/announcements/${id}`);
+  }
+
   getAnnouncementAndMakeSeen(id: number, form: FormData) {
     return this.http.put(`${this.url}/announcements/${id}/seen`, form);
   }

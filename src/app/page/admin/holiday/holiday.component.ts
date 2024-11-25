@@ -34,12 +34,15 @@ export class HolidayComponent {
       valueGetter: (params: any) => params.node.rowIndex + 1,
       flex: 0.5,
     },
-    { field: 'name', headerName: 'Name', flex: 5, filter: true },
+    { field: 'name', headerName: 'Name', flex: 3, filter: true },
     { field: 'date', headerName: 'Date', flex: 3, filter: true },
     {
       headerName: 'Actions',
       cellRenderer: ActionButtonRendererComponent,
-      flex: 0.8,
+      flex: 3,
+      cellRendererParams: {
+        getAllHolidays: this.getAllHolidays.bind(this), 
+      },
     },
   ];
   holidays: any = [];

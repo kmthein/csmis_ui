@@ -63,7 +63,7 @@
     <div class="ml-8 text-[#707070]">
       <div *ngIf="!isAdmin" (click)="closeAllSubmenu()">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694]  hover:text-[#c9c9c9]"
           routerLink="/"
           routerLinkActive="nav-active"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -85,7 +85,7 @@
       </div>
       <div *ngIf="!isAdmin">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/lunch"
           routerLinkActive="nav-active"
         >
@@ -96,7 +96,7 @@
 
       <div *ngIf="!isAdmin">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/announcement"
           routerLinkActive="nav-active"
         >
@@ -117,7 +117,7 @@
       </div> -->
       <div *ngIf="!isAdmin">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/avoid"
           routerLinkActive="active"
         >
@@ -130,7 +130,7 @@
         <!-- Management Main Item -->
         <button
           type="button"
-          class="px-4 py-4 pl-[20%] w-full rounded-tl-xl rounded-bl-xl inline-flex items-center gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
+          class="px-4 py-4 pl-[20%] w-full rounded-tl-xl rounded-bl-xl inline-flex items-center gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           (click)="toggleManagementSubMenu()"
         >
           <div class="flex justify-between w-full items-center">
@@ -160,7 +160,7 @@
         <ul *ngIf="isManagementSubMenuOpen && isAdmin">
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               routerLink="/admin/restaurant"
               routerLinkActive="nav-active"
             >
@@ -170,7 +170,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               routerLink="/admin/menu"
               routerLinkActive="nav-active"
             >
@@ -180,7 +180,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               routerLink="/admin/announcement"
               routerLinkActive="nav-active"
             >
@@ -190,7 +190,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               routerLink="/admin/staff"
               routerLinkActive="nav-active"
             >
@@ -200,7 +200,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               routerLink="/admin/holiday"
               routerLinkActive="nav-active"
             >
@@ -210,7 +210,7 @@
           </li>
           <li>
             <a
-              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hovehover:bg-[#386694] hover:text-[#c9c9c9]"
+              class="flex gap-2 items-center p-2 pl-[30%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               routerLink="/admin/doorlogs"
               routerLinkActive="nav-active"
             >
@@ -224,7 +224,7 @@
       <div *ngIf="isAdmin" (click)="closeOtherSubmenu('report')">
         <button
           type="button"
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           (click)="toggleReportSubMenu()"
         >
           <div class="flex justify-between w-full">
@@ -257,7 +257,7 @@
             <a
               routerLink="/admin/report/mail-on"
               routerLinkActive="nav-active"
-              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               >Mail received users</a
             >
           </li>
@@ -265,7 +265,7 @@
             <a
               routerLink="/admin/report/lunch-summary"
               routerLinkActive="nav-active"
-              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               >Lunch summary</a
             >
           </li>
@@ -273,7 +273,7 @@
             <a
               routerLink="/admin/report/department-cost"
               routerLinkActive="nav-active"
-              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#c9c9c9]"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               >Cost by department</a
             >
           </li>
@@ -282,7 +282,7 @@
 
       <div *ngIf="isAdmin">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/admin/meats"
           routerLinkActive="nav-active"
         >
@@ -293,7 +293,7 @@
 
       <div *ngIf="!isAdmin">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/profile"
           routerLinkActive="nav-active"
         >
@@ -304,7 +304,7 @@
 
       <div *ngIf="!isAdmin">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/suggest"
           routerLinkActive="nav-active"
         >
@@ -315,7 +315,7 @@
 
       <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/admin/create-voucher"
           routerLinkActive="nav-active"
         >
@@ -326,7 +326,7 @@
 
       <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/admin/settings"
           routerLinkActive="nav-active"
         >
@@ -386,7 +386,7 @@
       <span>Company_yearly</span>
     </a> -->
         <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-blue-50"
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/admin/payment"
           routerLinkActive="active"
         >

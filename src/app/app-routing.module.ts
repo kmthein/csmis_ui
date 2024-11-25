@@ -50,6 +50,7 @@ import { TotalMonthlyPaymentComponent } from './payments/total-monthly-payment/t
 import { SuggestDetailsComponent } from './page/admin/suggest-details/suggest-details.component';
 import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.component';
 import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
+import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
 
 const routes: Routes = [
   {
@@ -61,7 +62,7 @@ const routes: Routes = [
       { path: 'lunch', component: LunchRegistrationComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'announcement', component: AnnoucementListComponent },
-      { path: 'announcement/:id', component: AnnoucementListComponent },
+      { path: 'announcement/:id', component: AnnouncementDetailsComponent },
       { path: 'notifications/all', component: AllNotificationsComponent },
       { path: 'avoid', component: DietaryPreferenceComponent },
       {

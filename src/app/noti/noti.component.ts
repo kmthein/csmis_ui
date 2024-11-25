@@ -109,7 +109,7 @@ export class NotiComponent implements OnInit {
 
   navigateToAnnouncementDetails(announceId: string, isSeen: boolean): void {
     if (isSeen) {
-      this.router.navigate([`/admin/announcements/${announceId}`]);
+      this.router.navigate([`/announcement/${announceId}`]);
     } else {
       const form = new FormData();
       const user = JSON.parse(localStorage.getItem('user')!);
@@ -117,7 +117,8 @@ export class NotiComponent implements OnInit {
       this.announcementService
         .getAnnouncementAndMakeSeen(+announceId, form)
         .subscribe((res) => {
-          this.router.navigate([`/admin/announcements/${announceId}`]);
+          console.log(res);
+          this.router.navigate([`/announcement/${announceId}`]);
           this.loadUnreadCount();
         });
     }
