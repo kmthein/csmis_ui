@@ -43,6 +43,8 @@ import {
   ionBuild,
   ionSearch,
   ionCash,
+  ionBanSharp,
+  ionStatsChartSharp,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -240,6 +242,8 @@ import { MeatActionRendererComponent } from './components/meat-action-renderer/m
       ionBuild,
       ionSearch,
       ionCash,
+      ionBanSharp,
+      ionStatsChartSharp,
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

@@ -1,18 +1,24 @@
 <div class="flex gap-4">
   <div class="">
     <h3 class="text-md font-semibold mb-4">My Profile</h3>
-    <img src="assets/profile-lg.png" class="w-40" />
+    <div class="w-[8rem] h-[8rem] rounded-full">
+      <img
+        src="assets/default_profile.jpg"
+        class="w-full rounded-full object-cover"
+      />
+    </div>
   </div>
   <form class="profile-form pt-6 px-8 min-w-[50%]">
-    <div class="border shadow-md rounded-md px-8 py-8 mb-5">
-      <h6 class="text-[#696969] block text-sm font-bold mb-5">
-        Staff Information
+    <div class="border shadow-md rounded-md px-8 pt-10 pb-14 mb-5">
+      <h6 class="text-[#696969] block text-[15px] font-bold mb-8">
+        Your Information
       </h6>
       <div class="flex items-center gap-8 mb-8">
         <label class="text-[#696969] text-sm w-[50%]">Staff ID</label>
         <input
           type="text"
           name="staffId"
+          [(ngModel)]="user.staffId"
           required
           readonly
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
@@ -22,7 +28,8 @@
         <label class="text-[#696969] text-sm w-[50%]">Name</label>
         <input
           type="text"
-          name="staffId"
+          name="name"
+          [(ngModel)]="user.name"
           required
           readonly
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
@@ -32,7 +39,8 @@
         <label class="text-[#696969] text-sm w-[50%]">Door Log No</label>
         <input
           type="text"
-          name="staffId"
+          name="doorLogNo"
+          [(ngModel)]="user.doorLogNo"
           required
           readonly
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
@@ -42,7 +50,8 @@
         <label class="text-[#696969] text-sm w-[50%]">Email</label>
         <input
           type="text"
-          name="staffId"
+          name="email"
+          [(ngModel)]="user.email"
           required
           readonly
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
@@ -52,7 +61,8 @@
         <label class="text-[#696969] text-sm w-[50%]">Division</label>
         <input
           type="text"
-          name="staffId"
+          name="division"
+          [(ngModel)]="user.division"
           required
           readonly
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
@@ -62,7 +72,8 @@
         <label class="text-[#696969] text-sm w-[50%]">Department</label>
         <input
           type="text"
-          name="staffId"
+          name="department"
+          [(ngModel)]="user.department"
           required
           readonly
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
@@ -72,14 +83,15 @@
         <label class="text-[#696969] text-sm w-[50%]">Team</label>
         <input
           type="text"
-          name="staffId"
+          name="team"
+          [(ngModel)]="user.team"
           required
           readonly
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
       </div>
     </div>
-    <div class="border shadow-md rounded-md px-8 py-8 mb-5">
+    <!-- <div class="border shadow-md rounded-md px-8 py-8 mb-5">
       <h6 class="text-[#696969] block text-sm font-bold mb-5">
         User Preference
       </h6>
@@ -159,6 +171,6 @@
           Update
         </button>
       </div>
-    </div>
+    </div> -->
   </form>
 </div>
