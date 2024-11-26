@@ -30,7 +30,7 @@ updateLunchRegistration(userId: number, registrationDto: LunchRegistrationDTO): 
   return this.http.put(`${this.apiUrl}/${userId}`, registrationDto);
 }
 updateLunchRegistrationForNextMonth(userId: number, registrationDto: LunchRegistrationDTO): Observable<any> {
-  return this.http.put<any>(`${this.apiUrl}/api/lunch/update-next-month/${userId}`, registrationDto);
+  return this.http.put<any>(`${this.apiUrl}/update-next-month/${userId}`, registrationDto);
 }
 getLunchDetails(userId: number): Observable<any> {
   return this.http.get<any>(`${this.apiUrl}/get-lunch-details/${userId}`);
@@ -38,4 +38,11 @@ getLunchDetails(userId: number): Observable<any> {
 saveUserCost(userHasLunch: any): Observable<any> {
   return this.http.post<any>(`${this.apiUrl}/saveUserCosts`, userHasLunch);
 }
+checkRegistrationAllowed(): Observable<boolean> {
+  return this.http.get<boolean>(`${this.apiUrl}/can-register`);
+}
+getRegistrationCutoff(): Observable<{ lastRegisterDay: string, lastRegisterTime: string }> {
+  return this.http.get<{ lastRegisterDay: string, lastRegisterTime: string }>('http://localhost:8080/api/settings/registration-cutoff');
+}
+
 }

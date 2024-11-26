@@ -42,7 +42,7 @@ export class WeeklyPaymentService {
   //Admin
 
   getCompanyCostWeekly(departmentId: number | null): Observable<any> {
-    let url = `${this.apiUrl}total-company-cost`; 
+    let url = `${this.apiUrl}/total-company-cost`; 
     if (departmentId !== null) {
       url += `&departmentId=${departmentId}`;
     }

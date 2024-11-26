@@ -272,3 +272,9 @@
 .modal-content input[type="checkbox"] {
   margin-right: 10px;
 }
+.not-selectable {
+  pointer-events: none;
+  background-color: #e0e0e0;
+  color: #aaa;
+  cursor: not-allowed;
+}

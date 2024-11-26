@@ -55,15 +55,15 @@ body {
   
   /* Heading */
   h3 {
-    font-size: 1.1rem;
+    font-size: bold;
     color: #000000;
     margin-top: 0;
   }
   
   /* Paragraph styling */
   p {
-    font-size: 1rem;
-    color: #333;
+    font-size: bold;
+    color: #000000;
     margin: 8px 0;
   }
   
@@ -72,7 +72,7 @@ body {
   p[ngIf="totalCost"] {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #28a745;
+    color: #000000;
   }
   
   /* Border and Shadows for Card Effect */

@@ -9,6 +9,8 @@ import { DietaryPreference } from '../../models/DietaryPreference';
 import { UserService } from '../../services/user/user.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Settings } from '../../DTO/Settings';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-lunch-registration',
@@ -17,6 +19,8 @@ import { of } from 'rxjs';
 })
 export class LunchRegistrationComponent implements OnInit {
   [x: string]: any;
+  currentForMonth = new Date().getMonth(); // Current month (0-based index)
+
   currentMonth: Date = new Date();
   selectedDates: Date[] = [];
   currentMonthDates: Date[] = [];
@@ -33,11 +37,16 @@ export class LunchRegistrationComponent implements OnInit {
   userCost: number | undefined;
   companyCost: number | undefined;
   estMonthlyCost: number = 0;
+  isNextMonthView = false;
+  settings: Settings | undefined;
+  userCostPerDay: number =0;
+  userMonthlyCost: number = 0;
+
 
   public publicHolidays: { date: Date, name: string }[] = [];
 
 
-  constructor(private lunchRegistrationService: LunchRegistrationService,private meatService: MeatService,private userService: UserService, private holidayService: HolidayService) {
+  constructor(private lunchRegistrationService: LunchRegistrationService,private meatService: MeatService,private userService: UserService, private holidayService: HolidayService,private http: HttpClient) {
     this.today = new Date();
     
   }
@@ -48,20 +57,41 @@ export class LunchRegistrationComponent implements OnInit {
     if (user && user.id) {
       this.userId = user.id;
       this.loadUserSelectedDates();
+      this.lunchRegistrationService.getLunchDetails(this.userId).subscribe(data => {
+        this.lunchPrice = data.lunchPrice;
+        this.companyRate = data.companyRate;
+        this.registeredDays = data.registeredDays;
+        this.userCostPerDay =data.userCostPerDay;
+        this.userMonthlyCost = data.userMonthlyCost;
+  
+        this.calculateCost();
+      });
     } else {
       console.error('User not found in local storage!');
     };    this.loadMeats();
+    this['selectedMonth'] = this.currentMonth;
 
+    const today = new Date();
+    const nextMonth = new Date(today.setMonth(today.getMonth() + 1));
+    if (this['selectedMonth'] === nextMonth.getMonth()) {
+      this.isNextMonthView = true;
+    }
     
-    this.lunchRegistrationService.getLunchDetails(this.userId).subscribe(data => {
-      this.lunchPrice = data.lunchPrice;
-      this.companyRate = data.companyRate;
-      this.registeredDays = data.registeredDays;
+   
+    this.loadRegistrationCutoff();
 
-      this.calculateCost();
-    });
+  }
+  scheduleNextWeekCheck() {
+    // Check every day at midnight to refresh the registration status
+    setInterval(() => {
+      this.checkRegistrationWindow();
+    }, 24 * 60 * 60 * 1000); // 24 hours interval (milliseconds)
   }
   
+  checkRegistrationWindow() {
+    // Logic to update registration availability for the next week
+    console.log("Checking registration window...");
+  }
   calculateCost(): void {
     if (this.lunchPrice > 0 && this.companyRate >= 0 && this.registeredDays > 0) {
       const userSharePercentage = 100 - this.companyRate;
@@ -73,6 +103,27 @@ export class LunchRegistrationComponent implements OnInit {
       this.companyCost = companyCostPerDay * this.registeredDays;
     }
   }
+  loadRegistrationCutoff(): void {
+    this.lunchRegistrationService.getRegistrationCutoff().subscribe(
+      (data) => {
+        this.settings = data;  
+        console.log("Registration cutoff:", this.settings);
+
+      },
+      (error) => {
+        console.error('Error loading registration cutoff:', error);
+      }
+    );
+  }
+  // getLunchCostPerDayByUserId(userId: number): void {
+  //   this.http.get(`/api/lunch/cost-per-day/user/${userId}`).subscribe((data: any) => {
+  //     console.log('Lunch cost details:', data);
+  //     this.lunchPrice = data.lunchPrice;
+  //     this.userCostPerDay = data.userCostPerDay;
+  //     this.companyCostPerDay = data.companyCostPerDay;
+  //   });
+  // }
+  
   loadPublicHolidays() {
     this.holidayService.getAllHolidays().subscribe({
       next: (data) => {
@@ -116,6 +167,9 @@ export class LunchRegistrationComponent implements OnInit {
         this.loadPublicHolidays(); 
         this.isFirstRegistration = this.selectedDates.length === 0;
         if (this.isFirstRegistration) this.populateAllWeekdaysExcludingCurrentWeek(this.currentMonth);
+        if (this.isFirstRegistration) this.canRegisterForNextWeek;
+
+this.canRegisterForNextWeek 
       });
     }
   }
@@ -131,21 +185,28 @@ export class LunchRegistrationComponent implements OnInit {
     const year = month.getFullYear();
     const monthIndex = month.getMonth();
     const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-    
-
+  
     this.selectedDates = [];
   
     const today = new Date();
     today.setHours(0, 0, 0, 0); 
-
+  
+    const canRegisterForNextWeek = this.canRegisterForNextWeek();
+  
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, monthIndex, day);
-      
+  
       if (!this.isCurrentWeek(date) && date.getDay() !== 0 && date.getDay() !== 6 && date > today) {
+        if (this.isNextWeek(date) && !canRegisterForNextWeek) {
+          continue;
+        }
+  
+        // Otherwise, allow the date to be selected
         this.selectedDates.push(date);
       }
     }
   }
+  
   isRegistered(date: Date): boolean {
     return this.selectedDates.some(
       (registeredDate) =>
@@ -283,6 +344,7 @@ isCurrentMonth(): boolean {
   }
 
   submitRegistration(): void {
+   
     if (this.userId) {
       const registrationDto: LunchRegistrationDTO = {
         userId: this.userId,
@@ -321,11 +383,10 @@ isCurrentMonth(): boolean {
               console.log('Registration successful for next month:', response);
               alert('Registration successful for next month!');
               this.isFirstRegistration = false;
-              this.openVeganModal();
             },
             (error) => {
               console.error('Error registering for next month:', error);
-              alert('Error registering for next month!');
+              alert(' Error Registration successful for next month!');
             }
           );
         } else {
@@ -336,7 +397,7 @@ isCurrentMonth(): boolean {
             },
             (error) => {
               console.error('Error updating registration for next month:', error);
-              alert('Error updating registration for next month!');
+              alert(' Error Registration updated  for next month!');
             }   
           );
         }
@@ -393,4 +454,106 @@ isCurrentMonth(): boolean {
   });
   
 }
+handleRegistrationClick(): void {
+  if (this.isNextMonthView || !this.isFirstRegistration) {
+    alert('Registration for next month is now closed. Please try again next month.');
+  } else {
+    this.submitRegistration();
+  }
+}
+isNextWeek(date: Date): boolean {
+  const currentDate = new Date();
+
+  const nextWeekStart = new Date(currentDate);
+  nextWeekStart.setDate(currentDate.getDate() + (7 - currentDate.getDay())); // Sunday of next week
+  nextWeekStart.setHours(0, 0, 0, 0);
+
+  const nextWeekEnd = new Date(nextWeekStart);
+  nextWeekEnd.setDate(nextWeekStart.getDate() + 6); // Saturday of next week
+  nextWeekEnd.setHours(23, 59, 59, 999);
+
+  return date >= nextWeekStart && date <= nextWeekEnd;
+}
+canRegisterForNextWeek(): boolean {
+  if (!this.settings?.lastRegisterDay || !this.settings?.lastRegisterTime) {
+    console.error("Settings or required properties are undefined");
+    return false; // Ensure we don't proceed with undefined values
+  }
+
+  const currentDate = new Date();
+
+  // Days of the week mapping to numbers (Sunday = 0, Monday = 1, ... )
+  const dayNameToNumber: { [key: string]: number } = {
+    Sunday: 0,
+    Monday: 1,
+    Tuesday: 2,
+    Wednesday: 3,
+    Thursday: 4,
+    Friday: 5,
+    Saturday: 6,
+  };
+
+  // Get the cutoff day (e.g., Friday)
+  const cutoffDay = dayNameToNumber[this.settings.lastRegisterDay];
+  if (cutoffDay === undefined) {
+    console.error(`Invalid day name: ${this.settings.lastRegisterDay}`);
+    return false;
+  }
+
+  // Calculate the cutoff date and time
+  const cutoffDateTime = new Date(currentDate);
+  const daysUntilCutoff = (cutoffDay - currentDate.getDay() + 7) % 7; // Days until next cutoff day (Friday)
+  cutoffDateTime.setDate(currentDate.getDate() + daysUntilCutoff);
+
+  // Set the cutoff time (e.g., 3:00 PM or 15:00)
+  const [cutoffHour, cutoffMinute] = this.settings.lastRegisterTime.split(':').map(Number);
+  cutoffDateTime.setHours(cutoffHour, cutoffMinute, 0, 0);
+
+  // Log for debugging
+  console.log("Current Date:", currentDate);
+  console.log("Cutoff Date:", cutoffDateTime);
+
+  // Check if today is Friday and if the current time is before the cutoff time
+  if (currentDate.getDay() === cutoffDay) {
+    if (currentDate < cutoffDateTime) {
+      console.log("Registration for next week is allowed (before cutoff time on Friday)");
+      return true; // Allow registration if it's before the cutoff time on Friday
+    } else {
+      console.log("Registration for next week is disabled (after cutoff time on Friday)");
+      return false; // Registration is disabled after the cutoff time on Friday
+    }
+  }
+
+  // If today is before the cutoff day, allow registration for next week
+  if (currentDate.getDay() < cutoffDay) {
+    console.log("Registration for next week is allowed (before cutoff day)");
+    return true; // Allow registration for next week if today is before the cutoff day (Friday)
+  }
+
+  // If it's after the cutoff day and time, disable registration
+  console.log("Registration for next week is disabled (cutoff day and time reached)");
+  return false; // Registration for next week is disabled if today is after the cutoff day
+}
+
+isDateSelectable(date: Date): boolean {
+  const currentDate = new Date();
+  
+  // Calculate next week's start and end date
+  const nextWeekStart = new Date(currentDate);
+  nextWeekStart.setDate(currentDate.getDate() + (7 - currentDate.getDay()));
+  nextWeekStart.setHours(0, 0, 0, 0);
+
+  const nextWeekEnd = new Date(nextWeekStart);
+  nextWeekEnd.setDate(nextWeekStart.getDate() + 6);
+  nextWeekEnd.setHours(23, 59, 59, 999);
+
+  // If the date is within next week's range, check if registration is allowed
+  if (date >= nextWeekStart && date <= nextWeekEnd) {
+    return this.canRegisterForNextWeek(); // Only allow registration for next week if allowed
+  }
+
+  return true; // Allow selection for dates outside the next week
+}
+
+
 }

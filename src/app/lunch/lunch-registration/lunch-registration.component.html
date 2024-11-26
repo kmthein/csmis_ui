@@ -9,22 +9,18 @@
           <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Price Per Lunch</span>
             <span class="w-[30px]"> - </span>
-            <span> MMK {{ lunchPrice }}</span>
+            <span> MMK {{ userCostPerDay || 0  }}</span>
           </h4>
           <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Registered Lunch</span>
             <span class="w-[30px]"> - </span>
             <span>{{ registeredDays }} days</span>
           </h4>
-          <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
-            <span class="min-w-[135px]">Est.Cost Monthly</span>
-            <span class="w-[30px]"> - </span>
-            <span> MMK {{ estMonthlyCost }}</span>
-          </h4>
+          
           <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Your Cost</span>
             <span class="w-[30px]"> - </span>
-            <span> MMK {{ userCost }}</span>
+            <span> MMK {{  userMonthlyCost || 0 }}</span>
           </h4>
           <!-- <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Company Cost</span>
@@ -34,6 +30,7 @@
         </div>
       </div>
     </div>
+    
     <div class="calendar-container bg-[#ffffffd2]" id="calendar">
       <div class="calendar-header bg-[#ffffffd2] border-b mx-3 mb-3">
         <div
@@ -78,7 +75,9 @@
     'past-day': isBeforeOrToday(date),
     'past-weekend': isWeekend(date) ,
     today : isToday(date),
-    'public-holiday': isPublicHoliday(date)
+    'public-holiday': isPublicHoliday(date),
+    'not-selectable': !isDateSelectable(date),  
+
 
   }"
   (click)="toggleDate(date)"
@@ -97,8 +96,8 @@
     [disabled]="
       isWeekend(date) ||
       isBeforeOrToday(date) ||
-      isPublicHoliday(date)
-    "
+      isPublicHoliday(date) ||
+      !isDateSelectable(date)    "
     style="display: none"
   />
 </div>
@@ -107,9 +106,23 @@
       </div>
 
       <div class="register-box flex justify-end mx-[30px]">
-        <button class="register-button" (click)="submitRegistration()">
-          Register
-        </button>
+        <button 
+        class="register-button" 
+        (click)="handleRegistrationClick()">
+        Register
+      </button>
+      <div class="text-center text-sm font-medium mt-4">
+        <p *ngIf="settings?.lastRegisterDay && settings?.lastRegisterTime">
+          <span class="text-gray-700">Last Registration Time:</span> 
+          {{ settings?.lastRegisterDay }} at {{ settings?.lastRegisterTime }}
+        </p>
+        <p *ngIf="!settings?.lastRegisterDay || !settings?.lastRegisterTime" class="text-red-500">
+          Registration details not available.
+        </p>
+      </div>
+      <div *ngIf="isNextMonthView">
+        <p>Registration for next month is now closed. Please try again next month.</p>
+      </div>
       </div>
     </div>
   </div>

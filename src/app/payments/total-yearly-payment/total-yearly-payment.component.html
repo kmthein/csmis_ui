@@ -18,12 +18,15 @@
     <div *ngIf="selectedDepartmentId === null">
       <h3>Total Cost for All Departments</h3>
       <p>{{ totalCostAllDepartments | currency }}</p>
+      <p>Registered Date Count: {{ registeredDateCount }}</p>
+
     </div>
     <div *ngIf="selectedDepartmentId !== null">
       <h3>Total Cost for Selected Department</h3>
       <p>{{ totalCost | currency }}</p>
+      <p>Registered Date Count: {{ registeredDateCount }}</p>
+
     </div>
     
-    <p>Registered Date Count: {{ registeredDateCount }}</p>
   </div>
   
