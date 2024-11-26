@@ -1,0 +1,31 @@
+<div>
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="text-md font-semibold mb-4">Suggestion</h3>
+      <ng-icon (click)="navgiateBack()" name="ionReturnUpBackOutline" class="text-2xl cursor-pointer text-[#363636] hover:text-[#363636]"></ng-icon>
+    </div>
+    <div class="pb-6" *ngFor="let suggestion of suggestions">
+        <div class="bg-white p-4 rounded-md relative">
+            <div class="flex gap-4">
+              <img
+                class="w-12 h-12 rounded object-contain border"
+                src="assets/logo.png"
+                alt="Medium avatar"
+              />
+              <div class="w-full">
+                <div class="mb-3">
+                  <div class="flex justify-between">
+                    <h4>{{ suggestion?.username }}</h4>
+                  </div>
+                  <span class="text-sm text-[#797979]">{{
+                    suggestion?.createdAt | dfnsFormat : "EEE LLLL d yyyy"
+                  }}</span>
+                </div>
+                <div class="mb-3">
+                    <p>{{ suggestion?.content }}</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+  

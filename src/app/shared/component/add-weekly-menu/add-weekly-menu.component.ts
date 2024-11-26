@@ -127,13 +127,14 @@ export class AddWeeklyMenuComponent {
     }
   }
   onSubmit(form: NgForm) {
-    console.log(form.value);
     console.log('Weekly Menu:', this.weeklyMenu);
+    const user = JSON.parse(localStorage.getItem('user')!);    
     const body = {
       price: this.price,
       rate: this.rate,
       restaurant: this.restaurant,
       menuList: this.weeklyMenu,
+      adminId: user?.id
     };
     this.lunchService.addWeeklyLunch(body).subscribe({
       next: (response) => {

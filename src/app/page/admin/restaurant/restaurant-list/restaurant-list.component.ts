@@ -29,7 +29,8 @@ export class RestaurantListComponent {
       cellRenderer: ActionButtonRendererComponent,
       flex: 0.8,
       cellRendererParams: {
-        type: "restaurant"
+        type: "restaurant",
+        getAllRestaurants: this.getAllRestaurants.bind(this)
       },
     },
   ];

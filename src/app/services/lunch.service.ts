@@ -21,6 +21,10 @@ export class LunchService {
     return this.http.get<any>(`${this.apiUrl}/weekly`);
   }
 
+  getNextWeekLunch() {
+    return this.http.get<any>(`${this.apiUrl}/next-week`);
+  }
+
   // Get all lunches
   getAllLunches(): Observable<Lunch[]> {
     return this.http.get<Lunch[]>(this.apiUrl);

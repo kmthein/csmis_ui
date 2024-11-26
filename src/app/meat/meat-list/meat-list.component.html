@@ -1,3 +1,38 @@
+<div class="relative">
+<div class="">
+  <div class="flex justify-between items-center">
+    <h3 class="text-md font-semibold">Meat List</h3>
+    <div
+      class="flex md:order-2 gap-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+    >
+      <button
+        (click)="onCreateMeat()"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-1"
+      >
+        <ng-icon name="ionAddOutline"></ng-icon>
+        Add Meat
+      </button>
+    </div>
+  </div>
+  <div class="my-4">
+    <ag-grid-angular
+      style="width: 100%; height: 100vh"
+      class="ag-theme-alpine"
+      [rowData]="meats"
+      [columnDefs]="colDefs"
+      [pagination]="pagination"
+      [paginationPageSize]="paginationPageSize"
+      [paginationPageSizeSelector]="paginationPageSizeSelector"
+      [gridOptions]="gridOptions"
+    >
+    </ag-grid-angular>
+  </div>
+</div>
+
+<!-- Main modal controlled with *ngIf -->
+
+
+
 <div class="container">
   <div><h2>Meat List</h2>
     <button class="btn btn-success mb-3" (click)="onCreateMeat()">
@@ -40,8 +75,91 @@
     No meats found.
   </div>
 
+  <!-- Main modal -->
+  <div
+  *ngIf="isModalOpen"
+  class="fixed inset-0 z-50 flex items-center justify-center"
+>
+  <!-- Modal Backdrop -->
+  <div
+    class="fixed inset-0 bg-black opacity-50"
+    (click)="closeModal()"
+  ></div>
+
+  <!-- Modal Content Wrapper -->
+  <div class="relative z-10 p-4 w-full max-w-[30rem]">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+      <!-- Modal header -->
+      <div
+        class="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600"
+      >
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+          {{ isEditMode ? 'Edit Meat' : 'Create Meat' }}
+        </h3>
+        <button
+          type="button"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          (click)="closeModal()"
+        >
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+            />
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="p-4 pt-4 pb-8">
+        <form
+          class="mx-auto"
+          #meatForm="ngForm"
+          (ngSubmit)="saveMeat()"
+        >
+        <div class="flex justify-center items-end gap-4">
+          <div>
+            <label
+              for="meatName"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Meat Name</label
+            >
+            <div class="relative">
+              <input
+                class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[0.85rem] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                id="meatName" [(ngModel)]="selectedMeat.name" name="meatName"
+                name="lastRegisterDay"
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              class="bg-[#336699] text-sm hover:bg-[#2c5a88] disabled:bg-slate-400 rounded-md text-white p-[0.85rem]"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- Edit Meat Modal -->
-  <div class="modal fade" id="editMeatModal" tabindex="-1" aria-labelledby="editMeatModalLabel" aria-hidden="true">
+  <div class="bg-white hidden left-[50%] -translate-x-[50%]" id="editMeatModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -64,4 +182,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

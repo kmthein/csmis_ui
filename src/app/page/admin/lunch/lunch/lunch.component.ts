@@ -41,7 +41,8 @@ export class LunchComponent implements OnInit {
       cellRenderer: ActionButtonRendererComponent,
       flex: 0.8,
       cellRendererParams: {
-        type: "menu"
+        type: "menu",
+        loadLunches: this.loadLunches.bind(this)
       },
     },
   ];

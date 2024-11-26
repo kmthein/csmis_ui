@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdminActionService } from '../../../services/admin-action.service';
 
 @Component({
   selector: 'app-action-button-renderer',
@@ -15,7 +16,7 @@ export class ActionButtonRendererComponent {
     this.params = params;
   }
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private adminService: AdminActionService) {
   }
 
   onEdit() {
@@ -26,6 +27,19 @@ export class ActionButtonRendererComponent {
 
 
   onDelete() {
-    alert('Delete action for ' + this.params.data.name);
+    const paramsData = this.params.data;
+    const type = this.params.type;
+    this.adminService.deleteByType(type, paramsData.id).subscribe({
+        next: () => {
+          if(this.params.getAllHolidays) {
+            this.params.getAllHolidays();
+          } else if(this.params.loadLunches) {
+            this.params.loadLunches();
+          } else if(this.params.getAllRestaurants) {
+            this.params.getAllRestaurants();
+          }
+        }, 
+        error: () => console.log('Failed to delete.'),
+    });;
   }
 }

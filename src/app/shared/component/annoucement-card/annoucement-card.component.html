@@ -68,7 +68,7 @@
           [innerHTML]="announcement?.content | safeHtml"
         ></div>
       </div>
-      <div class="mb-3" *ngIf="announcement?.files.length > 0" class="flex items-end gap-4">
+      <div class="mb-3" *ngIf="announcement?.files?.length > 0" class="flex items-end gap-4">
         <div *ngFor="let file of announcement?.files" class="w-[50%] inline-flex justify-center">
           <img
             *ngIf="

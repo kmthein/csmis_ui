@@ -1,7 +1,5 @@
 .calendar-container {
-  width: 60%; /* Increased width for a wider calendar */
   max-width: 1000px; /* Set a max-width to control its size on larger screens */
-  margin: 0 auto; /* Center the calendar on the page */
   border: 1px solid #ccc;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -64,7 +62,6 @@
   background-color: #515dff; /* Optional hover effect */
 }
 
-
 .weekend {
   background-color: #f8d7da; /* Light red background for weekend days */
   color: #999; /* Optional color for weekend text */
@@ -82,11 +79,10 @@
   background-color: #3a6fa3;
 }
 .day.past-weekend {
-  background-color: #FF6347; /* Red for past weekends */
-  color: #FFF;
+  background-color: #ff6347; /* Red for past weekends */
+  color: #fff;
   pointer-events: none;
 }
-
 
 .register-box {
   align-items: center;
@@ -95,16 +91,16 @@
 }
 
 .register-button {
-    margin: 10px 0;
-    background-color: #174572; 
-    color: white; 
-    padding: 8px 15px; 
-    font-size: 13px; 
-    border: none; 
-    border-radius: 8px; 
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 10px 0;
+  background-color: #174572;
+  color: white;
+  padding: 8px 15px;
+  font-size: 13px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .register-button:hover {
@@ -118,42 +114,39 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
 }
 .past-day {
-  opacity: 0.6;               /* Reduce opacity to indicate past days */
-  pointer-events: none;       /* Disable clicks on past days if needed */
-  background-color: #f0f0f0;  /* Light gray background for past days */
-  color: #aaa;                /* Dimmed text color */
+  opacity: 0.6; /* Reduce opacity to indicate past days */
+  pointer-events: none; /* Disable clicks on past days if needed */
+  background-color: #f0f0f0; /* Light gray background for past days */
+  color: #aaa; /* Dimmed text color */
 }
-.day.selected {
-  background-color: #174572;
-  color: #000000;
-}
+
 .date-container {
   display: flex;
   flex-direction: column; /* Stack date and text vertically */
-  align-items: center;    /* Center-align content */
+  align-items: center; /* Center-align content */
 }
 
 .date {
-  font-size: 1.2em;       /* Adjust font size as needed */
+  font-size: 1.2em; /* Adjust font size as needed */
 }
 
 .registered-text {
-  font-size: 0.5em;            /* Smaller font for the badge */
-  color: white;                /* White text */
-  background-color: #6fe775;   /* Button-like blue background */
-  padding: 2px 6px;            /* Padding for button shape */
-  border-radius: 4px;          /* Rounded corners */
-  margin-top: 4px;             /* Space above the registered text */
-  display: inline-block;       /* Display as inline-block */
+  font-size: 0.5em; /* Smaller font for the badge */
+  color: white; /* White text */
+  background-color: #6fe775; /* Button-like blue background */
+  padding: 2px 6px; /* Padding for button shape */
+  border-radius: 4px; /* Rounded corners */
+  margin-top: 4px; /* Space above the registered text */
+  display: inline-block; /* Display as inline-block */
   /* font-weight: bold;      Space between date and text */
 }
 .holiday-text {
-  font-size: 0.5em;            /* Smaller font for the badge */
-  color: white;                /* White text */
-  background-color: #6fe775;   /* Button-like blue background */
-  padding: 2px 6px;            /* Padding for button shape */
-  border-radius: 4px;          /* Rounded corners */
-  margin-top: 4px;             /* Space above the registered text */
+  font-size: 0.5em; /* Smaller font for the badge */
+  color: white; /* White text */
+  background-color: #6fe775; /* Button-like blue background */
+  padding: 2px 6px; /* Padding for button shape */
+  border-radius: 4px; /* Rounded corners */
+  margin-top: 4px; /* Space above the registered text */
   display: inline-block;
 }
 
@@ -161,8 +154,8 @@
   display: block;
   font-size: 0.5em;
   color: green; /* Customize the color as desired */
-  /* margin-top: 5px; */
-/* } */ 
+/* margin-top: 5px; */
+/* } */
 .day.weekend {
   background-color: #ff593b7c; /* Red for weekends */
   color: #000000;
@@ -178,15 +171,16 @@
   pointer-events: none; /* Disable past days */
 }
 .day.public-holiday {
-  background-color: #Ffd700; /* Grey color for holidays */
-  color: #000000;
+  background-color: #ffd700; /* Grey color for holidays */
+  color: #241e00;
   pointer-events: none;
 }
 
 .disabled {
   opacity: 0.5;
   pointer-events: none;
-}.modal {
+}
+.modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -277,4 +271,8 @@
   background-color: #e0e0e0;
   color: #aaa;
   cursor: not-allowed;
+}
+.day.selected {
+  background-color: #174572;
+  color: #f3f3f3;
 }

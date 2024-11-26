@@ -47,6 +47,10 @@ import { ViewPaymentComponent } from './payments/view-payment/view-payment.compo
 import { TotalWeeklyPaymentComponent } from './payments/total-weekly-payment/total-weekly-payment.component';
 import { TotalYearlyPaymentComponent } from './payments/total-yearly-payment/total-yearly-payment.component';
 import { TotalMonthlyPaymentComponent } from './payments/total-monthly-payment/total-monthly-payment.component';
+import { SuggestDetailsComponent } from './page/admin/suggest-details/suggest-details.component';
+import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.component';
+import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
+import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
 
 const routes: Routes = [
   {
@@ -58,17 +62,16 @@ const routes: Routes = [
       { path: 'lunch', component: LunchRegistrationComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'announcement', component: AnnoucementListComponent },
-      { path: 'announcement/:id', component: AnnoucementListComponent },
+      { path: 'announcement/:id', component: AnnouncementDetailsComponent },
+      { path: 'notifications/all', component: AllNotificationsComponent },
       { path: 'avoid', component: DietaryPreferenceComponent },
-
-      
       {
         path: 'lunch-menu',
         component: LunchComponent,
       },
       { path: 'reportViewer', component: ReportViewerComponent },
-      { path: 'suggest', component:SuggestionCreateComponent },
-      { path: 'feedback', component:FeedbackFormComponent}
+      { path: 'suggest', component: SuggestionCreateComponent },
+      { path: 'feedback', component: FeedbackFormComponent },
     ],
   },
   {
@@ -107,7 +110,7 @@ const routes: Routes = [
       { path: 'report/lunch-summary', component: LunchSummaryComponent },
       { path: 'report/department-cost', component: DepartmentCostComponent },
       { path: 'weekly', component: WeeklyPaymentComponent },
-      
+
       { path: 'monthly', component: MonthlyPaymentComponent },
       { path: 'Company_monthly', component: CompanyMonthlyPaymentComponent },
       { path: 'Totalmonthly', component: TotalMonthlyPaymentComponent },
@@ -115,13 +118,13 @@ const routes: Routes = [
       { path: 'yearly', component: YearlyPaymentComponent },
       { path: 'Company_yearly', component: CompanyYearlyPaymentComponent },
 
-      { path: 'Company_weekly', component:       CompanyweeklyPaymentComponent},
-      
-      { path: 'payment', component:       ViewPaymentComponent},
-      { path: 'TotalWeekly', component:       TotalWeeklyPaymentComponent},
-      { path: 'TotalYearly', component:       TotalYearlyPaymentComponent},
+      { path: 'Company_weekly', component: CompanyweeklyPaymentComponent },
 
-      
+      { path: 'payment', component: ViewPaymentComponent },
+      { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
+      { path: 'TotalYearly', component: TotalYearlyPaymentComponent },
+      { path: 'suggestions/:id', component: SuggestDetailsComponent },
+      { path: 'notifications/all', component: SuggestListComponent },
     ],
   },
   {

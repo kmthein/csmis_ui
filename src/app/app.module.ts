@@ -43,6 +43,10 @@ import {
   ionBuild,
   ionSearch,
   ionCash,
+  ionBanSharp,
+  ionStatsChartSharp,
+  ionArrowForward,
+  ionArrowBackOutline,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -117,6 +121,12 @@ import { ViewPaymentComponent } from './payments/view-payment/view-payment.compo
 import { TotalWeeklyPaymentComponent } from './payments/total-weekly-payment/total-weekly-payment.component';
 import { TotalMonthlyPaymentComponent } from './payments/total-monthly-payment/total-monthly-payment.component';
 import { TotalYearlyPaymentComponent } from './payments/total-yearly-payment/total-yearly-payment.component';
+import { RelativeTimePipe } from './core/pipe/relative-time.pipe';
+import { SuggestDetailsComponent } from './page/admin/suggest-details/suggest-details.component';
+import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.component';
+import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
+import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
+import { MeatActionRendererComponent } from './components/meat-action-renderer/meat-action-renderer.component';
 
 @NgModule({
   declarations: [
@@ -181,6 +191,12 @@ import { TotalYearlyPaymentComponent } from './payments/total-yearly-payment/tot
     TotalWeeklyPaymentComponent,
     TotalMonthlyPaymentComponent,
     TotalYearlyPaymentComponent,
+    RelativeTimePipe,
+    SuggestDetailsComponent,
+    SuggestListComponent,
+    AllNotificationsComponent,
+    AnnouncementDetailsComponent,
+    MeatActionRendererComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -227,7 +243,11 @@ import { TotalYearlyPaymentComponent } from './payments/total-yearly-payment/tot
       ionReturnUpBackOutline,
       ionBuild,
       ionSearch,
-      ionCash
+      ionCash,
+      ionBanSharp,
+      ionStatsChartSharp,
+      ionArrowForward,
+      ionArrowBackOutline
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

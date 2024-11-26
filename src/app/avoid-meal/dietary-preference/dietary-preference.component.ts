@@ -5,24 +5,26 @@ import { Meat } from '../../models/meat';
 import { DietaryPreference } from '../../models/DietaryPreference';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dietary-preference',
   templateUrl: './dietary-preference.component.html',
-  styleUrls: ['./dietary-preference.component.css']
+  styleUrls: ['./dietary-preference.component.css'],
 })
 export class DietaryPreferenceComponent implements OnInit {
   userId: number | null = null;
   isVegan: boolean = false;
-  meats: Meat[] = [];  // List of available meats
-  selectedMeats: number[] = [];  // List of selected meats
+  meats: Meat[] = []; // List of available meats
+  selectedMeats: number[] = []; // List of selected meats
   showVeganModal: boolean = false;
   showMeatModal: boolean = false;
   private destroy$ = new Subject<void>(); // For unsubscribing from observables
 
   constructor(
     private userService: UserService,
-    private meatService: MeatService
+    private meatService: MeatService,
+    private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -38,29 +40,31 @@ export class DietaryPreferenceComponent implements OnInit {
 
   loadUserPreferences(): void {
     if (this.userId === null) return;
-    this.userService.getUserPreferences(this.userId)
+    this.userService
+      .getUserPreferences(this.userId)
       .pipe(takeUntil(this.destroy$)) // Unsubscribe when component is destroyed
       .subscribe({
         next: (preferences) => {
           this.isVegan = preferences.isVegan;
           this.selectedMeats = preferences.meatIds;
         },
-        error: (err) => console.error('Error fetching user preferences', err)
+        error: (err) => console.error('Error fetching user preferences', err),
       });
   }
 
   loadMeats(): void {
-    this.meatService.getAllMeats()
+    this.meatService
+      .getAllMeats()
       .pipe(takeUntil(this.destroy$)) // Unsubscribe when component is destroyed
       .subscribe({
-        next: (meats) => this.meats = meats,
-        error: (err) => console.error('Error loading meats', err)
+        next: (meats) => (this.meats = meats),
+        error: (err) => console.error('Error loading meats', err),
       });
   }
 
   toggleVegan(): void {
     if (this.isVegan) {
-      this.selectedMeats = [];  // Clear selected meats if vegan is selected
+      this.selectedMeats = []; // Clear selected meats if vegan is selected
       this.showMeatModal = false;
     } else {
       this.showMeatModal = true;
@@ -78,18 +82,21 @@ export class DietaryPreferenceComponent implements OnInit {
 
   saveDietaryPreferences(): void {
     if (this.userId === null) return;
-    
+
     const preference: DietaryPreference = {
       userId: this.userId,
       isVegan: this.isVegan,
-      meatIds: this.selectedMeats
+      meatIds: this.selectedMeats,
     };
 
-    this.userService.saveDietaryPreference(preference)
+    this.userService
+      .saveDietaryPreference(preference)
       .pipe(takeUntil(this.destroy$)) // Unsubscribe when component is destroyed
       .subscribe({
-        next: () => console.log('Dietary preferences updated successfully'),
-        error: (err) => console.error('Error updating dietary preferences', err)
+        next: () =>
+          this.toast.success('Dietary preferences updated successfully'),
+        error: (err) =>
+          console.error('Error updating dietary preferences', err),
       });
   }
 

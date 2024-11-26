@@ -5,6 +5,7 @@ import { User } from '../../../models/user';
 import { initFlowbite } from 'flowbite';
 import { AnnouncementService } from '../../../services/announcement/announcement.service';
 import { UserService } from '../../../services/user/user.service';
+import { LunchService } from '../../../services/lunch.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,13 +17,66 @@ export class DashboardComponent {
   restaurantName: string = "";
   announcement: any = {};
   receivedMail: boolean = false;
+  isCurrentWeek: boolean = true;
+
+  weeklyMenu: any = [];
+  menuAry: string[] = [];
+  restaurant: any;
+
+  getNextWeekMenu() {
+    this.lunchService.getNextWeekLunch().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.restaurantName = response[response.length - 1].restaurantName;
+        this.weeklyMenu = response.map((data: any) => {
+          return {
+            ...data,
+            menu: data?.menu?.split(','),
+            date: new Date(data?.date),
+          };
+        });
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+
+  getCurrentWeekMenu() {
+    this.lunchService.getWeeklyLunch().subscribe({
+      next: (response) => {
+        console.log(response);
+
+        this.restaurantName = response[response.length - 1].restaurantName;
+        this.weeklyMenu = response.map((data: any) => {
+          return {
+            ...data,
+            menu: data?.menu?.split(','),
+            date: new Date(data?.date),
+          };
+        });
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
 
   // Function to handle the emitted restaurant name
   onRestaurantChange(name: string) {
     this.restaurantName = name;
   }
 
-  constructor(private router: Router, private authService: AuthService, private announceService: AnnouncementService, private userService: UserService) {}
+  toggleNextOrCurrentWeek() {
+      this.isCurrentWeek = !this.isCurrentWeek;
+      if(!this.isCurrentWeek) {
+        this.getNextWeekMenu();
+      } else {
+        this.getCurrentWeekMenu();  
+      }
+  }
+
+  constructor(private router: Router, private authService: AuthService, private announceService: AnnouncementService, private userService: UserService, private lunchService: LunchService) {}
 
   ngOnInit() {
     this.authService.currentUser$.subscribe((user) => {
@@ -38,6 +92,11 @@ export class DashboardComponent {
         console.error(error);
       }
     })
+    if (this.isCurrentWeek) {
+      this.getCurrentWeekMenu();
+    } else {
+      this.getNextWeekMenu();
+    }
   }
 
   toggleMailNoti(notiOn: any) {
