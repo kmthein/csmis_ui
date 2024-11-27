@@ -51,6 +51,7 @@ import { SuggestDetailsComponent } from './page/admin/suggest-details/suggest-de
 import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.component';
 import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
 import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
+import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
 
 const routes: Routes = [
   {
@@ -109,6 +110,7 @@ const routes: Routes = [
       { path: 'report/mail-on', component: MailOnUserComponent },
       { path: 'report/lunch-summary', component: LunchSummaryComponent },
       { path: 'report/department-cost', component: DepartmentCostComponent },
+      { path: 'report/staff-lunch', component: StaffLunchRecordComponent },
       { path: 'weekly', component: WeeklyPaymentComponent },
 
       { path: 'monthly', component: MonthlyPaymentComponent },
