@@ -47,6 +47,7 @@ import {
   ionStatsChartSharp,
   ionArrowForward,
   ionArrowBackOutline,
+  ionCloudUploadOutline
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -128,6 +129,7 @@ import { AllNotificationsComponent } from './page/shared/all-notifications/all-n
 import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
 import { MeatActionRendererComponent } from './components/meat-action-renderer/meat-action-renderer.component';
 import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
+import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
 
 @NgModule({
   declarations: [
@@ -199,6 +201,7 @@ import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lun
     AnnouncementDetailsComponent,
     MeatActionRendererComponent,
     StaffLunchRecordComponent,
+    UserAvoidRecordComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -249,7 +252,8 @@ import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lun
       ionBanSharp,
       ionStatsChartSharp,
       ionArrowForward,
-      ionArrowBackOutline
+      ionArrowBackOutline,
+      ionCloudUploadOutline
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

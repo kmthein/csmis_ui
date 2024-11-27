@@ -1,44 +1,5 @@
 <div class="">
-  <div class="mb-4" *ngIf="weeklyMenu.length > 0">
-    <div class="flex justify-between mb-3">
-      <h3 class="text-md font-semibold" *ngIf="restaurantName != ''">
-        {{ isCurrentWeek ? "This" : "Next" }} Week Lunch Menu
-        <span class="font-normal text-[18px] text-[#444444]"
-          >({{ restaurantName }} Restaurant)</span
-        >
-      </h3>
-      <button
-        *ngIf="weeklyMenu.length > 0"
-        (click)="toggleNextOrCurrentWeek()"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-1"
-      >
-        <ng-icon name="ionArrowBack" *ngIf="!isCurrentWeek" class="text-[1rem]"></ng-icon>
-        {{ isCurrentWeek ? "View Next" : "Back Current" }} Week
-        <ng-icon name="ionArrowForward" *ngIf="isCurrentWeek" class="text-[1rem]"></ng-icon>
-      </button>
-    </div>
-    
-    <div class="flex gap-4 mb-6">
-      <div *ngFor="let menu of weeklyMenu" class="bg-white rounded-md text-center flex-1 max-w-[22%]">
-        <div class="flex justify-center border-b-2 mx-4 py-4 mb-3">
-            <h5 class="uppercase">{{ menu?.date?.toLocaleDateString('en-US', { weekday: 'short' }) }}</h5>
-        </div>
-        <div class="pb-3">
-            <p class="font-medium mb-5">{{ menu?.date | date: 'MMM d, y' }}</p>
-            <div>
-                <span *ngFor="let item of menu.menu" class="block mb-3">{{ item }}</span>
-            </div>
-        </div>
-    </div>
-    </div>
-
-
-  </div>
-  <div class="mb-6" *ngIf="announcement">
-    <h3 class="text-md font-semibold mb-4">Latest Announcement</h3>
-    <app-annoucement-card [announcement]="announcement"></app-annoucement-card>
-  </div>
-  <div class="my-6">
+  <div class="my-3 mb-8">
     <div class="flex gap-4">
       <div
         class="bg-white flex w-[25%] justify-between px-5 py-12 items-center rounded-lg"
@@ -111,5 +72,44 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="mb-4" *ngIf="weeklyMenu.length > 0">
+    <div class="flex justify-between mb-3">
+      <h3 class="text-md font-semibold" *ngIf="restaurantName != ''">
+        {{ isCurrentWeek ? "This" : "Next" }} Week Lunch Menu
+        <span class="font-normal text-[18px] text-[#444444]"
+          >({{ restaurantName }} Restaurant)</span
+        >
+      </h3>
+      <button
+        *ngIf="weeklyMenu.length > 0"
+        (click)="toggleNextOrCurrentWeek()"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-1"
+      >
+        <ng-icon name="ionArrowBack" *ngIf="!isCurrentWeek" class="text-[1rem]"></ng-icon>
+        {{ isCurrentWeek ? "View Next" : "Back Current" }} Week
+        <ng-icon name="ionArrowForward" *ngIf="isCurrentWeek" class="text-[1rem]"></ng-icon>
+      </button>
+    </div>
+    
+    <div class="flex gap-4 mb-6">
+      <div *ngFor="let menu of weeklyMenu" class="bg-white rounded-md text-center flex-1 max-w-[22%]">
+        <div class="flex justify-center border-b-2 mx-4 py-4 mb-3">
+            <h5 class="uppercase">{{ menu?.date?.toLocaleDateString('en-US', { weekday: 'short' }) }}</h5>
+        </div>
+        <div class="pb-3">
+            <p class="font-medium mb-5">{{ menu?.date | date: 'MMM d, y' }}</p>
+            <div>
+                <span *ngFor="let item of menu.menu" class="block mb-3">{{ item }}</span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+  </div>
+  <div class="mb-6" *ngIf="announcement">
+    <h3 class="text-md font-semibold mb-4">Latest Announcement</h3>
+    <app-annoucement-card [announcement]="announcement"></app-annoucement-card>
   </div>
 </div>

@@ -10,6 +10,10 @@ export class ReportService {
 
   constructor(private http: HttpClient) {}
 
+  getUserAvoidMeat() {
+    return this.http.get(`${this.apiUrl}/users-avoid-meat`);
+  }
+
   getStaffLunchRecord(type: string, timeRange: string, form: FormData) {
     if(type == "Registered Eat") {
       if(timeRange == "daily") {
