@@ -47,6 +47,7 @@ import {
   ionStatsChartSharp,
   ionArrowForward,
   ionArrowBackOutline,
+  ionChatboxEllipsesOutline,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -247,7 +248,8 @@ import { MeatActionRendererComponent } from './components/meat-action-renderer/m
       ionBanSharp,
       ionStatsChartSharp,
       ionArrowForward,
-      ionArrowBackOutline
+      ionArrowBackOutline,
+      ionChatboxEllipsesOutline
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

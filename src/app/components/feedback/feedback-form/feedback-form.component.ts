@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FeedbackService } from '../../../services/feedback.service';
 import { LunchService } from '../../../services/lunch.service';
 import { Feedback } from '../../../models/feedback';
@@ -14,31 +15,35 @@ import { AuthService } from '../../../services/auth.service';
 export class FeedbackFormComponent implements OnInit {
   feedback: Feedback = new Feedback();
   lunch: Lunch | null = null; // To hold the fetched lunch data
+  selectedDate: string = ''; // To store the date parameter
 
   constructor(
     private feedbackService: FeedbackService,
     private lunchService: LunchService,
     private toastr: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute // For accessing route parameters
   ) {}
 
   ngOnInit(): void {
-    this.loadTodayLunch();
+    this.loadLunch();
   }
 
-  // Fetch today's lunch (single lunch object expected)
-  loadTodayLunch(): void {
-    const today = new Date().toISOString().split('T')[0]; // Format today's date as YYYY-MM-DD
-    this.lunchService.getLunchByDate(today).subscribe(
-      (lunch: Lunch) => {
-        this.lunch = lunch; // Store the fetched lunch
-        console.log('Lunch fetched successfully:', this.lunch);
-      },
-      (error) => {
-        console.error('Error fetching lunch:', error);
-        this.toastr.error("Error fetching today's lunch. Please try again.", 'Error');
-      }
-    );
+  // Fetch lunch for a specific date (from route params if available, else use today's date)
+  loadLunch(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.selectedDate = params['date'] || new Date().toISOString().split('T')[0]; // Use param date or fallback to today
+      this.lunchService.getLunchByDate(this.selectedDate).subscribe(
+        (lunch: Lunch) => {
+          this.lunch = lunch; // Store the fetched lunch
+          console.log('Lunch fetched successfully:', this.lunch);
+        },
+        (error) => {
+          console.error('Error fetching lunch:', error);
+          this.toastr.error(`Error fetching lunch for ${this.selectedDate}. Please try again.`, 'Error');
+        }
+      );
+    });
   }
 
   // Submit feedback form

@@ -5,6 +5,7 @@ export class Feedback {
   userId: number | null;
   date: Date;
   lunchId: number;
+  
 
   constructor(
     id: number = 0,
