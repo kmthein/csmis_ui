@@ -128,6 +128,7 @@ import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.com
 import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
 import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
 import { MeatActionRendererComponent } from './components/meat-action-renderer/meat-action-renderer.component';
+import { PaymentVoucherComponent } from './payments/payment-voucher/payment-voucher.component';
 
 @NgModule({
   declarations: [
@@ -198,6 +199,7 @@ import { MeatActionRendererComponent } from './components/meat-action-renderer/m
     AllNotificationsComponent,
     AnnouncementDetailsComponent,
     MeatActionRendererComponent,
+    PaymentVoucherComponent,
   ],
   imports: [
     FontAwesomeModule,

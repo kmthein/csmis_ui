@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaymentVoucher } from '../models/paymentVoucher';
 
@@ -37,4 +37,14 @@ export class PaymentVoucherService {
   deletePaymentVoucher(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getQuantity(date: string): Observable<number> {
+    return this.http.get<number>(`http://localhost:8080/api/orders/quantity`, { params: { date } });
+  }
+
+  getTotalCost(date: string): Observable<number> {
+    const params = new HttpParams().set('date', date);
+    return this.http.get<number>(`http://localhost:8080/api/lunches/cost`,{ params: { date } });
+  }
+  
 }

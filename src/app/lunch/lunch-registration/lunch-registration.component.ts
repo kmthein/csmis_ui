@@ -42,6 +42,8 @@ export class LunchRegistrationComponent implements OnInit {
   settings: Settings | undefined;
   userCostPerDay: number =0;
   userMonthlyCost: number = 0;
+ 
+  registeredDates: Date[] = [];
 
 
   public publicHolidays: { date: Date; name: string }[] = [];
@@ -63,14 +65,14 @@ export class LunchRegistrationComponent implements OnInit {
       this.userId = user.id;
       this.loadUserSelectedDates();
       this.lunchRegistrationService.getLunchDetails(this.userId).subscribe(data => {
+        console.log('Data from backend:', data); // Log the response to see the structure and values
         this.lunchPrice = data.lunchPrice;
         this.companyRate = data.companyRate;
-        this.registeredDays = data.registeredDays;
-        this.userCostPerDay =data.userCostPerDay;
-        this.userMonthlyCost = data.userMonthlyCost;
-  
+        this.registeredDays = data.registeredDays; // Ensure this value is correct
+      
         this.calculateCost();
       });
+      
     } else {
       console.error('User not found in local storage!');
     };    this.loadMeats();
@@ -94,24 +96,24 @@ export class LunchRegistrationComponent implements OnInit {
   }
   
   checkRegistrationWindow() {
-    // Logic to update registration availability for the next week
     console.log("Checking registration window...");
   }
   calculateCost(): void {
     if (
       this.lunchPrice > 0 &&
       this.companyRate >= 0 &&
-      this.registeredDays > 0
+      this.registeredDays > 0 // Ensure this condition is met
     ) {
       const userSharePercentage = 100 - this.companyRate;
       const userCostPerDay = (this.lunchPrice * userSharePercentage) / 100;
       const companyCostPerDay = (this.lunchPrice * this.companyRate) / 100;
-      this.estMonthlyCost = this.lunchPrice * this.registeredDays;
-
+  
       this.userCost = userCostPerDay * this.registeredDays;
       this.companyCost = companyCostPerDay * this.registeredDays;
+      this.estMonthlyCost = this.lunchPrice * this.registeredDays;
     }
   }
+  
   loadRegistrationCutoff(): void {
     this.lunchRegistrationService.getRegistrationCutoff().subscribe(
       (data) => {
@@ -439,18 +441,7 @@ this.canRegisterForNextWeek
               alert(' Error Registration successful for next month!');
             }
           );
-        } else {
-          this.lunchRegistrationService.updateLunchRegistrationForNextMonth(this.userId, registrationDto).subscribe(
-            (response) => {
-              console.log('Registration updated successfully for next month:', response);
-              alert('Registration updated successfully for next month!');
-            },
-            (error) => {
-              console.error('Error updating registration for next month:', error);
-              alert(' Error Registration updated  for next month!');
-            }   
-          );
-        }
+        } 
       }
     } else {
       console.error('User ID is not set!');
