@@ -9,11 +9,13 @@ import { AdminActionService } from '../../../services/admin-action.service';
 })
 export class ActionButtonRendererComponent {
   params: any;
+  type: any;
 
   @Output() edit = new EventEmitter<any>();
 
   agInit(params: any): void {
     this.params = params;
+    this.type = params.type;
   }
 
   constructor(private router: Router, private adminService: AdminActionService) {

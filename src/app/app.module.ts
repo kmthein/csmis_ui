@@ -48,6 +48,7 @@ import {
   ionArrowForward,
   ionArrowBackOutline,
   ionChatboxEllipsesOutline,
+  ionCloudUploadOutline
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -129,6 +130,8 @@ import { AllNotificationsComponent } from './page/shared/all-notifications/all-n
 import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
 import { MeatActionRendererComponent } from './components/meat-action-renderer/meat-action-renderer.component';
 import { PaymentVoucherComponent } from './payments/payment-voucher/payment-voucher.component';
+import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
+import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
 
 @NgModule({
   declarations: [
@@ -200,6 +203,8 @@ import { PaymentVoucherComponent } from './payments/payment-voucher/payment-vouc
     AnnouncementDetailsComponent,
     MeatActionRendererComponent,
     PaymentVoucherComponent,
+    StaffLunchRecordComponent,
+    UserAvoidRecordComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -251,7 +256,8 @@ import { PaymentVoucherComponent } from './payments/payment-voucher/payment-vouc
       ionStatsChartSharp,
       ionArrowForward,
       ionArrowBackOutline,
-      ionChatboxEllipsesOutline
+      ionChatboxEllipsesOutline,
+      ionCloudUploadOutline
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

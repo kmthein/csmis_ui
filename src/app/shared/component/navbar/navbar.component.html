@@ -61,10 +61,17 @@
           {{ user?.name || "User 404" }}
           <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
+        <!-- <img
+          data-tooltip-target="tooltip-jese"
+          class="w-12 h-12 rounded-full object-cover"
+          src="assets/default-profile.png"
+          *ngIf="!user?.imgUrl"
+          alt="Medium avatar"
+        /> -->
         <img
           data-tooltip-target="tooltip-jese"
-          class="w-12 h-12 rounded"
-          src="assets/profile1.png"
+          class="w-12 h-12 rounded-full object-cover"
+          [src]="user?.imgUrl || 'assets/default-profile.png'"
           alt="Medium avatar"
         />
       </div>
