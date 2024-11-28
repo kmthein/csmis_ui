@@ -6,7 +6,7 @@ import { DepartmentServiceService } from '../../services/department-service.serv
 @Component({
   selector: 'app-total-weekly-payment',
   templateUrl: './total-weekly-payment.component.html',
-  styleUrl: './total-weekly-payment.component.css'
+  styleUrls: ['./total-weekly-payment.component.css'], // Fix `styleUrl` to `styleUrls`
 })
 export class TotalWeeklyPaymentComponent implements OnInit {
   totalCost: number = 0;
@@ -14,12 +14,14 @@ export class TotalWeeklyPaymentComponent implements OnInit {
   departments: Department[] = [];
   selectedDepartmentId: number | null = null;
 
-  constructor(private weeklyPaymentService: WeeklyPaymentService, 
-              private departmentService: DepartmentServiceService) {}
+  constructor(
+    private weeklyPaymentService: WeeklyPaymentService,
+    private departmentService: DepartmentServiceService
+  ) {}
 
   ngOnInit(): void {
     this.fetchDepartments();
-    this.fetchTotalCostAndDateCount(); 
+    this.fetchTotalCostAndDateCount();
   }
 
   // Fetch all departments
@@ -34,23 +36,31 @@ export class TotalWeeklyPaymentComponent implements OnInit {
     );
   }
 
+  // Fetch total cost and registered date count based on department ID
   fetchTotalCostAndDateCount(): void {
-    this.weeklyPaymentService.getTotalCostAndDateCount(this.selectedDepartmentId ?? undefined).subscribe(
-      (response) => {
-        this.totalCost = response.totalCost;
-        this.registeredDateCount = response.registeredDateCount;
-      },
-      (error) => {
-        console.error('Error fetching total cost and date count', error);
-      }
-    );
+    // Pass undefined if no specific department is selected
+    this.weeklyPaymentService
+      .getTotalCostAndDateCount(this.selectedDepartmentId || undefined)
+      .subscribe(
+        (response) => {
+          this.totalCost = response.totalCost;
+          this.registeredDateCount = response.registeredDateCount;
+        },
+        (error) => {
+          console.error('Error fetching total cost and date count', error);
+        }
+      );
   }
-  
 
-  // Triggered when a department is selected from the dropdown
+  // Handle department dropdown change
   onDepartmentChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-    this.selectedDepartmentId = selectElement.value ? +selectElement.value : null;  // Set selected department
-    this.fetchTotalCostAndDateCount();  // Fetch data for the selected department
+
+    // Explicitly handle "All Departments" option
+    this.selectedDepartmentId =
+      selectElement.value === '' ? null : +selectElement.value;
+
+    // Fetch data for the newly selected department or all departments
+    this.fetchTotalCostAndDateCount();
   }
 }

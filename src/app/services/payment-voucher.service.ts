@@ -38,13 +38,32 @@ export class PaymentVoucherService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  getQuantity(date: string): Observable<number> {
-    return this.http.get<number>(`http://localhost:8080/api/orders/quantity`, { params: { date } });
+  getOrderQuantity(date: string): Observable<number> {
+    return this.http.get<number>(`http://localhost:8080/api/orders/getOrderQuantity`, { params: { date } });
   }
 
   getTotalCost(date: string): Observable<number> {
     const params = new HttpParams().set('date', date);
     return this.http.get<number>(`http://localhost:8080/api/lunches/cost`,{ params: { date } });
+  }
+  getAllAdmins(): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/admin/api/users/getAllAdmins`);
+  }
+  getRestaurantByDate(date: string): Observable<string> {
+    const params = new HttpParams().set('date', date);
+    return this.http.get<string>(`http://localhost:8080/api/orders/restaurant`, { params: { date } });
+  }
+  
+  
+  getAllRestaurants(): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/api/restaurants`);
+  }
+  saveVoucher(date: string, paymentVoucherDTO: any) {
+    const params = new HttpParams().set('selectedDate', date); // Set the selectedDate query parameter
+  
+    const apiUrl = 'http://localhost:8080/api/payment-vouchers/from-date'; 
+  
+    return this.http.post(apiUrl, paymentVoucherDTO, { params });
   }
   
 }
