@@ -1,0 +1,83 @@
+<div class="voucher-container">
+  <h2>Payment Voucher</h2>
+
+  <label for="dateSelect">Choose a Date: </label>
+  <input type="date" id="dateSelect" [(ngModel)]="selectedDate" (change)="onDateChange($event)" />
+
+  <button (click)="calculateWeek()">Generate Voucher</button>
+
+  <div *ngIf="voucherData">
+    <!-- Top Info Section --> 
+    <div class="row">
+      <div class="column">
+        <p><strong>Voucher No:</strong> {{ voucherData.voucherNo }}</p>
+      </div>
+      <div class="column">
+        <p><strong>Payment Date:</strong> {{ voucherData.paymentDate }}</p>
+      </div>
+    </div>
+
+    <!-- Catering Info Section -->
+    <div class="row">
+      <div class="column">
+        <p><strong>Catering Service Name:</strong> {{ voucherData.cateringServiceName }}</p>
+      </div>
+      <div class="column">
+        <p><strong>Invoice Period:</strong> {{ voucherData.invoicePeriod }}</p>
+      </div>
+    </div> 
+
+    <!-- Table Section -->
+    <h4>Voucher Details:</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Date</th>
+          <th>No. of Pax</th>
+          <th>Price</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of voucherData.services; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ service.date }}</td>
+          <td>{{ service.quantity }}</td>
+          <td>{{ service.pricePerPax || 0 }}</td>
+          <td>{{ service.amount }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="total-amount">
+      <p><strong>Total Amount for the Week:</strong> {{ totalAmount }}</p>
+    </div>
+
+    <div *ngIf="voucherData">
+      <div class="row">
+        <div class="column" >
+          <label for="approvedBy">Approved By:</label>
+          <select id="approvedBy" [(ngModel)]="voucherData.approvedBy" name="approvedBy" required>
+            <option *ngFor="let admin of admins" [value]="admin.id">{{ admin.name }}</option>
+          </select>
+          </div>
+        <div class="column">
+          <p><strong>Cashier:</strong> {{ cashier.name }}</p>
+        </div>
+        <!-- <div class="column">
+          <label>Status:</label>
+          <label>
+            <input type="radio" name="status" value="paid" [(ngModel)]="voucherData.status" /> Paid
+          </label>
+          <label>
+            <input type="radio" name="status" value="unpaid" [(ngModel)]="voucherData.status" /> Unpaid
+          </label>
+        </div> -->
+      </div>
+      <button (click)="submitVoucher()" class="btn btn-primary">Save Voucher</button>
+
+    </div>
+  </div>
+</div>
+
