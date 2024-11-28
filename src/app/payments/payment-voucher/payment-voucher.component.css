@@ -1,0 +1,79 @@
+.voucher-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="date"] {
+  padding: 10px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between; /* Distribute the columns evenly */
+  margin: 10px 0;
+}
+
+.column {
+  flex: 1; /* Make each column take equal space */
+  margin-right: 10px; /* Add some spacing between columns */
+}
+
+.column:last-child {
+  margin-right: 0; /* Remove margin for the last column */
+}
+
+  table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse borders for a cleaner appearance */
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px dotted black; /* Add horizontal dotted border */
+    border-right: 1px solid black;  /* Add vertical normal border */
+  }
+  
+  th {
+    background-color: #d3d3d3; /* Light grey background for the header */
+    color: black;
+    font-weight: bold;
+    border-bottom: 2px solid black; /* Solid horizontal line for the header */
+  }
+  
+  tr:last-child td {
+    border-bottom: none; /* Remove horizontal dotted border for the last row */
+  }
+  
+  tr td:last-child, th:last-child {
+    border-right: none; /* Remove vertical line on the last column */
+  }
+  
+.dotted-line {
+  border: none;
+  border-top: 2px dotted black; /* Dotted line styling */
+  margin: 15px 0; /* Add spacing around the line */
+}

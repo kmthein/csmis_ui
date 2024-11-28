@@ -1,5 +1,5 @@
 .calendar-container {
-  max-width: 1000px; /* Set a max-width to control its size on larger screens */
+  max-width: 800px; /* Set a max-width to control its size on larger screens */
   border: 1px solid #ccc;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;

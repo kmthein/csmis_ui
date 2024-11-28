@@ -10,22 +10,18 @@
           <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Price Per Lunch</span>
             <span class="w-[30px]"> - </span>
-            <span> MMK {{ userCostPerDay || 0  }}</span>
+            <span> MMK {{ lunchPrice || 0  }}</span>
           </h4>
           <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Registered Lunch</span>
             <span class="w-[30px]"> - </span>
             <span>{{ registeredDays }} days</span>
           </h4>
-          <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
-            <span class="min-w-[135px]">Est.Cost Monthly</span>
-            <span class="w-[30px]"> - </span>
-            <span> MMK {{ estMonthlyCost }}</span>
-          </h4>
+          
           <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Your Cost</span>
             <span class="w-[30px]"> - </span>
-            <span> MMK {{  userMonthlyCost || 0 }}</span>
+            <span> MMK {{  userCost || 0 }}</span>
           </h4>
           <!-- <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Company Cost</span>
@@ -136,7 +132,7 @@
       <div *ngIf="isNextMonthView">
         <p>Registration for next month is now closed. Please try again next month.</p>
       </div>
-        <button class="register-button" (click)="submitRegistration()">
+        <button class="register-button" (click)="handleRegistrationClick()">
           Register
         </button>
     </div>

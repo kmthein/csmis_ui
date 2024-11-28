@@ -51,6 +51,7 @@ import { SuggestDetailsComponent } from './page/admin/suggest-details/suggest-de
 import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.component';
 import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
 import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
+import { PaymentVoucherComponent } from './payments/payment-voucher/payment-voucher.component';
 
 const routes: Routes = [
   {
@@ -119,6 +120,7 @@ const routes: Routes = [
       { path: 'Company_yearly', component: CompanyYearlyPaymentComponent },
 
       { path: 'Company_weekly', component: CompanyweeklyPaymentComponent },
+      { path: 'vocher', component: PaymentVoucherComponent },
 
       { path: 'payment', component: ViewPaymentComponent },
       { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
