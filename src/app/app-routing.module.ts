@@ -55,6 +55,7 @@ import { PaymentVoucherComponent } from './payments/payment-voucher/payment-vouc
 import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
 import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
 import { OrderCreateComponent } from './components/order/order-create/order-create.component';
+import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
 
 const routes: Routes = [
   {
@@ -131,6 +132,7 @@ const routes: Routes = [
       { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
       { path: 'TotalYearly', component: TotalYearlyPaymentComponent },
       { path: 'suggestions/:id', component: SuggestDetailsComponent },
+      { path: 'feedbacks', component: FeedbackListComponent },
       { path: 'notifications/all', component: SuggestListComponent },
     ],
   },

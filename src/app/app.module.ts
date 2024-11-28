@@ -133,6 +133,7 @@ import { MeatActionRendererComponent } from './components/meat-action-renderer/m
 import { PaymentVoucherComponent } from './payments/payment-voucher/payment-voucher.component';
 import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
 import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
+import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
 
 @NgModule({
   declarations: [
@@ -206,7 +207,8 @@ import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-
     PaymentVoucherComponent,
     StaffLunchRecordComponent,
     UserAvoidRecordComponent,
-    OrderCreateComponent
+    OrderCreateComponent,
+    FeedbackListComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -255,11 +257,12 @@ import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-
       ionSearch,
       ionCash,
       ionBanSharp,
+      ionChatboxEllipsesOutline,
       ionStatsChartSharp,
       ionArrowForward,
       ionArrowBackOutline,
-      ionChatboxEllipsesOutline,
-      ionCloudUploadOutline
+      ionCloudUploadOutline,
+      
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,
