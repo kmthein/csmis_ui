@@ -41,13 +41,21 @@ export class WeeklyPaymentService {
 
   //Admin
 
-  getCompanyCostWeekly(departmentId: number | null): Observable<any> {
-    let url = `${this.apiUrl}/total-company-cost`; 
-    if (departmentId !== null) {
-      url += `&departmentId=${departmentId}`;
-    }
+  // getCompanyCostWeekly(departmentId: number | null): Observable<any> {
+  //   let url = `${this.apiUrl}/total-company-cost`; 
+  //   if (departmentId !== null) {
+  //     url += `&departmentId=${departmentId}`;
+  //   }
 
-    return this.http.get<any>(url);  
+  //   return this.http.get<any>(url);  
+  // }
+
+  getCompanyCostWeekly(departmentId: number | null = null): Observable<any> {
+    const params: any = {};
+    if (departmentId !== null) {
+      params.departmentId = departmentId;
+    }
+    return this.http.get<any>(`${this.apiUrl}/total-company-cost`, { params });
   }
   getCompanyCost(month: number, year: number, departmentId: number | null): Observable<any> {
     let url = `${this.apiUrl}/total-company-cost-and-month-count/${month}/${year}`;

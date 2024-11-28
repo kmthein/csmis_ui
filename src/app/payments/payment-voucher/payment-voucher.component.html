@@ -7,7 +7,7 @@
   <button (click)="calculateWeek()">Generate Voucher</button>
 
   <div *ngIf="voucherData">
-    <!-- Top Info Section -->
+    <!-- Top Info Section --> 
     <div class="row">
       <div class="column">
         <p><strong>Voucher No:</strong> {{ voucherData.voucherNo }}</p>
@@ -25,7 +25,7 @@
       <div class="column">
         <p><strong>Invoice Period:</strong> {{ voucherData.invoicePeriod }}</p>
       </div>
-    </div>
+    </div> 
 
     <!-- Table Section -->
     <h4>Voucher Details:</h4>
@@ -50,9 +50,34 @@
       </tbody>
     </table>
 
-    <!-- Total Amount -->
     <div class="total-amount">
       <p><strong>Total Amount for the Week:</strong> {{ totalAmount }}</p>
     </div>
+
+    <div *ngIf="voucherData">
+      <div class="row">
+        <div class="column" >
+          <label for="approvedBy">Approved By:</label>
+          <select id="approvedBy" [(ngModel)]="voucherData.approvedBy" name="approvedBy" required>
+            <option *ngFor="let admin of admins" [value]="admin.id">{{ admin.name }}</option>
+          </select>
+          </div>
+        <div class="column">
+          <p><strong>Cashier:</strong> {{ cashier.name }}</p>
+        </div>
+        <!-- <div class="column">
+          <label>Status:</label>
+          <label>
+            <input type="radio" name="status" value="paid" [(ngModel)]="voucherData.status" /> Paid
+          </label>
+          <label>
+            <input type="radio" name="status" value="unpaid" [(ngModel)]="voucherData.status" /> Unpaid
+          </label>
+        </div> -->
+      </div>
+      <button (click)="submitVoucher()" class="btn btn-primary">Save Voucher</button>
+
+    </div>
   </div>
 </div>
+

@@ -4,6 +4,7 @@
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  background-color: #f9f9f9; /* Light background color for the container */
 }
 
 h2 {
@@ -11,9 +12,12 @@ h2 {
   margin-bottom: 20px;
 }
 
-input[type="date"] {
+input[type="date"], select, textarea {
   padding: 10px;
-  margin-right: 10px;
+  margin: 10px 0;
+  width: 50%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
 button {
@@ -29,51 +33,92 @@ button:hover {
   background-color: #45a049;
 }
 
+button[type="button"] {
+  background-color: #f44336;
+}
+
+button[type="button"]:hover {
+  background-color: #d32f2f;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60%;
+}
+
+form .form-group {
+  margin-bottom: 15px;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px dotted black;
+  border-right: 1px solid black;
+}
+
+th {
+  background-color: #d3d3d3;
+  font-weight: bold;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr td:last-child, th:last-child {
+  border-right: none;
+}
+
+.total-amount {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 .row {
   display: flex;
-  justify-content: space-between; /* Distribute the columns evenly */
+  justify-content: space-between;
   margin: 10px 0;
 }
 
 .column {
-  flex: 1; /* Make each column take equal space */
-  margin-right: 10px; /* Add some spacing between columns */
+  flex: 1;
+  margin-right: 10px;
 }
 
 .column:last-child {
-  margin-right: 0; /* Remove margin for the last column */
+  margin-right: 0;
 }
 
-  table {
-    width: 100%;
-    border-collapse: collapse; /* Collapse borders for a cleaner appearance */
-    margin-top: 20px;
-  }
-  
-  th, td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px dotted black; /* Add horizontal dotted border */
-    border-right: 1px solid black;  /* Add vertical normal border */
-  }
-  
-  th {
-    background-color: #d3d3d3; /* Light grey background for the header */
-    color: black;
-    font-weight: bold;
-    border-bottom: 2px solid black; /* Solid horizontal line for the header */
-  }
-  
-  tr:last-child td {
-    border-bottom: none; /* Remove horizontal dotted border for the last row */
-  }
-  
-  tr td:last-child, th:last-child {
-    border-right: none; /* Remove vertical line on the last column */
-  }
-  
 .dotted-line {
   border: none;
-  border-top: 2px dotted black; /* Dotted line styling */
-  margin: 15px 0; /* Add spacing around the line */
+  border-top: 2px dotted black;
+  margin: 15px 0;
 }
