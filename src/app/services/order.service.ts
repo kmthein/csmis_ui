@@ -16,8 +16,20 @@ export class OrderService {
     return this.http.get<number>(`${this.apiUrl}/quantity`, { params });
   }
 
+  getNextWeekOrder() {
+    return this.http.get(`${this.apiUrl}/check-exist`);
+  }
+
+  getOrderByDate(date: string) {
+    const form = new FormData();
+    form.append('date', date);
+    return this.http.put(`${this.apiUrl}/find-date`, form);
+  }
+
   getNextWeekRegister() {
-    return this.http.get(`http://localhost:8080/api/lunch/lunch-count-next-week`);
+    return this.http.get(
+      `http://localhost:8080/api/lunch/lunch-count-next-week`
+    );
   }
 
   // Create a new order

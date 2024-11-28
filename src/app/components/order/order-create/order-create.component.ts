@@ -25,13 +25,12 @@ export class OrderCreateComponent implements OnInit {
   restaurants: any = [];
   restaurantId!: number;
   publicHolidays: any = [];
+  orderAlreadyExist: boolean = false;
 
   calculateWeek() {
-    if (!this.selectedDate) {
-      return;
-    }
-
-    const selected = new Date(this.selectedDate);
+    const selected = new Date(
+      this.registerData[0]?.lunchDate || this.selectedDate
+    );
     const dayOfWeek = selected.getDay();
     const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
 
@@ -42,13 +41,20 @@ export class OrderCreateComponent implements OnInit {
     for (let i = 0; i < 5; i++) {
       const day = new Date(startOfWeek);
       day.setDate(startOfWeek.getDate() + i);
-      this.weekDates.push(day.toISOString().split('T')[0]);
+      const formattedDate = day.toISOString().split('T')[0];
+
+      // Exclude dates that match public holidays
+      if (!this.publicHolidays.includes(formattedDate)) {
+        this.weekDates.push(formattedDate);
+      }
     }
+    console.log('Filtered Week Dates:', this.weekDates);
   }
 
   onDateChange(event: any) {
     this.selectedDate = event.target.value;
     this.calculateWeek();
+    this.getNextWeekRegister(); // Reload register data after filtering
   }
 
   constructor(
@@ -61,16 +67,23 @@ export class OrderCreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.checkOrderAlreadyMade();
     this.getAllRestaurants();
     this.loadPublicHolidays();
+  }
+
+  checkOrderAlreadyMade() {
+    this.orderService.getNextWeekOrder().subscribe((res: any) => {
+      if (res.length > 0) {
+        this.orderAlreadyExist = true;
+      }
+    });
   }
 
   loadPublicHolidays() {
     this.holidayService.getAllHolidays().subscribe({
       next: (data) => {
-        this.publicHolidays = data.map(
-          (holiday: any) => new Date(holiday.date)
-        );
+        this.publicHolidays = data.map((holiday: any) => holiday.date);
         this.getNextWeekRegister();
       },
       error: (error) => {
@@ -104,12 +117,8 @@ export class OrderCreateComponent implements OnInit {
   }
 
   isPublicHoliday(date: Date): boolean {
-    return this.publicHolidays.some(
-      (holiday: any) =>
-        holiday.getDate() === date.getDate() &&
-        holiday.getMonth() === date.getMonth() &&
-        holiday.getFullYear() === date.getFullYear()
-    );
+    const formattedDate = date.toISOString().split('T')[0];
+    return this.publicHolidays.includes(formattedDate);
   }
 
   onChangeRestaurant(event: any) {
@@ -117,45 +126,45 @@ export class OrderCreateComponent implements OnInit {
   }
 
   getAllRestaurants() {
-    this.restaurantService.getAllRestaurants().subscribe(res => {
+    this.restaurantService.getAllRestaurants().subscribe((res) => {
       this.restaurants = res;
       this.restaurantId = res[0].id;
-    })
+    });
   }
 
   getNextWeekRegister() {
-  this.orderService.getNextWeekRegister().subscribe((res: any) => {
-    // Extract holiday dates as ISO strings for comparison
-    const holidayDates = this.publicHolidays.map((holiday: any) => holiday.date);
+    this.orderService.getNextWeekRegister().subscribe((res: any) => {
+      const holidayDates = this.publicHolidays.map((holiday: any) => holiday); // ISO format
 
-    // Filter out entries where lunchDate matches any holiday date
-    this.registerData = res.filter((data: any) => !holidayDates.includes(data.lunchDate));
+      this.registerData = res.filter(
+        (data: any) => !holidayDates.includes(data.lunchDate) // Exclude holidays
+      );
 
-    // Calculate total amount based on the filtered data
-    this.totalAmount = this.registerData.reduce((total: number, data: any) => {
-      const oneDayAmount = data.cost * data.quantity;
-      return total + oneDayAmount;
-    }, 0);
-  });
-}
-
+      this.totalAmount = this.registerData.reduce(
+        (total: number, data: any) => {
+          return total + data.cost * data.quantity; // Calculate total amount
+        },
+        0
+      );
+    });
+  }
 
   updateTotalAmount(): void {
     this.totalAmount = this.registerData.reduce((sum: any, service: any) => {
-      return sum + (service.quantity * service.cost);
+      return sum + service.quantity * service.cost;
     }, 0);
   }
 
   // Submit the form
   onSubmit(): void {
     console.log(this.registerData);
-    const user = JSON.parse(localStorage.getItem("user")!);
+    const user = JSON.parse(localStorage.getItem('user')!);
     const data = {
       orderDate: new Date().toISOString(),
       restaurantId: this.restaurantId,
       adminId: user?.id,
-      rows: this.registerData
-    }
+      rows: this.registerData,
+    };
     // if (this.order.message.trim() === '') {
     //   this.toastr.error('Message is required.', 'Error');
     //   return;
@@ -164,11 +173,11 @@ export class OrderCreateComponent implements OnInit {
     this.orderService.createOrder(data).subscribe(
       (response) => {
         this.toastr.success('Order created successfully!', 'Success');
-        this.router.navigate(['/orders']); // Navigate to the order list
+        this.router.navigate(['/admin']); // Navigate to the order list
       },
       (error) => {
         console.error('Error creating order:', error);
-        this.toastr.error('Error creating order. Please try again.', 'Error');
+        this.toastr.error('Error creating order. Please try again.');
       }
     );
   }

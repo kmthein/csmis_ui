@@ -1,59 +1,83 @@
 <div class="voucher-container">
-    <h2>Create New Order</h2>
-  
-    <div *ngIf="registerData">  
-      <!-- Catering Info Section -->
-      <div class="row">
-        <div class="column">
-          <p><strong>Catering Service Name:</strong> <select (change)="onChangeRestaurant($event)"
-            class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 ml-3 h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"><option *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{ restaurant.name }}</option></select></p>
-        </div>
-      </div>
-  
-      <!-- Table Section -->
-      <h4>Order Details:</h4>
-      <table class="table-auto w-full border-collapse border border-gray-200 rounded-lg shadow-md">
-        <thead class="bg-blue-500 text-white">
-          <tr>
-            <th class="py-2 px-4 text-left">Sr. No.</th>
-            <th class="py-2 px-4 text-left">Date</th>
-            <th class="py-2 px-2 text-left w-40">No. of Pax</th> <!-- Reduced width -->
-            <th class="py-2 px-4 text-left">Price</th>
-            <th class="py-2 px-4 text-left">Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr 
-            *ngFor="let service of registerData; let i = index" 
-            class="odd:bg-white even:bg-gray-50 hover:bg-gray-100"
+  <h2>Create New Order</h2>
+
+  <div *ngIf="registerData && !orderAlreadyExist">
+    <!-- Catering Info Section -->
+    <div class="row">
+      <div class="column">
+        <p>
+          <strong>Catering Service Name:</strong>
+          <select
+            (change)="onChangeRestaurant($event)"
+            class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 ml-3 h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
-            <td class="py-2 px-4">{{ i + 1 }}</td>
-            <td class="py-2 px-4">{{ service.lunchDate }}</td>
-            <td class="py-2 px-2 w-20">
-              <input 
-                type="number" 
-                name="service.quantity" 
-                min="0" 
-                [(ngModel)]="service.quantity" 
-                (change)="updateTotalAmount()"
-                class="w-full border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-blue-400 text-center"
-              />
-            </td>
-            <td class="py-2 px-4">{{ service.cost || 0 }}</td>
-            <td class="py-2 px-4">{{ service.quantity * service.cost }}</td>
-          </tr>
-          <tr class="bg-gray-100 font-semibold text-gray-700">
-            <td class="py-2 px-4"></td>
-            <td class="py-2 px-4"></td>
-            <td class="py-2 px-4"></td>
-            <td class="py-2 px-4 text-right">Total</td>
-            <td class="py-2 px-4">{{ totalAmount }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="flex justify-end mt-5">
-        <button (click)="onSubmit()">Send Order</button>
+            <option
+              *ngFor="let restaurant of restaurants"
+              [value]="restaurant.id"
+            >
+              {{ restaurant.name }}
+            </option>
+          </select>
+        </p>
       </div>
     </div>
+
+    <!-- Table Section -->
+    <h4>Order Details:</h4>
+    <table
+      class="table-auto w-full border-collapse border border-gray-200 rounded-lg shadow-md"
+    >
+      <thead class="bg-blue-500 text-white">
+        <tr>
+          <th class="py-2 px-4 text-left">Sr. No.</th>
+          <th class="py-2 px-4 text-left">Date</th>
+          <th class="py-2 px-2 text-left w-40">No. of Pax</th>
+          <!-- Reduced width -->
+          <th class="py-2 px-4 text-left">Price</th>
+          <th class="py-2 px-4 text-left">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let service of registerData; let i = index"
+          class="odd:bg-white even:bg-gray-50 hover:bg-gray-100"
+        >
+          <td class="py-2 px-4">{{ i + 1 }}</td>
+          <td class="py-2 px-4">{{ service.lunchDate }}</td>
+          <td class="py-2 px-2 w-20">
+            <input
+              type="number"
+              name="service.quantity"
+              min="0"
+              [(ngModel)]="service.quantity"
+              (change)="updateTotalAmount()"
+              class="w-full border border-gray-300 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-blue-400 text-center"
+            />
+          </td>
+          <td class="py-2 px-4">{{ service.cost || 0 }}</td>
+          <td class="py-2 px-4">{{ service.quantity * service.cost }}</td>
+        </tr>
+        <tr class="bg-gray-100 font-semibold text-gray-700">
+          <td class="py-2 px-4"></td>
+          <td class="py-2 px-4"></td>
+          <td class="py-2 px-4"></td>
+          <td class="py-2 px-4 text-right">Total</td>
+          <td class="py-2 px-4">{{ totalAmount }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="flex justify-end mt-5">
+      <button (click)="onSubmit()">Send Order</button>
+    </div>
   </div>
-  
+
+  <div *ngIf="orderAlreadyExist">
+    <p class="text-center mb-6">
+      Order was already submitted, you can order again after last registration
+      time next week!
+    </p>
+    <div class="flex justify-center mb-4">
+      <a routerLink="/admin"><button>Back to Home</button></a>
+    </div>
+  </div>
+</div>

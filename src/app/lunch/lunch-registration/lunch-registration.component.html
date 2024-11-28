@@ -10,18 +10,18 @@
           <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Price Per Lunch</span>
             <span class="w-[30px]"> - </span>
-            <span> MMK {{ lunchPrice || 0  }}</span>
+            <span> MMK {{ lunchPrice || 0 }}</span>
           </h4>
           <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Registered Lunch</span>
             <span class="w-[30px]"> - </span>
             <span>{{ registeredDays }} days</span>
           </h4>
-          
+
           <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Your Cost</span>
             <span class="w-[30px]"> - </span>
-            <span> MMK {{  userCost || 0 }}</span>
+            <span> MMK {{ userCost || 0 }}</span>
           </h4>
           <!-- <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Company Cost</span>
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="calendar-container bg-[#ffffffd2]" id="calendar">
       <div class="calendar-header bg-[#ffffffd2] border-b mx-3 mb-3">
         <div
@@ -68,9 +68,9 @@
             <div class="empty-day"></div>
           </div>
           <div
-  class="day"
-  *ngFor="let date of currentMonthDates"
-  [ngClass]="{
+            class="day"
+            *ngFor="let date of currentMonthDates"
+            [ngClass]="{
     selected: isDateSelected(date) && !isPublicHoliday(date),
     weekend: isWeekend(date),
     'past-day': isBeforeOrToday(date),
@@ -81,89 +81,98 @@
 
 
   }"
-  (click)="toggleDate(date)"
->
-<div class="date-container">
-  <span class="date">{{ date.getDate() }}</span>
-  <!-- <span *ngIf="isRegistered(date)" class="registered-text">registered</span> -->
+            (click)="toggleDate(date)"
+          >
+            <div class="date-container">
+              <span class="date">{{ date.getDate() }}</span>
+              <!-- <span *ngIf="isRegistered(date)" class="registered-text">registered</span> -->
+            </div>
 
-</div>
-
-
-  <input
-    type="checkbox"
-    [checked]="isDateSelected(date)"
-    (change)="toggleDate(date)"
-    [disabled]="
-      isWeekend(date) ||
-      isBeforeOrToday(date) ||
-      isPublicHoliday(date) ||
-      !isDateSelectable(date)    "
-    style="display: none"
-  />
-</div>
+            <input
+              type="checkbox"
+              [checked]="isDateSelected(date)"
+              (change)="toggleDate(date)"
+              [disabled]="
+                isWeekend(date) ||
+                isBeforeOrToday(date) ||
+                isPublicHoliday(date) ||
+                !isDateSelectable(date)
+              "
+              style="display: none"
+            />
+          </div>
         </div>
       </div>
 
       <div class="register-box flex justify-between mx-[30px]">
-      <div class="text-sm font-medium my-4 mb-6">
-        <p *ngIf="settings?.lastRegisterDay && settings?.lastRegisterTime">
-          <span class="text-gray-700">Last Registration Time:</span> 
-          {{ settings?.lastRegisterDay }} at {{ settings?.lastRegisterTime }}
-        </p>
-        <p *ngIf="!settings?.lastRegisterDay || !settings?.lastRegisterTime" class="text-red-500">
-          Registration details not available.
-        </p>
-        <div class="flex gap-3 mt-2">
-          <div class="flex items-center gap-1">
-            <div class="bg-[#174572] w-3 h-3"></div>
-            <span class="text-sm text-black/90">Registered</span>
-          </div>
-          <div class="flex items-center gap-1">
-            <div class="bg-[#FEAD9F] w-3 h-3"></div>
-            <span class="text-sm text-black/90">Weekend</span>
-          </div>
-          <div class="flex items-center gap-1">
-            <div class="bg-[#FFD700] w-3 h-3"></div>
-            <span class="text-sm text-black/90">Public Holiday</span>
+        <div class="text-sm font-medium my-4 mb-6">
+          <p *ngIf="isNextMonthView">
+            Registration for next month can be update in next month.
+          </p>
+          <p
+            *ngIf="
+              settings?.lastRegisterDay &&
+              settings?.lastRegisterTime &&
+              !isNextMonthView
+            "
+          >
+            <span class="text-gray-700">Last Registration Time:</span>
+            {{ settings?.lastRegisterDay }} at {{ settings?.lastRegisterTime }}
+          </p>
+          <p
+            *ngIf="!settings?.lastRegisterDay || !settings?.lastRegisterTime"
+            class="text-red-500"
+          >
+            Registration details not available.
+          </p>
+          <div class="flex gap-3 mt-2">
+            <div class="flex items-center gap-1">
+              <div class="bg-[#174572] w-3 h-3"></div>
+              <span class="text-sm text-black/90">Registered</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <div class="bg-[#FEAD9F] w-3 h-3"></div>
+              <span class="text-sm text-black/90">Weekend</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <div class="bg-[#FFD700] w-3 h-3"></div>
+              <span class="text-sm text-black/90">Public Holiday</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div *ngIf="isNextMonthView">
-        <p>Registration for next month is now closed. Please try again next month.</p>
-      </div>
         <button class="register-button" (click)="handleRegistrationClick()">
           Register
         </button>
+      </div>
     </div>
   </div>
-</div>
-<!-- Vegan Modal -->
-<div *ngIf="showVeganModal" class="modal">
-  <div class="modal-content">
-    <p>Are you a vegan?</p>
-    <div class="vegan-buttons">
-      <button (click)="setVegan(true)">Yes</button>
-      <button (click)="setVegan(false)">No</button>
+  <!-- Vegan Modal -->
+  <div *ngIf="showVeganModal" class="modal">
+    <div class="modal-content">
+      <p>Are you a vegan?</p>
+      <div class="vegan-buttons">
+        <button (click)="setVegan(true)">Yes</button>
+        <button (click)="setVegan(false)">No</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Meat Selection Modal -->
-<div *ngIf="showMeatModal" class="modal">
-  <div class="modal-content">
-    <p>Select the meats you avoid:</p>
-    <div *ngFor="let meat of meats">
-      <input
-        type="checkbox"
-        [value]="meat.id"
-        (change)="toggleMeatSelection(meat)"
-      />
-      {{ meat.name }}
-    </div>
-    <div class="meat-buttons">
-      <button (click)="submitAvoidedMeats()">Save</button>
-      <button (click)="closeModal()">Close</button>
+  <!-- Meat Selection Modal -->
+  <div *ngIf="showMeatModal" class="modal">
+    <div class="modal-content">
+      <p>Select the meats you avoid:</p>
+      <div *ngFor="let meat of meats">
+        <input
+          type="checkbox"
+          [value]="meat.id"
+          (change)="toggleMeatSelection(meat)"
+        />
+        {{ meat.name }}
+      </div>
+      <div class="meat-buttons">
+        <button (click)="submitAvoidedMeats()">Save</button>
+        <button (click)="closeModal()">Close</button>
+      </div>
     </div>
   </div>
 </div>

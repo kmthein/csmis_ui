@@ -48,7 +48,8 @@ import {
   ionArrowForward,
   ionArrowBackOutline,
   ionChatboxEllipsesOutline,
-  ionCloudUploadOutline
+  ionCloudUploadOutline,
+  ionCart,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -133,6 +134,8 @@ import { MeatActionRendererComponent } from './components/meat-action-renderer/m
 import { PaymentVoucherComponent } from './payments/payment-voucher/payment-voucher.component';
 import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
 import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
+import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
+import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
 
 @NgModule({
   declarations: [
@@ -206,7 +209,9 @@ import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-
     PaymentVoucherComponent,
     StaffLunchRecordComponent,
     UserAvoidRecordComponent,
-    OrderCreateComponent
+    OrderCreateComponent,
+    VoucherListComponent,
+    EditVoucherComponent,
   ],
   imports: [
     FontAwesomeModule,
@@ -259,7 +264,8 @@ import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-
       ionArrowForward,
       ionArrowBackOutline,
       ionChatboxEllipsesOutline,
-      ionCloudUploadOutline
+      ionCloudUploadOutline,
+      ionCart,
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

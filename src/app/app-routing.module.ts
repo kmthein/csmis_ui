@@ -55,6 +55,8 @@ import { PaymentVoucherComponent } from './payments/payment-voucher/payment-vouc
 import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
 import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
 import { OrderCreateComponent } from './components/order/order-create/order-create.component';
+import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
+import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
 
 const routes: Routes = [
   {
@@ -108,7 +110,6 @@ const routes: Routes = [
       },
       { path: 'meats', component: MeatListComponent },
       { path: 'report/lunch-summary', component: LunchSummaryComponent },
-      { path: 'create-voucher', component: CreateVoucherComponent },
       { path: 'settings', component: SettingComponent },
       { path: 'report/mail-on', component: MailOnUserComponent },
       { path: 'report/lunch-summary', component: LunchSummaryComponent },
@@ -125,7 +126,9 @@ const routes: Routes = [
       { path: 'Company_yearly', component: CompanyYearlyPaymentComponent },
 
       { path: 'Company_weekly', component: CompanyweeklyPaymentComponent },
-      { path: 'vocher', component: PaymentVoucherComponent },
+      { path: 'voucher', component: VoucherListComponent },
+      { path: 'voucher/new', component: PaymentVoucherComponent },
+      { path: 'voucher/edit/:id', component: EditVoucherComponent },
       { path: 'order', component: OrderCreateComponent },
       { path: 'payment', component: ViewPaymentComponent },
       { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
