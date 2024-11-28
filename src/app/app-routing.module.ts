@@ -54,6 +54,7 @@ import { AnnouncementDetailsComponent } from './page/shared/announcement-details
 import { PaymentVoucherComponent } from './payments/payment-voucher/payment-voucher.component';
 import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
 import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
+import { OrderCreateComponent } from './components/order/order-create/order-create.component';
 
 const routes: Routes = [
   {
@@ -125,7 +126,7 @@ const routes: Routes = [
 
       { path: 'Company_weekly', component: CompanyweeklyPaymentComponent },
       { path: 'vocher', component: PaymentVoucherComponent },
-
+      { path: 'order', component: OrderCreateComponent },
       { path: 'payment', component: ViewPaymentComponent },
       { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
       { path: 'TotalYearly', component: TotalYearlyPaymentComponent },
