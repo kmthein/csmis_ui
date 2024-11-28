@@ -111,6 +111,7 @@ import { AgChartsModule } from 'ag-charts-angular';
 import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
 import { CreateVoucherComponent } from './components/payment-voucher/create-voucher/create-voucher.component';
+import { OrderCreateComponent } from './components/order/order-create/order-create.component';
 import { DepartmentCostComponent } from './report/department-cost/department-cost.component';
 import { DietaryPreferenceComponent } from './avoid-meal/dietary-preference/dietary-preference.component';
 import { WeeklyPaymentComponent } from './payments/weekly-payment/weekly-payment.component';
@@ -205,6 +206,7 @@ import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-
     PaymentVoucherComponent,
     StaffLunchRecordComponent,
     UserAvoidRecordComponent,
+    OrderCreateComponent
   ],
   imports: [
     FontAwesomeModule,
