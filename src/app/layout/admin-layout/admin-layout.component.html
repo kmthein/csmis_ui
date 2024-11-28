@@ -1,0 +1,11 @@
+<div class="md:flex">
+  <div class="absolute md:static md:w-[20%] z-50">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="w-full md:w-[80%]">
+    <app-navbar class="sticky top-0 z-[10]"></app-navbar>
+    <div class="px-8 bg-[#F2F2F2] min-h-screen pt-4 pb-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

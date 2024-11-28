@@ -1,0 +1,111 @@
+<div>
+  <h3 class="text-md font-semibold mb-4">Dietary Preferences</h3>
+  <!-- Vegan Toggle Switch -->
+  <div class="toggle-container">
+    <label for="isVegan">Vegan: </label>
+    <label class="switch">
+      <input type="checkbox" [(ngModel)]="isVegan" (change)="toggleVegan()" />
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <!-- Always Show Meat Selection -->
+  <div>
+    <h3 class="font-medium text-[16px] mb-2">Select Meats</h3>
+    <div class="mb-3" *ngFor="let meat of meats">
+      <label class="flex items-center gap-2">
+        <input
+          type="checkbox"
+          [checked]="isVegan ? false : selectedMeats.includes(meat.id)"
+          (change)="toggleMeatSelection(meat.id)"
+          [disabled]="isVegan"
+        />
+        {{ meat.name }}
+      </label>
+    </div>
+  </div>
+
+  <!-- Vegan Warning Modal (if selected) -->
+  <div *ngIf="isVegan && !showMeatModal" class="mb-2">
+    <p>
+      You have selected Vegan. All meats will be deselected and cannot be
+      selected.
+    </p>
+  </div>
+
+  <!-- Save Preferences Button -->
+  <button (click)="saveDietaryPreferences()">Save Preferences</button>
+</div>
+
+<!-- Add some styling for the switch -->
+<style>
+  .dietary-preference-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+    margin-left: 10px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+  }
+
+  input:checked + .slider {
+    background-color: #2196f3;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(14px);
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+</style>

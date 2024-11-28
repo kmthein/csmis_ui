@@ -1,0 +1,12 @@
+<div>
+  <label for="department">Select Department:</label>
+  <select id="department" (change)="onDepartmentChange($event)">
+    <!-- Use an empty value for "All Departments" -->
+    <option value="">All Departments</option>
+    <option *ngFor="let department of departments" [value]="department.id">
+      {{ department.name }}
+    </option>
+  </select>
+  <p>Total Cost: {{ totalCost | currency }}</p>
+  <p>Registered Date Count: {{ registeredDateCount }}</p>
+</div>

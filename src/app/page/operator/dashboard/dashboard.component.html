@@ -1,0 +1,148 @@
+<div class="">
+  <div class="mb-4">
+    <div class="flex justify-between mb-3">
+      <h3 class="text-md font-semibold" *ngIf="restaurantName != ''">
+        {{ isCurrentWeek ? "This" : "Next" }} Week Lunch Menu
+        <span class="font-normal text-[18px] text-[#444444]">
+          ({{ restaurantName }} Restaurant)
+        </span>
+      </h3>
+      <button
+        (click)="toggleNextOrCurrentWeek()"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-1"
+      >
+        <ng-icon
+          name="ionArrowBack"
+          *ngIf="!isCurrentWeek"
+          class="text-[1rem]"
+        ></ng-icon>
+        {{ isCurrentWeek ? "View Next" : "Back Current" }} Week
+        <ng-icon
+          name="ionArrowForward"
+          *ngIf="isCurrentWeek"
+          class="text-[1rem]"
+        ></ng-icon>
+      </button>
+    </div>
+
+    
+    <div class="flex gap-6 mb-8 flex-wrap justify-center">
+      <div
+        *ngFor="let menu of weeklyMenu"
+        class="bg-white rounded-lg text-center flex-1 max-w-[22%] border border-gray-200 shadow-lg p-5 transform hover:scale-105 transition-all duration-300 ease-in-out"
+      >
+        <div class="flex justify-center border-b-2 border-gray-100 mx-4 py-4 mb-3">
+          <h5 class="uppercase text-gray-500 text-lg tracking-wide font-semibold">
+            {{ menu?.date?.toLocaleDateString('en-US', { weekday: 'short' }) }}
+          </h5>
+        </div>
+        <div class="pb-5">
+          <p class="font-semibold text-gray-700 text-xl mb-5">
+            {{ menu?.date | date: 'MMM d, y' }}
+          </p>
+          <div>
+            <span
+              *ngFor="let item of menu.menu"
+              class="block mb-2 text-gray-700 text-lg font-medium"
+            >
+              {{ item }}
+            </span>
+          </div>
+        </div>
+    
+        <button  *ngIf="canGiveFeedback(menu.date)"
+        [routerLink]="'/feedback'"
+        [queryParams]="{ date: menu.date | date: 'yyyy-MM-dd' }"
+        class="mt-4 inline-flex items-center text-white bg-blue-600 hover:bg-blue-700 font-medium text-md py-2 px-4 rounded-full shadow-md transition-all duration-300"
+      >
+        <ng-icon name="ionChatboxEllipsesOutline" class="text-xl mr-2"></ng-icon>
+        Give Feedback
+      </button>
+      
+      </div>
+    </div>
+    
+    
+
+    <div class="mb-6" *ngIf="announcement">
+      <h3 class="text-md font-semibold mb-4">Latest Announcement</h3>
+      <app-annoucement-card [announcement]="announcement"></app-annoucement-card>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="my-3 mb-8">
+      <div class="flex gap-4">
+        <div
+          class="bg-white flex w-[25%] justify-between px-5 py-12 items-center rounded-lg"
+        >
+          <div>
+            <p class="text-[#5B5B5B] mb-[16px]">Total Cost(Monthly)</p>
+            <p class="font-bold">70000 MMK</p>
+          </div>
+          <div
+            class="bg-[#91BAE3] inline-flex items-center justify-center h-10 w-10 rounded-xl"
+          >
+            <ng-icon
+              name="ionCalendarNumberOutline"
+              class="text-xl text-[#1c4166]"
+            ></ng-icon>
+          </div>
+        </div>
+        <div
+          class="bg-white flex w-[25%] justify-between px-5 py-12 items-center rounded-lg"
+        >
+          <div>
+            <p class="text-[#5B5B5B] mb-[16px]">Total Cost(Weekly)</p>
+            <p class="font-bold">4500 MMK</p>
+          </div>
+          <div
+            class="bg-[#FFCC33] inline-flex items-center justify-center h-10 w-10 rounded-xl"
+          >
+            <ng-icon
+              name="ionTodayOutline"
+              class="text-xl text-[#5f4c13]"
+            ></ng-icon>
+          </div>
+        </div>
+        <div
+          class="bg-white flex w-[25%] justify-between px-5 py-12 items-center rounded-lg"
+        >
+          <div>
+            <p class="text-[#5B5B5B] mb-[16px]">Lunch Price</p>
+            <p class="font-bold">3000 MMK</p>
+          </div>
+          <div
+            class="bg-[#E5E4FF] inline-flex items-center justify-center h-10 w-10 rounded-xl"
+          >
+            <ng-icon
+              name="ionRestaurant"
+              class="text-xl text-[#4c4a8a]"
+            ></ng-icon>
+          </div>
+        </div>
+        <div
+          class="bg-white flex w-[25%] justify-between px-5 py-12 items-center rounded-lg"
+        >
+          <div>
+            <p class="text-[#5B5B5B] mb-[16px]">Mail Notification</p>
+            <p class="font-bold">{{ receivedMail ? "ON" : "OFF" }}</p>
+          </div>
+          <div>
+            <label class="inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                (change)="toggleMailNoti(receivedMail)"
+                [(ngModel)]="receivedMail"
+                name="receivedMail"
+                class="sr-only peer"
+              />
+              <div
+                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+              ></div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>

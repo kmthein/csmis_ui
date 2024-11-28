@@ -1,0 +1,105 @@
+<div
+  class="relative cursor-pointer"
+  (click)="toggleDropdown()"
+  id="dropdownNotificationButton"
+>
+  <ng-icon name="ionNotifications" class="text-2xl"></ng-icon>
+  <span
+    class="bg-red-500 text-white rounded-full w-5 h-5 inline-flex justify-center items-center text-sm absolute bottom-5 left-4"
+    *ngIf="unreadCount > 0"
+  >
+    {{ unreadCount }}
+  </span>
+</div>
+
+<!-- Dropdown menu -->
+<div
+  id="dropdownNotification"
+  [ngClass]="{ hidden: !isDropdownVisible }"
+  class="absolute z-20 top-[7rem] right-[7rem] w-[24rem] bg-white divide-y divide-gray-100 rounded-lg shadow-lg dark:bg-gray-800 dark:divide-gray-700"
+>
+  <div
+    class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white"
+  >
+    Notifications
+  </div>
+
+  <div class="divide-y divide-gray-100 dark:divide-gray-700">
+    <ng-container *ngIf="suggestions.length > 0 || announcements.length > 0">
+      <!-- Suggestions -->
+      <ng-container *ngIf="suggestions.length > 0">
+        <!-- <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+          <strong>New Suggestions:</strong>
+        </div> -->
+        <div
+          [ngClass]="!suggestion.seen ? 'bg-[#E9EFF2]' : ''"
+          *ngFor="let suggestion of suggestions.slice(0, 7)"
+        >
+          <a
+            (click)="navigateToSuggestDetails(suggestion.id, suggestion.seen)"
+            class="flex px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            <div class="w-full">
+              <div class="text-gray-900 text-sm dark:text-gray-400 mb-2">
+                <span class="font-medium text-black">{{
+                  suggestion.username
+                }}</span>
+                has sent a suggestion.
+              </div>
+              <p class="text-gray-400 text-sm font-light">
+                {{ suggestion.createdAt | relativeTime }}
+              </p>
+            </div>
+          </a>
+        </div>
+      </ng-container>
+
+      <!-- Announcements -->
+      <ng-container *ngIf="announcements.length > 0">
+        <!-- <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+          <strong>New Suggestions:</strong>
+        </div> -->
+        <div
+          [ngClass]="!announcement.seen ? 'bg-[#E9EFF2]' : ''"
+          *ngFor="let announcement of announcements.slice(0, 7)"
+        >
+          <a
+            (click)="
+              navigateToAnnouncementDetails(announcement.id, announcement.seen)
+            "
+            class="flex px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            <div class="w-full">
+              <div class="text-gray-900 text-sm dark:text-gray-400 mb-2">
+                New announcement has received
+              </div>
+              <p class="text-gray-400 text-sm font-light">
+                {{ announcement.createdAt | relativeTime }}
+              </p>
+            </div>
+          </a>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <a
+      (click)="navigateToNotificationList()"
+      class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white cursor-pointer"
+    >
+      <div class="inline-flex items-center">
+        <svg
+          class="w-4 h-4 mr-2 text-gray-500 dark:text-gray-400"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 14"
+        >
+          <path
+            d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"
+          />
+        </svg>
+        View all
+      </div>
+    </a>
+  </div>
+</div>

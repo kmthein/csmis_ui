@@ -1,0 +1,32 @@
+<div>
+    <label for="department">Select Department:</label>
+    <select id="department" [(ngModel)]="selectedDepartmentId" (change)="onDepartmentChange()">
+      <option [ngValue]="null">All Departments</option>
+      <option *ngFor="let department of departments" [ngValue]="department.id">
+        {{ department.name }}
+      </option>
+    </select>
+    
+  
+    <label for="year">Select Year:</label>
+    <select id="year" [(ngModel)]="selectedYear" (change)="onYearChange()">
+      <option *ngFor="let year of years" [value]="year">
+        {{ year }}
+      </option>
+    </select>
+  
+    <div *ngIf="selectedDepartmentId === null">
+      <h3>Total Cost for All Departments</h3>
+      <p>{{ totalCostAllDepartments | currency }}</p>
+      <p>Registered Date Count: {{ registeredDateCount }}</p>
+
+    </div>
+    <div *ngIf="selectedDepartmentId !== null">
+      <h3>Total Cost for Selected Department</h3>
+      <p>{{ totalCost | currency }}</p>
+      <p>Registered Date Count: {{ registeredDateCount }}</p>
+
+    </div>
+    
+  </div>
+  

@@ -1,0 +1,88 @@
+/* Body styling for background and general font */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+  border: 1px solid #007bff; /* Blue border */
+
+}
+
+/* Wrapper for the form and report section */
+div {
+  max-width: 800px;
+  /* margin: 2rem auto; */
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #007bff; /* Blue border */
+
+}
+
+/* Styling the label for the select dropdown */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #4a4a4a;
+  font-size: 1.1rem;
+}
+
+/* Select styling */
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #007bff; /* Blue border */
+  border-radius: 6px;
+  background-color: #fafafa;
+  font-size: 1rem;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus state for select dropdown */
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #ffffff;
+}
+
+/* Heading style for the report */
+h3 {
+  font-size: 1.25rem;
+  color: #000000;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/* Paragraphs inside the report section */
+p {
+  font-weight: bold;
+  color: #000000;
+  margin: 10px 0;
+}
+
+/* Currency styling (total cost) */
+p[ngIf="totalCost"] {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #28a745; /* Green color for total cost */
+}
+
+/* Responsive styling for small screens */
+@media (max-width: 600px) {
+  div {
+    padding: 1.5rem;
+  }
+
+  label, h3, p {
+    font-size: 1rem;
+  }
+  
+  select {
+    font-size: 0.95rem;
+  }
+}

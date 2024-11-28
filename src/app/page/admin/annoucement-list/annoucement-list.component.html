@@ -1,0 +1,196 @@
+<div>
+  <div class="flex justify-between items-center mb-3">
+    <h3 class="text-md font-semibold mb-4">All Announcements</h3>
+    <div
+      *ngIf="isAdmin"
+      class="flex md:order-2 gap-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+    >
+      <button
+        type="button"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-1"
+        (click)="toggleModal(false)"
+      >
+      <ng-icon name="ionAddSharp" class="text-lg"></ng-icon>
+        Create New
+      </button>
+    </div>
+  </div>
+  <div class="pb-6" *ngIf="announcements.length == 0">
+    <p class="text-center">No announcement found yet.</p>
+  </div>
+  <div class="pb-6" *ngFor="let announcement of announcements">
+    <app-annoucement-card
+      *ngIf="announcements.length > 0"
+      [announcement]="announcement"
+      (selectAnnouncement)="onSelectAnnouncement($event)"
+      (confirmDelete)="toggleConfirmModal(true, announcement.id)"
+    ></app-annoucement-card>
+  </div>
+</div>
+
+<div
+  *ngIf="isModalOpen"
+  class="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-gray-500 bg-opacity-50"
+>
+   <div
+    class="relative p-4 w-full max-w-2xl bg-white shadow dark:bg-gray-700"
+    [ngClass]="editMode ? 'max-h-[80%]' : 'max-h-[70%]'"
+    style="overflow-y: auto;"  
+  >
+    <!-- Modal content -->
+    <div class="flex justify-between p-4 border-b dark:border-gray-600">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+        {{ !editMode ? "Create New Announcement" : "Edit Announcement" }}
+      </h3>
+      <button
+        (click)="toggleModal(false)"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+      >
+        <svg
+          class="w-3 h-3"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 14 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+          />
+        </svg>
+      </button>
+    </div>
+    <form
+      class="p-4"
+      #announceForm="ngForm"
+      (ngSubmit)="onSubmit()"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-5">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          for="title"
+          >Title</label
+        >
+        <input
+          class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          id="title"
+          [(ngModel)]="title"
+          name="title"
+          type="text"
+          required
+          #titleInput="ngModel"
+        />
+        <small *ngIf="!title && (titleInput?.touched || titleInput?.dirty)">
+          Title is required.
+        </small>
+      </div>
+      <div class="my-5">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Content</label
+        >
+        <div class="border rounded-md">
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+          </ngx-editor-menu>
+          <ngx-editor
+            [editor]="editor"
+            [(ngModel)]="editorContent"
+            name="editorContent"
+            #contentInput="ngModel"
+            required
+            class="w-80"
+          >
+          </ngx-editor>
+          <small
+            *ngIf="
+              !editorContent && (contentInput?.touched || contentInput?.dirty)
+            "
+          >
+            Content is required.
+          </small>
+        </div>
+      </div>
+      <div class="my-5" *ngIf="editMode">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          for="file_input"
+          >Previous files</label
+        >
+        <div class="flex">
+          <div
+            *ngFor="let file of previewFiles; let i = index"
+            class="w-40 h-[8rem] relative"
+            (mouseenter)="hoveredIndex = i"
+            (mouseleave)="hoveredIndex = null"
+          >
+            <div
+              class="bg-[#0000005b] w-full h-full absolute flex justify-center items-center cursor-pointer"
+              [ngClass]="{ hidden: hoveredIndex !== i }"
+            >
+              <ng-icon
+                (click)="deleteFile(file.id)"
+                name="ionTrashBin"
+                class="text-red-600 text-2xl cursor-pointer z-50"
+              ></ng-icon>
+            </div>
+            <img
+              *ngIf="
+                file?.filetype == 'image/jpeg' ||
+                file?.filetype == 'image/png' ||
+                file?.filetype == 'image/jpg'
+              "
+              src="{{ file?.filePath }}"
+              class="w-full h-full object-contain"
+            />
+            <ngx-doc-viewer
+              *ngIf="file.filetype == 'application/pdf'"
+              [url]="file?.filePath"
+              viewer="pdf"
+              class="w-full h-full"
+            ></ngx-doc-viewer>
+            <video
+              controls
+              *ngIf="file?.filetype == 'video/mp4'"
+              class="w-full h-full object-cover"
+            >
+              <source src="{{ file?.filePath }}" type="{{ file?.filetype }}" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+      <div class="my-5">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          for="file_input"
+          >Upload file</label
+        >
+        <input
+          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          aria-describedby="file_input_help"
+          id="file_input"
+          type="file"
+          (change)="onFileSelected($event)"
+          [multiple]="true"
+        />
+      </div>
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          [disabled]="isLoading || announceForm.invalid"
+          class="bg-blue-700 text-white px-4 py-2 rounded-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-[#1e1552]"
+        >
+          {{ editMode ? "Update" : "Upload" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-confirmation-modal *ngIf="isConfirmOpen"
+[content]="'announcement'"
+(confirm)="confirmDelete()"
+(cancel)="toggleConfirmModal(false)"></app-confirmation-modal>  

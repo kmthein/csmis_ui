@@ -1,0 +1,126 @@
+<nav class="bg-gray-800 text-white p-4">
+  <div class="flex gap-8 items-center">
+    <!-- User Payment Dropdown -->
+    <div
+      class="relative"
+      (mouseenter)="openDropdown('user')"
+      (mouseleave)="closeDropdown()"
+    >
+      <button
+        class="bg-blue-600 px-4 py-2 rounded-lg"
+        (click)="toggleDropdown('user')"
+      >
+        User Payment
+      </button>
+      <ul
+        class="absolute bg-white text-black rounded-lg mt-2 shadow-lg w-48"
+        *ngIf="activeDropdown === 'user'"
+      >
+        <li class="p-2 hover:bg-gray-200 cursor-pointer" (click)="view = 'user_weekly'; closeDropdown()">
+          Weekly
+        </li>
+        <li class="p-2 hover:bg-gray-200 cursor-pointer" (click)="view = 'user_monthly'; closeDropdown()">
+          Monthly
+        </li>
+        <li class="p-2 hover:bg-gray-200 cursor-pointer" (click)="view = 'user_yearly'; closeDropdown()">
+          Yearly
+        </li>
+      </ul>
+    </div>
+
+    <!-- Company Payment Dropdown -->
+    <div
+      class="relative"
+      (mouseenter)="openDropdown('company')"
+      (mouseleave)="closeDropdown()"
+    >
+      <button
+        class="bg-blue-600 px-4 py-2 rounded-lg"
+        (click)="toggleDropdown('company')"
+      >
+        Company Payment
+      </button>
+      <ul
+        class="absolute bg-white text-black rounded-lg mt-2 shadow-lg w-48"
+        *ngIf="activeDropdown === 'company'"
+      >
+        <li class="p-2 hover:bg-gray-200 cursor-pointer" (click)="view = 'company_weekly'; closeDropdown()">
+          Weekly
+        </li>
+        <li class="p-2 hover:bg-gray-200 cursor-pointer" (click)="view = 'company_monthly'; closeDropdown()">
+          Monthly
+        </li>
+        <li class="p-2 hover:bg-gray-200 cursor-pointer" (click)="view = 'company_yearly'; closeDropdown()">
+          Yearly
+        </li>
+      </ul>
+    </div>
+
+    <!-- Total Payment Dropdown -->
+    <div
+      class="relative"
+      (mouseenter)="openDropdown('total')"
+      (mouseleave)="closeDropdown()"
+    >
+      <button
+        class="bg-blue-600 px-4 py-2 rounded-lg"
+        (click)="toggleDropdown('total')"
+      >
+        Total Payment
+      </button>
+      <ul
+        class="absolute bg-white text-black rounded-lg mt-2 shadow-lg w-48"
+        *ngIf="activeDropdown === 'total'"
+      >
+        <li class="p-2 hover:bg-gray-200 cursor-pointer" (click)="view = 'total_weekly'; closeDropdown()">
+          Weekly
+        </li>
+        <li class="p-2 hover:bg-gray-200 cursor-pointer" (click)="view = 'total_monthly'; closeDropdown()">
+          Monthly
+        </li>
+        <li class="p-2 hover:bg-gray-200 cursor-pointer" (click)="view = 'total_yearly'; closeDropdown()">
+          Yearly
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="bg-white p-4 rounded-lg mt-4">
+  <div *ngIf="view === 'user_weekly'">
+    <h2>User Weekly Payment</h2>
+    <app-weekly-payment></app-weekly-payment>
+  </div>
+  <div *ngIf="view === 'user_monthly'">
+    <h2>User Monthly Payment</h2>
+    <app-monthly-payment></app-monthly-payment>
+  </div>
+  <div *ngIf="view === 'user_yearly'">
+    <h2>User Yearly Payment</h2>
+    <app-yearly-payment></app-yearly-payment>
+  </div>
+  <div *ngIf="view === 'company_weekly'">
+    <h2>Company Weekly Payment</h2>
+    <app-companyweekly-payment></app-companyweekly-payment>
+  </div>
+  <div *ngIf="view === 'company_monthly'">
+    <h2>Company Monthly Payment</h2>
+    <app-company-monthly-payment></app-company-monthly-payment>
+  </div>
+  <div *ngIf="view === 'company_yearly'">
+    <h2>Company Yearly Payment</h2>
+    <app-company-yearly-payment></app-company-yearly-payment>
+  </div>
+  <div *ngIf="view === 'total_weekly'">
+    <h2>Total Weekly Payment</h2>
+    <app-total-weekly-payment></app-total-weekly-payment>
+  </div>
+  <div *ngIf="view === 'total_monthly'">
+    <h2>Total Monthly Payment</h2>
+    <app-total-monthly-payment></app-total-monthly-payment>
+  </div>
+  <div *ngIf="view === 'total_yearly'">
+    <h2>Total Yearly Payment</h2>
+    <app-total-yearly-payment></app-total-yearly-payment>
+  </div>
+</div>

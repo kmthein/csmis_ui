@@ -1,0 +1,107 @@
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  /* Main container */
+  div {
+    max-width: 800px;
+    /* margin: 2rem auto; */
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #007bff; /* Blue border */
+  }
+  
+  /* Title styling */
+  h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 1.5rem;
+  }
+  
+  /* Label styling */
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #000000; /* Blue text for labels */
+    font-size: 1.1rem;
+  }
+  
+  /* Select dropdown styling */
+  select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #007bff; /* Blue border */
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  /* Focus state for dropdown */
+  select:focus {
+    border-color: #0056b3; /* Darker blue for focus */
+    background-color: #ffffff;
+    outline: none;
+  }
+  
+  /* Flexbox layout for select fields */
+  .div-select-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  /* Container for each select */
+  .select-container {
+    flex: 1 1 calc(33% - 20px); /* 3 columns with gap */
+    min-width: 200px; /* Minimum width for small screens */
+  }
+  
+  /* Report section styling */
+  p {
+    font-size: 1.1rem;
+    color: #000000;
+    margin: 10px 0;
+  }
+  
+  /* Highlighted text */
+  p[ngIf="totalCost"], p[ngIf="totalCostAllDepartments"] {
+    font-weight: bold;
+    color: #28a745; /* Green for total cost */
+  }
+  
+  /* Additional margin for sections */
+  p, h3 {
+    margin-top: 1rem;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .div-select-container {
+      flex-direction: column; /* Stacks the fields on smaller screens */
+    }
+  
+    .select-container {
+      width: 100%; /* Full width for smaller screens */
+    }
+  
+    h3 {
+      font-size: 1.25rem;
+    }
+  
+    p {
+      font-size: 1rem;
+    }
+  }
+  

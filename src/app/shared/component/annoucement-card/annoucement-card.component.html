@@ -1,0 +1,101 @@
+<div class="bg-white p-4 rounded-md relative">
+  <div class="flex gap-4">
+    <img
+      class="w-12 h-12 rounded object-contain border"
+      src="assets/logo.png"
+      alt="Medium avatar"
+    />
+    <div class="w-full">
+      <div class="mb-3">
+        <div class="flex justify-between">
+          <h4>{{ announcement?.title }}</h4>
+          <div
+            *ngIf="isAdmin"
+            id="dropdownDefaultButton2"
+            (click)="toggleDropdown(announcement?.id)"
+            class="focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-2.5 py-2.5 text-center flex items-center cursor-pointer"
+            type="button"
+          >
+            <svg
+              class="w-2.5 h-2.5 ms-3 text-gray-500"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 4 4 4-4"
+              />
+            </svg>
+          </div>
+          <!-- Dropdown menu -->
+          <div
+            *ngIf="selectedDropdown === announcement?.id"
+            id="dd"
+            class="z-10 absolute right-4 top-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownDefaultButton2"
+            >
+              <li (click)="onCardClick()" class="cursor-pointer flex justify-between items-center px-4 py-2 gap-2 hover:bg-gray-100">
+                <a
+                  >Edit</a
+                >
+                <ng-icon name="ionCreateOutline" class="mb-1 text-[#3a23a0]"></ng-icon>
+              </li>
+              <li (click)="onDelete()" class="cursor-pointer flex items-center justify-between px-4 py-2 gap-2 hover:bg-gray-100">
+                <a
+                  >Delete</a
+                >
+                <ng-icon name="ionTrash" class="mb-1 text-[#f74141]"></ng-icon>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <span class="text-sm text-[#797979]">{{
+          announcement?.date | dfnsFormat : "EEE LLLL d yyyy"
+        }}</span>
+      </div>
+      <div class="mb-3 w-full">
+        <div
+          class="leading-relaxed"
+          [innerHTML]="announcement?.content | safeHtml"
+        ></div>
+      </div>
+      <div class="mb-3" *ngIf="announcement?.files?.length > 0" class="flex items-end gap-4">
+        <div *ngFor="let file of announcement?.files" class="w-[50%] inline-flex justify-center">
+          <img
+            *ngIf="
+              file?.filetype == 'image/jpeg' ||
+              file?.filetype == 'image/png' ||
+              file?.filetype == 'image/jpg'
+            "
+            src="{{ file?.filePath }}"
+            class="object-contain"
+          />
+          <ngx-doc-viewer
+            *ngIf="file.filetype == 'application/pdf'"
+            [url]="file?.filePath"
+            viewer="pdf"
+            style="width: 100%; height: 500px"
+          ></ngx-doc-viewer>
+          <video
+            width="auto"
+            height="240"
+            controls
+            *ngIf="file?.filetype == 'video/mp4'"
+          >
+            <source src="{{ file?.filePath }}" type="{{ file?.filetype }}" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
