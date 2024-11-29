@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentVoucherService } from '../../../services/payment-voucher.service';
 
 @Component({
@@ -13,10 +13,12 @@ export class EditVoucherComponent {
   order: any;
   totalAmount: any;
   admins: any[] = [];
+  readonly: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private voucherService: PaymentVoucherService
+    private voucherService: PaymentVoucherService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -26,13 +28,14 @@ export class EditVoucherComponent {
   }
 
   getVoucherById() {
-    this.voucherService.getPaymentVoucher(this.id).subscribe((res) => {
+    this.voucherService.getPaymentVoucher(this.id).subscribe((res: any) => {
       console.log(res);
+      if (res.status == 'PAID') {
+        this.readonly = true;
+      }
       this.voucherData = res;
       this.totalAmount = this.voucherData.rows.reduce(
         (total: number, data: any) => {
-          console.log(data);
-
           return total + data.price * data.qty; // Calculate total amount
         },
         0
@@ -51,7 +54,19 @@ export class EditVoucherComponent {
     );
   }
 
+  navigateBack() {
+    this.router.navigate([`/admin/voucher`]);
+  }
+
   onSubmit() {
     console.log(this.voucherData);
+    this.voucherService
+      .updatePaymentVoucher(this.voucherData.id, this.voucherData)
+      .subscribe((res: any) => {
+        console.log(res);
+        if (res.status == '200') {
+          this.router.navigate([`/admin/voucher`]);
+        }
+      });
   }
 }

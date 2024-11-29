@@ -64,12 +64,22 @@
           class="text-md"
           id="approvedBy"
           name="voucherData.approvedBy"
+          [disabled]="readonly"
+          class="disabled:bg-[#f0efef]"
+          *ngIf="!readonly"
           required
         >
           <option *ngFor="let admin of admins" [value]="admin.name">
             {{ admin.name }}
           </option>
         </select>
+        <input
+          type="text"
+          disabled="true"
+          class="disabled:bg-[#f0efef]"
+          [(ngModel)]="voucherData.approvedBy"
+          *ngIf="readonly"
+        />
       </div>
     </div>
     <div class="column mb-4">
@@ -89,37 +99,63 @@
           <label class="w-40 inline-block">Received By: </label>
           <input
             type="text"
+            [disabled]="readonly"
             class="disabled:bg-[#f0efef]"
             [(ngModel)]="voucherData.receivedBy"
           />
         </p>
       </div>
       <div>
-        <div class="column">
+        <div class="column flex">
           <label class="w-40 inline-block">Status:</label>
-          <label class="inline-flex items-center gap-1">
-            <input
-              type="radio"
-              name="status"
-              value="PAID"
-              [(ngModel)]="voucherData.status"
-            />
-            Paid
-          </label>
-          <label class="inline-flex items-center gap-1 ml-6">
-            <input
-              type="radio"
-              name="status"
-              value="UNPAID"
-              [(ngModel)]="voucherData.status"
-            />
-            Unpaid
-          </label>
+          <div class="flex items-center gap-6">
+            <!-- Paid Radio -->
+            <label
+              class="inline-flex items-center gap-2 cursor-pointer"
+              [ngClass]="readonly ? 'opacity-50 cursor-not-allowed' : ''"
+            >
+              <input
+                type="radio"
+                name="status"
+                value="PAID"
+                class="w-4 h-4 text-blue-500 border-gray-300 focus:ring-blue-500 disabled:cursor-not-allowed"
+                [disabled]="readonly"
+                [(ngModel)]="voucherData.status"
+              />
+              <span class="text-sm font-medium text-gray-700">Paid</span>
+            </label>
+
+            <!-- Unpaid Radio -->
+            <label
+              class="inline-flex items-center gap-2 cursor-pointer"
+              [ngClass]="readonly ? 'opacity-50 cursor-not-allowed' : ''"
+            >
+              <input
+                type="radio"
+                name="status"
+                value="UNPAID"
+                class="w-4 h-4 text-red-500 border-gray-300 focus:ring-red-500 disabled:cursor-not-allowed"
+                [disabled]="readonly"
+                [(ngModel)]="voucherData.status"
+              />
+              <span class="text-sm font-medium text-gray-700">Unpaid</span>
+            </label>
+          </div>
         </div>
       </div>
-      <div class="mt-10 mb-6 flex justify-end">
-        <button (click)="onSubmit()" class="btn btn-primary">
-          Update Voucher
+      <div class="mt-10 mb-6 flex gap-6 justify-end">
+        <button
+          (click)="navigateBack()"
+          class="bg-transparent border-2 border-[#999999] text-[#000] px-6 py-2.5"
+        >
+          Back
+        </button>
+        <button
+          *ngIf="!readonly"
+          (click)="onSubmit()"
+          class="btn btn-primary text-white bg-[#4caf50] hover:bg-[#45a049] px-6 py-2.5"
+        >
+          Update
         </button>
       </div>
     </div>

@@ -24,16 +24,8 @@ textarea {
 }
 
 button {
-  padding: 10px 15px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
 }
 
 button[type="button"] {
