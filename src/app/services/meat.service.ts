@@ -31,7 +31,15 @@ export class MeatService {
   }
 
   updateMeat(id: number, meat: Meat): Observable<Meat> {
-    return this.http.put<Meat>(`${this.apiUrl}/${id}`, meat);
+    return this.http.put<Meat>(`${this.apiUrl}/${id}`, meat).pipe(
+      catchError((error) => {
+        if (error.status === 409) {
+          alert('A meat with this name already exists.');
+        }
+        return throwError(() => error);
+      })
+    );
+  
   }
 
   deleteMeat(id: number): Observable<void> {
