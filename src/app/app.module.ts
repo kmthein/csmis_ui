@@ -136,6 +136,7 @@ import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lun
 import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
 import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
 import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
+import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
 
 @NgModule({
   declarations: [
@@ -212,6 +213,7 @@ import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.com
     OrderCreateComponent,
     VoucherListComponent,
     EditVoucherComponent,
+    FeedbackListComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -260,10 +262,10 @@ import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.com
       ionSearch,
       ionCash,
       ionBanSharp,
+      ionChatboxEllipsesOutline,
       ionStatsChartSharp,
       ionArrowForward,
       ionArrowBackOutline,
-      ionChatboxEllipsesOutline,
       ionCloudUploadOutline,
       ionCart,
     }),

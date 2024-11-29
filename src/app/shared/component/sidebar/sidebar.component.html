@@ -342,6 +342,19 @@
       <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
+          routerLink="/admin/feedbacks" 
+          routerLinkActive="nav-active"
+        >
+          <!-- Feedback Icon -->
+          <ng-icon name="ion-chatbox-ellipses-outline"></ng-icon>
+          <span>Feedbacks</span>
+        </a>
+      </div>
+      
+
+      <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/admin/settings"
           routerLinkActive="nav-active"
         >

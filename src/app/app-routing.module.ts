@@ -57,6 +57,7 @@ import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-
 import { OrderCreateComponent } from './components/order/order-create/order-create.component';
 import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
 import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
+import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
 
 const routes: Routes = [
   {
@@ -134,6 +135,7 @@ const routes: Routes = [
       { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
       { path: 'TotalYearly', component: TotalYearlyPaymentComponent },
       { path: 'suggestions/:id', component: SuggestDetailsComponent },
+      { path: 'feedbacks', component: FeedbackListComponent },
       { path: 'notifications/all', component: SuggestListComponent },
     ],
   },
