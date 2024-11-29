@@ -100,7 +100,7 @@ export class MeatListComponent implements OnInit {
             this.closeModal();
             this.loadMeats();
           },
-          error: () => this.toastService.error('Failed to update meat.'),
+          error: () => this.toastService.error('A meat with this name already exists. Please choose a different name.'),
         });
     } else {
       this.meatService.createMeat(this.selectedMeat).subscribe({
