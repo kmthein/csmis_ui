@@ -164,6 +164,7 @@ export class OrderCreateComponent implements OnInit {
       restaurantId: this.restaurantId,
       adminId: user?.id,
       rows: this.registerData,
+      restaurantName: this.restaurantId
     };
     // if (this.order.message.trim() === '') {
     //   this.toastr.error('Message is required.', 'Error');

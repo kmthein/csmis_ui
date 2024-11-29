@@ -520,7 +520,7 @@ export class LunchRegistrationComponent implements OnInit {
   }
 
   handleRegistrationClick(): void {
-    if (this.isNextMonthView || !this.isFirstRegistration) {
+    if ( !this.isFirstRegistration) {
       this.toast.info(
         'Registration for next month is now closed. Please try again next month.'
       );
