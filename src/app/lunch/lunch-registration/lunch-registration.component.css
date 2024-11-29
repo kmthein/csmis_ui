@@ -1,15 +1,15 @@
 .calendar-container {
-  max-width: 800px; /* Set a max-width to control its size on larger screens */
+  max-width: 600px; /* Set a max-width to control its size on larger screens */
   border: 1px solid #ccc;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
   overflow: hidden; /* To round corners */
 }
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 60px;
+  padding: 20px;
 }
 
 .calendar-title {
@@ -50,8 +50,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70px; /* Adjust height for small boxes */
-  width: 70px; /* Adjust width for small boxes */
+  height: 50px; /* Adjust height for small boxes */
+  width: 50px; /* Adjust width for small boxes */
   border: 1px solid #ccc; /* Optional border */
   border-radius: 4px; /* Optional rounded corners */
   cursor: pointer; /* Change cursor to pointer on hover */
@@ -157,7 +157,7 @@
 /* margin-top: 5px; */
 /* } */
 .day.weekend {
-  background-color: #ff593b7c; /* Red for weekends */
+  background-color: #ecf56a; /* Red for weekends */
   color: #000000;
 }
 

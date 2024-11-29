@@ -140,7 +140,7 @@ export class LunchRegistrationComponent implements OnInit {
       next: (data) => {
         this.publicHolidays = data.map((holiday: any) => ({
           date: new Date(holiday.date),
-          name: holiday.name, // Assuming holiday name is available in the response
+          name: holiday.name, 
         }));
         console.log(this.publicHolidays); // Check the structure
       },
@@ -156,7 +156,10 @@ export class LunchRegistrationComponent implements OnInit {
     });
     return holiday ? holiday.name : null;
   }
-
+  isHoliday(date: Date): boolean {
+    return this.getHolidayName(date) !== null;
+  }
+         
   loadMeats() {
     this.meatService.getAllMeats().subscribe({
       next: (meats) => (this.meats = meats),
@@ -196,25 +199,33 @@ this.canRegisterForNextWeek
     const monthIndex = month.getMonth();
     const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
     this.selectedDates = [];
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); 
   
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to midnight for comparison
+    
     const canRegisterForNextWeek = this.canRegisterForNextWeek();
   
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, monthIndex, day);
   
-      if (!this.isCurrentWeek(date) && date.getDay() !== 0 && date.getDay() !== 6 && date > today) {
+      // Skip weekends, current week, holidays, and past days
+      if (
+        !this.isCurrentWeek(date) && 
+        date.getDay() !== 0 && // Not Sunday
+        date.getDay() !== 6 && // Not Saturday
+        date > today && 
+        !this.isHoliday(date) // Not a holiday
+      ) {
+        // If it's a date in the next week but registration isn't open, skip
         if (this.isNextWeek(date) && !canRegisterForNextWeek) {
           continue;
         }
   
-        // Otherwise, allow the date to be selected
         this.selectedDates.push(date);
       }
     }
   }
+  
   
   isRegistered(date: Date): boolean {
     return this.selectedDates.some(
@@ -429,6 +440,7 @@ this.canRegisterForNextWeek
             );
         }
       } else {
+        
         if (this.isFirstRegistration) {
           this.lunchRegistrationService.registerUserForLunch(registrationDto).subscribe(
             (response) => {
@@ -496,9 +508,11 @@ this.canRegisterForNextWeek
   }
 
   handleRegistrationClick(): void {
-  if (this.isNextMonthView || !this.isFirstRegistration) {
-    alert('Registration for next month is now closed. Please try again next month.');
-  } else {
+  if ( !this.isCurrentMonth() && !this.isFirstRegistration) {
+      alert('Registration for next month is now closed. Please try again next month.');
+    
+    
+  } else if (this.isCurrentMonth()  || this.isFirstRegistration) {
     this.submitRegistration();
   }
 }

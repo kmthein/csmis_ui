@@ -7,7 +7,7 @@
   <button (click)="calculateWeek()">Generate Voucher</button>
 
   <div *ngIf="voucherData">
-    <!-- Top Info Section --> 
+    <!-- Top Info Section --> -->
     <div class="row">
       <div class="column">
         <p><strong>Voucher No:</strong> {{ voucherData.voucherNo }}</p>
@@ -50,10 +50,12 @@
       </tbody>
     </table>
 
+    <!-- Total Amount -->
     <div class="total-amount">
       <p><strong>Total Amount for the Week:</strong> {{ totalAmount }}</p>
     </div>
 
+    <!-- Additional Information -->
     <div *ngIf="voucherData">
       <div class="row">
         <div class="column" >
@@ -68,15 +70,13 @@
         <div class="column">
           <label>Status:</label>
           <label>
-            <input type="radio" name="status" value="PAID" [(ngModel)]="voucherData.status" /> Paid
+            <input type="radio" name="status" value="paid" [(ngModel)]="voucherData.status" /> Paid
           </label>
           <label>
-            <input type="radio" name="status" value="UNPAID" [(ngModel)]="voucherData.status" /> Unpaid
+            <input type="radio" name="status" value="unpaid" [(ngModel)]="voucherData.status" /> Unpaid
           </label>
         </div>
       </div>
-      <button (click)="submitVoucher()" class="btn btn-primary">Save Voucher</button>
-
     </div>
   </div>
 </div>
