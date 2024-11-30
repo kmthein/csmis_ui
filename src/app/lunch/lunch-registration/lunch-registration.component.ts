@@ -510,8 +510,6 @@ this.canRegisterForNextWeek
   handleRegistrationClick(): void {
   if ( !this.isCurrentMonth() && !this.isFirstRegistration) {
       alert('Registration for next month is now closed. Please try again next month.');
-    
-    
   } else if (this.isCurrentMonth()  || this.isFirstRegistration) {
     this.submitRegistration();
   }
