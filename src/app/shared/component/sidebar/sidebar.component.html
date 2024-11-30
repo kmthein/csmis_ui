@@ -55,7 +55,7 @@
     <span class="sr-only">Close menu</span>
   </button>
   <div class="w-full">
-    <div class="h-[120px] flex items-center justify-center">
+    <div class="h-[90px] flex items-center justify-center">
       <a [routerLink]="isAdmin ? '/admin' : '/'">
         <img src="assets/logo.png" class="w-[100px] mx-auto" />
       </a>
@@ -265,14 +265,6 @@
         <ul *ngIf="isReportSubMenuOpen">
           <li>
             <a
-              routerLink="/admin/report/mail-on"
-              routerLinkActive="nav-active"
-              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
-              >Mail received users</a
-            >
-          </li>
-          <li>
-            <a
               routerLink="/admin/report/lunch-summary"
               routerLinkActive="nav-active"
               class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
@@ -301,6 +293,14 @@
               routerLinkActive="nav-active"
               class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
               >User Avoid Meat</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/admin/report/mail-on"
+              routerLinkActive="nav-active"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
+              >Mail received users</a
             >
           </li>
         </ul>
