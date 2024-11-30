@@ -287,6 +287,22 @@
               >Cost by department</a
             >
           </li>
+          <li>
+            <a
+              routerLink="/admin/report/staff-lunch"
+              routerLinkActive="nav-active"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
+              >Staff Lunch Record</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/admin/report/user-avoid"
+              routerLinkActive="nav-active"
+              class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
+              >User Avoid Meat</a
+            >
+          </li>
         </ul>
       </div>
 
@@ -315,13 +331,26 @@
       <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
-          routerLink="/admin/create-voucher"
+          routerLink="/admin/payment"
           routerLinkActive="nav-active"
         >
           <ng-icon name="ionCash"></ng-icon>
           <span>Payment</span>
         </a>
       </div>
+
+      <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
+        <a
+          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
+          routerLink="/admin/feedbacks" 
+          routerLinkActive="nav-active"
+        >
+          <!-- Feedback Icon -->
+          <ng-icon name="ion-chatbox-ellipses-outline"></ng-icon>
+          <span>Feedbacks</span>
+        </a>
+      </div>
+      
 
       <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
         <a
@@ -384,23 +413,34 @@
       <ng-icon name="ionPerson"></ng-icon>
       <span>Company_yearly</span>
     </a> -->
-        <a
+        <!-- <a
           class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
           routerLink="/admin/payment"
           routerLinkActive="nav-active"
         >
           <ng-icon name="ionCash"></ng-icon>
           <span>Payment</span>
-        </a>
-        <a
-          class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
-          routerLink="/admin/vocher"
-          routerLinkActive="nav-active"
-        >
-          <ng-icon name="ionCash"></ng-icon>
-          <span>vocher</span>
-        </a>
-        
+        </a> -->
+        <div *ngIf="isAdmin">
+          <a
+            class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
+            routerLink="/admin/order"
+            routerLinkActive="nav-active"
+          >
+            <ng-icon name="ionCart"></ng-icon>
+            <span>Order</span>
+          </a>
+        </div>
+        <div *ngIf="isAdmin">
+          <a
+            class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
+            routerLink="/admin/voucher"
+            routerLinkActive="nav-active"
+          >
+            <ng-icon name="ionDocumentTextSharp"></ng-icon>
+            <span>Voucher</span>
+          </a>
+        </div>
       </div>
     </div>
     <div></div>

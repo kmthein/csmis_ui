@@ -13,6 +13,22 @@ export class UserService {
 
   constructor(private http: HttpClient, private toast: ToastrService) {}
 
+  updateUserProfile(form: FormData) {    
+    return this.http.put<any>(`${this.url}/users/profile-image`, form).pipe(
+      tap((response) => {
+        if (response.status == '200') {
+          this.toast.success(response.message);
+        } else {
+          this.toast.error(response.message);
+        }
+      }),
+      catchError((err) => {
+        const { error } = err;
+        return throwError(error);
+      })
+    );
+  }
+
   toggleMail(id: number, form: FormData) {
     return this.http.put<any>(`${this.url}/users/${id}/toggle-mail`, form).pipe(
       tap((response) => {

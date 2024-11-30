@@ -1,0 +1,89 @@
+<div class="p-6 bg-white shadow-md rounded-lg">
+    <!-- Feedback Header Section -->
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-2xl font-semibold text-gray-800">Feedback List</h3>
+      <div class="flex gap-4 items-center">
+        <!-- Search Bar -->
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="searchFeedbacks()"
+          placeholder="Search feedbacks..."
+          class="border border-gray-300 rounded-md p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+        />
+        <!-- Date Filter Section -->
+        <div class="flex items-center space-x-2">
+          <label for="startDate" class="text-sm text-gray-600 text-lg">Start Date:</label>
+          <input
+            id="startDate"
+            type="date"
+            [(ngModel)]="startDate"
+            (change)="searchFeedbacks()"
+            class="border border-gray-300 rounded-md p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+          />
+          <label for="endDate" class="text-sm text-gray-600 text-lg">End Date:</label>
+          <input
+            id="endDate"
+            type="date"
+            [(ngModel)]="endDate"
+            (change)="searchFeedbacks()"
+            class="border border-gray-300 rounded-md p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+          />
+        </div>
+      </div>
+    </div>
+  
+    <!-- Feedback Table Section -->
+    <div *ngIf="filteredFeedbacks.length > 0; else noFeedback">
+      <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+        <thead class="bg-gray-100 text-sm text-gray-700">
+          <tr>
+            <th class="px-6 py-3 text-left font-medium text-lg">#</th>
+            <th class="px-6 py-3 text-left font-medium text-lg">Comment</th>
+            <th class="px-6 py-3 text-left font-medium text-lg">Response</th>
+            <th class="px-6 py-3 text-left font-medium text-lg">Given By</th>
+            <th class="px-6 py-3 text-left font-medium text-lg">Menu</th>
+            <th class="px-6 py-3 text-left font-medium text-lg">Date</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm">
+          <tr
+            *ngFor="let feedback of paginatedFeedbacks; let i = index"
+            class="hover:bg-gray-50 border-t border-gray-100"
+          >
+            <td class="px-6 py-4 text-gray-700 text-lg">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+            <td class="px-6 py-4 text-gray-800 text-lg">{{ feedback.comment }}</td>
+            <td class="px-6 py-4 text-gray-800 text-lg">{{ feedback.response }}</td>
+            <td class="px-6 py-4 text-gray-800 text-lg">{{ feedback.userName }}</td>
+            <td class="px-6 py-4 text-gray-800 text-lg">{{ feedback.lunchMenu }}</td>
+            <td class="px-6 py-4 text-gray-700 text-lg">{{ feedback.date | date: 'EEE, MMM d, y' }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Pagination Controls -->
+      <div class="flex justify-between items-center mt-4">
+        <button
+          (click)="previousPage()"
+          [disabled]="currentPage === 1"
+          class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md disabled:bg-gray-400"
+        >
+          Previous
+        </button>
+        <span class="text-sm text-gray-600 font-medium">Page {{ currentPage }} of {{ totalPages }}</span>
+        <button
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+          class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md disabled:bg-gray-400"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  
+    <!-- No Feedback Available Template -->
+    <ng-template #noFeedback>
+      <p class="text-gray-500 text-center py-6 text-lg">No feedback available.</p>
+    </ng-template>
+  </div>
+  

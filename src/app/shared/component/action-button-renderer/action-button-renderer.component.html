@@ -1,4 +1,4 @@
 <div class="flex gap-3">
   <button class="text-[#13385E]" (click)="onEdit()">Edit</button>
-  <button class="text-red-600" (click)="onDelete()">Delete</button>
+  <button *ngIf="type != 'staff'" class="text-red-600" (click)="onDelete()">Delete</button>
 </div>

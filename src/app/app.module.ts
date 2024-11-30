@@ -48,6 +48,8 @@ import {
   ionArrowForward,
   ionArrowBackOutline,
   ionChatboxEllipsesOutline,
+  ionCloudUploadOutline,
+  ionCart,
 } from '@ng-icons/ionicons';
 import { ProfileComponent } from './page/shared/profile/profile.component';
 import { HolidayComponent } from './page/admin/holiday/holiday.component';
@@ -110,6 +112,7 @@ import { AgChartsModule } from 'ag-charts-angular';
 import { LunchSummaryComponent } from './report/lunch-summary/lunch-summary.component';
 import { FeedbackFormComponent } from './components/feedback/feedback-form/feedback-form.component';
 import { CreateVoucherComponent } from './components/payment-voucher/create-voucher/create-voucher.component';
+import { OrderCreateComponent } from './components/order/order-create/order-create.component';
 import { DepartmentCostComponent } from './report/department-cost/department-cost.component';
 import { DietaryPreferenceComponent } from './avoid-meal/dietary-preference/dietary-preference.component';
 import { WeeklyPaymentComponent } from './payments/weekly-payment/weekly-payment.component';
@@ -129,6 +132,11 @@ import { AllNotificationsComponent } from './page/shared/all-notifications/all-n
 import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
 import { MeatActionRendererComponent } from './components/meat-action-renderer/meat-action-renderer.component';
 import { PaymentVoucherComponent } from './payments/payment-voucher/payment-voucher.component';
+import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
+import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
+import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
+import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
+import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
 
 @NgModule({
   declarations: [
@@ -200,6 +208,12 @@ import { PaymentVoucherComponent } from './payments/payment-voucher/payment-vouc
     AnnouncementDetailsComponent,
     MeatActionRendererComponent,
     PaymentVoucherComponent,
+    StaffLunchRecordComponent,
+    UserAvoidRecordComponent,
+    OrderCreateComponent,
+    VoucherListComponent,
+    EditVoucherComponent,
+    FeedbackListComponent
   ],
   imports: [
     FontAwesomeModule,
@@ -248,10 +262,12 @@ import { PaymentVoucherComponent } from './payments/payment-voucher/payment-vouc
       ionSearch,
       ionCash,
       ionBanSharp,
+      ionChatboxEllipsesOutline,
       ionStatsChartSharp,
       ionArrowForward,
       ionArrowBackOutline,
-      ionChatboxEllipsesOutline
+      ionCloudUploadOutline,
+      ionCart,
     }),
     BrowserAnimationsModule,
     NgxDocViewerModule,

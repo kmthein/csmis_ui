@@ -52,6 +52,12 @@ import { SuggestListComponent } from './page/admin/suggest-list/suggest-list.com
 import { AllNotificationsComponent } from './page/shared/all-notifications/all-notifications.component';
 import { AnnouncementDetailsComponent } from './page/shared/announcement-details/announcement-details.component';
 import { PaymentVoucherComponent } from './payments/payment-voucher/payment-voucher.component';
+import { StaffLunchRecordComponent } from './report/staff-lunch-record/staff-lunch-record.component';
+import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-record.component';
+import { OrderCreateComponent } from './components/order/order-create/order-create.component';
+import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
+import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
+import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
 
 const routes: Routes = [
   {
@@ -105,11 +111,12 @@ const routes: Routes = [
       },
       { path: 'meats', component: MeatListComponent },
       { path: 'report/lunch-summary', component: LunchSummaryComponent },
-      { path: 'create-voucher', component: CreateVoucherComponent },
       { path: 'settings', component: SettingComponent },
       { path: 'report/mail-on', component: MailOnUserComponent },
       { path: 'report/lunch-summary', component: LunchSummaryComponent },
       { path: 'report/department-cost', component: DepartmentCostComponent },
+      { path: 'report/staff-lunch', component: StaffLunchRecordComponent },
+      { path: 'report/user-avoid', component: UserAvoidRecordComponent },
       { path: 'weekly', component: WeeklyPaymentComponent },
 
       { path: 'monthly', component: MonthlyPaymentComponent },
@@ -120,12 +127,15 @@ const routes: Routes = [
       { path: 'Company_yearly', component: CompanyYearlyPaymentComponent },
 
       { path: 'Company_weekly', component: CompanyweeklyPaymentComponent },
-      { path: 'vocher', component: PaymentVoucherComponent },
-
+      { path: 'voucher', component: VoucherListComponent },
+      { path: 'voucher/new', component: PaymentVoucherComponent },
+      { path: 'voucher/edit/:id', component: EditVoucherComponent },
+      { path: 'order', component: OrderCreateComponent },
       { path: 'payment', component: ViewPaymentComponent },
       { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
       { path: 'TotalYearly', component: TotalYearlyPaymentComponent },
       { path: 'suggestions/:id', component: SuggestDetailsComponent },
+      { path: 'feedbacks', component: FeedbackListComponent },
       { path: 'notifications/all', component: SuggestListComponent },
     ],
   },

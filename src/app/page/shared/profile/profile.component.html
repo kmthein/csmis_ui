@@ -1,11 +1,60 @@
 <div class="flex gap-4">
   <div class="">
     <h3 class="text-md font-semibold mb-4">My Profile</h3>
-    <div class="w-[8rem] h-[8rem] rounded-full">
-      <img
-        src="assets/default_profile.jpg"
-        class="w-full rounded-full object-cover"
-      />
+    <div>
+      <div class="flex justify-center mt-10 relative">
+        <div class="w-[120px] h-[120px]">
+          <img
+            *ngIf="!previewImg && !user.imgUrl"
+            src="assets/default-profile.png"
+            class="w-full h-full object-center object-cover rounded-full"
+            alt=""
+            (mouseenter)="setOverlay(true)"
+          />
+          <img
+            *ngIf="!previewImg && user.imgUrl"
+            [src]="user.imgUrl"
+            class="w-full h-full object-center object-cover rounded-full"
+            alt=""
+            (mouseenter)="setOverlay(true)"
+          />
+          <img
+            *ngIf="previewImg"
+            [src]="previewImg"
+            class="w-full h-full object-center object-cover rounded-full"
+            alt=""
+            (mouseenter)="setOverlay(true)"
+          />
+        </div>
+        <div
+          *ngIf="showOverlay"
+          (click)="triggerFileInput()"
+          class="w-[120px] h-[120px] z-50 bg-[#00000054] absolute rounded-full duration-1000"
+          (mouseleave)="setOverlay(false)"
+        >
+          <div class="flex justify-center items-center h-full">
+            <ng-icon
+              name="ionCloudUploadOutline"
+              class="text-white text-2xl cursor-pointer"
+            ></ng-icon>
+          </div>
+        </div>
+        <input
+          type="file"
+          id="fileInput"
+          class="hidden"
+          (change)="onFileSelected($event)"
+        />
+      </div>
+      <div class="mt-4">
+        <button
+          (click)="saveProfileImage()"
+          [disabled]="previewImg == null"
+          class="bg-[#4caf50] hover:bg-[#45a049] disabled:bg-[#264f7754] block text-white text-sm font-light mx-auto h-8 w-16 rounded-md"
+        >
+          Save
+        </button>
+      </div>
     </div>
   </div>
   <form class="profile-form pt-6 px-8 min-w-[50%]">

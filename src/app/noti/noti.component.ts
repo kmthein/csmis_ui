@@ -94,15 +94,14 @@ export class NotiComponent implements OnInit {
       const form = new FormData();
       const user = JSON.parse(localStorage.getItem('user')!);
       form.append('userId', user?.id);
-      if(this.isAdmin) {
+      if (this.isAdmin) {
         this.suggestionService
-        .getSuggestionAndMakeSeen(+suggestionId, form)
-        .subscribe((res) => {
-          this.router.navigate([`/admin/suggestions/${suggestionId}`]);
-          this.loadUnreadCount();
-        });
+          .getSuggestionAndMakeSeen(+suggestionId, form)
+          .subscribe((res) => {
+            this.router.navigate([`/admin/suggestions/${suggestionId}`]);
+            this.loadUnreadCount();
+          });
       }
-      
     }
     this.isDropdownVisible = false;
   }
@@ -143,7 +142,7 @@ export class NotiComponent implements OnInit {
   }
 
   navigateToNotificationList() {
-    if(this.isAdmin) {
+    if (this.isAdmin) {
       this.router.navigate(['/admin/notifications/all']);
     } else {
       this.router.navigate(['/notifications/all']);
@@ -163,7 +162,6 @@ export class NotiComponent implements OnInit {
         this.suggestionService
           .getUnseenSuggestionsByUserId(userId)
           .subscribe((suggestions) => {
-            console.log(suggestions);
             this.suggestions = suggestions;
             const unreadSuggestions = suggestions.filter(
               (data: any) => data.seen == false

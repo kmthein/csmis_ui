@@ -21,6 +21,10 @@ export class AuthService {
     }
   }
 
+  updateUser(user: any) {
+    this.userSource.next(user);
+  }
+
   login(staffId: string, password: string): Observable<any> {
     const body = { staffId, password };
     return this.http.post<any>(`${this.url}/login`, body).pipe(

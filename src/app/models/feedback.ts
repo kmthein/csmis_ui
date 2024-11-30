@@ -5,7 +5,8 @@ export class Feedback {
   userId: number | null;
   date: Date;
   lunchId: number;
-  
+  userName?: string; // Optional field for user name
+  lunchMenu?: string; // Optional field for lunch menu
 
   constructor(
     id: number = 0,
@@ -13,7 +14,9 @@ export class Feedback {
     response: string = '',
     userId: number = 0,
     date: Date = new Date(),
-    lunchId: number = 0
+    lunchId: number = 0,
+    userName: string = '',  // Optional parameter for user name
+    lunchMenu: string = ''  // Optional parameter for lunch menu
   ) {
     this.id = id;
     this.comment = comment;
@@ -21,5 +24,7 @@ export class Feedback {
     this.userId = userId;
     this.date = date;
     this.lunchId = lunchId;
+    this.userName = userName;
+    this.lunchMenu = lunchMenu;
   }
 }

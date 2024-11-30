@@ -7,7 +7,7 @@ import { Order } from '../models/order';
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = `localhost:8080/api/orders`; // Base URL for the orders endpoint
+  private apiUrl = `http://localhost:8080/api/orders`; // Base URL for the orders endpoint
 
   constructor(private http: HttpClient) {}
 
@@ -16,8 +16,24 @@ export class OrderService {
     return this.http.get<number>(`${this.apiUrl}/quantity`, { params });
   }
 
+  getNextWeekOrder() {
+    return this.http.get(`${this.apiUrl}/check-exist`);
+  }
+
+  getOrderByDate(date: string) {
+    const form = new FormData();
+    form.append('date', date);
+    return this.http.put(`${this.apiUrl}/find-date`, form);
+  }
+
+  getNextWeekRegister() {
+    return this.http.get(
+      `http://localhost:8080/api/lunch/lunch-count-next-week`
+    );
+  }
+
   // Create a new order
-  createOrder(order: Order): Observable<Order> {
+  createOrder(order: any): Observable<Order> {
     return this.http.post<Order>(`${this.apiUrl}`, order);
   }
 

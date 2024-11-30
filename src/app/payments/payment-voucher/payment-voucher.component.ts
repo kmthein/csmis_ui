@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { PaymentVoucherService } from '../../services/payment-voucher.service';
 import { HolidayService } from '../../services/admin/holiday.service';
+import { OrderService } from '../../services/order.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-voucher',
   templateUrl: './payment-voucher.component.html',
-  styleUrls: ['./payment-voucher.component.css']
+  styleUrls: ['./payment-voucher.component.css'],
 })
 export class PaymentVoucherComponent implements OnInit {
-
   selectedDate: string = '';
   totalAmount: number = 0;
   voucherData: any = {
@@ -19,16 +21,23 @@ export class PaymentVoucherComponent implements OnInit {
     services: [],
     approvedBy: '', // Admin selected for approval
     remarks: '', // Remarks entered by the user
-    status: 'UNPAID' // Default status (paid or unpaid)
+    status: 'UNPAID', // Default status (paid or unpaid)
+    receivedBy: '',
   };
+  voucherExist: boolean = false;
   holidays: string[] = []; // To store holiday dates
   admins: any[] = []; // List of admins
   cashier: any = {}; // Current logged-in user (Cashier)
   isModalOpen: boolean = false; // Modal open/close state
-  restaurants: any[] =[];
+  restaurants: any[] = [];
+  order: any = {};
+
   constructor(
     private voucherService: PaymentVoucherService,
-    private holidayService: HolidayService
+    private holidayService: HolidayService,
+    private orderService: OrderService,
+    private toast: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +48,7 @@ export class PaymentVoucherComponent implements OnInit {
 
     this.holidayService.getAllHolidays().subscribe((data: any) => {
       this.holidays = data.map((holiday: any) => holiday.date); // Assuming holiday.date is in 'yyyy-MM-dd' format
-      this.calculateWeek();
+      // this.calculateWeek();
     });
   }
   loadRestaurants(): void {
@@ -56,11 +65,17 @@ export class PaymentVoucherComponent implements OnInit {
     this.voucherService.getAllAdmins().subscribe(
       (admins) => {
         this.admins = admins;
+        this.voucherData.approvedBy = admins[0].name;
+        console.log(this.voucherData.approvedBy);
       },
       (error) => {
         console.error('Error fetching admins:', error);
       }
     );
+  }
+
+  onChangeApprove(event: any) {
+    this.voucherData.approvedBy = event.target.value;
   }
 
   setReceivedBy(): void {
@@ -71,6 +86,10 @@ export class PaymentVoucherComponent implements OnInit {
   }
 
   calculateWeek() {
+    this.orderService.getOrderByDate(this.selectedDate).subscribe((res) => {
+      console.log(res);
+      this.order = res;
+    });
     if (!this.selectedDate) {
       return;
     }
@@ -112,14 +131,15 @@ export class PaymentVoucherComponent implements OnInit {
     // );
     this.voucherData.services = [];
     this.totalAmount = 0;
-    this.voucherData.voucherNo = "CS001-" + weekDates[0].replace(/-/g, '');
+    this.voucherData.voucherNo = 'CS001-' + weekDates[0].replace(/-/g, '');
     this.voucherData.paymentDate = new Date().toISOString().split('T')[0];
-    this.voucherData.cateringServiceName = "Kaung Myait Hein Restaurant";
-    this.voucherData.invoicePeriod = `${weekDates[0]} ~ ${weekDates[weekDates.length - 1]}`;
+    this.voucherData.invoicePeriod = `${weekDates[0]} ~ ${
+      weekDates[weekDates.length - 1]
+    }`;
     console.log(this.voucherData.invoicePeriod);
-    weekDates.forEach(date => {
-      this.voucherService.getOrderQuantity(date).subscribe(quantity => {
-        this.voucherService.getTotalCost(date).subscribe(totalCost => {
+    weekDates.forEach((date) => {
+      this.voucherService.getOrderQuantity(date).subscribe((quantity) => {
+        this.voucherService.getTotalCost(date).subscribe((totalCost) => {
           const pricePerPax = totalCost;
           const amount = quantity * pricePerPax;
 
@@ -132,6 +152,7 @@ export class PaymentVoucherComponent implements OnInit {
           });
 
           this.totalAmount += amount;
+          this.voucherExist = true;
         });
       });
     });
@@ -147,41 +168,51 @@ export class PaymentVoucherComponent implements OnInit {
   onDateChange(event: any) {
     this.selectedDate = event.target.value;
     this.calculateWeek();
-  }  
+  }
   submitVoucher() {
-    if (!this.voucherData.approvedBy || this.voucherData.services.length === 0) {
-      alert("Please complete the form with all required data.");
+    if (
+      !this.voucherData.approvedBy ||
+      this.voucherData.services.length === 0
+    ) {
+      this.toast.info('Please complete the form with all required data.');
       return;
     }
-  
+
     const paymentVoucherDTO = {
       cashierUserId: this.cashier.id,
-      approvedByUserId: this.voucherData.approvedBy,
+      approvedByName: this.voucherData.approvedBy,
       remark: this.voucherData.remarks,
-      receivedBy: this.cashier.name,
+      receivedBy: this.voucherData.receivedBy,
       status: this.voucherData.status,
+      totalAmount: this.totalAmount,
       rows: this.voucherData.services.map((service: any) => ({
         dt: service.date,
         qty: service.quantity,
         price: service.pricePerPax,
         amount: service.amount,
-        remark: '' // Add any remarks if needed
-      }))
+        remark: '', // Add any remarks if needed
+      })),
     };
-  
+
     // Call the API to save the voucher
-    this.voucherService.saveVoucher(this.selectedDate, paymentVoucherDTO).subscribe(
-      (response) => {
-        alert("Payment voucher saved successfully!");
-        this.resetForm(); // Reset the form after saving
-      },
-      (error) => {
-        console.error("Error saving payment voucher:", error);
-        alert("An error occurred while saving the voucher. Please try again.");
-      }
-    );
+    this.voucherService
+      .saveVoucher(this.selectedDate, paymentVoucherDTO)
+      .subscribe(
+        (response) => {
+          this.toast.success('Payment voucher saved successfully!');
+          this.resetForm(); // Reset the form after saving
+          this.voucherExist = false;
+          this.router.navigate([`/admin/voucher`]);
+        },
+        (error) => {
+          console.error('Error saving payment voucher:', error);
+          this.toast.error(
+            'An error occurred while saving the voucher. Please try again.'
+          );
+        }
+      );
   }
-  
+
   resetForm() {
     this.selectedDate = '';
     this.totalAmount = 0;
@@ -193,8 +224,7 @@ export class PaymentVoucherComponent implements OnInit {
       services: [],
       approvedBy: '',
       remarks: '',
-      status: 'UNPAID'
+      status: 'UNPAID',
     };
   }
-  
 }
