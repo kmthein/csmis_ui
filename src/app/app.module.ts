@@ -137,6 +137,8 @@ import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-
 import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
 import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
 import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
+import { FeedbackResponseCreateComponent } from './components/feedback-response/feedback-response-create/feedback-response-create.component';
+import { ReponseListComponent } from './components/feedback-response/reponse-list/reponse-list.component';
 
 @NgModule({
   declarations: [
@@ -213,7 +215,9 @@ import { FeedbackListComponent } from './components/feedback/feedback-list/feedb
     OrderCreateComponent,
     VoucherListComponent,
     EditVoucherComponent,
-    FeedbackListComponent
+    FeedbackListComponent,
+    FeedbackResponseCreateComponent,
+    ReponseListComponent
   ],
   imports: [
     FontAwesomeModule,

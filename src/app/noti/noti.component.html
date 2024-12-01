@@ -28,12 +28,9 @@
     <ng-container *ngIf="suggestions.length > 0 || announcements.length > 0">
       <!-- Suggestions -->
       <ng-container *ngIf="suggestions.length > 0">
-        <!-- <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-          <strong>New Suggestions:</strong>
-        </div> -->
         <div
-          [ngClass]="!suggestion.seen ? 'bg-[#E9EFF2]' : ''"
           *ngFor="let suggestion of suggestions.slice(0, 7)"
+          [ngClass]="!suggestion.seen ? 'bg-[#dfe3e6]' : ''"
         >
           <a
             (click)="navigateToSuggestDetails(suggestion.id, suggestion.seen)"
@@ -41,10 +38,10 @@
           >
             <div class="w-full">
               <div class="text-gray-900 text-sm dark:text-gray-400 mb-2">
-                <span class="font-medium text-black">{{
-                  suggestion.username
-                }}</span>
+                <span class="font-medium text-black">{{ suggestion.username }}</span>
                 has sent a suggestion.
+                <!-- Conditionally add Unread text -->
+                <span *ngIf="!suggestion.seen" class="text-red-500 font-bold text-xs">(Unread)</span>
               </div>
               <p class="text-gray-400 text-sm font-light">
                 {{ suggestion.createdAt | relativeTime }}
@@ -56,22 +53,19 @@
 
       <!-- Announcements -->
       <ng-container *ngIf="announcements.length > 0">
-        <!-- <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-          <strong>New Suggestions:</strong>
-        </div> -->
         <div
-          [ngClass]="!announcement.seen ? 'bg-[#E9EFF2]' : ''"
           *ngFor="let announcement of announcements.slice(0, 7)"
+          [ngClass]="!announcement.seen ? 'bg-[#E9EFF2]' : ''"
         >
           <a
-            (click)="
-              navigateToAnnouncementDetails(announcement.id, announcement.seen)
-            "
+            (click)="navigateToAnnouncementDetails(announcement.id, announcement.seen)"
             class="flex px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <div class="w-full">
               <div class="text-gray-900 text-sm dark:text-gray-400 mb-2">
-                New announcement has received
+                New announcement: {{ announcement.title }}
+                <!-- Conditionally add Unread text -->
+                <span *ngIf="!announcement.seen" class="text-red-500 font-bold text-xs">(Unread)</span>
               </div>
               <p class="text-gray-400 text-sm font-light">
                 {{ announcement.createdAt | relativeTime }}
