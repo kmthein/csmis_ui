@@ -2,13 +2,19 @@
   <h2>Payment Voucher</h2>
 
   <label for="dateSelect" class="w-40 inline-block">Choose a Date: </label>
-  <input
-    type="date"
-    id="dateSelect"
-    [(ngModel)]="selectedDate"
-    (change)="onDateChange($event)"
-  />
-
+  <mat-form-field class="w-[50%]" appearance="fill">
+    <mat-label>Select a date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [(ngModel)]="selectedDate"
+      [matDatepickerFilter]="dateFilter"
+      (ngModelChange)="voucherGenerateAgain()"
+      class="w-[200px]"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
   <div *ngIf="voucherData && voucherExist">
     <!-- Top Info Section -->
     <div class="row">
@@ -128,13 +134,16 @@
         </div>
       </div>
       <div class="mt-10 mb-6 flex justify-end">
-        <button (click)="calculateWeek()" *ngIf="!voucherExist">
+        <button (click)="calculateWeek()" 
+        class="bg-[#4caf50] hover:bg-[#45a049]"
+        *ngIf="!voucherExist">
           Generate Voucher
         </button>
         <button
           (click)="submitVoucher()"
+          [disabled]="isDateDisabled(selectedDate)"
           *ngIf="voucherExist"
-          class="btn btn-primary"
+          class="bg-[#4caf50] hover:bg-[#45a049] disabled:bg-[#45a04934]"
         >
           Save Voucher
         </button>

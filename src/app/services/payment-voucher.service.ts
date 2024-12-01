@@ -16,6 +16,10 @@ export class PaymentVoucherService {
     return this.http.get<PaymentVoucher[]>(this.apiUrl);
   }
 
+  getAlreadyHaveVoucherDate() {
+    return this.http.get(`${this.apiUrl}/get-dates`);
+  }
+
   // Get a single payment voucher by ID
   getPaymentVoucher(id: number): Observable<PaymentVoucher> {
     return this.http.get<PaymentVoucher>(`${this.apiUrl}/${id}`);

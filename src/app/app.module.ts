@@ -137,6 +137,9 @@ import { UserAvoidRecordComponent } from './report/user-avoid-record/user-avoid-
 import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
 import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
 import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -229,6 +232,9 @@ import { FeedbackListComponent } from './components/feedback/feedback-list/feedb
     AgChartsModule,
     HttpClientModule,
     DateFnsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Initialize Firebase
     AngularFireStorageModule,
     NgxDocViewerModule,
@@ -309,7 +315,7 @@ import { FeedbackListComponent } from './components/feedback/feedback-list/feedb
       },
     }),
   ],
-  providers: [provideHttpClient(withInterceptors([authInterceptor])), DatePipe],
+  providers: [provideHttpClient(withInterceptors([authInterceptor])), DatePipe, MatDatepickerModule],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PaymentVoucherService } from '../../services/payment-voucher.service';
 import { HolidayService } from '../../services/admin/holiday.service';
 import { OrderService } from '../../services/order.service';
@@ -31,26 +31,73 @@ export class PaymentVoucherComponent implements OnInit {
   isModalOpen: boolean = false; // Modal open/close state
   restaurants: any[] = [];
   order: any = {};
+  orderedDates: any = [];
 
   constructor(
     private voucherService: PaymentVoucherService,
     private holidayService: HolidayService,
     private orderService: OrderService,
     private toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
+
+  voucherGenerateAgain() {
+    this.voucherExist = false;
+  }
+
+  isDateDisabled(date: string): boolean {
+    return this.orderedDates.includes(date) || this.holidays.includes(date) || this.isWeekend;
+  }
+
+  isWeekend(date: Date): boolean {
+    const day = date.getDay(); // Get the day of the week (0 = Sunday, 6 = Saturday)
+    return day === 0 || day === 6; // Return true for weekends
+  }
+
+  dateFilter = (date: Date | null): boolean => {
+    if (!date) return true; // Allow null dates
+    const formattedDate = this.formatDateToYYYYMMDD(date); 
+    const isWeekend = this.isWeekend(date);
+    const isPublicHoliday = this.holidays.includes(formattedDate);
+    const isOrderedDate = this.orderedDates.includes(formattedDate);
+    return !(isWeekend || isPublicHoliday || isOrderedDate);
+  };
+
+  formatDateToYYYYMMDD(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
   ngOnInit(): void {
     const today = new Date();
     this.selectedDate = today.toISOString().split('T')[0];
     this.loadAdmins();
     this.setReceivedBy(); // Automatically set receivedBy field
-
+    this.getAlreadyHaveVoucherDate();
     this.holidayService.getAllHolidays().subscribe((data: any) => {
       this.holidays = data.map((holiday: any) => holiday.date); // Assuming holiday.date is in 'yyyy-MM-dd' format
       // this.calculateWeek();
     });
   }
+
+  getAlreadyHaveVoucherDate() {
+    this.voucherService.getAlreadyHaveVoucherDate().subscribe((res: any) => {
+      console.log(res);
+      const dates: any = [];
+      res.map((data: any) => {
+        const date = new Date(data.dt)
+        dates.push(date.toISOString().split('T')[0]);
+      })
+      console.log(dates);      
+      this.orderedDates = dates;
+
+      this.cdr.detectChanges();
+    })
+  }
+
   loadRestaurants(): void {
     this.voucherService.getAllRestaurants().subscribe(
       (data) => {
@@ -66,7 +113,6 @@ export class PaymentVoucherComponent implements OnInit {
       (admins) => {
         this.admins = admins;
         this.voucherData.approvedBy = admins[0].name;
-        console.log(this.voucherData.approvedBy);
       },
       (error) => {
         console.error('Error fetching admins:', error);
