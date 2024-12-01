@@ -58,6 +58,8 @@ import { OrderCreateComponent } from './components/order/order-create/order-crea
 import { VoucherListComponent } from './page/admin/voucher-list/voucher-list.component';
 import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.component';
 import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
+import { FeedbackResponseCreateComponent } from './components/feedback-response/feedback-response-create/feedback-response-create.component';
+import { ReponseListComponent } from './components/feedback-response/reponse-list/reponse-list.component';
 
 const routes: Routes = [
   {
@@ -78,7 +80,7 @@ const routes: Routes = [
       },
       { path: 'reportViewer', component: ReportViewerComponent },
       { path: 'suggest', component: SuggestionCreateComponent },
-      { path: 'feedback', component: FeedbackFormComponent },
+      { path: 'give-feedback', component: FeedbackFormComponent },
     ],
   },
   {
@@ -136,6 +138,9 @@ const routes: Routes = [
       { path: 'TotalYearly', component: TotalYearlyPaymentComponent },
       { path: 'suggestions/:id', component: SuggestDetailsComponent },
       { path: 'feedbacks', component: FeedbackListComponent },
+      { path: 'feedback-option', component: FeedbackResponseCreateComponent },
+      { path: 'list-feedback-options', component: ReponseListComponent },
+    
       { path: 'notifications/all', component: SuggestListComponent },
     ],
   },

@@ -140,6 +140,8 @@ import { FeedbackListComponent } from './components/feedback/feedback-list/feedb
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { FeedbackResponseCreateComponent } from './components/feedback-response/feedback-response-create/feedback-response-create.component';
+import { ReponseListComponent } from './components/feedback-response/reponse-list/reponse-list.component';
 
 @NgModule({
   declarations: [
@@ -217,6 +219,8 @@ import { MatInputModule } from '@angular/material/input';
     VoucherListComponent,
     EditVoucherComponent,
     FeedbackListComponent,
+    FeedbackResponseCreateComponent,
+    ReponseListComponent
   ],
   imports: [
     FontAwesomeModule,
