@@ -60,7 +60,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   private fetchAnnouncements(): void {
     this.announceService.getAllAnnouncements(1, 1).subscribe({
       next: (response) => {
-        this.announcement = response[0];
+        console.log(response);
+        
+        this.announcement = response.content[0];
       },
       error: (error) => {
         console.error('Error fetching announcements:', error);

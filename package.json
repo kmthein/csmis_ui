@@ -42,7 +42,6 @@
     "ngx-date-fns": "^11.0.0",
     "ngx-doc-viewer": "^15.0.1",
     "ngx-editor": "^17.5.4",
-    "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "sockjs-client": "^1.6.1",
