@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -218,6 +218,7 @@ import { ReponseListComponent } from './components/feedback-response/reponse-lis
     FeedbackListComponent,
     FeedbackResponseCreateComponent,
     ReponseListComponent
+
   ],
   imports: [
     FontAwesomeModule,
@@ -315,5 +316,6 @@ import { ReponseListComponent } from './components/feedback-response/reponse-lis
   ],
   providers: [provideHttpClient(withInterceptors([authInterceptor])), DatePipe],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

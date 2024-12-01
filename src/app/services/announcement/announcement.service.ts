@@ -23,8 +23,10 @@ export class AnnouncementService {
     return this.http.put(`${this.url}/announcements/${id}/seen`, form);
   }
 
-  getAllAnnouncements(): Observable<any> {
-    return this.http.get<any>(`${this.url}/announcements`);
+  getAllAnnouncements(page: number, size: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.url}/announcements?page=${page}&size=${size}`
+    );
   }
 
   addNewAnnouncement(
@@ -100,6 +102,6 @@ export class AnnouncementService {
           this.toast.error(response.error);
         }
       })
-    )
+    );
   }
 }

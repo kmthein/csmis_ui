@@ -14,7 +14,7 @@
           type="text"
           name="staffId"
           [(ngModel)]="staff.staffId"
-          [readOnly]="viewMode"
+          [readOnly]="true"
           required
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
@@ -25,7 +25,7 @@
           type="text"
           name="name"
           required
-          [readOnly]="viewMode"
+          [readOnly]="true"
           [(ngModel)]="staff.name"
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
@@ -38,7 +38,7 @@
           type="text"
           name="doorLogNo"
           required
-          [readOnly]="viewMode"
+          [readOnly]="true"
           [(ngModel)]="staff.doorLogNo"
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
@@ -49,7 +49,7 @@
           type="email"
           name="email"
           required
-          [readOnly]="viewMode"
+          [readOnly]="true"
           [(ngModel)]="staff.email"
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
@@ -62,12 +62,11 @@
           type="text"
           name="division"
           required
-          [readOnly]="viewMode"
+          [readOnly]="true"
           [(ngModel)]="staff.division"
-          *ngIf="viewMode || addNewDivision"
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
-        <select
+        <!-- <select
           id="division"
           name="division"
           [(ngModel)]="staff.division"
@@ -84,7 +83,7 @@
             {{ division.name }}
           </option>
           <option value="" class="font-bold">Add new division</option>
-        </select>
+        </select> -->
       </div>
       <div class="w-[50%]">
         <label class="text-[#696969] mb-1 block text-sm">Department</label>
@@ -92,12 +91,11 @@
           type="text"
           name="department"
           required
-          [readOnly]="viewMode"
+          [readOnly]="true"
           [(ngModel)]="staff.department"
-          *ngIf="viewMode || addNewDepart"
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
-        <select
+        <!-- <select
           id="department"
           name="department"
           [(ngModel)]="staff.department"
@@ -114,7 +112,7 @@
             {{ department.name }}
           </option>
           <option value="" class="font-bold">Add new department</option>
-        </select>
+        </select> -->
       </div>
     </div>
     <div class="flex gap-6 mb-8">
@@ -124,12 +122,11 @@
           type="text"
           name="team"
           required
-          *ngIf="viewMode || addNewTeam"
-          [readOnly]="viewMode"
+          [readOnly]="true"
           [(ngModel)]="staff.team"
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
-        <select
+        <!-- <select
           id="team"
           name="team"
           [(ngModel)]="staff.team"
@@ -146,7 +143,7 @@
             {{ team.name }}
           </option>
           <option value="" class="font-bold">Add new team</option>
-        </select>
+        </select> -->
       </div>
       <div class="w-[50%]">
         <label class="text-[#696969] mb-1 block text-sm">Status</label>
@@ -154,12 +151,11 @@
           type="text"
           name="status"
           required
-          [readOnly]="viewMode"
-          *ngIf="viewMode"
+          [readOnly]="true"
           [(ngModel)]="staff.status"
           class="block w-full bg-[#FCFCFC] border-0 h-10 rounded-sm read-only:bg-[#fcfcfc88]"
         />
-        <select
+        <!-- <select
           id="status"
           name="status"
           [(ngModel)]="staff.status"
@@ -174,7 +170,7 @@
           >
             {{ status }}
           </option>
-        </select>
+        </select> -->
       </div>
     </div>
     <div class="flex gap-6 mb-8">
@@ -195,7 +191,7 @@
           [(ngModel)]="staff.role"
           *ngIf="!viewMode"
           (change)="onChangeTeam($event)"
-          class="bg-[#FCFCFC] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-[#ffffff] border border-[#e6e6e6] text-gray-900 focus:ring-blue-500 focus:border-blue-500 w-full h-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
           <option
             [selected]="staff.role === role"
@@ -206,7 +202,6 @@
           </option>
         </select>
       </div>
-      
     </div>
     <div class="flex justify-end gap-4 my-10">
       <button
