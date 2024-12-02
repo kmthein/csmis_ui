@@ -10,6 +10,10 @@ export class FeedbackResponseService {
 
   constructor(private http: HttpClient) {}
 
+  getFeedbackCountByResponseId(responseId: number): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/count/${responseId}`);
+  }
+
   /**
    * Create a new FeedbackResponse
    * @param feedbackResponse The FeedbackResponse object to create

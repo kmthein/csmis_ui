@@ -12,6 +12,19 @@ export class FeedbackService {
 
   constructor(private http: HttpClient) { }
 
+  getFeedbackCountForCurrentWeek(responseId: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/count/week/${responseId}`);
+  }
+
+  // Get feedback count for the current month
+  getFeedbackCountForCurrentMonth(responseId: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/count/month/${responseId}`);
+  }
+
+  getFeedbackCountByResponseId(responseId: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/count/${responseId}`);
+  }
+
   getFeedbackByUserAndDate(userId: number, date: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/for-update?userId=${userId}&date=${date}`);
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FeedbackResponse } from '../../../models/feedbackReponse';
 import { FeedbackResponseService } from '../../../services/feedback-response.service';
 import { ToastrService } from 'ngx-toastr';
+import { FeedbackService } from '../../../services/feedback.service';
 
 @Component({
   selector: 'app-reponse-list',
@@ -12,9 +13,11 @@ export class ReponseListComponent implements OnInit {
   feedbackResponses: FeedbackResponse[] = [];  // To hold list of feedback responses
   isDeleteConfirmationVisible: boolean = false; // To control the visibility of delete confirmation dialog
   responseToDelete: FeedbackResponse | null = null; // Store the response to delete
+  feedbackCounts: { [key: number]: number } = {};  // To store feedback count for each response
 
   constructor(
     private feedbackResponseService: FeedbackResponseService,
+    private feedbackService: FeedbackService,
     private toastr: ToastrService
   ) {}
 
@@ -27,10 +30,27 @@ export class ReponseListComponent implements OnInit {
     this.feedbackResponseService.getAllFeedbackResponses().subscribe(
       responses => {
         this.feedbackResponses = responses;
+        // After fetching responses, get the feedback count for each response
+        this.feedbackResponses.forEach(response => {
+          this.getFeedbackCount(response.id);
+        });
       },
       error => {
         console.error('Error fetching feedback responses:', error);
         this.toastr.error('Error loading feedback responses', 'Error');
+      }
+    );
+  }
+
+  // Get the count of feedbacks for each response
+  getFeedbackCount(responseId: number) {
+    this.feedbackService.getFeedbackCountByResponseId(responseId).subscribe(
+      count => {
+        this.feedbackCounts[responseId] = count;  // Store the count in the dictionary
+      },
+      error => {
+        console.error('Error fetching feedback count:', error);
+        this.toastr.error('Error fetching feedback count', 'Error');
       }
     );
   }
