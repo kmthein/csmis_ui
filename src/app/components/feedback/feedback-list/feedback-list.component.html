@@ -1,7 +1,7 @@
-<div class="ml-auto">
+<div class="flex justify-end mb-4">
   <a
     routerLink="/admin/list-feedback-options"
-    class="px-6 py-2 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition duration-300"
+    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-2"
   >
     Manage Feedback Options
   </a>
@@ -10,7 +10,7 @@
 <div class="p-6 bg-white shadow-xl rounded-lg">
   <!-- Feedback Header Section -->
   <div class="flex justify-between items-center mb-6">
-    <h3 class="text-3xl font-semibold text-gray-800">Feedback List</h3>
+    <h3 class="text-xl font-semibold text-gray-800">Feedback List</h3>
     <div class="flex gap-6 items-center">
       <!-- Search Bar -->
       <input
@@ -18,18 +18,20 @@
         [(ngModel)]="searchQuery"
         (input)="searchFeedbacks()"
         placeholder="Search feedbacks..."
-        class="border border-gray-300 rounded-md p-3 text-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+        class="border border-gray-300 rounded-md p-3 text-[1rem] text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
       />
       <!-- Date Filter Section -->
       <div class="flex items-center gap-4">
         <div class="flex items-center space-x-2">
-          <label for="startDate" class="text-sm text-gray-600">Start Date:</label>
+          <label for="startDate" class="text-sm text-gray-600"
+            >Start Date:</label
+          >
           <input
             id="startDate"
             type="date"
             [(ngModel)]="startDate"
             (change)="searchFeedbacks()"
-            class="border border-gray-300 rounded-md p-3 text-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="border border-gray-300 rounded-md p-3 text-[1rem] text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
         <div class="flex items-center space-x-2">
@@ -39,36 +41,52 @@
             type="date"
             [(ngModel)]="endDate"
             (change)="searchFeedbacks()"
-            class="border border-gray-300 rounded-md p-3 text-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="border border-gray-300 rounded-md p-3 text-[1rem] text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
       </div>
     </div>
     <!-- Navigation Button to Manage Feedback Options -->
-    
   </div>
 
   <!-- Feedback Table Section -->
   <div *ngIf="filteredFeedbacks.length > 0; else noFeedback">
-    <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+    <table
+      class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md"
+    >
       <thead class="bg-gray-100 text-sm text-gray-700">
         <tr>
-          <th class="px-6 py-4 text-left font-medium text-lg">#</th>
-          <th class="px-6 py-4 text-left font-medium text-lg">Comment</th>
-          <th class="px-6 py-4 text-left font-medium text-lg">Response</th>
-          <th class="px-6 py-4 text-left font-medium text-lg">Given By</th>
-          <th class="px-6 py-4 text-left font-medium text-lg">Menu</th>
-          <th class="px-6 py-4 text-left font-medium text-lg">Date</th>
+          <th class="px-6 py-4 text-left font-medium text-[1rem]">#</th>
+          <th class="px-6 py-4 text-left font-medium text-[1rem]">Comment</th>
+          <th class="px-6 py-4 text-left font-medium text-[1rem]">Response</th>
+          <th class="px-6 py-4 text-left font-medium text-[1rem]">Given By</th>
+          <th class="px-6 py-4 text-left font-medium text-[1rem]">Menu</th>
+          <th class="px-6 py-4 text-left font-medium text-[1rem]">Date</th>
         </tr>
       </thead>
       <tbody class="text-sm">
-        <tr *ngFor="let feedback of paginatedFeedbacks; let i = index" class="hover:bg-gray-50 border-t border-gray-100">
-          <td class="px-6 py-4 text-gray-700 text-lg">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
-          <td class="px-6 py-4 text-gray-800 text-lg">{{ feedback.comment }}</td>
-          <td class="px-6 py-4 text-gray-800 text-lg">{{ feedback.response }}</td>
-          <td class="px-6 py-4 text-gray-800 text-lg">{{ feedback.userName }}</td>
-          <td class="px-6 py-4 text-gray-800 text-lg">{{ feedback.lunchMenu }}</td>
-          <td class="px-6 py-4 text-gray-700 text-lg">{{ feedback.date | date: 'EEE, MMM d, y' }}</td>
+        <tr
+          *ngFor="let feedback of paginatedFeedbacks; let i = index"
+          class="hover:bg-gray-50 border-t border-gray-100"
+        >
+          <td class="px-6 py-4 text-gray-700 text-[1rem]">
+            {{ (currentPage - 1) * pageSize + i + 1 }}
+          </td>
+          <td class="px-6 py-4 text-gray-800 text-[1rem]">
+            {{ feedback.comment }}
+          </td>
+          <td class="px-6 py-4 text-gray-800 text-[1rem]">
+            {{ feedback.response }}
+          </td>
+          <td class="px-6 py-4 text-gray-800 text-[1rem]">
+            {{ feedback.userName }}
+          </td>
+          <td class="px-6 py-4 text-gray-800 text-[1rem]">
+            {{ feedback.lunchMenu }}
+          </td>
+          <td class="px-6 py-4 text-gray-700 text-[1rem]">
+            {{ feedback.date | date : "EEE, MMM d, y" }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -82,7 +100,9 @@
       >
         Previous
       </button>
-      <span class="text-sm text-gray-600 font-medium">Page {{ currentPage }} of {{ totalPages }}</span>
+      <span class="text-sm text-gray-600 font-medium"
+        >Page {{ currentPage }} of {{ totalPages }}</span
+      >
       <button
         (click)="nextPage()"
         [disabled]="currentPage === totalPages"
@@ -95,6 +115,8 @@
 
   <!-- No Feedback Available Template -->
   <ng-template #noFeedback>
-    <p class="text-gray-500 text-center py-6 text-lg">No feedback available.</p>
+    <p class="text-gray-500 text-center py-6 text-[1rem]">
+      No feedback available.
+    </p>
   </ng-template>
 </div>

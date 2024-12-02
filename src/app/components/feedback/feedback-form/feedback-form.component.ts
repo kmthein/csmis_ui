@@ -35,7 +35,8 @@ export class FeedbackFormComponent implements OnInit {
 
   loadLunch(): void {
     this.route.queryParams.subscribe((params) => {
-      this.selectedDate = params['date'] || new Date().toISOString().split('T')[0];
+      this.selectedDate =
+        params['date'] || new Date().toISOString().split('T')[0];
       this.lunchService.getLunchByDate(this.selectedDate).subscribe(
         (lunch: Lunch) => {
           this.lunch = lunch;
@@ -75,7 +76,10 @@ export class FeedbackFormComponent implements OnInit {
         this.resetForm();
       },
       (error) => {
-        this.toastr.error('Error submitting feedback. Please try again.', 'Error');
+        this.toastr.error(
+          'Error submitting feedback. Please try again.',
+          'Error'
+        );
       }
     );
   }
