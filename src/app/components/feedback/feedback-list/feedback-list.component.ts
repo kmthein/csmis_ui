@@ -29,8 +29,11 @@ export class FeedbackListComponent implements OnInit {
   loadFeedbacks(): void {
     this.feedbackService.getAllFeedbacks().subscribe({
       next: (data) => {
-        this.feedbacks = data;
-        this.filteredFeedbacks = this.feedbacks; // Initialize filtered feedbacks
+        // Sort the feedbacks by date in descending order
+        this.feedbacks = data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        
+        // Initialize filteredFeedbacks and pagination
+        this.filteredFeedbacks = this.feedbacks;
         this.totalPages = Math.ceil(this.filteredFeedbacks.length / this.pageSize);
         this.updatePaginatedData();
       },
@@ -39,26 +42,29 @@ export class FeedbackListComponent implements OnInit {
       },
     });
   }
+  
 
   searchFeedbacks(): void {
     // Filter by search query and date range
     this.filteredFeedbacks = this.feedbacks.filter((feedback) => {
       const isSearchMatch =
-        feedback.comment.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        feedback.userName?.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        feedback.lunchMenu?.toLowerCase().includes(this.searchQuery.toLowerCase());
-
+        (feedback.comment?.toLowerCase().includes(this.searchQuery.toLowerCase()) || '') ||
+        (feedback.userName?.toLowerCase().includes(this.searchQuery.toLowerCase()) || '') ||
+        (feedback.lunchMenu?.toLowerCase().includes(this.searchQuery.toLowerCase()) || '') ||
+        (feedback.response?.toLowerCase().includes(this.searchQuery.toLowerCase()) || ''); // Include response in search
+  
       const isDateInRange =
         (this.startDate ? new Date(feedback.date) >= new Date(this.startDate) : true) &&
         (this.endDate ? new Date(feedback.date) <= new Date(this.endDate) : true);
-
+  
       return isSearchMatch && isDateInRange;
     });
-
+  
     this.totalPages = Math.ceil(this.filteredFeedbacks.length / this.pageSize);
     this.currentPage = 1; // Reset to first page after search
     this.updatePaginatedData();
   }
+  
 
   updatePaginatedData(): void {
     const startIndex = (this.currentPage - 1) * this.pageSize;
