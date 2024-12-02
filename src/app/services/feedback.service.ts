@@ -12,6 +12,10 @@ export class FeedbackService {
 
   constructor(private http: HttpClient) { }
 
+  getFeedbackByUserAndDate(userId: number, date: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/for-update?userId=${userId}&date=${date}`);
+  }
+
   checkFeedbackStatus(userId: number, lunchId: number): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiUrl}/has-feedback`, {
       params: { userId: userId.toString(), lunchId: lunchId.toString() },
