@@ -132,7 +132,7 @@
 
         <button
           *ngIf="canGiveFeedback(menu.date)"
-          [routerLink]="'/feedback'"
+          [routerLink]="menu.isFeedbackAdd ? '/edit-feedback' : '/give-feedback'"
           [queryParams]="{ date: menu.date | date : 'yyyy-MM-dd' }"
           class="inline-flex items-center text-white bg-blue-600 hover:bg-blue-700 font-medium text-md py-2 px-4 rounded-full shadow-md transition-all duration-300"
         >
@@ -140,7 +140,7 @@
             name="ionChatboxEllipsesOutline"
             class="text-xl mr-2"
           ></ng-icon>
-          Feedback
+          {{ menu.isFeedbackAdd ? "Edit" : "Feedback" }}
         </button>
       </div>
     </div>
