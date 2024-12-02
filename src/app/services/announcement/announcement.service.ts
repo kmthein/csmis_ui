@@ -29,6 +29,13 @@ export class AnnouncementService {
     );
   }
 
+  getAllAnnouncement(): Observable<any> {
+    return this.http.get<any>(
+      `${this.url}/announcements`
+    );
+  }
+
+
   addNewAnnouncement(
     title: string,
     content: string,

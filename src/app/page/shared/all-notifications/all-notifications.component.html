@@ -1,1 +1,15 @@
-<p>all-notifications works!</p>
+<div>
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="text-md font-semibold mb-4">All Announcements</h3>
+    </div>
+    <div *ngIf="loading" class="spinner">Loading...</div>
+    <div *ngIf="!loading && announcements.length > 0">
+      <div *ngFor="let announcement of announcements" class="pb-6">
+        <app-annoucement-card [announcement]="announcement"></app-annoucement-card>
+      </div>
+    </div>
+    <div *ngIf="!loading && announcements.length === 0" class="text-gray-500">
+      No announcements available.
+    </div>
+  </div>
+  

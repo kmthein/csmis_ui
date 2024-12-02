@@ -131,19 +131,22 @@
         </div>
 
         <button
-          *ngIf="canGiveFeedback(menu.date)"
-          [routerLink]="'/give-feedback'"
+  *ngIf="canGiveFeedback(menu.date)"
+  [routerLink]="menu.isFeedbackAdd ? '' : '/give-feedback'"
+  [queryParams]="{ date: menu.date | date : 'yyyy-MM-dd' }"
+  [ngClass]="{
+    'bg-gray-400 hover:bg-gray-500': menu.isFeedbackAdd,
+    'bg-blue-600 hover:bg-blue-700': !menu.isFeedbackAdd
+  }"
+  class="inline-flex items-center text-white font-medium text-md py-2 px-4 rounded-full shadow-md transition-all duration-300"
+>
+  <ng-icon
+    name="ionChatboxEllipsesOutline"
+    class="text-xl mr-2"
+  ></ng-icon>
+  {{ menu.isFeedbackAdd ? "Given" : "Feedback" }}
+</button>
 
-          [routerLink]="menu.isFeedbackAdd ? '/edit-feedback' : '/give-feedback'"
-          [queryParams]="{ date: menu.date | date : 'yyyy-MM-dd' }"
-          class="inline-flex items-center text-white bg-blue-600 hover:bg-blue-700 font-medium text-md py-2 px-4 rounded-full shadow-md transition-all duration-300"
-        >
-          <ng-icon
-            name="ionChatboxEllipsesOutline"
-            class="text-xl mr-2"
-          ></ng-icon>
-          {{ menu.isFeedbackAdd ? "Edit" : "Feedback" }}
-        </button>
       </div>
     </div>
 
