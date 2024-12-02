@@ -12,6 +12,7 @@ export class SidebarComponent {
 
   isManagementSubMenuOpen = false;
   isReportSubMenuOpen = false;
+  isVoucherSubMenuOpen = false;
 
   toggleManagementSubMenu(): void {
     this.isManagementSubMenuOpen = !this.isManagementSubMenuOpen;
@@ -19,6 +20,10 @@ export class SidebarComponent {
 
   toggleReportSubMenu(): void {
     this.isReportSubMenuOpen = !this.isReportSubMenuOpen;
+  }
+
+  toggleVoucherSubMenu(): void {
+    this.isVoucherSubMenuOpen = !this.isVoucherSubMenuOpen;
   }
 
   constructor(private authService: AuthService, private router: Router) {
@@ -38,13 +43,19 @@ export class SidebarComponent {
   closeAllSubmenu() {
     this.isManagementSubMenuOpen = false;
     this.isReportSubMenuOpen = false;
+    this.isVoucherSubMenuOpen = false;
   }
 
   closeOtherSubmenu(type: string) {
     if(type == "management") {
       this.isReportSubMenuOpen = false;
+      this.isVoucherSubMenuOpen = false;
     } else if(type == "report") {
       this.isManagementSubMenuOpen = false;
+      this.isVoucherSubMenuOpen = false;
+    } else if(type == "voucher") {
+      this.isManagementSubMenuOpen = false;
+      this.isReportSubMenuOpen = false;
     }
   }
 

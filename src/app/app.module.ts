@@ -142,6 +142,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { FeedbackResponseCreateComponent } from './components/feedback-response/feedback-response-create/feedback-response-create.component';
 import { ReponseListComponent } from './components/feedback-response/reponse-list/reponse-list.component';
+import { CustomVoucherComponent } from './page/admin/custom-voucher/custom-voucher.component';
 
 @NgModule({
   declarations: [
@@ -220,7 +221,8 @@ import { ReponseListComponent } from './components/feedback-response/reponse-lis
     EditVoucherComponent,
     FeedbackListComponent,
     FeedbackResponseCreateComponent,
-    ReponseListComponent
+    ReponseListComponent,
+    CustomVoucherComponent
   ],
   imports: [
     FontAwesomeModule,

@@ -219,54 +219,35 @@ this.canRegisterForNextWeek
     const monthIndex = month.getMonth();
     const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
   
-    this.selectedDates = []; // Reset selected dates
+    this.selectedDates = [];
   
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
+    today.setHours(0, 0, 0, 0); // Reset time to midnight for comparison
   
-    const canRegisterForNextWeek = this.canRegisterForNextWeek(); // Check if registration for next week is allowed
-    console.log("Can register for next week:", canRegisterForNextWeek); // Debugging
+    const canRegisterForNextWeek = this.canRegisterForNextWeek();
   
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, monthIndex, day);
   
-      // Debugging output
-      console.log("Processing Date:", date);
-  
-      // Only include dates that are not in the current week and are weekdays
       if (
-        !this.isCurrentWeek(date) && // Exclude current week
+        !this.isCurrentWeek(date) && // Not in the current week
         date.getDay() !== 0 && // Not Sunday
         date.getDay() !== 6 && // Not Saturday
-        date > today && // Only future dates
-        !this.isPublicHoliday(date) && // Exclude public holidays
-        (this.isNextWeek(date) && canRegisterForNextWeek || !this.isNextWeek(date)) // Corrected: Auto-select next week if allowed
+        date > today && // Future dates only
+        !this.isPublicHoliday(date) // Exclude public holidays
       ) {
-        console.log("Auto-selecting Date:", date); // Debugging selected date
+        if (this.isNextWeek(date) && !canRegisterForNextWeek) {
+          continue;
+        }
+  
+        // Push the valid date
         this.selectedDates.push(date);
       }
     }
   
-    // Handle transition to next year (January)
-    if (monthIndex === 11) { // If December, include January dates for next week
-      const nextYear = year + 1;
-      for (let day = 1; day <= 7; day++) { // First week of January
-        const date = new Date(nextYear, 0, day); // January dates
-        if (
-          this.isNextWeek(date) &&
-          canRegisterForNextWeek &&
-          date.getDay() !== 0 && // Not Sunday
-          date.getDay() !== 6 && // Not Saturday
-          !this.isPublicHoliday(date)
-        ) {
-          console.log("Auto-selecting Date (Next Year):", date);
-          this.selectedDates.push(date);
-        }
-      }
-    }
-  
-    console.log("Auto-selected Dates:", this.selectedDates.map((d) => d.toISOString()));
+    console.log('Selected Dates (excluding public holidays):', this.selectedDates);
   }
+  
   
   
   isRegistered(date: Date): boolean {
@@ -460,7 +441,7 @@ toggleDate(date: Date): void {
               },
               (error) => {
                 console.error('Error registering for current month:', error);
-                alert('Error registering for current month!');
+                this.toast.error(" Error registering for current month!");
               }
             );
         } else {
@@ -472,14 +453,14 @@ toggleDate(date: Date): void {
                   'Registration updated successfully for current month:',
                   response
                 );
-                alert('Registration updated successfully for current month!');
+                this.toast.success(" Registration updated successfully for current month!");
               },
               (error) => {
                 console.error(
                   'Error updating registration for current month:',
                   error
                 );
-                alert('Error updating registration for current month!');
+                this.toast.error("Error updating registration for current month! ");
               }
             );
         }
@@ -494,6 +475,7 @@ toggleDate(date: Date): void {
             },
             (error) => {
               console.error('Error registering for next month:', error);
+              
               alert(' Error Registration successful for next month!');
             }
           );

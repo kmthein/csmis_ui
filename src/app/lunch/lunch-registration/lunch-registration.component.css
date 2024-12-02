@@ -276,3 +276,35 @@
   background-color: #174572;
   color: #f3f3f3;
 }
+.unselectButton {
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  color: #007bff; /* Text color (blue, similar to a link) */
+  font-size: 15px; /* Smaller font size */
+  font-weight: normal; /* Normal weight for a smaller appearance */
+  text-decoration: underline; /* Underline to indicate it's clickable */
+  cursor: pointer; /* Pointer cursor on hover */
+  padding: 0; /* Remove padding for text-like appearance */
+  margin: 0; /* Remove margin */
+  line-height: 1; /* Adjust line height for compact size */
+}
+
+/* Hover effect */
+.unselectButton:hover {
+  color: #0056b3; /* Darker blue for hover */
+  text-decoration: none; /* Remove underline on hover */
+}
+
+/* Active (clicked) effect */
+.unselectButton:active {
+  color: #003f7f; /* Darkest blue when clicked */
+  transform: scale(0.98); /* Slightly shrink the button */
+}
+
+/* Disabled state */
+.unselectButton:disabled {
+  color: #999999; /* Light gray for disabled state */
+  text-decoration: none; /* No underline */
+  cursor: not-allowed; /* Disabled cursor */
+  opacity: 0.6; /* Fade effect */
+}
