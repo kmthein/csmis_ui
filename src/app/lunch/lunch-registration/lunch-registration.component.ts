@@ -470,13 +470,13 @@ toggleDate(date: Date): void {
           this.lunchRegistrationService.registerUserForLunch(registrationDto).subscribe(
             (response) => {
               console.log('Registration successful for next month:', response);
-              alert('Registration successful for next month!');
+              this.toast.success(" Registration successful for next month!");
               this.isFirstRegistration = false;
             },
             (error) => {
               console.error('Error registering for next month:', error);
               
-              alert(' Error Registration successful for next month!');
+              this.toast.error("Error registering for next month! ");
             }
           );
         } 
@@ -535,7 +535,8 @@ toggleDate(date: Date): void {
 
   handleRegistrationClick(): void {
   if ( !this.isCurrentMonth() && !this.isFirstRegistration) {
-      alert('Registration for next month is now closed. Please try again next month.');
+    this.toast.error("Registration for next month is now closed. Please try again next month.! ");
+
   } else if (this.isCurrentMonth()  || this.isFirstRegistration) {
     this.submitRegistration();
   }
@@ -636,4 +637,8 @@ unselectAllDates(): void {
   this.selectedDates = [];
   console.log("All dates unselected:", this.selectedDates);
 }
+closetheModal(): void {
+  this.showVeganModal = false;
+}
+
 }

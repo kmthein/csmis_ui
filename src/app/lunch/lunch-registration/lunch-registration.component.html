@@ -153,6 +153,7 @@
   <!-- Vegan Modal -->
   <div *ngIf="showVeganModal" class="modal">
     <div class="modal-content">
+      <span class="close-button" (click)="closetheModal()">&times;</span>
       <p>Are you a vegan?</p>
       <div class="vegan-buttons">
         <button (click)="setVegan(true)">Yes</button>
@@ -160,6 +161,7 @@
       </div>
     </div>
   </div>
+  
 
   <!-- Meat Selection Modal -->
   <div *ngIf="showMeatModal" class="modal">
