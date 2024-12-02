@@ -8,7 +8,7 @@
         >
           <div>
             <p class="text-[#5B5B5B] mb-[16px]">Total Cost(Monthly)</p>
-            <p class="font-bold"> {{ monthlyCost }} MMK</p>
+            <p class="font-bold">{{ monthlyCost }} MMK</p>
           </div>
           <div
             class="bg-[#91BAE3] inline-flex items-center justify-center h-10 w-10 rounded-xl"
@@ -24,7 +24,7 @@
         >
           <div>
             <p class="text-[#5B5B5B] mb-[16px]">Total Cost(Weekly)</p>
-            <p class="font-bold"> {{ weeklyCost }} MMK</p>
+            <p class="font-bold">{{ weeklyCost }} MMK</p>
           </div>
           <div
             class="bg-[#FFCC33] inline-flex items-center justify-center h-10 w-10 rounded-xl"
@@ -79,11 +79,12 @@
     <div class="flex justify-between mb-3">
       <h3 class="text-md font-semibold" *ngIf="restaurantName != ''">
         {{ isCurrentWeek ? "This" : "Next" }} Week Lunch Menu
-        <span class="font-normal text-[18px] text-[#444444]">
+        <span class="font-normal text-[#444444]">
           ({{ restaurantName }} Restaurant)
         </span>
       </h3>
       <button
+        *ngIf="nextWeekMenuHave"
         (click)="toggleNextOrCurrentWeek()"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-1"
       >
@@ -150,6 +151,5 @@
         [announcement]="announcement"
       ></app-annoucement-card>
     </div>
-
   </div>
 </div>
