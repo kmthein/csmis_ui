@@ -7,6 +7,7 @@ import { AnnouncementService } from '../../../services/announcement/announcement
 import { OperatorCostService } from '../../../services/operator-cost.service'; // Import the service
 import { User } from '../../../models/user';
 import { initFlowbite } from 'flowbite'; // Import Flowbite initialization function
+import { FeedbackService } from '../../../services/feedback.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,6 +33,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private announceService: AnnouncementService,
     private userService: UserService,
     private lunchService: LunchService,
+    private feedbackService: FeedbackService,
     private operatorCostService: OperatorCostService // Inject the service
   ) {}
 
@@ -50,6 +52,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     // Load the current week's or next week's menu
     this.isCurrentWeek ? this.getCurrentWeekMenu() : this.getNextWeekMenu();
     this.getNextWeekMenu();
+    
   }
 
   ngAfterViewInit(): void {
@@ -103,7 +106,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           ...data,
           menu: data?.menu?.split(','),
           date: new Date(data?.date),
+          isFeedbackAdd: false
         }));
+        this.weeklyMenu.forEach((menuItem) => {
+          this.checkFeedbackStatus(this.user?.id!, menuItem.id).subscribe(
+            (res: boolean) => {
+              menuItem.isFeedbackAdd = res; // Update the field asynchronously
+            }
+          );
+        });
       },
       error: (error) => {
         console.error('Error fetching current week menu:', error);
@@ -111,11 +122,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  checkFeedbackStatus(userId: number, lunchId: number) {
+    return this.feedbackService.checkFeedbackStatus(userId, lunchId)
+  }
+
   // Fetch the menu for the next week
   private getNextWeekMenu(): void {
     this.lunchService.getNextWeekLunch().subscribe({
       next: (response) => {
-        console.log(response);
         if (response != null) {
           this.nextWeekMenuHave = true;
         } else {

@@ -13,7 +13,7 @@ export class FeedbackService {
   constructor(private http: HttpClient) { }
 
   checkFeedbackStatus(userId: number, lunchId: number): Observable<boolean> {
-    return this.http.get<boolean>(`/has-feedback`, {
+    return this.http.get<boolean>(`${this.apiUrl}/has-feedback`, {
       params: { userId: userId.toString(), lunchId: lunchId.toString() },
     });
   }

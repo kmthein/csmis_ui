@@ -60,6 +60,7 @@ import { EditVoucherComponent } from './page/admin/edit-voucher/edit-voucher.com
 import { FeedbackListComponent } from './components/feedback/feedback-list/feedback-list.component';
 import { FeedbackResponseCreateComponent } from './components/feedback-response/feedback-response-create/feedback-response-create.component';
 import { ReponseListComponent } from './components/feedback-response/reponse-list/reponse-list.component';
+import { CustomVoucherComponent } from './page/admin/custom-voucher/custom-voucher.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,7 @@ const routes: Routes = [
       { path: 'reportViewer', component: ReportViewerComponent },
       { path: 'suggest', component: SuggestionCreateComponent },
       { path: 'give-feedback', component: FeedbackFormComponent },
+      { path: 'edit-feedback', component: FeedbackFormComponent },
     ],
   },
   {
@@ -132,6 +134,7 @@ const routes: Routes = [
       { path: 'voucher', component: VoucherListComponent },
       { path: 'voucher/new', component: PaymentVoucherComponent },
       { path: 'voucher/edit/:id', component: EditVoucherComponent },
+      { path: 'voucher/custom-voucher', component: CustomVoucherComponent },
       { path: 'order', component: OrderCreateComponent },
       { path: 'payment', component: ViewPaymentComponent },
       { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
