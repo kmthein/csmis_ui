@@ -1,3 +1,6 @@
+<a routerLink="/" class="flex justify-end mr-6">
+  <ng-icon name="ionArrowBack" class="text-2xl"></ng-icon>
+</a>
 <div
   *ngIf="lunch"
   class="max-w-4xl mx-auto my-8 p-6 bg-white shadow-xl rounded-xl"
@@ -5,21 +8,23 @@
   <h3 class="text-4xl font-extrabold text-center text-gray-900 mb-6">
     Lunch Details
   </h3>
-  
+
   <!-- Menu Section -->
   <div class="border-b-2 border-gray-300 pb-4 mb-4">
     <p class="text-2xl font-semibold text-indigo-700">
       <span class="text-lg text-gray-600">Menu: </span>
-      <span class="text-xl font-extrabold text-indigo-800">{{ lunch.menu }}</span>
+      <span class="text-xl font-extrabold text-indigo-800">{{
+        lunch.menu
+      }}</span>
     </p>
   </div>
-  
+
   <!-- Date Section -->
   <p class="text-lg text-gray-700 mb-4">
-    <strong class="font-semibold">Date:</strong> 
-    {{ lunch.date | date: 'EEE, MMM d, yyyy' }}
+    <strong class="font-semibold">Date:</strong>
+    {{ lunch.date | date : "EEE, MMM d, yyyy" }}
   </p>
-  
+
   <!-- Meats Section -->
   <div *ngIf="lunch.meats?.length" class="mt-4">
     <p class="text-lg text-gray-700">
@@ -36,19 +41,21 @@
   <div class="space-y-6">
     <!-- Feedback for Lunch Response -->
     <div>
-      <label for="response" class="block text-lg font-medium text-gray-700 mb-2">How was the lunch? (Required)</label>
+      <label for="response" class="block text-lg font-medium text-gray-700 mb-2"
+        >How was the lunch? (Required)</label
+      >
       <div class="flex flex-col space-y-4">
-        <label 
-          *ngFor="let option of feedbackResponses" 
+        <label
+          *ngFor="let option of feedbackResponses"
           class="flex items-center text-lg"
         >
-          <input 
-            type="radio" 
-            [(ngModel)]="feedback.responseId" 
-            name="responseId" 
-            [value]="option.id" 
-            required 
-            class="h-6 w-6 text-indigo-600 focus:ring-0" 
+          <input
+            type="radio"
+            [(ngModel)]="feedback.responseId"
+            name="responseId"
+            [value]="option.id"
+            required
+            class="h-6 w-6 text-indigo-600 focus:ring-0"
           />
           <span class="ml-2">{{ option.response }}</span>
         </label>
@@ -57,9 +64,7 @@
 
     <!-- Feedback Comment -->
     <div>
-      <label
-        for="comment"
-        class="block text-lg font-medium text-gray-700 mb-2"
+      <label for="comment" class="block text-lg font-medium text-gray-700 mb-2"
         >Your Feedback (Optional):</label
       >
       <textarea
@@ -95,9 +100,6 @@
 </form>
 
 <!-- Loading and Error Handling -->
-<div
-  *ngIf="!lunch"
-  class="text-center text-gray-600 text-lg mt-8"
->
+<div *ngIf="!lunch" class="text-center text-gray-600 text-lg mt-8">
   <p>Loading lunch details...</p>
 </div>

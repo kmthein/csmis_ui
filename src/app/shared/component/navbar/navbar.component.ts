@@ -1,4 +1,9 @@
-import { ApplicationRef, ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import {
+  ApplicationRef,
+  ChangeDetectorRef,
+  Component,
+  NgZone,
+} from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/user';
 import { Router } from '@angular/router';
@@ -11,13 +16,18 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent {
   user: User | undefined | null;
-  today: string = "";
-  day: string = "";
+  today: string = '';
+  day: string = '';
   dropdownOpen: boolean = false;
   isAdmin: boolean = false;
   permanentOperator: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router, private cdRef: ChangeDetectorRef, private ngZone: NgZone) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cdRef: ChangeDetectorRef,
+    private ngZone: NgZone
+  ) {
     const date = new Date();
     const today = date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -26,17 +36,18 @@ export class NavbarComponent {
     });
     this.today = today;
     const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
-    this.day = dayOfWeek; 
+    this.day = dayOfWeek;
   }
 
   ngOnInit() {
+    this.dropdownOpen = false;
     this.authService.currentUser$.subscribe((user) => {
       this.user = user;
     });
     if (this.authService.isAdmin()) {
       this.isAdmin = true;
       this.permanentOperator = false;
-    } 
+    }
     if (this.authService.isPermanentOperator()) {
       this.permanentOperator = true;
     }
@@ -49,7 +60,7 @@ export class NavbarComponent {
   switchUserPanel(isAdmin: boolean) {
     const user = JSON.parse(localStorage.getItem('user')!);
     const newUser = { ...user, role: isAdmin ? 'OPERATOR' : 'ADMIN' };
-    if(isAdmin) {
+    if (isAdmin) {
       this.isAdmin = false;
     } else {
       this.isAdmin = true;
@@ -60,14 +71,14 @@ export class NavbarComponent {
 
     // Navigate and ensure Angular detects changes after navigation
     this.router.navigate([isAdmin ? '/' : '/admin']).then(() => {
-        this.ngZone.run(() => {
-            this.dropdownOpen = false;
-            this.cdRef.detectChanges(); // Trigger change detection after navigation in NgZone
-        });
+      this.ngZone.run(() => {
+        this.dropdownOpen = false;
+        this.cdRef.detectChanges(); // Trigger change detection after navigation in NgZone
+      });
     });
     console.log(this.user);
     console.log(this.permanentOperator);
-}
+  }
 
   logout() {
     this.authService.logout();

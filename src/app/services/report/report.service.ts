@@ -14,44 +14,46 @@ export class ReportService {
     return this.http.get(`${this.apiUrl}/users-avoid-meat`);
   }
 
+  getVoucherBetweenTwoDates(form: FormData) {
+    return this.http.put(`${this.apiUrl}/paid-voucher-list`, form);
+  }
+
   getStaffLunchRecord(type: string, timeRange: string, form: FormData) {
-    if(type == "Registered Eat") {
-      if(timeRange == "daily") {
+    if (type == 'Registered Eat') {
+      if (timeRange == 'daily') {
         return this.http.put(`${this.apiUrl}/registered-ate-daily`, form);
-      } else if(timeRange == "custom") {
+      } else if (timeRange == 'custom') {
         return this.http.put(`${this.apiUrl}/registered-ate-weekly`, form);
-      } else if(timeRange == "monthly") {
+      } else if (timeRange == 'monthly') {
         return this.http.put(`${this.apiUrl}/registered-ate-monthly`, form);
-      } else if(timeRange == "yearly") {
+      } else if (timeRange == 'yearly') {
         return this.http.put(`${this.apiUrl}/registered-ate-yearly`, form);
       }
-    } else if(type == "Registered Not Eat") {
-      if(timeRange == "daily") {
+    } else if (type == 'Registered Not Eat') {
+      if (timeRange == 'daily') {
         return this.http.put(`${this.apiUrl}/registered-not-eat-daily`, form);
-      } else if(timeRange == "custom") {
+      } else if (timeRange == 'custom') {
         return this.http.put(`${this.apiUrl}/registered-not-eat-weekly`, form);
-      } else if(timeRange == "monthly") {
+      } else if (timeRange == 'monthly') {
         return this.http.put(`${this.apiUrl}/registered-not-eat-monthly`, form);
-      } else if(timeRange == "yearly") {
+      } else if (timeRange == 'yearly') {
         return this.http.put(`${this.apiUrl}/registered-not-eat-yearly`, form);
       }
-    } else if(type == "Unregistered But Eat") {
-      if(timeRange == "daily") {
+    } else if (type == 'Unregistered But Eat') {
+      if (timeRange == 'daily') {
         return this.http.put(`${this.apiUrl}/unregistered-ate-daily`, form);
-      } else if(timeRange == "custom") {
+      } else if (timeRange == 'custom') {
         return this.http.put(`${this.apiUrl}/unregistered-ate-weekly`, form);
-      } else if(timeRange == "monthly") {
+      } else if (timeRange == 'monthly') {
         return this.http.put(`${this.apiUrl}/unregistered-ate-monthly`, form);
-      } else if(timeRange == "yearly") {
+      } else if (timeRange == 'yearly') {
         return this.http.put(`${this.apiUrl}/unregistered-ate-yearly`, form);
       }
     }
     return null;
   }
 
-  generateReport(
-    params: HttpParams
-  ): Observable<Blob> {
+  generateReport(params: HttpParams): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/generate`, {
       params: params,
       responseType: 'blob', // Expecting a binary file (PDF or Excel)
@@ -64,10 +66,10 @@ export class ReportService {
 
   getLunchSummaryPie(date: string) {
     const formData = new FormData();
-    formData.append("date", date);
+    formData.append('date', date);
     return this.http.put(`${this.apiUrl}/lunch-summary`, formData);
   }
-  
+
   getLunchSummaryBetween(form: FormData) {
     return this.http.put(`${this.apiUrl}/summary-between`, form);
   }
@@ -75,7 +77,7 @@ export class ReportService {
   getMonthlySummaryPie(form: FormData) {
     return this.http.put(`${this.apiUrl}/monthly-summary`, form);
   }
-  
+
   getYearlySummaryPie(form: FormData) {
     return this.http.put(`${this.apiUrl}/yearly-summary`, form);
   }

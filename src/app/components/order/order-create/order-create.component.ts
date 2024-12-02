@@ -107,10 +107,10 @@ export class OrderCreateComponent implements OnInit {
       this.lastRegisterDay,
       this.lastRegisterTime
     );
-  
+
     console.log('Next valid order datetime:', nextValidOrderDateTime);
     const currentDate = new Date();
-  
+
     // Compare with current date and time
     if (currentDate >= nextValidOrderDateTime!) {
       console.log('Order is valid.');
@@ -118,7 +118,7 @@ export class OrderCreateComponent implements OnInit {
     } else {
       console.log('Order is not valid yet.');
       this.orderAlreadyExist = true;
-    }     
+    }
     this.orderService.getNextWeekOrder().subscribe((res: any) => {
       if (res.length > 0) {
         this.orderAlreadyExist = true;
@@ -129,50 +129,49 @@ export class OrderCreateComponent implements OnInit {
   getNextValidOrderDateTime(day: string, time: string): Date | null {
     console.log(day);
     console.log(time);
-  
+
     const daysOfWeek = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
     ];
-  
+
     const targetDayIndex = daysOfWeek.indexOf(day);
     if (targetDayIndex === -1) {
       throw new Error(`Invalid day provided: ${day}`);
     }
-  
+
     const now = new Date();
     const currentDayIndex = now.getDay();
-  
+
     // If today is after the target day, it belongs to the next week
     if (currentDayIndex > targetDayIndex) {
-      console.log("Target day is in the past this week.");
+      console.log('Target day is in the past this week.');
       return null; // Invalid for this week
     }
-  
+
     // Calculate the target date for this week's day
     const daysUntilTarget = targetDayIndex - currentDayIndex;
     const targetDate = new Date(now);
     targetDate.setDate(now.getDate() + daysUntilTarget);
-  
+
     // Parse and set the time (e.g., "17:00:00")
-    const [hours, minutes] = time.split(":").map(Number);
+    const [hours, minutes] = time.split(':').map(Number);
     targetDate.setHours(hours, minutes, 0, 0); // Include milliseconds
-  
+
     // Ensure the target date and time are in the future
     if (now >= targetDate) {
-      console.log("Target time has already passed today.");
+      console.log('Target time has already passed today.');
       return null; // The time for this week's target day has already passed
     }
-  
-    console.log("Next valid date and time:", targetDate);
+
+    console.log('Next valid date and time:', targetDate);
     return targetDate;
   }
-  
 
   loadPublicHolidays() {
     this.holidayService.getAllHolidays().subscribe({

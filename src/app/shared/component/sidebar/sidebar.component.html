@@ -421,7 +421,7 @@
           <ng-icon name="ionCash"></ng-icon>
           <span>Payment</span>
         </a> -->
-        <div *ngIf="isAdmin">
+        <div *ngIf="isAdmin" (click)="closeAllSubmenu()">
           <a
             class="px-4 py-4 w-full rounded-tl-xl rounded-bl-xl inline-flex items-center pl-[20%] gap-2 transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
             routerLink="/admin/order"
@@ -441,7 +441,10 @@
           >
             <div class="flex justify-between w-full items-center">
               <div class="flex items-center gap-2">
-                <ng-icon name="ionDocumentTextSharp" class="text-[#b6b6b6]"></ng-icon>
+                <ng-icon
+                  name="ionDocumentTextSharp"
+                  class="text-[#b6b6b6]"
+                ></ng-icon>
                 <span class="text-[#b6b6b6]">Voucher</span>
               </div>
               <svg
@@ -461,7 +464,7 @@
               </svg>
             </div>
           </button>
-  
+
           <!-- Submenu for Voucher -->
           <ul *ngIf="isVoucherSubMenuOpen && isAdmin">
             <li>
@@ -474,7 +477,7 @@
             </li>
             <li>
               <a
-                routerLink="/admin/voucher/custom-voucher"
+                routerLink="/admin/custom-voucher"
                 routerLinkActive="nav-active"
                 class="flex gap-2 items-center p-2 pl-[27%] py-3 w-full rounded-tl-xl rounded-bl-xl transition-colors duration-300 hover:bg-[#386694] hover:text-[#e9e9e9]"
                 >List Between</a
@@ -482,7 +485,6 @@
             </li>
           </ul>
         </div>
-
       </div>
     </div>
   </div>

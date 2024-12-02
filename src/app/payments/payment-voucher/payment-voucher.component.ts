@@ -47,7 +47,11 @@ export class PaymentVoucherComponent implements OnInit {
   }
 
   isDateDisabled(date: string): boolean {
-    return this.orderedDates.includes(date) || this.holidays.includes(date) || this.isWeekend;
+    return (
+      this.orderedDates.includes(date) ||
+      this.holidays.includes(date) ||
+      this.isWeekend
+    );
   }
 
   isWeekend(date: Date): boolean {
@@ -57,7 +61,7 @@ export class PaymentVoucherComponent implements OnInit {
 
   dateFilter = (date: Date | null): boolean => {
     if (!date) return true; // Allow null dates
-    const formattedDate = this.formatDateToYYYYMMDD(date); 
+    const formattedDate = this.formatDateToYYYYMMDD(date);
     const isWeekend = this.isWeekend(date);
     const isPublicHoliday = this.holidays.includes(formattedDate);
     const isOrderedDate = this.orderedDates.includes(formattedDate);
@@ -85,17 +89,15 @@ export class PaymentVoucherComponent implements OnInit {
 
   getAlreadyHaveVoucherDate() {
     this.voucherService.getAlreadyHaveVoucherDate().subscribe((res: any) => {
-      console.log(res);
       const dates: any = [];
       res.map((data: any) => {
-        const date = new Date(data.dt)
+        const date = new Date(data.dt);
         dates.push(date.toISOString().split('T')[0]);
-      })
-      console.log(dates);      
+      });
       this.orderedDates = dates;
 
       this.cdr.detectChanges();
-    })
+    });
   }
 
   loadRestaurants(): void {
@@ -132,17 +134,16 @@ export class PaymentVoucherComponent implements OnInit {
   }
 
   calculateWeek() {
-    this.orderService.getOrderByDate(this.selectedDate).subscribe((res) => {
-      console.log(res);
-      this.order = res;
-    });
     if (!this.selectedDate) {
       return;
     }
 
     const selected = new Date(this.selectedDate);
     const dayOfWeek = selected.getDay();
-    const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+
+    // Ensure Monday stays in the current week
+    const diffToMonday =
+      dayOfWeek === 0 ? -6 : dayOfWeek === 1 ? 0 : 1 - dayOfWeek;
 
     const startOfWeek = new Date(selected);
     startOfWeek.setDate(selected.getDate() + diffToMonday);
@@ -153,6 +154,8 @@ export class PaymentVoucherComponent implements OnInit {
       day.setDate(startOfWeek.getDate() + i);
       const formattedDate = day.toISOString().split('T')[0];
 
+      console.log(formattedDate);
+
       // Only include dates that are not holidays
       if (!this.holidays.includes(formattedDate)) {
         tempWeekDates.push(formattedDate);
@@ -161,6 +164,19 @@ export class PaymentVoucherComponent implements OnInit {
 
     this.voucherData.services = []; // Reset services
     this.calculateVoucherData(tempWeekDates);
+    const date = new Date(this.selectedDate);
+
+    // Manually format the date as YYYY-MM-DD
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    // Call the order service with the manually formatted date
+    this.orderService.getOrderByDate(formattedDate).subscribe((res) => {
+      console.log(res);
+      this.order = res;
+    });
   }
 
   calculateVoucherData(weekDates: string[]) {
@@ -185,17 +201,26 @@ export class PaymentVoucherComponent implements OnInit {
     console.log(this.voucherData.invoicePeriod);
     weekDates.forEach((date) => {
       this.voucherService.getOrderQuantity(date).subscribe((quantity) => {
+        console.log(quantity);
+
         this.voucherService.getTotalCost(date).subscribe((totalCost) => {
           const pricePerPax = totalCost;
           const amount = quantity * pricePerPax;
 
-          this.voucherData.services.push({
-            date: date,
-            quantity: quantity,
-            totalCost: totalCost,
-            pricePerPax: pricePerPax,
-            amount: amount,
-          });
+          this.voucherData.services = this.order.rows.map((row: any) => ({
+            ...row, // Keep original row properties
+            date: row.lunchDate, // Add or override the `date`
+            pricePerPax, // Add price per pax
+            amount, // Add calculated amount
+          }));
+
+          // this.voucherData.services.push({
+          //   date: date,
+          //   quantity: quantity,
+          //   totalCost: totalCost,
+          //   pricePerPax: pricePerPax,
+          //   amount: amount,
+          // });
 
           this.totalAmount += amount;
           this.voucherExist = true;
@@ -215,6 +240,7 @@ export class PaymentVoucherComponent implements OnInit {
     this.selectedDate = event.target.value;
     this.calculateWeek();
   }
+
   submitVoucher() {
     if (
       !this.voucherData.approvedBy ||
@@ -242,7 +268,7 @@ export class PaymentVoucherComponent implements OnInit {
 
     // Call the API to save the voucher
     this.voucherService
-      .saveVoucher(this.selectedDate, paymentVoucherDTO)
+      .saveVoucher(this.dateStringFormat(this.selectedDate), paymentVoucherDTO)
       .subscribe(
         (response) => {
           this.toast.success('Payment voucher saved successfully!');
@@ -257,6 +283,17 @@ export class PaymentVoucherComponent implements OnInit {
           );
         }
       );
+  }
+
+  dateStringFormat(param: string) {
+    const date = new Date(this.selectedDate);
+
+    // Manually format the date as YYYY-MM-DD
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
   }
 
   resetForm() {
