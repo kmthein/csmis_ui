@@ -134,14 +134,15 @@
         </div>
       </div>
       <div class="mt-10 mb-6 flex justify-end">
-        <button (click)="calculateWeek()" 
-        class="bg-[#4caf50] hover:bg-[#45a049]"
-        *ngIf="!voucherExist">
+        <button
+          (click)="calculateWeek()"
+          class="bg-[#4caf50] hover:bg-[#45a049]"
+          *ngIf="!voucherExist"
+        >
           Generate Voucher
         </button>
         <button
           (click)="submitVoucher()"
-          [disabled]="isDateDisabled(selectedDate)"
           *ngIf="voucherExist"
           class="bg-[#4caf50] hover:bg-[#45a049] disabled:bg-[#45a04934]"
         >

@@ -134,7 +134,7 @@ const routes: Routes = [
       { path: 'voucher', component: VoucherListComponent },
       { path: 'voucher/new', component: PaymentVoucherComponent },
       { path: 'voucher/edit/:id', component: EditVoucherComponent },
-      { path: 'voucher/custom-voucher', component: CustomVoucherComponent },
+      { path: 'custom-voucher', component: CustomVoucherComponent },
       { path: 'order', component: OrderCreateComponent },
       { path: 'payment', component: ViewPaymentComponent },
       { path: 'TotalWeekly', component: TotalWeeklyPaymentComponent },
@@ -143,7 +143,7 @@ const routes: Routes = [
       { path: 'feedbacks', component: FeedbackListComponent },
       { path: 'feedback-option', component: FeedbackResponseCreateComponent },
       { path: 'list-feedback-options', component: ReponseListComponent },
-    
+
       { path: 'notifications/all', component: SuggestListComponent },
     ],
   },

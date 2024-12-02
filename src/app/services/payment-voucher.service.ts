@@ -58,7 +58,7 @@ export class PaymentVoucherService {
   getTotalCost(date: string): Observable<number> {
     const params = new HttpParams().set('date', date);
     return this.http.get<number>(`http://localhost:8080/api/lunches/cost`, {
-      params: { date },
+      params,
     });
   }
   getAllAdmins(): Observable<any[]> {

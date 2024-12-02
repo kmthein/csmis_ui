@@ -49,10 +49,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     // Fetch announcements
     this.fetchAnnouncements();
+    this.checkNextMenuHave();
     // Load the current week's or next week's menu
     this.isCurrentWeek ? this.getCurrentWeekMenu() : this.getNextWeekMenu();
-    this.getNextWeekMenu();
-    
   }
 
   ngAfterViewInit(): void {
@@ -61,8 +60,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   // Fetch announcements
   private fetchAnnouncements(): void {
-    this.announceService.getAllAnnouncements(1, 1).subscribe({
+    this.announceService.getAllAnnouncements(0, 1).subscribe({
       next: (response) => {
+        console.log(response);
         this.announcement = response.content[0];
       },
       error: (error) => {
@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           ...data,
           menu: data?.menu?.split(','),
           date: new Date(data?.date),
-          isFeedbackAdd: false
+          isFeedbackAdd: false,
         }));
         this.weeklyMenu.forEach((menuItem) => {
           this.checkFeedbackStatus(this.user?.id!, menuItem.id).subscribe(
@@ -123,7 +123,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   checkFeedbackStatus(userId: number, lunchId: number) {
-    return this.feedbackService.checkFeedbackStatus(userId, lunchId)
+    return this.feedbackService.checkFeedbackStatus(userId, lunchId);
+  }
+
+  checkNextMenuHave() {
+    this.lunchService.getNextWeekLunch().subscribe({
+      next: (response) => {
+        if (response != null) {
+          this.nextWeekMenuHave = true;
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching next week menu:', error);
+      },
+    });
   }
 
   // Fetch the menu for the next week
@@ -132,7 +145,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       next: (response) => {
         if (response != null) {
           this.nextWeekMenuHave = true;
-        } else {
           this.restaurantName =
             response[response?.length - 1]?.restaurantName || '';
           this.weeklyMenu = response.map((data: any) => ({
@@ -157,8 +169,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.getNextWeekMenu();
     }
   }
-
-  
 
   // Check if feedback can be given for a specific menu date
   canGiveFeedback(menuDate: Date): boolean {

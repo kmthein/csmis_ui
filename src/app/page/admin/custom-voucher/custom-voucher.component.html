@@ -1,1 +1,152 @@
-<p>custom-voucher works!</p>
+<div class="flex justify-between items-center mb-8">
+  <h3 class="text-md font-semibold">Voucher List Between Two Dates</h3>
+  <form (ngSubmit)="onSubmit()" #dateForm="ngForm" class="flex items-center">
+    <div id="date-range-picker" class="flex items-center">
+      <span class="mx-2 text-gray-500 text-sm">Select from:</span>
+
+      <div class="relative">
+        <input
+          id="datepicker-range-start"
+          name="start"
+          [(ngModel)]="start"
+          type="date"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Select date start"
+        />
+      </div>
+      <span class="mx-2 text-gray-500 text-sm">to</span>
+      <div class="relative">
+        <input
+          id="datepicker-range-end"
+          name="end"
+          [(ngModel)]="end"
+          type="date"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-tl-lg rounded-bl-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Select date end"
+        />
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="px-4 bg-[#336699] text-white rounded-tr-lg rounded-br-lg hover:bg-[#28537e] inline-flex items-center py-2.5"
+    >
+      <ng-icon name="ionSearch" class="text-white text-lg"></ng-icon>
+    </button>
+  </form>
+</div>
+<div
+  *ngIf="!voucherExist"
+  class="bg-[#FCFCFC] w-[60%] py-8 rounded-lg shadow-xl mx-auto"
+>
+  <p class="text-center mb-6 mt-4">
+    Please select start date and end date to generate voucher list.
+  </p>
+  <div class="flex justify-center mb-4">
+    <a routerLink="/admin"
+      ><button
+        class="bg-[#4caf50] hover:bg-[#45a049] py-2 text-white rounded-md px-2"
+      >
+        Back to Home
+      </button></a
+    >
+  </div>
+</div>
+
+<div *ngIf="voucherExist" class="voucher-container p-10 bg-[#FCFCFC]">
+  <h2>Payment Voucher</h2>
+
+  <div *ngIf="voucherData">
+    <!-- Top Info Section -->
+    <div class="row">
+      <div class="column">
+        <p><strong>Report Date:</strong> {{ currentDate }}</p>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <table>
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Description</th>
+          <th>Cashier</th>
+          <th>Received By</th>
+          <th>Approved By</th>
+          <th>Amount</th>
+          <th>Payment Date</th>
+          <th>Status</th>
+          <th>Payment Method</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of voucherData; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ service.voucherNo }} : {{ service.invoiceFor }}</td>
+          <td>{{ service.cashier }}</td>
+          <td>{{ service.receivedBy }}</td>
+          <td>{{ service.approvedBy }}</td>
+          <td>{{ service.amount }}</td>
+          <td>{{ service.payDate }}</td>
+          <td>{{ service.status }}</td>
+          <td>{{ service.paymentMethod }}</td>
+        </tr>
+        <tr class="bg-gray-100 font-semibold text-gray-700">
+          <td class="py-2 px-4"></td>
+          <td class="py-2 px-4"></td>
+          <td class="py-2 px-4"></td>
+          <td class="py-2 px-4"></td>
+          <td class="py-2 px-4 text-right">Total</td>
+          <td class="py-2 px-4">{{ totalAmount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="voucherData">
+    <div>
+      <div class="mt-10 mb-6 flex gap-6 justify-end">
+        <button
+          (click)="navigateBack()"
+          class="bg-transparent border-2 border-[#999999] text-[#000] px-6 py-2.5 text-sm"
+        >
+          Back
+        </button>
+        <div class="relative">
+          <button
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center gap-2"
+            (click)="toggleDropdown()"
+            *ngIf="voucherExist"
+          >
+            <ng-icon
+              name="ionArrowDownRightBoxOutline"
+              class="text-lg"
+            ></ng-icon>
+            Export
+          </button>
+          <!-- Dropdown menu -->
+          <div
+            *ngIf="dropdownOpen"
+            class="z-10 absolute top-[3rem] right-1 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          >
+            <ul
+              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownDefaultButton"
+            >
+              <li (click)="exportReport('pdf')" class="cursor-pointer">
+                <a
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Export as PDF</a
+                >
+              </li>
+              <li (click)="exportReport('excel')" class="cursor-pointer">
+                <a
+                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >Export as excel</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
