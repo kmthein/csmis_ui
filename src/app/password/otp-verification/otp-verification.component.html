@@ -5,18 +5,19 @@
     
       <div class="otp-inputs">
         <input type="text" maxlength="1" id="otp1" [(ngModel)]="otpDigits[0]" class="otp-input"
-          (input)="onInputChange($event, 0)" (keyup)="moveFocus($event, 'otp2')" />
+          (input)="onInputChange($event, 0)" (keyup)="moveFocus($event, 'otp2')" (paste)="onPaste($event)" />
         <input type="text" maxlength="1" id="otp2" [(ngModel)]="otpDigits[1]" class="otp-input"
-          (input)="onInputChange($event, 1)" (keyup)="moveFocus($event, 'otp3')" />
+          (input)="onInputChange($event, 1)" (keyup)="moveFocus($event, 'otp3')" (paste)="onPaste($event)" />
         <input type="text" maxlength="1" id="otp3" [(ngModel)]="otpDigits[2]" class="otp-input"
-          (input)="onInputChange($event, 2)" (keyup)="moveFocus($event, 'otp4')" />
+          (input)="onInputChange($event, 2)" (keyup)="moveFocus($event, 'otp4')" (paste)="onPaste($event)" />
         <input type="text" maxlength="1" id="otp4" [(ngModel)]="otpDigits[3]" class="otp-input"
-          (input)="onInputChange($event, 3)" (keyup)="moveFocus($event, 'otp5')" />
+          (input)="onInputChange($event, 3)" (keyup)="moveFocus($event, 'otp5')" (paste)="onPaste($event)" />
         <input type="text" maxlength="1" id="otp5" [(ngModel)]="otpDigits[4]" class="otp-input"
-          (input)="onInputChange($event, 4)" (keyup)="moveFocus($event, 'otp6')" />
+          (input)="onInputChange($event, 4)" (keyup)="moveFocus($event, 'otp6')" (paste)="onPaste($event)" />
         <input type="text" maxlength="1" id="otp6" [(ngModel)]="otpDigits[5]" class="otp-input"
-          (input)="onInputChange($event, 5)" />
+          (input)="onInputChange($event, 5)" (paste)="onPaste($event)" />
       </div>
+      
     
       <p *ngIf="timeLeft > 0" class="text-[#444444] text-sm text-center mb-6 leading-[1.6rem]">Time left: {{ timeLeft }} seconds</p>
       <p *ngIf="timeLeft === 0" class="text-[#dd4d4d] text-sm text-center mb-6 leading-[1.6rem]">OTP expired. Please request a new one.</p>

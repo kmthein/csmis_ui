@@ -43,7 +43,7 @@ export class LunchRegistrationComponent implements OnInit {
   userCostPerDay: number =0;
   userMonthlyCost: number = 0;
  
-  registeredDates: Date[] = [];
+  registeredDates: number = 0;
 
 
   public publicHolidays: { date: Date; name: string }[] = [];
@@ -65,14 +65,14 @@ export class LunchRegistrationComponent implements OnInit {
       this.userId = user.id;
       this.loadUserSelectedDates();
       this.lunchRegistrationService.getLunchDetails(this.userId).subscribe(data => {
-        console.log('Data from backend:', data); // Log the response to see the structure and values
+        console.log('Data from backend:', data); // Log the response to verify the structure
         this.lunchPrice = data.lunchPrice;
         this.companyRate = data.companyRate;
-        this.registeredDays = data.registeredDays; // Ensure this value is correct
+        this.registeredDates = data.registeredDates;  // This should be a number (int)
       
-        this.calculateCost();
-      });
-      
+        this.calculateCost();  // Perform the cost calculation based on the received data
+    });
+    
     } else {
       console.error('User not found in local storage!');
     };    this.loadMeats();
@@ -89,7 +89,6 @@ export class LunchRegistrationComponent implements OnInit {
 
   }
   scheduleNextWeekCheck() {
-    // Check every day at midnight to refresh the registration status
     setInterval(() => {
       this.checkRegistrationWindow();
     }, 24 * 60 * 60 * 1000); // 24 hours interval (milliseconds)
@@ -102,17 +101,38 @@ export class LunchRegistrationComponent implements OnInit {
     if (
       this.lunchPrice > 0 &&
       this.companyRate >= 0 &&
-      this.registeredDays > 0 // Ensure this condition is met
+      this.registeredDates > 0 // Ensure registeredDates is a positive number
     ) {
+      // Get the current month and year
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth(); // 0-based (Jan = 0)
+      const currentYear = currentDate.getFullYear();
+
+      // Calculate user cost per day and company cost per day based on fetched data
       const userSharePercentage = 100 - this.companyRate;
       const userCostPerDay = (this.lunchPrice * userSharePercentage) / 100;
       const companyCostPerDay = (this.lunchPrice * this.companyRate) / 100;
-  
-      this.userCost = userCostPerDay * this.registeredDays;
-      this.companyCost = companyCostPerDay * this.registeredDays;
-      this.estMonthlyCost = this.lunchPrice * this.registeredDays;
+
+      // Calculate monthly costs
+      const userMonthlyCost = userCostPerDay * this.registeredDates;
+      const companyMonthlyCost = companyCostPerDay * this.registeredDates;
+      const estimatedMonthlyCost = this.lunchPrice * this.registeredDates;
+
+      console.log('User cost per day:', userCostPerDay);
+      console.log('Company cost per day:', companyCostPerDay);
+      console.log('Registered days:', this.registeredDates);
+      console.log('User monthly cost:', userMonthlyCost);
+      console.log('Company monthly cost:', companyMonthlyCost);
+      console.log('Estimated monthly cost:', estimatedMonthlyCost);
+
+      // Update UI or state with the calculated costs
+      this.userCostPerDay = userCostPerDay;
+      this.userMonthlyCost = userMonthlyCost;
+      
     }
-  }
+}
+
+
   
   loadRegistrationCutoff(): void {
     this.lunchRegistrationService.getRegistrationCutoff().subscribe(
@@ -198,32 +218,54 @@ this.canRegisterForNextWeek
     const year = month.getFullYear();
     const monthIndex = month.getMonth();
     const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-    this.selectedDates = [];
+  
+    this.selectedDates = []; // Reset selected dates
   
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Reset time to midnight for comparison
-    
-    const canRegisterForNextWeek = this.canRegisterForNextWeek();
+    today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
+  
+    const canRegisterForNextWeek = this.canRegisterForNextWeek(); // Check if registration for next week is allowed
+    console.log("Can register for next week:", canRegisterForNextWeek); // Debugging
   
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, monthIndex, day);
   
-      // Skip weekends, current week, holidays, and past days
+      // Debugging output
+      console.log("Processing Date:", date);
+  
+      // Only include dates that are not in the current week and are weekdays
       if (
-        !this.isCurrentWeek(date) && 
+        !this.isCurrentWeek(date) && // Exclude current week
         date.getDay() !== 0 && // Not Sunday
         date.getDay() !== 6 && // Not Saturday
-        date > today && 
-        !this.isHoliday(date) // Not a holiday
+        date > today && // Only future dates
+        !this.isPublicHoliday(date) && // Exclude public holidays
+        (this.isNextWeek(date) && canRegisterForNextWeek || !this.isNextWeek(date)) // Corrected: Auto-select next week if allowed
       ) {
-        // If it's a date in the next week but registration isn't open, skip
-        if (this.isNextWeek(date) && !canRegisterForNextWeek) {
-          continue;
-        }
-  
+        console.log("Auto-selecting Date:", date); // Debugging selected date
         this.selectedDates.push(date);
       }
     }
+  
+    // Handle transition to next year (January)
+    if (monthIndex === 11) { // If December, include January dates for next week
+      const nextYear = year + 1;
+      for (let day = 1; day <= 7; day++) { // First week of January
+        const date = new Date(nextYear, 0, day); // January dates
+        if (
+          this.isNextWeek(date) &&
+          canRegisterForNextWeek &&
+          date.getDay() !== 0 && // Not Sunday
+          date.getDay() !== 6 && // Not Saturday
+          !this.isPublicHoliday(date)
+        ) {
+          console.log("Auto-selecting Date (Next Year):", date);
+          this.selectedDates.push(date);
+        }
+      }
+    }
+  
+    console.log("Auto-selected Dates:", this.selectedDates.map((d) => d.toISOString()));
   }
   
   
@@ -247,36 +289,38 @@ this.canRegisterForNextWeek
     return day === 0 || day === 6; // Sunday or Saturday
   }
   isCurrentWeek(date: Date): boolean {
-    const today = new Date();
-    const startOfWeek = new Date(
-      today.setDate(today.getDate() - today.getDay() + 1)
-    ); // Monday of the current week
-    const endOfWeek = new Date(
-      today.setDate(today.getDate() - today.getDay() + 7)
-    ); // Sunday of the current week
+  const today = new Date();
+  const startOfCurrentWeek = new Date(today);
+  startOfCurrentWeek.setDate(today.getDate() - today.getDay()); // Start of this week (Sunday)
 
-    return date >= startOfWeek && date <= endOfWeek;
-  }
+  const endOfCurrentWeek = new Date(startOfCurrentWeek);
+  endOfCurrentWeek.setDate(startOfCurrentWeek.getDate() + 6); // End of this week (Saturday)
 
-  toggleDate(date: Date): void {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+  return date >= startOfCurrentWeek && date <= endOfCurrentWeek;
+}
 
-    if (
-      !this.isBeforeOrToday(date) &&
-      !this.isWeekend(date) &&
-      !this.isCurrentWeek(date)
-    ) {
-      const index = this.selectedDates.findIndex(
-        (selectedDate) => selectedDate.getTime() === date.getTime()
-      );
-      if (index === -1) {
-        this.selectedDates.push(date);
-      } else {
-        this.selectedDates.splice(index, 1);
-      }
+  
+toggleDate(date: Date): void {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (
+    !this.isBeforeOrToday(date) &&
+    !this.isWeekend(date) &&
+    !this.isCurrentWeek(date)
+  ) {
+    const index = this.selectedDates.findIndex(
+      (selectedDate) => selectedDate.getTime() === date.getTime()
+    );
+    if (index === -1) {
+      this.selectedDates.push(date);
+    } else {
+      this.selectedDates.splice(index, 1);
     }
+    this.generateCalendarDates(this.currentMonth); // Make sure to refresh the calendar
   }
+}
+
 
   isPublicHoliday(date: Date): string | null {
     const holiday = this.publicHolidays.find((holiday) =>
@@ -515,18 +559,16 @@ this.canRegisterForNextWeek
   }
 }
 isNextWeek(date: Date): boolean {
-  const currentDate = new Date();
+  const today = new Date();
+  const startOfNextWeek = new Date(today);
+  startOfNextWeek.setDate(today.getDate() + (7 - today.getDay())); // Start of next week (next Monday)
 
-  const nextWeekStart = new Date(currentDate);
-  nextWeekStart.setDate(currentDate.getDate() + (7 - currentDate.getDay())); // Sunday of next week
-  nextWeekStart.setHours(0, 0, 0, 0);
+  const endOfNextWeek = new Date(startOfNextWeek);
+  endOfNextWeek.setDate(startOfNextWeek.getDate() + 6); // End of next week (next Sunday)
 
-  const nextWeekEnd = new Date(nextWeekStart);
-  nextWeekEnd.setDate(nextWeekStart.getDate() + 6); // Saturday of next week
-  nextWeekEnd.setHours(23, 59, 59, 999);
-
-  return date >= nextWeekStart && date <= nextWeekEnd;
+  return date >= startOfNextWeek && date <= endOfNextWeek;
 }
+
 canRegisterForNextWeek(): boolean {
   if (!this.settings?.lastRegisterDay || !this.settings?.lastRegisterTime) {
     console.error("Settings or required properties are undefined");
@@ -608,5 +650,8 @@ isDateSelectable(date: Date): boolean {
   return true; // Allow selection for dates outside the next week
 }
 
-
+unselectAllDates(): void {
+  this.selectedDates = [];
+  console.log("All dates unselected:", this.selectedDates);
+}
 }

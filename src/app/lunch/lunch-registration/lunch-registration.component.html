@@ -15,13 +15,13 @@
           <h4 class="mb-12 text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Registered Lunch</span>
             <span class="w-[30px]"> - </span>
-            <span>{{ registeredDays }} days</span>
+            <span>{{ registeredDates }} days</span>
           </h4>
 
           <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Your Cost</span>
             <span class="w-[30px]"> - </span>
-            <span> MMK {{ userCost || 0 }}</span>
+            <span> MMK {{ userMonthlyCost || 0 }}</span>
           </h4>
           <!-- <h4 class="text-[#E2F1FF] font-medium text-[15px] flex">
             <span class="min-w-[135px]">Company Cost</span>
@@ -41,6 +41,7 @@
         >
           &lt;
         </div>
+        
         <h1 class="calendar-title">{{ currentMonth | date : "MMMM yyyy" }}</h1>
         <div
           class="next-button"
@@ -50,7 +51,9 @@
           &gt;
         </div>
       </div>
+
       <div class="calendar-body">
+
         <div class="day-names">
           <div>Sun</div>
           <div>Mon</div>
@@ -81,9 +84,12 @@
 
 
   }"
+  
             (click)="toggleDate(date)"
           >
+          
             <div class="date-container">
+
               <span class="date">{{ date.getDate() }}</span>
               <!-- <span *ngIf="isRegistered(date)" class="registered-text">registered</span> -->
             </div>
@@ -130,10 +136,7 @@
               <div class="bg-[#174572] w-3 h-3"></div>
               <span class="text-sm text-black/90">Registered</span>
             </div>
-            <div class="flex items-center gap-1">
-              <div class="bg-[#FEAD9F] w-3 h-3"></div>
-              <span class="text-sm text-black/90">Weekend</span>
-            </div>
+            
             <div class="flex items-center gap-1">
               <div class="bg-[#FFD700] w-3 h-3"></div>
               <span class="text-sm text-black/90">Public Holiday</span>
@@ -143,6 +146,8 @@
         <button class="register-button" (click)="handleRegistrationClick()">
           Register
         </button>
+        <button (click)="unselectAllDates()">Unselect All</button>
+
       </div>
     </div>
   </div>
