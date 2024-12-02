@@ -12,6 +12,12 @@ export class FeedbackService {
 
   constructor(private http: HttpClient) { }
 
+  checkFeedbackStatus(userId: number, lunchId: number): Observable<boolean> {
+    return this.http.get<boolean>(`/has-feedback`, {
+      params: { userId: userId.toString(), lunchId: lunchId.toString() },
+    });
+  }
+
   // Get all feedbacks
   getAllFeedbacks(): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(this.apiUrl);

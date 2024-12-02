@@ -141,6 +141,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  
+
   // Check if feedback can be given for a specific menu date
   canGiveFeedback(menuDate: Date): boolean {
     const currentDate = new Date();
