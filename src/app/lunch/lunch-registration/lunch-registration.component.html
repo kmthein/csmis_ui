@@ -28,7 +28,18 @@
             <span class="w-[30px]"> - </span>
             <span> MMK {{ companyCost }}</span>
           </h4> -->
+          <p style="margin-top: 60%;color: aliceblue;" *ngIf="settings?.lastRegisterDay && settings?.lastRegisterTime">
+            <span style="color: aliceblue;">Last Registration Time:</span>
+            {{ settings?.lastRegisterDay }} at {{ settings?.lastRegisterTime }}
+          </p>
+          <p style="color: aliceblue;"
+            *ngIf="!settings?.lastRegisterDay || !settings?.lastRegisterTime"
+            class="text-red-500"
+          >
+            Registration details not available.
+          </p>
         </div>
+        
       </div>
     </div>
 
@@ -112,16 +123,8 @@
 
       <div class="register-box flex justify-between mx-[30px]">
         <div class="text-sm font-medium my-4 mb-6">
-          <p *ngIf="settings?.lastRegisterDay && settings?.lastRegisterTime">
-            <span class="text-gray-700">Last Registration Time:</span>
-            {{ settings?.lastRegisterDay }} at {{ settings?.lastRegisterTime }}
-          </p>
-          <p
-            *ngIf="!settings?.lastRegisterDay || !settings?.lastRegisterTime"
-            class="text-red-500"
-          >
-            Registration details not available.
-          </p>
+          <button class="unselectButton" (click)="unselectAllDates()">Unselect All</button>
+
           <div class="flex gap-3 mt-2">
             <div class="flex items-center gap-1">
               <div class="bg-[#174572] w-3 h-3"></div>
@@ -143,7 +146,6 @@
         <button class="register-button" (click)="handleRegistrationClick()">
           Register
         </button>
-        <button (click)="unselectAllDates()">Unselect All</button>
 
       </div>
     </div>
