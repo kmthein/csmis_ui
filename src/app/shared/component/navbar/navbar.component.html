@@ -43,7 +43,7 @@
     </div>
   </form> -->
   <div class="font-medium hidden sm:block">
-    <p class="mb-1 text-left">{{ today }}</p>
+    <p class="my-1 text-left">{{ today }}</p>
     <p class="text-left text-gray-500">
       {{ day }}
     </p>
@@ -81,12 +81,12 @@
         type="button"
       >
         <div *ngIf="isAdmin">
-          <p class="mb-1 text-left">{{ user?.name || "User 404" }}</p>
+          <p class="my-1 text-left">{{ user?.name || "User 404" }}</p>
           <p class="text-left text-gray-500">Admin</p>
         </div>
 
         <div *ngIf="!isAdmin">
-          <p class="mb-1 text-left">{{ user?.name || "User 404" }}</p>
+          <p class="my-1 text-left">{{ user?.name || "User 404" }}</p>
           <p class="text-left text-gray-500">Operator</p>
         </div>
 

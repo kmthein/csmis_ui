@@ -131,5 +131,28 @@ export class OtpVerificationComponent implements OnInit {
         });
 }
 
+onPaste(event: ClipboardEvent) {
+  const clipboardData = event.clipboardData || (window as any).clipboardData;
+  const pastedText = clipboardData.getData('text');
+
+  // Allow only numeric OTP of the correct length (6 digits)
+  if (pastedText.match(/^[0-9]{6}$/)) {
+    this.otpDigits = pastedText.split('');
+
+    // Automatically populate the inputs with pasted digits
+    for (let i = 0; i < this.otpDigits.length; i++) {
+      const input = document.querySelector<HTMLInputElement>(`#otp${i + 1}`);
+      if (input) {
+        input.value = this.otpDigits[i];
+      }
+    }
+
+    // Prevent the default paste behavior
+    event.preventDefault();
+  } else {
+    this.errorMessage = 'Invalid OTP format. Please enter 6 digits.';
+    event.preventDefault();
+  }
+}
 
 }

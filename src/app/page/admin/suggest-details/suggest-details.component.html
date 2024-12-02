@@ -7,14 +7,14 @@
         <div class="bg-white p-4 rounded-md relative">
             <div class="flex gap-4">
               <img
-                class="w-12 h-12 rounded object-contain border"
-                src="assets/logo.png"
+              class="w-12 h-12 rounded-full object-cover"
+                [src]="suggestion?.userImg || 'assets/default-profile.png'"
                 alt="Medium avatar"
               />
               <div class="w-full">
                 <div class="mb-3">
                   <div class="flex justify-between">
-                    <h4>{{ suggestion?.username }}</h4>
+                    <h4>{{ suggestion?.name }}</h4>
                   </div>
                   <span class="text-sm text-[#797979]">{{
                     suggestion?.createdAt | dfnsFormat : "EEE LLLL d yyyy"

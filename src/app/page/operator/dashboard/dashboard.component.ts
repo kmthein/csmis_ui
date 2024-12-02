@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   weeklyMenu: any[] = [];
   menuAry: string[] = [];
   restaurant: any;
-
+  nextWeekMenuHave: boolean = false;
   monthlyCost: number = 0; // Variable to store monthly cost
   weeklyCost: number = 0; // Variable to store weekly cost
 
@@ -47,9 +47,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     // Fetch announcements
     this.fetchAnnouncements();
-
     // Load the current week's or next week's menu
     this.isCurrentWeek ? this.getCurrentWeekMenu() : this.getNextWeekMenu();
+    this.getNextWeekMenu();
   }
 
   ngAfterViewInit(): void {
@@ -60,8 +60,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   private fetchAnnouncements(): void {
     this.announceService.getAllAnnouncements(1, 1).subscribe({
       next: (response) => {
-        console.log(response);
-        
         this.announcement = response.content[0];
       },
       error: (error) => {
@@ -117,13 +115,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   private getNextWeekMenu(): void {
     this.lunchService.getNextWeekLunch().subscribe({
       next: (response) => {
-        this.restaurantName =
-          response[response.length - 1]?.restaurantName || '';
-        this.weeklyMenu = response.map((data: any) => ({
-          ...data,
-          menu: data?.menu?.split(','),
-          date: new Date(data?.date),
-        }));
+        console.log(response);
+        if (response != null) {
+          this.nextWeekMenuHave = true;
+        } else {
+          this.restaurantName =
+            response[response?.length - 1]?.restaurantName || '';
+          this.weeklyMenu = response.map((data: any) => ({
+            ...data,
+            menu: data?.menu?.split(','),
+            date: new Date(data?.date),
+          }));
+        }
       },
       error: (error) => {
         console.error('Error fetching next week menu:', error);

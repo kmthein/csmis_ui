@@ -157,7 +157,7 @@
 /* margin-top: 5px; */
 /* } */
 .day.weekend {
-  background-color: #ecf56a; /* Red for weekends */
+  background-color: #ffd700; /* Red for weekends */
   color: #000000;
 }
 
