@@ -236,7 +236,7 @@ this.canRegisterForNextWeek
         date > today && // Future dates only
         !this.isPublicHoliday(date) // Exclude public holidays
       ) {
-        if (this.isNextWeek(date) && !canRegisterForNextWeek) {
+        if (this.isNextWeek(date)) {
           continue;
         }
   
